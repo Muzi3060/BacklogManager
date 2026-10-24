@@ -1,0 +1,361 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:BacklogManager.Models"
+        x:Class="BacklogManager.MainWindow"
+        Title="Backlog Manager" Width="1120" Height="780"
+        MinWidth="900" MinHeight="660" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <StreamGeometry x:Key="HomeIcon">M3,10 L12,3 21,10 M5,9 V21 H10 V15 H14 V21 H19 V9</StreamGeometry>
+        <StreamGeometry x:Key="LibraryIcon">M4,4 H9 V21 H4 Z M11,4 H16 V21 H11 Z M18,3 L22,20</StreamGeometry>
+        <StreamGeometry x:Key="PlusIcon">M12,4 V20 M4,12 H20</StreamGeometry>
+        <StreamGeometry x:Key="GameIcon">M7,6 H17 Q21,6 22,11 L23,17 Q23,21 20,20 L16,16 H8 L4,20 Q1,21 1,17 L2,11 Q3,6 7,6 Z M5,11 H11 M8,8 V14 M16,10 H17 M19,13 H20</StreamGeometry>
+        <StreamGeometry x:Key="CheckIcon">M5,12 L10,17 20,6</StreamGeometry>
+        <StreamGeometry x:Key="ArrowIcon">M4,12 H20 M14,6 L20,12 14,18</StreamGeometry>
+    </Window.Resources>
+    <Window.Styles>
+        <Style Selector="Button.navigation">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#BEBEC5" />
+            <Setter Property="Padding" Value="14,13" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                        <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="Button.navigation:pointerover">
+            <Setter Property="Background" Value="#2A2A2A" />
+        </Style>
+        <Style Selector="Button.navigation.active">
+            <Setter Property="Background" Value="#343038" />
+            <Setter Property="Foreground" Value="#C4A8F7" />
+        </Style>
+        <Style Selector="Button.navigation:focus-visible">
+            <Setter Property="Background" Value="#40384E" />
+        </Style>
+        <Style Selector="Button.recent">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="ListBox#ListaBacklog">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected Border.gameCard">
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="Background" Value="#35313D" />
+        </Style>
+        <Style Selector="Border#AvisoOperacao">
+            <Setter Property="Background" Value="#223B31" />
+            <Setter Property="BorderBrush" Value="#42785E" />
+        </Style>
+        <Style Selector="Border#IconeAviso">
+            <Setter Property="Background" Value="#335848" />
+        </Style>
+        <Style Selector="TextBlock#TxtIconeAviso">
+            <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
+        </Style>
+        <Style Selector="Border#AvisoOperacao.erro">
+            <Setter Property="Background" Value="#41272D" />
+            <Setter Property="BorderBrush" Value="#99505D" />
+        </Style>
+        <Style Selector="Border#AvisoOperacao.erro Border#IconeAviso">
+            <Setter Property="Background" Value="#683743" />
+        </Style>
+        <Style Selector="Border#AvisoOperacao.erro TextBlock#TxtIconeAviso">
+            <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}" />
+        </Style>
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="202,*">
+        <!-- A navegação permanece visível enquanto o conteúdo da página muda. -->
+        <Border Background="{DynamicResource SidebarBackground}" BorderBrush="#353535" BorderThickness="0,0,1,0">
+            <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="12,0">
+                <Grid ColumnDefinitions="Auto,*" Margin="10,28,4,32">
+                    <Border Background="#3D304E" CornerRadius="9" Width="32" Height="32">
+                        <Path Data="{StaticResource GameIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.7" Width="21" Height="18" Stretch="Uniform" />
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="Backlog" FontWeight="Bold" FontSize="16" />
+                        <TextBlock Text="MANAGER" FontSize="9" LetterSpacing="2" Classes="muted" />
+                    </StackPanel>
+                </Grid>
+                <StackPanel Grid.Row="1" Spacing="6">
+                    <TextBlock Text="BIBLIOTECA" Classes="sectionLabel" Margin="14,0,0,10" />
+                    <Button x:Name="NavInicio" Classes="navigation active" Tag="inicio" Click="Navegar_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="13">
+                            <Path Data="{StaticResource HomeIcon}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1.6" Width="18" Height="18" Stretch="Uniform" />
+                            <TextBlock Text="Início" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="NavBacklog" Classes="navigation" Tag="backlog" Click="Navegar_Click">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Path Data="{StaticResource LibraryIcon}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1.6" Width="18" Height="18" Stretch="Uniform" />
+                            <TextBlock Grid.Column="1" Text="Meu backlog" Margin="13,0,0,0" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="2" x:Name="TxtContagemNav" FontSize="11" VerticalAlignment="Center" Opacity="0.7" />
+                        </Grid>
+                    </Button>
+                    <Button x:Name="NavCadastro" Classes="navigation" Tag="cadastro" Click="Navegar_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="13">
+                            <Path Data="{StaticResource PlusIcon}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1.6" Width="18" Height="18" Stretch="Uniform" />
+                            <TextBlock Text="Adicionar / editar" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <Border Grid.Row="3" BorderBrush="#363636" BorderThickness="0,1,0,0" Padding="10,18" Margin="0,0,0,8">
+                    <StackPanel Spacing="7">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse Fill="{DynamicResource SuccessBrush}" Width="6" Height="6" VerticalAlignment="Center" />
+                            <TextBlock Text="Sua coleção, no seu ritmo" FontSize="11" />
+                        </StackPanel>
+                        <TextBlock Text="Armazenamento local" Classes="muted" FontSize="10" Margin="14,0,0,0" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" RowDefinitions="Auto,*" Margin="38,32,38,24">
+            <!-- O aviso fica fora da rolagem e acompanha a navegação entre as páginas. -->
+            <Border x:Name="AvisoOperacao" IsVisible="False" BorderThickness="1" CornerRadius="10"
+                    Padding="16" Margin="0,0,0,20">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Border x:Name="IconeAviso" CornerRadius="18"
+                            Width="36" Height="36" VerticalAlignment="Center">
+                        <TextBlock x:Name="TxtIconeAviso" Text="✓" FontSize="22" FontWeight="Bold"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <StackPanel Grid.Column="1" Spacing="5" Margin="14,0" VerticalAlignment="Center">
+                        <TextBlock x:Name="TxtAvisoTitulo" FontSize="15" FontWeight="Bold" />
+                        <TextBlock x:Name="TxtAvisoMensagem" FontSize="13" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"
+                                   MaxLines="2" TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                    <Button Grid.Column="2" Content="×" Click="FecharAviso_Click"
+                            AutomationProperties.Name="Fechar aviso" ToolTip.Tip="Fechar aviso"
+                            Background="Transparent" FontSize="22" Padding="8,2"
+                            VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+            <Grid Grid.Row="1">
+                <!-- INÍCIO -->
+                <ScrollViewer x:Name="PaginaInicio" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Spacing="24" MaxWidth="1040">
+                        <StackPanel Spacing="7">
+                            <TextBlock Text="Bem-vindo ao seu backlog" Classes="pageTitle" />
+                            <TextBlock Text="Organize suas próximas aventuras e registre cada conquista." Classes="muted" TextWrapping="Wrap" />
+                        </StackPanel>
+                        <Grid ColumnDefinitions="*,*,*">
+                            <Border Classes="card" Margin="0,0,10,0">
+                                <StackPanel Spacing="8">
+                                    <TextBlock x:Name="TxtTotal" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" />
+                                    <TextBlock Text="Jogos na coleção" Classes="muted" />
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="1" Classes="card" Margin="0,0,10,0">
+                                <StackPanel Spacing="8">
+                                    <TextBlock x:Name="TxtJogando" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" />
+                                    <TextBlock Text="Jogando agora" Classes="muted" />
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="2" Classes="card">
+                                <StackPanel Spacing="8">
+                                    <TextBlock x:Name="TxtZerados" FontSize="32" FontWeight="Bold" Foreground="#E7BD78" />
+                                    <TextBlock Text="Jogos zerados" Classes="muted" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        <Border Classes="card">
+                            <StackPanel Spacing="18">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Text="Cada jogo, uma história" FontSize="16" FontWeight="SemiBold" />
+                                    <TextBlock Grid.Column="1" x:Name="TxtProgresso" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
+                                </Grid>
+                                <ProgressBar x:Name="ProgressoBacklog" Minimum="0" Maximum="100" Height="5" Foreground="{DynamicResource AccentBrush}" Background="#444148" />
+                                <TextBlock x:Name="TxtResumo" Classes="muted" TextWrapping="Wrap" />
+                                <Border BorderBrush="{DynamicResource CardBorder}" BorderThickness="0,1,0,0" Padding="0,16,0,0">
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <Path Data="{StaticResource PlusIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.6" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" />
+                                        <StackPanel Grid.Column="1" Margin="14,0" Spacing="4" VerticalAlignment="Center">
+                                            <TextBlock Text="Qual vai ser o próximo jogo?" FontWeight="SemiBold" />
+                                            <TextBlock Text="Adicione um título à sua coleção." Classes="muted" FontSize="12" />
+                                        </StackPanel>
+                                        <Button Grid.Column="2" Content="Adicionar jogo" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Spacing="14">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="Adicionados recentemente" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" />
+                                <Button Grid.Column="1" Content="Ver coleção  →" Background="Transparent" Foreground="{DynamicResource MutedForeground}" Tag="backlog" Click="Navegar_Click" Padding="4,6" />
+                            </Grid>
+                            <ItemsControl x:Name="ListaRecentes">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate><UniformGrid Columns="3" /></ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="models:BacklogItem">
+                                        <Button Classes="recent" Tag="{Binding}" Click="Recente_Click" Margin="0,0,10,0" ToolTip.Tip="Abrir este jogo para editar">
+                                            <Border Classes="card" Padding="0" ClipToBounds="True">
+                                                <StackPanel>
+                                                    <Border Height="72" Background="#39313F">
+                                                        <Path Data="{StaticResource GameIcon}" Stroke="#AC8CD1" StrokeThickness="1.2" Width="48" Height="35" Stretch="Uniform" Opacity="0.7" />
+                                                    </Border>
+                                                    <StackPanel Margin="14,12" Spacing="7">
+                                                        <TextBlock Text="{Binding Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                                        <Grid ColumnDefinitions="*,Auto">
+                                                            <TextBlock Text="{Binding Status}" Classes="muted" FontSize="11" />
+                                                            <TextBlock Grid.Column="1" Text="{Binding Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontSize="11" />
+                                                        </Grid>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Border x:Name="EstadoInicioVazio" Classes="card" IsVisible="False">
+                                <TextBlock Text="Sua coleção começa aqui. Adicione seu primeiro jogo!" Classes="muted" TextWrapping="Wrap" />
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- MEU BACKLOG -->
+                <Grid x:Name="PaginaBacklog" IsVisible="False" RowDefinitions="Auto,Auto,*,Auto">
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,24">
+                        <StackPanel Spacing="7">
+                            <TextBlock Text="Meu backlog" Classes="pageTitle" />
+                            <TextBlock Text="Todos os seus jogos, em um só lugar." Classes="muted" />
+                        </StackPanel>
+                        <Button Grid.Column="1" Content="+  Adicionar jogo" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
+                    </Grid>
+                    <Grid Grid.Row="1" ColumnDefinitions="*,180" Margin="0,0,0,20">
+                        <TextBox x:Name="TxtBusca" PlaceholderText="Buscar por título ou categoria..." TextChanged="Filtros_Changed" Margin="0,0,12,0" />
+                        <ComboBox Grid.Column="1" x:Name="CmbFiltroStatus" SelectedIndex="0" SelectionChanged="Filtros_Changed">
+                            <ComboBoxItem Content="Todos os status" />
+                            <ComboBoxItem Content="Na Fila" />
+                            <ComboBoxItem Content="Jogando" />
+                            <ComboBoxItem Content="Zerado" />
+                            <ComboBoxItem Content="Pausado" />
+                            <ComboBoxItem Content="Abandonado" />
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <ListBox x:Name="ListaBacklog" SelectionChanged="ListaBacklog_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="models:BacklogItem">
+                                    <Border Classes="card gameCard" Padding="18">
+                                        <Grid ColumnDefinitions="44,*,Auto">
+                                            <Border Background="#40344E" CornerRadius="8" Width="34" Height="34" VerticalAlignment="Top">
+                                                <Path Data="{StaticResource GameIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.5" Width="23" Height="18" Stretch="Uniform" />
+                                            </Border>
+                                            <StackPanel Grid.Column="1" Spacing="9" Margin="8,0,18,0">
+                                                <TextBlock Text="{Binding Titulo}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                                    <Border Background="#3E3E42" CornerRadius="4" Padding="8,3">
+                                                        <TextBlock Text="{Binding Categoria}" FontSize="11" Foreground="#CCCCD2" />
+                                                    </Border>
+                                                    <Border Background="#3C3548" CornerRadius="4" Padding="8,3">
+                                                        <TextBlock Text="{Binding Status}" FontSize="11" Foreground="#C5A8EF" />
+                                                    </Border>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding Review}" Classes="muted" FontSize="12" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="2" Text="{Binding Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontWeight="SemiBold" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel x:Name="EstadoListaVazia" IsVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="12" Margin="20">
+                            <Path Data="{StaticResource LibraryIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.4" Width="32" Height="32" Stretch="Uniform" Margin="0,0,0,4" />
+                            <TextBlock x:Name="TxtListaVazia" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" />
+                            <TextBlock x:Name="TxtDicaListaVazia" Classes="muted" TextWrapping="Wrap" TextAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                    <Border Grid.Row="3" BorderBrush="#3C3C3C" BorderThickness="0,1,0,0" Padding="0,16,0,0" Margin="0,12,0,0">
+                        <Grid ColumnDefinitions="*,Auto,Auto">
+                            <TextBlock x:Name="TxtContagemLista" Classes="muted" FontSize="12"
+                                       VerticalAlignment="Center" Margin="0,0,12,0" />
+                            <Button Grid.Column="1" x:Name="BtnEditar" Content="Editar jogo" Click="EditarSelecionado_Click" IsEnabled="False" Margin="0,0,10,0" VerticalAlignment="Center" />
+                            <Button Grid.Column="2" x:Name="BtnRemover" Content="Remover" Classes="danger" Click="BtnRemover_Click" IsEnabled="False" VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!-- CADASTRO / EDIÇÃO -->
+                <ScrollViewer x:Name="PaginaCadastro" IsVisible="False" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Spacing="24" MaxWidth="800" HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="7">
+                            <TextBlock x:Name="TxtTituloCadastro" Text="Adicionar jogo" Classes="pageTitle" />
+                            <TextBlock x:Name="TxtSubtituloCadastro" Text="Uma nova aventura para a sua coleção." Classes="muted" />
+                        </StackPanel>
+                        <Border Classes="card" Padding="24">
+                            <StackPanel Spacing="18">
+                                <TextBlock Text="DADOS DO JOGO" Classes="sectionLabel" />
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Título do jogo" FontWeight="SemiBold" />
+                                    <TextBox x:Name="TxtTitulo" PlaceholderText="Ex.: Cyberpunk 2077" />
+                                </StackPanel>
+                                <Grid ColumnDefinitions="*,*">
+                                    <StackPanel Spacing="8" Margin="0,0,16,0">
+                                        <TextBlock Text="Categoria" FontWeight="SemiBold" />
+                                        <ComboBox x:Name="CmbCategoria" SelectedIndex="0">
+                                            <ComboBoxItem Content="RPG" />
+                                            <ComboBoxItem Content="Ação / Aventura" />
+                                            <ComboBoxItem Content="FPS / Tiro" />
+                                            <ComboBoxItem Content="Estratégia" />
+                                            <ComboBoxItem Content="Indie" />
+                                            <ComboBoxItem Content="Outro" />
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Spacing="8">
+                                        <TextBlock Text="Status" FontWeight="SemiBold" />
+                                        <ComboBox x:Name="CmbStatus" SelectedIndex="0">
+                                            <ComboBoxItem Content="Na Fila" />
+                                            <ComboBoxItem Content="Jogando" />
+                                            <ComboBoxItem Content="Zerado" />
+                                            <ComboBoxItem Content="Pausado" />
+                                            <ComboBoxItem Content="Abandonado" />
+                                        </ComboBox>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Sua nota" FontWeight="SemiBold" />
+                                    <Grid ColumnDefinitions="160,*">
+                                        <NumericUpDown x:Name="NumNota" Minimum="0" Maximum="5" Increment="0.5" FormatString="0.0" Value="5.0" />
+                                        <TextBlock Grid.Column="1" Text="De 0 a 5 estrelas" Classes="muted" VerticalAlignment="Center" Margin="14,0,0,0" />
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Spacing="8">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock Text="Review / comentários" FontWeight="SemiBold" />
+                                        <TextBlock Grid.Column="1" Text="Opcional · até 1000 caracteres" Classes="muted" FontSize="11" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <TextBox x:Name="TxtReview" PlaceholderText="O que você achou do jogo? Registre suas impressões..." AcceptsReturn="True" TextWrapping="Wrap" MaxLength="1000" Height="120" VerticalContentAlignment="Top" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Grid ColumnDefinitions="*,Auto,Auto">
+                            <Button Grid.Column="1" Content="Limpar / novo" Click="LimparFormulario_Click" Margin="0,0,12,0" />
+                            <Button Grid.Column="2" x:Name="BtnAdicionar" Classes="primary" Content="Adicionar jogo" Click="BtnAdicionar_Click" />
+                            <Button Grid.Column="2" x:Name="BtnAtualizar" Classes="primary" Content="Salvar alterações" Click="BtnAtualizar_Click" IsVisible="False" />
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

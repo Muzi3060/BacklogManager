@@ -1,0 +1,40 @@
+# Saídas de compilação e testes do .NET
+**/bin/
+**/obj/
+artifacts/
+TestResults/
+*.coverage
+*.coveragexml
+*.nupkg
+*.snupkg
+
+# Configurações locais das IDEs
+.idea/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Dados pessoais da coleção (criados pelo aplicativo)
+/backlog.json
+
+# Configurações locais, credenciais e ferramentas
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+*.pfx
+*.p12
+/dotnet-install.sh
+
+# Arquivos temporários e do sistema operacional
+*.log
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
