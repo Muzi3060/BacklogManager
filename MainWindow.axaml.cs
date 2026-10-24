@@ -1,10 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using BacklogManager.Data;
 using BacklogManager.Models;
+using BacklogManager.Services;
+using System.Threading;
 
 namespace BacklogManager;
 
@@ -13,6 +16,8 @@ public partial class MainWindow : Window
     private BacklogItem? _itemEmEdicao;
     private readonly ObservableCollection<BacklogItem> _itens;
     private bool _interfacePronta;
+    private SteamGame? _jogoSelecionado;
+    private CancellationTokenSource? _buscaCancellation;
 
     public MainWindow()
     {
@@ -54,6 +59,8 @@ public partial class MainWindow : Window
     private void LimparFormulario()
     {
         _itemEmEdicao = null;
+        _jogoSelecionado = null;
+        ListaSugestoes.ItemsSource = null;
         ListaBacklog.SelectedItem = null;
         TxtTitulo.Text = string.Empty;
         CmbCategoria.SelectedIndex = 0;
@@ -66,6 +73,10 @@ public partial class MainWindow : Window
     private void AtualizarModoFormulario()
     {
         var editando = _itemEmEdicao != null;
+
+        TxtTitulo.IsReadOnly = editando;
+        
+        
         TxtTituloCadastro.Text = editando ? "Editar jogo" : "Adicionar jogo";
         TxtSubtituloCadastro.Text = editando
             ? "Atualize os detalhes e registre seu progresso."
@@ -76,26 +87,46 @@ public partial class MainWindow : Window
 
     private BacklogItem? LerFormulario()
     {
-        var titulo = TxtTitulo.Text?.Trim() ?? string.Empty;
-        if (string.IsNullOrWhiteSpace(titulo))
+
+        string titulo;
+        int? steamAppId;
+        
+        if (_jogoSelecionado != null)
         {
-            ExibirAviso("Confira os dados", "Informe o título do jogo para continuar.", true);
-            TxtTitulo.Focus();
+            titulo = _jogoSelecionado.Nome;
+            steamAppId = _jogoSelecionado.AppId;
+        } else if (_itemEmEdicao != null)
+        {
+            titulo = _itemEmEdicao.Titulo;
+            steamAppId = _itemEmEdicao.SteamAppId;
+        }
+        else
+        {
+            ExibirAviso("Selecione um jogo", "Escolha um jogo antes de adicionar à sua coleção.", true);
             return null;
         }
-
+        
         var categoria = (CmbCategoria.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Outro";
         var status = (CmbStatus.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Na Fila";
         var review = TxtReview.Text?.Trim();
         return new BacklogItem(titulo, categoria, status, (double)(NumNota.Value ?? 0),
-            string.IsNullOrWhiteSpace(review) ? "Nenhuma Review" : review);
+            string.IsNullOrWhiteSpace(review) ? "Nenhuma Review" : review, steamAppId);
+
+        
     }
 
     private void BtnAdicionar_Click(object? sender, RoutedEventArgs e)
     {
+
+        if (_jogoSelecionado == null)
+        {
+            ExibirAviso("Selecione um jogo", "Escolha um jogo antes de adicionar à sua coleção.", true);
+            return;
+        }
+        
         var novoItem = LerFormulario();
         if (novoItem == null) return;
-
+        
         _itens.Add(novoItem);
         FileManager.Salvar(_itens);
         LimparFormulario();
@@ -105,6 +136,7 @@ public partial class MainWindow : Window
 
     private void BtnAtualizar_Click(object? sender, RoutedEventArgs e)
     {
+        
         if (_itemEmEdicao == null) return;
         var atualizado = LerFormulario();
         if (atualizado == null) return;
@@ -166,6 +198,7 @@ public partial class MainWindow : Window
 
     private void EditarJogo(BacklogItem item)
     {
+        _jogoSelecionado = null;
         _itemEmEdicao = item;
         TxtTitulo.Text = item.Titulo;
         SelecionarValor(CmbCategoria, item.Categoria);
@@ -241,5 +274,62 @@ public partial class MainWindow : Window
         TxtDicaListaVazia.Text = _itens.Count == 0
             ? "Use “Adicionar jogo” para começar seu backlog."
             : "Tente outro título, categoria ou status.";
+    }
+
+    private void ListaSugestoes_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (ListaSugestoes.SelectedItem is SteamGame jogo)
+        {
+            _jogoSelecionado = jogo;
+            ListaSugestoes.IsVisible = false;
+            Console.WriteLine($"Selecionado: AppId: {jogo.AppId} - Nome: {jogo.Nome}");
+        }
+        else
+        {
+            _jogoSelecionado = null;
+        }
+    }
+
+    private async void TxtTitulo_TextChanged(object? sender, TextChangedEventArgs e)
+    {
+        _buscaCancellation?.Cancel();
+        var buscaAtual = new CancellationTokenSource();
+        _buscaCancellation = buscaAtual;
+        
+        _jogoSelecionado = null;
+        ListaSugestoes.ItemsSource = null;
+        ListaSugestoes.IsVisible = false;
+
+        if (_itemEmEdicao != null)
+        {
+            return;
+        }
+        var termo = TxtTitulo.Text?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrEmpty(termo))
+        {
+            return;
+        }
+
+        try
+        {
+            await Task.Delay(400, buscaAtual.Token);
+            var resultado = await new SteamCatalogService().BuscarJogosAsync(termo);
+
+            buscaAtual.Token.ThrowIfCancellationRequested();
+            ListaSugestoes.ItemsSource = resultado;
+            
+            if (resultado.Count > 0)
+            {
+                ListaSugestoes.IsVisible = true;
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // A digitação mudou; esta busca foi cancelada.
+        }
+
+        
+        
     }
 }

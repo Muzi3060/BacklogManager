@@ -307,7 +307,14 @@
                                 <TextBlock Text="DADOS DO JOGO" Classes="sectionLabel" />
                                 <StackPanel Spacing="8">
                                     <TextBlock Text="Título do jogo" FontWeight="SemiBold" />
-                                    <TextBox x:Name="TxtTitulo" PlaceholderText="Ex.: Cyberpunk 2077" />
+                                    <TextBox x:Name="TxtTitulo" PlaceholderText="Ex.: Cyberpunk 2077" TextChanged="TxtTitulo_TextChanged"/>
+                                    <ListBox x:Name="ListaSugestoes" SelectionChanged="ListaSugestoes_SelectionChanged">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate DataType="models:SteamGame">
+                                                <TextBlock Text="{Binding Nome}" />
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
                                 </StackPanel>
                                 <Grid ColumnDefinitions="*,*">
                                     <StackPanel Spacing="8" Margin="0,0,16,0">

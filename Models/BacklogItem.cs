@@ -9,18 +9,21 @@ public class BacklogItem
     
     public string Review { get; set; } = string.Empty;
     
+    public int? SteamAppId { get; set; } 
+    
     public BacklogItem()
     {
 
     }
     
-    public BacklogItem(string titulo, string categoria, string status, double nota, string review)
+    public BacklogItem(string titulo, string categoria, string status, double nota, string review, int? steamAppID)
     {
         Titulo = titulo;
         Categoria = categoria;
         Status = status;
         Nota = nota;
         Review = review;
+        SteamAppId = steamAppID;
     }
 
     public override string ToString()
