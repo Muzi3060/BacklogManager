@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BacklogManager.csproj" />
+  <Project Path="Tests/BacklogManager.Tests/BacklogManager.Tests.csproj" />
+</Solution>

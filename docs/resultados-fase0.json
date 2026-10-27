@@ -1,0 +1,1586 @@
+{
+  "origem": "fase0-final.trx",
+  "total": 175,
+  "totais": {
+    "Aprovado": 175,
+    "Reprovado": 0,
+    "Não executado": 0
+  },
+  "resultados": [
+    {
+      "id": "P01",
+      "cenario": "Arquivo inexistente",
+      "esperado": "Lista vazia sem criar arquivo",
+      "observado": "Confirmado pelas asserções: Lista vazia sem criar arquivo",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0008820"
+    },
+    {
+      "id": "P02",
+      "cenario": "Lista vazia válida",
+      "esperado": "Carregamento aceito",
+      "observado": "Confirmado pelas asserções: Carregamento aceito",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0003467"
+    },
+    {
+      "id": "P03",
+      "cenario": "JSON legado válido",
+      "esperado": "Todos os campos preservados",
+      "observado": "Confirmado pelas asserções: Todos os campos preservados",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0715472"
+    },
+    {
+      "id": "P04",
+      "cenario": "Arquivo vazio",
+      "esperado": "Erro de leitura; gravação bloqueada; bytes originais preservados",
+      "observado": "Confirmado pelas asserções: Erro de leitura; gravação bloqueada; bytes originais preservados",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005176"
+    },
+    {
+      "id": "P05",
+      "cenario": "JSON com sintaxe incompleta",
+      "esperado": "Erro de leitura; gravação bloqueada; bytes originais preservados",
+      "observado": "Confirmado pelas asserções: Erro de leitura; gravação bloqueada; bytes originais preservados",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0003757"
+    },
+    {
+      "id": "P06",
+      "cenario": "Raiz JSON null",
+      "esperado": "Erro de leitura; gravação bloqueada; original preservado",
+      "observado": "Confirmado pelas asserções: Erro de leitura; gravação bloqueada; original preservado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0018171"
+    },
+    {
+      "id": "P07",
+      "cenario": "Raiz JSON objeto em vez de lista",
+      "esperado": "Erro de leitura; gravação bloqueada; original preservado",
+      "observado": "Confirmado pelas asserções: Erro de leitura; gravação bloqueada; original preservado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0016228"
+    },
+    {
+      "id": "P08",
+      "cenario": "Registro null na lista",
+      "esperado": "Lista inteira recusada sem descarte parcial",
+      "observado": "Confirmado pelas asserções: Lista inteira recusada sem descarte parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001268"
+    },
+    {
+      "id": "P09",
+      "cenario": "Título nulo no registro",
+      "esperado": "Lista inteira recusada sem descarte parcial",
+      "observado": "Confirmado pelas asserções: Lista inteira recusada sem descarte parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0002048"
+    },
+    {
+      "id": "P10",
+      "cenario": "Categoria nula no registro",
+      "esperado": "Lista inteira recusada sem descarte parcial",
+      "observado": "Confirmado pelas asserções: Lista inteira recusada sem descarte parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001357"
+    },
+    {
+      "id": "P11",
+      "cenario": "Status nulo no registro",
+      "esperado": "Lista inteira recusada sem descarte parcial",
+      "observado": "Confirmado pelas asserções: Lista inteira recusada sem descarte parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001231"
+    },
+    {
+      "id": "P12",
+      "cenario": "Nota fora de 0 a 5",
+      "esperado": "Lista inteira recusada sem descarte parcial",
+      "observado": "Confirmado pelas asserções: Lista inteira recusada sem descarte parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001808"
+    },
+    {
+      "id": "P13",
+      "cenario": "Review nula no registro",
+      "esperado": "Lista inteira recusada sem descarte parcial",
+      "observado": "Confirmado pelas asserções: Lista inteira recusada sem descarte parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005253"
+    },
+    {
+      "id": "P14",
+      "cenario": "Primeira gravação",
+      "esperado": "Arquivo válido e recarregável",
+      "observado": "Confirmado pelas asserções: Arquivo válido e recarregável",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0007484"
+    },
+    {
+      "id": "P15",
+      "cenario": "Atualização de arquivo",
+      "esperado": "Backup byte a byte da versão anterior",
+      "observado": "Confirmado pelas asserções: Backup byte a byte da versão anterior",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0007112"
+    },
+    {
+      "id": "P16",
+      "cenario": "Gravações sucessivas",
+      "esperado": "Backup acompanha última versão válida",
+      "observado": "Confirmado pelas asserções: Backup acompanha última versão válida",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004626"
+    },
+    {
+      "id": "P17",
+      "cenario": "Arquivo alterado externamente",
+      "esperado": "Gravação recusada e versão externa intacta",
+      "observado": "Confirmado pelas asserções: Gravação recusada e versão externa intacta",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005212"
+    },
+    {
+      "id": "P18",
+      "cenario": "Arquivo removido externamente",
+      "esperado": "Nenhuma recriação silenciosa",
+      "observado": "Confirmado pelas asserções: Nenhuma recriação silenciosa",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005365"
+    },
+    {
+      "id": "P19",
+      "cenario": "Arquivo criado após leitura vazia",
+      "esperado": "Arquivo externo preservado",
+      "observado": "Confirmado pelas asserções: Arquivo externo preservado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004425"
+    },
+    {
+      "id": "P20",
+      "cenario": "Gravação sem leitura anterior",
+      "esperado": "Operação recusada sem criar arquivo",
+      "observado": "Confirmado pelas asserções: Operação recusada sem criar arquivo",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0003623"
+    },
+    {
+      "id": "P21",
+      "cenario": "Registro inválido ao salvar",
+      "esperado": "Arquivo e backup não alterados",
+      "observado": "Confirmado pelas asserções: Arquivo e backup não alterados",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004550"
+    },
+    {
+      "id": "P22",
+      "cenario": "Bloqueio por outra instância",
+      "esperado": "Falha segura sem modificar coleção",
+      "observado": "Confirmado pelas asserções: Falha segura sem modificar coleção",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005655"
+    },
+    {
+      "id": "P23",
+      "cenario": "Falha na substituição do backup",
+      "esperado": "Original intacto e temporário removido",
+      "observado": "Confirmado pelas asserções: Original intacto e temporário removido",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0007125"
+    },
+    {
+      "id": "P24",
+      "cenario": "Recuperação após falha de gravação",
+      "esperado": "Nova tentativa salva corretamente",
+      "observado": "Confirmado pelas asserções: Nova tentativa salva corretamente",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0009618"
+    },
+    {
+      "id": "P25",
+      "cenario": "Campos desconhecidos",
+      "esperado": "Dados adicionais preservados no roundtrip",
+      "observado": "Confirmado pelas asserções: Dados adicionais preservados no roundtrip",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0102880"
+    },
+    {
+      "id": "P26",
+      "cenario": "Onze registros simulados e IDs repetidos",
+      "esperado": "Quantidade e valores integralmente preservados",
+      "observado": "Confirmado pelas asserções: Quantidade e valores integralmente preservados",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0053822"
+    },
+    {
+      "id": "P27",
+      "cenario": "Unicode e review com quebras",
+      "esperado": "Texto preservado após gravação",
+      "observado": "Confirmado pelas asserções: Texto preservado após gravação",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0008911"
+    },
+    {
+      "id": "P28",
+      "cenario": "Caminho padrão",
+      "esperado": "Diretório de trabalho original mantido",
+      "observado": "Confirmado pelas asserções: Diretório de trabalho original mantido",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001290"
+    },
+    {
+      "id": "P29",
+      "cenario": "Diretório de destino ausente",
+      "esperado": "Falha sem criar pastas implicitamente",
+      "observado": "Confirmado pelas asserções: Falha sem criar pastas implicitamente",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004615"
+    },
+    {
+      "id": "P30",
+      "cenario": "Caminho ocupado por diretório",
+      "esperado": "Erro de leitura e gravação bloqueada",
+      "observado": "Confirmado pelas asserções: Erro de leitura e gravação bloqueada",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0011303"
+    },
+    {
+      "id": "P31",
+      "cenario": "Duas janelas com versões diferentes",
+      "esperado": "Segunda janela não sobrescreve a primeira",
+      "observado": "Confirmado pelas asserções: Segunda janela não sobrescreve a primeira",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0040591"
+    },
+    {
+      "id": "P32",
+      "cenario": "Leitura falha após leitura válida",
+      "esperado": "Autorização anterior para gravar é revogada",
+      "observado": "Confirmado pelas asserções: Autorização anterior para gravar é revogada",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005514"
+    },
+    {
+      "id": "P33",
+      "cenario": "JSON UTF-8 com BOM",
+      "esperado": "Carregamento compatível sem alterar bytes originais",
+      "observado": "Confirmado pelas asserções: Carregamento compatível sem alterar bytes originais",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004386"
+    },
+    {
+      "id": "P34",
+      "cenario": "JSON UTF-16 com BOM",
+      "esperado": "Codificação reconhecida como na leitura anterior",
+      "observado": "Confirmado pelas asserções: Codificação reconhecida como na leitura anterior",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0003115"
+    },
+    {
+      "id": "I01",
+      "cenario": "ID legado positivo",
+      "esperado": "Valor mantido; IgdbId não inferido nem serializado",
+      "observado": "Confirmado pelas asserções: Valor mantido; IgdbId não inferido nem serializado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0002259"
+    },
+    {
+      "id": "I02",
+      "cenario": "ID legado null",
+      "esperado": "Valor null mantido; IgdbId não inferido",
+      "observado": "Confirmado pelas asserções: Valor null mantido; IgdbId não inferido",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0002597"
+    },
+    {
+      "id": "I03",
+      "cenario": "ID legado zero",
+      "esperado": "Valor legado mantido sem reinterpretação",
+      "observado": "Confirmado pelas asserções: Valor legado mantido sem reinterpretação",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0002272"
+    },
+    {
+      "id": "I04",
+      "cenario": "ID legado negativo",
+      "esperado": "Valor legado mantido sem reinterpretação",
+      "observado": "Confirmado pelas asserções: Valor legado mantido sem reinterpretação",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0064680"
+    },
+    {
+      "id": "I05",
+      "cenario": "ID legado int.MaxValue",
+      "esperado": "Valor legado mantido sem heurística de origem",
+      "observado": "Confirmado pelas asserções: Valor legado mantido sem heurística de origem",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0006211"
+    },
+    {
+      "id": "I06",
+      "cenario": "Novo identificador IGDB",
+      "esperado": "Roundtrip mantém ID separado do legado",
+      "observado": "Confirmado pelas asserções: Roundtrip mantém ID separado do legado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0008652"
+    },
+    {
+      "id": "I07",
+      "cenario": "Dois identificadores no JSON",
+      "esperado": "Nenhum sobrescreve o outro",
+      "observado": "Confirmado pelas asserções: Nenhum sobrescreve o outro",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0002119"
+    },
+    {
+      "id": "I08",
+      "cenario": "IDs legados repetidos",
+      "esperado": "Registros continuam distintos",
+      "observado": "Confirmado pelas asserções: Registros continuam distintos",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004356"
+    },
+    {
+      "id": "I09",
+      "cenario": "Identificador IGDB zero",
+      "esperado": "Gravação rejeitada sem descartar original",
+      "observado": "Confirmado pelas asserções: Gravação rejeitada sem descartar original",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001440"
+    },
+    {
+      "id": "I10",
+      "cenario": "Identificador IGDB negativo",
+      "esperado": "Gravação rejeitada sem descartar original",
+      "observado": "Confirmado pelas asserções: Gravação rejeitada sem descartar original",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0007584"
+    },
+    {
+      "id": "I11",
+      "cenario": "Legado sem propriedade SteamAppId",
+      "esperado": "Carregado com ID nulo sem conversão",
+      "observado": "Confirmado pelas asserções: Carregado com ID nulo sem conversão",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0003912"
+    },
+    {
+      "id": "I12",
+      "cenario": "Identificador IGDB máximo",
+      "esperado": "Inteiro positivo preservado sem heurística",
+      "observado": "Confirmado pelas asserções: Inteiro positivo preservado sem heurística",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004740"
+    },
+    {
+      "id": "C01",
+      "cenario": "Somente token com nome legado",
+      "esperado": "Configuração válida; token legado utilizado",
+      "observado": "Confirmado pelas asserções: Configuração válida; token legado utilizado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000244"
+    },
+    {
+      "id": "C02",
+      "cenario": "Somente token com nome corrigido",
+      "esperado": "Configuração válida; token corrigido utilizado",
+      "observado": "Confirmado pelas asserções: Configuração válida; token corrigido utilizado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000213"
+    },
+    {
+      "id": "C03",
+      "cenario": "Ambos os nomes de token configurados",
+      "esperado": "Configuração válida; nome corrigido tem precedência",
+      "observado": "Confirmado pelas asserções: Configuração válida; nome corrigido tem precedência",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000192"
+    },
+    {
+      "id": "C04",
+      "cenario": "Nome corrigido vazio e legado válido",
+      "esperado": "Configuração válida usando o legado",
+      "observado": "Confirmado pelas asserções: Configuração válida usando o legado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0028252"
+    },
+    {
+      "id": "C05",
+      "cenario": "Nome corrigido com espaços e legado válido",
+      "esperado": "Configuração válida usando o legado",
+      "observado": "Confirmado pelas asserções: Configuração válida usando o legado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004225"
+    },
+    {
+      "id": "C06",
+      "cenario": "Credenciais com espaços nas bordas",
+      "esperado": "Bordas aparadas; configuração válida",
+      "observado": "Confirmado pelas asserções: Bordas aparadas; configuração válida",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000292"
+    },
+    {
+      "id": "C07",
+      "cenario": "Client ID ausente",
+      "esperado": "Configuração indisponível sem exceção",
+      "observado": "Confirmado pelas asserções: Configuração indisponível sem exceção",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000177"
+    },
+    {
+      "id": "C08",
+      "cenario": "Client ID vazio",
+      "esperado": "Configuração indisponível sem exceção",
+      "observado": "Confirmado pelas asserções: Configuração indisponível sem exceção",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000160"
+    },
+    {
+      "id": "C09",
+      "cenario": "Ambos os tokens ausentes",
+      "esperado": "Configuração indisponível sem exceção",
+      "observado": "Confirmado pelas asserções: Configuração indisponível sem exceção",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000174"
+    },
+    {
+      "id": "C10",
+      "cenario": "Token legado somente com espaços",
+      "esperado": "Configuração indisponível sem exceção",
+      "observado": "Confirmado pelas asserções: Configuração indisponível sem exceção",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000201"
+    },
+    {
+      "id": "C11",
+      "cenario": "Client ID com quebra de linha interna",
+      "esperado": "Configuração inválida; nenhum header injetado",
+      "observado": "Confirmado pelas asserções: Configuração inválida; nenhum header injetado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000209"
+    },
+    {
+      "id": "C12",
+      "cenario": "Token com espaço interno",
+      "esperado": "Configuração inválida; nenhum header enviado",
+      "observado": "Confirmado pelas asserções: Configuração inválida; nenhum header enviado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000152"
+    },
+    {
+      "id": "C13",
+      "cenario": "Token corrigido inválido e legado válido",
+      "esperado": "Recusa explícita; sem troca silenciosa de credencial inválida",
+      "observado": "Confirmado pelas asserções: Recusa explícita; sem troca silenciosa de credencial inválida",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000186"
+    },
+    {
+      "id": "C14",
+      "cenario": "Credenciais inválidas no serviço",
+      "esperado": "Exceção segura sem expor valores",
+      "observado": "Confirmado pelas asserções: Exceção segura sem expor valores",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005046"
+    },
+    {
+      "id": "H01",
+      "cenario": "Pesquisa bem-sucedida",
+      "esperado": "POST no endpoint correto com headers e IDs",
+      "observado": "Confirmado pelas asserções: POST no endpoint correto com headers e IDs",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0043502"
+    },
+    {
+      "id": "H02",
+      "cenario": "Busca sem resultados",
+      "esperado": "Lista vazia sem falha",
+      "observado": "Confirmado pelas asserções: Lista vazia sem falha",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005352"
+    },
+    {
+      "id": "H03",
+      "cenario": "HTTP 401",
+      "esperado": "Mensagem de autenticação; uma chamada; corpo sensível não exposto",
+      "observado": "Confirmado pelas asserções: Mensagem de autenticação; uma chamada; corpo sensível não exposto",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000727"
+    },
+    {
+      "id": "H04",
+      "cenario": "HTTP 403",
+      "esperado": "Mensagem de autenticação; uma chamada; corpo sensível não exposto",
+      "observado": "Confirmado pelas asserções: Mensagem de autenticação; uma chamada; corpo sensível não exposto",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000762"
+    },
+    {
+      "id": "H05",
+      "cenario": "HTTP 429",
+      "esperado": "Mensagem de limite; uma chamada; sem repetição automática",
+      "observado": "Confirmado pelas asserções: Mensagem de limite; uma chamada; sem repetição automática",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000710"
+    },
+    {
+      "id": "H06",
+      "cenario": "HTTP 500",
+      "esperado": "Mensagem de indisponibilidade; uma chamada",
+      "observado": "Confirmado pelas asserções: Mensagem de indisponibilidade; uma chamada",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000737"
+    },
+    {
+      "id": "H07",
+      "cenario": "HTTP 503",
+      "esperado": "Mensagem de indisponibilidade; uma chamada",
+      "observado": "Confirmado pelas asserções: Mensagem de indisponibilidade; uma chamada",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000862"
+    },
+    {
+      "id": "H08",
+      "cenario": "HTTP 400",
+      "esperado": "Mensagem com status HTTP 400 sem corpo da resposta",
+      "observado": "Confirmado pelas asserções: Mensagem com status HTTP 400 sem corpo da resposta",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0010367"
+    },
+    {
+      "id": "H09",
+      "cenario": "HTTP 404",
+      "esperado": "Mensagem com status HTTP 404 sem corpo da resposta",
+      "observado": "Confirmado pelas asserções: Mensagem com status HTTP 404 sem corpo da resposta",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0003056"
+    },
+    {
+      "id": "H10",
+      "cenario": "Falha de conexão",
+      "esperado": "Mensagem de conexão sem detalhes sensíveis",
+      "observado": "Confirmado pelas asserções: Mensagem de conexão sem detalhes sensíveis",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0008684"
+    },
+    {
+      "id": "H11",
+      "cenario": "Timeout de transporte",
+      "esperado": "Mensagem distinta de cancelamento do usuário",
+      "observado": "Confirmado pelas asserções: Mensagem distinta de cancelamento do usuário",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0010309"
+    },
+    {
+      "id": "H12",
+      "cenario": "Resposta JSON incompleta",
+      "esperado": "Falha controlada sem retornar lista parcial",
+      "observado": "Confirmado pelas asserções: Falha controlada sem retornar lista parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001059"
+    },
+    {
+      "id": "H13",
+      "cenario": "Resposta JSON null",
+      "esperado": "Falha controlada sem retornar lista vazia enganosa",
+      "observado": "Confirmado pelas asserções: Falha controlada sem retornar lista vazia enganosa",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000801"
+    },
+    {
+      "id": "H14",
+      "cenario": "Resposta objeto em vez de lista",
+      "esperado": "Falha controlada sem retornar lista parcial",
+      "observado": "Confirmado pelas asserções: Falha controlada sem retornar lista parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0120506"
+    },
+    {
+      "id": "H15",
+      "cenario": "Elemento null na resposta",
+      "esperado": "Falha controlada sem retornar lista parcial",
+      "observado": "Confirmado pelas asserções: Falha controlada sem retornar lista parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000796"
+    },
+    {
+      "id": "H16",
+      "cenario": "Resultado com ID zero",
+      "esperado": "Falha controlada; resultado inválido não selecionável",
+      "observado": "Confirmado pelas asserções: Falha controlada; resultado inválido não selecionável",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001354"
+    },
+    {
+      "id": "H17",
+      "cenario": "Resultado com ID negativo",
+      "esperado": "Falha controlada; resultado inválido não selecionável",
+      "observado": "Confirmado pelas asserções: Falha controlada; resultado inválido não selecionável",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001068"
+    },
+    {
+      "id": "H18",
+      "cenario": "Resultado com nome null",
+      "esperado": "Falha controlada sem retornar lista parcial",
+      "observado": "Confirmado pelas asserções: Falha controlada sem retornar lista parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000876"
+    },
+    {
+      "id": "H19",
+      "cenario": "Resultado com nome em branco",
+      "esperado": "Falha controlada sem retornar lista parcial",
+      "observado": "Confirmado pelas asserções: Falha controlada sem retornar lista parcial",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0018204"
+    },
+    {
+      "id": "H20",
+      "cenario": "ID textual não numérico",
+      "esperado": "Falha controlada de desserialização",
+      "observado": "Confirmado pelas asserções: Falha controlada de desserialização",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0005814"
+    },
+    {
+      "id": "H21",
+      "cenario": "Resposta vazia",
+      "esperado": "Falha controlada sem confundir com zero resultados",
+      "observado": "Confirmado pelas asserções: Falha controlada sem confundir com zero resultados",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0001284"
+    },
+    {
+      "id": "H22",
+      "cenario": "Cancelamento antes do envio",
+      "esperado": "Nenhuma chamada HTTP",
+      "observado": "Confirmado pelas asserções: Nenhuma chamada HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0015404"
+    },
+    {
+      "id": "H23",
+      "cenario": "Cancelamento durante HTTP",
+      "esperado": "Token interrompe transporte",
+      "observado": "Confirmado pelas asserções: Token interrompe transporte",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0069488"
+    },
+    {
+      "id": "H24",
+      "cenario": "Recuperação após erro HTTP",
+      "esperado": "Próxima busca retorna resultado",
+      "observado": "Confirmado pelas asserções: Próxima busca retorna resultado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0011093"
+    },
+    {
+      "id": "H25",
+      "cenario": "Dois serviços compartilham cliente",
+      "esperado": "Headers independentes sem duplicação",
+      "observado": "Confirmado pelas asserções: Headers independentes sem duplicação",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0010043"
+    },
+    {
+      "id": "H26",
+      "cenario": "JSON com maiúsculas",
+      "esperado": "Desserialização mantém compatibilidade",
+      "observado": "Confirmado pelas asserções: Desserialização mantém compatibilidade",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0006595"
+    },
+    {
+      "id": "H27",
+      "cenario": "Requisições sucessivas",
+      "esperado": "Cliente reutilizado permanece disponível",
+      "observado": "Confirmado pelas asserções: Cliente reutilizado permanece disponível",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0007375"
+    },
+    {
+      "id": "H28",
+      "cenario": "Resposta HTTP concluída",
+      "esperado": "Conteúdo descartado após leitura",
+      "observado": "Confirmado pelas asserções: Conteúdo descartado após leitura",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0008817"
+    },
+    {
+      "id": "Q01",
+      "cenario": "Termo null",
+      "esperado": "Lista vazia; nenhuma chamada HTTP",
+      "observado": "Confirmado pelas asserções: Lista vazia; nenhuma chamada HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000358"
+    },
+    {
+      "id": "Q02",
+      "cenario": "Termo vazio",
+      "esperado": "Lista vazia; nenhuma chamada HTTP",
+      "observado": "Confirmado pelas asserções: Lista vazia; nenhuma chamada HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000363"
+    },
+    {
+      "id": "Q03",
+      "cenario": "Termo com somente espaços",
+      "esperado": "Lista vazia; nenhuma chamada HTTP",
+      "observado": "Confirmado pelas asserções: Lista vazia; nenhuma chamada HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000319"
+    },
+    {
+      "id": "Q04",
+      "cenario": "Espaços nas bordas do termo",
+      "esperado": "Consulta enviada com termo aparado",
+      "observado": "Confirmado pelas asserções: Consulta enviada com termo aparado",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000985"
+    },
+    {
+      "id": "Q05",
+      "cenario": "Aspas no termo",
+      "esperado": "Aspas escapadas dentro da string APICalypse",
+      "observado": "Confirmado pelas asserções: Aspas escapadas dentro da string APICalypse",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000730"
+    },
+    {
+      "id": "Q06",
+      "cenario": "Barras invertidas no termo",
+      "esperado": "Barras escapadas dentro da string APICalypse",
+      "observado": "Confirmado pelas asserções: Barras escapadas dentro da string APICalypse",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000775"
+    },
+    {
+      "id": "Q07",
+      "cenario": "Unicode e emoji no termo",
+      "esperado": "Texto preservado na consulta",
+      "observado": "Confirmado pelas asserções: Texto preservado na consulta",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000802"
+    },
+    {
+      "id": "Q08",
+      "cenario": "Ponto e vírgula dentro do termo",
+      "esperado": "Conteúdo mantido dentro da string de pesquisa",
+      "observado": "Confirmado pelas asserções: Conteúdo mantido dentro da string de pesquisa",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0014189"
+    },
+    {
+      "id": "Q09",
+      "cenario": "Tentativa de fechar string e inserir instrução",
+      "esperado": "Aspas escapadas; termo não vira instrução APICalypse",
+      "observado": "Confirmado pelas asserções: Aspas escapadas; termo não vira instrução APICalypse",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0004206"
+    },
+    {
+      "id": "Q10",
+      "cenario": "Apóstrofo no título",
+      "esperado": "Texto preservado na consulta",
+      "observado": "Confirmado pelas asserções: Texto preservado na consulta",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000761"
+    },
+    {
+      "id": "Q11",
+      "cenario": "Quebra de linha no termo",
+      "esperado": "Entrada recusada antes do envio HTTP",
+      "observado": "Confirmado pelas asserções: Entrada recusada antes do envio HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0000708"
+    },
+    {
+      "id": "Q12",
+      "cenario": "Retorno de carro no termo",
+      "esperado": "Entrada recusada antes do envio HTTP",
+      "observado": "Confirmado pelas asserções: Entrada recusada antes do envio HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0010081"
+    },
+    {
+      "id": "Q13",
+      "cenario": "Caractere null no termo",
+      "esperado": "Entrada recusada antes do envio HTTP",
+      "observado": "Confirmado pelas asserções: Entrada recusada antes do envio HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0003132"
+    },
+    {
+      "id": "Q14",
+      "cenario": "Limite de 200 caracteres",
+      "esperado": "Busca aceita",
+      "observado": "Confirmado pelas asserções: Busca aceita",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0006610"
+    },
+    {
+      "id": "Q15",
+      "cenario": "Mais de 200 caracteres",
+      "esperado": "Busca recusada antes do HTTP",
+      "observado": "Confirmado pelas asserções: Busca recusada antes do HTTP",
+      "tipo": "Automatizado",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0006205"
+    },
+    {
+      "id": "A01",
+      "cenario": "Adicionar seleção IGDB",
+      "esperado": "Novo ID correto e SteamAppId nulo",
+      "observado": "Confirmado pelas asserções: Novo ID correto e SteamAppId nulo",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0293012"
+    },
+    {
+      "id": "A02",
+      "cenario": "Adicionar sem seleção",
+      "esperado": "Nenhum arquivo criado",
+      "observado": "Confirmado pelas asserções: Nenhum arquivo criado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0230616"
+    },
+    {
+      "id": "A03",
+      "cenario": "Seleção desfeita",
+      "esperado": "Cadastro recusado",
+      "observado": "Confirmado pelas asserções: Cadastro recusado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0250750"
+    },
+    {
+      "id": "A04",
+      "cenario": "ID zero na sugestão",
+      "esperado": "Cadastro recusado",
+      "observado": "Confirmado pelas asserções: Cadastro recusado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0314776"
+    },
+    {
+      "id": "A05",
+      "cenario": "Nome vazio na sugestão",
+      "esperado": "Cadastro recusado",
+      "observado": "Confirmado pelas asserções: Cadastro recusado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0232977"
+    },
+    {
+      "id": "A06",
+      "cenario": "Nota vazia no cadastro",
+      "esperado": "Aviso e nenhuma gravação",
+      "observado": "Confirmado pelas asserções: Aviso e nenhuma gravação",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0283960"
+    },
+    {
+      "id": "A07",
+      "cenario": "Categoria não selecionada",
+      "esperado": "Cadastro recusado",
+      "observado": "Confirmado pelas asserções: Cadastro recusado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0223293"
+    },
+    {
+      "id": "A08",
+      "cenario": "Status não selecionado",
+      "esperado": "Cadastro recusado",
+      "observado": "Confirmado pelas asserções: Cadastro recusado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0224130"
+    },
+    {
+      "id": "A09",
+      "cenario": "Conflito ao adicionar",
+      "esperado": "Memória e formulário preservados sem falso sucesso",
+      "observado": "Confirmado pelas asserções: Memória e formulário preservados sem falso sucesso",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0339007"
+    },
+    {
+      "id": "A10",
+      "cenario": "Falha de backup ao adicionar",
+      "esperado": "Lista e arquivo originais preservados",
+      "observado": "Confirmado pelas asserções: Lista e arquivo originais preservados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0294661"
+    },
+    {
+      "id": "A11",
+      "cenario": "Mesmo ID adicionado duas vezes",
+      "esperado": "Dois registros sem deduplicação",
+      "observado": "Confirmado pelas asserções: Dois registros sem deduplicação",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0400034"
+    },
+    {
+      "id": "A12",
+      "cenario": "Coleção corrompida no início",
+      "esperado": "Gravação bloqueada e original intacto",
+      "observado": "Confirmado pelas asserções: Gravação bloqueada e original intacto",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0319402"
+    },
+    {
+      "id": "A13",
+      "cenario": "Review vazia e nota zero",
+      "esperado": "Cadastro válido com texto padrão",
+      "observado": "Confirmado pelas asserções: Cadastro válido com texto padrão",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0293160"
+    },
+    {
+      "id": "E01",
+      "cenario": "Editar registro legado",
+      "esperado": "SteamAppId preservado e título somente leitura",
+      "observado": "Confirmado pelas asserções: SteamAppId preservado e título somente leitura",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0249967"
+    },
+    {
+      "id": "E02",
+      "cenario": "Editar registro IGDB",
+      "esperado": "IgdbId preservado",
+      "observado": "Confirmado pelas asserções: IgdbId preservado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0253926"
+    },
+    {
+      "id": "E03",
+      "cenario": "Registro com dois IDs",
+      "esperado": "Ambos preservados sem reinterpretar",
+      "observado": "Confirmado pelas asserções: Ambos preservados sem reinterpretar",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0323429"
+    },
+    {
+      "id": "E04",
+      "cenario": "Registro sem IDs",
+      "esperado": "IDs permanecem nulos",
+      "observado": "Confirmado pelas asserções: IDs permanecem nulos",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0376683"
+    },
+    {
+      "id": "E05",
+      "cenario": "Editar nota mínima",
+      "esperado": "Zero persistido",
+      "observado": "Confirmado pelas asserções: Zero persistido",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0298760"
+    },
+    {
+      "id": "E06",
+      "cenario": "Editar nota máxima",
+      "esperado": "Cinco persistido",
+      "observado": "Confirmado pelas asserções: Cinco persistido",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0254547"
+    },
+    {
+      "id": "E07",
+      "cenario": "Categoria e status legados",
+      "esperado": "Valores fora das opções preservados",
+      "observado": "Confirmado pelas asserções: Valores fora das opções preservados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0332722"
+    },
+    {
+      "id": "E08",
+      "cenario": "Campo JSON desconhecido na edição",
+      "esperado": "Conteúdo adicional preservado",
+      "observado": "Confirmado pelas asserções: Conteúdo adicional preservado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0257252"
+    },
+    {
+      "id": "E09",
+      "cenario": "Falha ao salvar edição",
+      "esperado": "Nota anterior e formulário mantidos",
+      "observado": "Confirmado pelas asserções: Nota anterior e formulário mantidos",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0357079"
+    },
+    {
+      "id": "E10",
+      "cenario": "Atualizar sem item em edição",
+      "esperado": "Coleção não alterada",
+      "observado": "Confirmado pelas asserções: Coleção não alterada",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0263363"
+    },
+    {
+      "id": "E11",
+      "cenario": "Nota vazia na edição",
+      "esperado": "Arquivo anterior preservado",
+      "observado": "Confirmado pelas asserções: Arquivo anterior preservado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0439164"
+    },
+    {
+      "id": "E12",
+      "cenario": "Review legada acima de 1000 caracteres",
+      "esperado": "Edição de nota não trunca texto",
+      "observado": "Confirmado pelas asserções: Edição de nota não trunca texto",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0229969"
+    },
+    {
+      "id": "E13",
+      "cenario": "Review legada com espaços",
+      "esperado": "Edição sem alterar review preserva texto exato",
+      "observado": "Confirmado pelas asserções: Edição sem alterar review preserva texto exato",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0250570"
+    },
+    {
+      "id": "E14",
+      "cenario": "Review legada vazia",
+      "esperado": "Edição mantém valor vazio original",
+      "observado": "Confirmado pelas asserções: Edição mantém valor vazio original",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0263318"
+    },
+    {
+      "id": "R01",
+      "cenario": "Remover item selecionado",
+      "esperado": "Registro excluído da memória e do arquivo",
+      "observado": "Confirmado pelas asserções: Registro excluído da memória e do arquivo",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0262816"
+    },
+    {
+      "id": "R02",
+      "cenario": "Remover sem seleção",
+      "esperado": "Arquivo intacto",
+      "observado": "Confirmado pelas asserções: Arquivo intacto",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0225802"
+    },
+    {
+      "id": "R03",
+      "cenario": "Remover registro com ID repetido",
+      "esperado": "Somente o registro selecionado é removido",
+      "observado": "Confirmado pelas asserções: Somente o registro selecionado é removido",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0328409"
+    },
+    {
+      "id": "R04",
+      "cenario": "Remoção atualiza estatísticas",
+      "esperado": "Contadores refletem a coleção salva",
+      "observado": "Confirmado pelas asserções: Contadores refletem a coleção salva",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0243334"
+    },
+    {
+      "id": "R05",
+      "cenario": "Remover item em edição",
+      "esperado": "Formulário volta ao cadastro",
+      "observado": "Confirmado pelas asserções: Formulário volta ao cadastro",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0453488"
+    },
+    {
+      "id": "R06",
+      "cenario": "Remover outro item durante edição",
+      "esperado": "Edição do registro restante preservada",
+      "observado": "Confirmado pelas asserções: Edição do registro restante preservada",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0393491"
+    },
+    {
+      "id": "R07",
+      "cenario": "Conflito externo na remoção",
+      "esperado": "Memória e arquivo externo preservados",
+      "observado": "Confirmado pelas asserções: Memória e arquivo externo preservados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0308859"
+    },
+    {
+      "id": "R08",
+      "cenario": "Bloqueio na remoção",
+      "esperado": "Nenhum registro desaparece da memória",
+      "observado": "Confirmado pelas asserções: Nenhum registro desaparece da memória",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0269209"
+    },
+    {
+      "id": "R09",
+      "cenario": "Falha no backup da remoção",
+      "esperado": "Original preservado sem falso sucesso",
+      "observado": "Confirmado pelas asserções: Original preservado sem falso sucesso",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0314292"
+    },
+    {
+      "id": "R10",
+      "cenario": "Reiniciar após remoção",
+      "esperado": "Apenas registros restantes são carregados",
+      "observado": "Confirmado pelas asserções: Apenas registros restantes são carregados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0697549"
+    },
+    {
+      "id": "R11",
+      "cenario": "Remover vizinho de registro IGDB",
+      "esperado": "Identificadores restantes intactos",
+      "observado": "Confirmado pelas asserções: Identificadores restantes intactos",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0356588"
+    },
+    {
+      "id": "R12",
+      "cenario": "Remover último registro",
+      "esperado": "JSON vazio válido e backup recuperável",
+      "observado": "Confirmado pelas asserções: JSON vazio válido e backup recuperável",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0247649"
+    },
+    {
+      "id": "B01",
+      "cenario": "Digitação rápida",
+      "esperado": "Somente o termo final chega ao HTTP",
+      "observado": "Confirmado pelas asserções: Somente o termo final chega ao HTTP",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4417173"
+    },
+    {
+      "id": "B02",
+      "cenario": "Limpar antes da espera",
+      "esperado": "Nenhuma requisição enviada",
+      "observado": "Confirmado pelas asserções: Nenhuma requisição enviada",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0498834"
+    },
+    {
+      "id": "B03",
+      "cenario": "Trocar texto com HTTP ativo",
+      "esperado": "Cancelamento chega ao transporte",
+      "observado": "Confirmado pelas asserções: Cancelamento chega ao transporte",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4289337"
+    },
+    {
+      "id": "B04",
+      "cenario": "Resposta antiga chega depois",
+      "esperado": "Resultado antigo não reaparece",
+      "observado": "Confirmado pelas asserções: Resultado antigo não reaparece",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4136966"
+    },
+    {
+      "id": "B05",
+      "cenario": "Erro antigo após nova pesquisa",
+      "esperado": "Aviso atual não é substituído",
+      "observado": "Confirmado pelas asserções: Aviso atual não é substituído",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4134644"
+    },
+    {
+      "id": "B06",
+      "cenario": "Entrar em edição com busca ativa",
+      "esperado": "Busca cancelada sem sugestões na edição",
+      "observado": "Confirmado pelas asserções: Busca cancelada sem sugestões na edição",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0107729"
+    },
+    {
+      "id": "B07",
+      "cenario": "Navegar para início durante busca",
+      "esperado": "Pesquisa cancelada",
+      "observado": "Confirmado pelas asserções: Pesquisa cancelada",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0388864"
+    },
+    {
+      "id": "B08",
+      "cenario": "Novo jogo durante pesquisa",
+      "esperado": "Busca anterior cancelada e formulário limpo",
+      "observado": "Confirmado pelas asserções: Busca anterior cancelada e formulário limpo",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0133909"
+    },
+    {
+      "id": "B09",
+      "cenario": "Fechar com HTTP ativo",
+      "esperado": "Requisição cancelada sem atualizar janela fechada",
+      "observado": "Confirmado pelas asserções: Requisição cancelada sem atualizar janela fechada",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4211636"
+    },
+    {
+      "id": "B10",
+      "cenario": "Timeout na janela",
+      "esperado": "Aviso específico e coleção continua acessível",
+      "observado": "Confirmado pelas asserções: Aviso específico e coleção continua acessível",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4207914"
+    },
+    {
+      "id": "B11",
+      "cenario": "Falha de rede na janela",
+      "esperado": "Aviso sem encerramento",
+      "observado": "Confirmado pelas asserções: Aviso sem encerramento",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4100002"
+    },
+    {
+      "id": "B12",
+      "cenario": "Resposta inválida na janela",
+      "esperado": "Aviso sem lista de sugestões enganosa",
+      "observado": "Confirmado pelas asserções: Aviso sem lista de sugestões enganosa",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4113017"
+    },
+    {
+      "id": "B13",
+      "cenario": "Buscar novamente após erro",
+      "esperado": "Sugestões válidas apresentadas",
+      "observado": "Confirmado pelas asserções: Sugestões válidas apresentadas",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.8197042"
+    },
+    {
+      "id": "B14",
+      "cenario": "Pesquisa válida sem resultados",
+      "esperado": "Mensagem distinta de erro",
+      "observado": "Confirmado pelas asserções: Mensagem distinta de erro",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4433406"
+    },
+    {
+      "id": "B15",
+      "cenario": "Sem credenciais",
+      "esperado": "Coleção abre e edição local funciona",
+      "observado": "Confirmado pelas asserções: Coleção abre e edição local funciona",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0304215"
+    },
+    {
+      "id": "B16",
+      "cenario": "Alterar texto após selecionar",
+      "esperado": "Seleção antiga não pode cadastrar outro título",
+      "observado": "Confirmado pelas asserções: Seleção antiga não pode cadastrar outro título",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0305935"
+    },
+    {
+      "id": "B17",
+      "cenario": "Títulos iguais com IDs diferentes",
+      "esperado": "ID da sugestão escolhida é utilizado",
+      "observado": "Confirmado pelas asserções: ID da sugestão escolhida é utilizado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0157747"
+    },
+    {
+      "id": "B18",
+      "cenario": "Título de um caractere",
+      "esperado": "Pesquisa existente continua aceita",
+      "observado": "Confirmado pelas asserções: Pesquisa existente continua aceita",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4127192"
+    },
+    {
+      "id": "B19",
+      "cenario": "Abrir edição",
+      "esperado": "Nenhuma pesquisa HTTP automática",
+      "observado": "Confirmado pelas asserções: Nenhuma pesquisa HTTP automática",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0418454"
+    },
+    {
+      "id": "B20",
+      "cenario": "Exceção inesperada do transporte",
+      "esperado": "Barreira do evento evita encerramento e dados intactos",
+      "observado": "Confirmado pelas asserções: Barreira do evento evita encerramento e dados intactos",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.4333092"
+    },
+    {
+      "id": "B21",
+      "cenario": "Busca volta a funcionar",
+      "esperado": "Aviso antigo de falha removido",
+      "observado": "Confirmado pelas asserções: Aviso antigo de falha removido",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.8237136"
+    },
+    {
+      "id": "B22",
+      "cenario": "Texto alterado e cadastro imediato",
+      "esperado": "Seleção anterior recusada antes do evento enfileirado",
+      "observado": "Confirmado pelas asserções: Seleção anterior recusada antes do evento enfileirado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0130363"
+    },
+    {
+      "id": "B23",
+      "cenario": "Renderizar telas com dados simulados",
+      "esperado": "Quadros de início, lista e erro capturados",
+      "observado": "Confirmado pelas asserções: Quadros de início, lista e erro capturados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.2662892"
+    },
+    {
+      "id": "F01",
+      "cenario": "Filtrar título",
+      "esperado": "Somente título correspondente exibido",
+      "observado": "Confirmado pelas asserções: Somente título correspondente exibido",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0370930"
+    },
+    {
+      "id": "F02",
+      "cenario": "Título com caixa diferente",
+      "esperado": "Busca ignora maiúsculas e minúsculas",
+      "observado": "Confirmado pelas asserções: Busca ignora maiúsculas e minúsculas",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0401335"
+    },
+    {
+      "id": "F03",
+      "cenario": "Filtrar categoria",
+      "esperado": "Somente categoria correspondente exibida",
+      "observado": "Confirmado pelas asserções: Somente categoria correspondente exibida",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0385273"
+    },
+    {
+      "id": "F04",
+      "cenario": "Busca por trecho",
+      "esperado": "Correspondência parcial preservada",
+      "observado": "Confirmado pelas asserções: Correspondência parcial preservada",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0357052"
+    },
+    {
+      "id": "F05",
+      "cenario": "Filtro sem resultado",
+      "esperado": "Estado vazio exibido sem excluir dados",
+      "observado": "Confirmado pelas asserções: Estado vazio exibido sem excluir dados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.8021587"
+    },
+    {
+      "id": "F06",
+      "cenario": "Filtrar status",
+      "esperado": "Apenas jogos no status escolhido",
+      "observado": "Confirmado pelas asserções: Apenas jogos no status escolhido",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0249122"
+    },
+    {
+      "id": "F07",
+      "cenario": "Combinar texto e status",
+      "esperado": "Ambos os critérios aplicados",
+      "observado": "Confirmado pelas asserções: Ambos os critérios aplicados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0538868"
+    },
+    {
+      "id": "F08",
+      "cenario": "Filtro ativo",
+      "esperado": "Total da coleção não é alterado",
+      "observado": "Confirmado pelas asserções: Total da coleção não é alterado",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0343114"
+    },
+    {
+      "id": "F09",
+      "cenario": "Limpar filtros",
+      "esperado": "Todos os registros reaparecem",
+      "observado": "Confirmado pelas asserções: Todos os registros reaparecem",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0256288"
+    },
+    {
+      "id": "F10",
+      "cenario": "Seleção sai do filtro",
+      "esperado": "Botões de editar e remover desabilitados",
+      "observado": "Confirmado pelas asserções: Botões de editar e remover desabilitados",
+      "tipo": "Automatizado (Avalonia Headless/Skia)",
+      "status": "Aprovado",
+      "duracao": "00:00:00.0260169"
+    }
+  ]
+}
