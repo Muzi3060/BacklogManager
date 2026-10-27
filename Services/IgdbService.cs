@@ -1,53 +1,88 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using BacklogManager.Models;
-using System.Text.Json;
 
 namespace BacklogManager.Services;
 
-public class IgdbService
+public sealed class IgdbService
 {
     private readonly HttpClient _httpClient;
+    private readonly string _clientId;
+    private readonly string _accessToken;
 
+    // Quem fornece o HttpClient continua responsável por seu descarte.
     public IgdbService(HttpClient httpClient, string clientId, string accessToken)
     {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        if (!ConfiguracaoIgdb.CredencialValida(clientId) || !ConfiguracaoIgdb.CredencialValida(accessToken))
+            throw new ArgumentException("As credenciais locais da IGDB são inválidas.");
         _httpClient = httpClient;
-        _httpClient.DefaultRequestHeaders.Add("Client-ID", clientId);
-        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+        _clientId = clientId;
+        _accessToken = accessToken;
     }
 
-    public async Task<List<IgdbGame>> BuscarJogosAsync(string gameName)
+    public async Task<List<IgdbGame>> BuscarJogosAsync(string gameName, CancellationToken cancellationToken = default)
     {
-        
-        /*
-         * 1. Monta a consulta APICalypse.
-         * 2. Prepara o corpo da requisição.
-         * 3. Envia o POST.
-         * 4. Recebe a resposta HTTP.
-         * 5. Lê o JSON.
-         * 6. Converte o JSON em uma lista de IgdbGame.
-         * 7. Retorna essa lista.
-         */
-        
-        
-        var query = $"search \"{gameName}\"; fields id,name; limit 15;";
-        var conteudo = new StringContent(query, System.Text.Encoding.UTF8, "text/plain"); // corpo que enviamos para a igdb, passando a query que montamos, codificando em UTF8 e dizendo que é do tipo text/plain
-        
-        var resposta = await _httpClient.PostAsync("https://api.igdb.com/v4/games", conteudo);
-        
-        resposta.EnsureSuccessStatusCode();
+        cancellationToken.ThrowIfCancellationRequested();
+        var termo = gameName?.Trim() ?? string.Empty;
+        if (termo.Length == 0) return new List<IgdbGame>();
+        if (termo.Length > 200 || termo.Any(char.IsControl))
+            throw new PesquisaIgdbException("Use um título de até 200 caracteres, sem quebras de linha ou caracteres de controle.");
 
-        var json = await resposta.Content.ReadAsStringAsync(); // corpo que recebemos da igdb
+        // Escapa o texto dentro da string APICalypse, sem permitir novas instruções.
+        var escapado = termo.Replace("\\", "\\\\").Replace("\"", "\\\"");
+        using var requisicao = new HttpRequestMessage(HttpMethod.Post, "https://api.igdb.com/v4/games");
+        requisicao.Headers.Add("Client-ID", _clientId);
+        requisicao.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
+        requisicao.Content = new StringContent($"search \"{escapado}\"; fields id,name; limit 15;", Encoding.UTF8, "text/plain");
 
-        var options = new JsonSerializerOptions()
+        try
         {
-            PropertyNameCaseInsensitive = true
-        };
-        
-        var jogos = JsonSerializer.Deserialize<List<IgdbGame>>(json, options);
+            using var resposta = await _httpClient.SendAsync(requisicao, cancellationToken);
+            if (!resposta.IsSuccessStatusCode)
+                throw new PesquisaIgdbException(resposta.StatusCode switch
+                {
+                    HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden =>
+                        "A IGDB recusou a autenticação. Confira o Client ID e o token na configuração local.",
+                    HttpStatusCode.TooManyRequests =>
+                        "O limite de buscas da IGDB foi atingido. Aguarde um pouco antes de tentar novamente.",
+                    _ when (int)resposta.StatusCode >= 500 =>
+                        "A IGDB está temporariamente indisponível. Tente novamente mais tarde.",
+                    _ => $"A IGDB não pôde concluir a pesquisa (HTTP {(int)resposta.StatusCode})."
+                });
 
-        return jogos ?? new List<IgdbGame>(); // se jogos não for nulo, retorne a lista de jogos, se não retorne uma lista vazia de igdbGame
+            var json = await resposta.Content.ReadAsStringAsync(cancellationToken);
+            cancellationToken.ThrowIfCancellationRequested();
+            var jogos = JsonSerializer.Deserialize<List<IgdbGame>>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            if (jogos == null || jogos.Any(j => j == null || j.Id <= 0 || string.IsNullOrWhiteSpace(j.Name)))
+                throw new PesquisaIgdbException("A IGDB retornou resultados inválidos. Tente novamente.");
+            return jogos;
+        }
+        catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
+        {
+            throw new PesquisaIgdbException("A pesquisa demorou demais. Confira sua conexão e tente novamente.");
+        }
+        catch (HttpRequestException)
+        {
+            throw new PesquisaIgdbException("Não foi possível conectar à IGDB. Confira sua conexão e tente novamente.");
+        }
+        catch (JsonException)
+        {
+            throw new PesquisaIgdbException("A IGDB retornou uma resposta inválida. Tente novamente.");
+        }
     }
+}
+
+public sealed class PesquisaIgdbException : Exception
+{
+    public PesquisaIgdbException(string mensagem) : base(mensagem) { }
 }

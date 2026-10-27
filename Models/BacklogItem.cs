@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace BacklogManager.Models;
 
 public class BacklogItem
@@ -6,16 +10,23 @@ public class BacklogItem
     public string Categoria { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public double Nota { get; set; }
-    
+
     public string Review { get; set; } = string.Empty;
-    
-    public int? SteamAppId { get; set; } 
-    
+
+    public int? SteamAppId { get; set; }
+
+    // IDs legados não têm origem confiável; somente novas seleções preenchem IgdbId.
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? IgdbId { get; set; }
+
+    [JsonExtensionData]
+    public Dictionary<string, JsonElement>? DadosAdicionais { get; set; }
+
     public BacklogItem()
     {
 
     }
-    
+
     public BacklogItem(string titulo, string categoria, string status, double nota, string review, int? steamAppID)
     {
         Titulo = titulo;
