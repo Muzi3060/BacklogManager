@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -16,15 +17,21 @@ public partial class MainWindow : Window
     private BacklogItem? _itemEmEdicao;
     private readonly ObservableCollection<BacklogItem> _itens;
     private bool _interfacePronta;
-    private SteamGame? _jogoSelecionado;
+    private IgdbGame? _jogoSelecionado;
     private CancellationTokenSource? _buscaCancellation;
-
+    private readonly IgdbService _igdbService;
+    
     public MainWindow()
     {
         InitializeComponent();
         _itens = new ObservableCollection<BacklogItem>(FileManager.Carregar());
         _interfacePronta = true;
         AtualizarColecao();
+        string clientId = Environment.GetEnvironmentVariable("IGDB_CLIENT_ID") 
+                          ?? throw new InvalidOperationException("IGDB_CLIENT_ID não configuirado.");
+        string accessToken = Environment.GetEnvironmentVariable("IGDB_ACESS_TOKEN") 
+                             ?? throw new InvalidOperationException("IGDB_ACESS_TOKEN não configuirado.");
+        _igdbService = new IgdbService(new HttpClient(), clientId, accessToken);
     }
 
     private void Navegar_Click(object? sender, RoutedEventArgs e)
@@ -93,8 +100,8 @@ public partial class MainWindow : Window
         
         if (_jogoSelecionado != null)
         {
-            titulo = _jogoSelecionado.Nome;
-            steamAppId = _jogoSelecionado.AppId;
+            titulo = _jogoSelecionado.Name;
+            steamAppId = _jogoSelecionado.Id;
         } else if (_itemEmEdicao != null)
         {
             titulo = _itemEmEdicao.Titulo;
@@ -278,11 +285,11 @@ public partial class MainWindow : Window
 
     private void ListaSugestoes_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (ListaSugestoes.SelectedItem is SteamGame jogo)
+        if (ListaSugestoes.SelectedItem is IgdbGame jogo)
         {
             _jogoSelecionado = jogo;
             ListaSugestoes.IsVisible = false;
-            Console.WriteLine($"Selecionado: AppId: {jogo.AppId} - Nome: {jogo.Nome}");
+            Console.WriteLine($"Selecionado: Id: {jogo.Id} - Nome: {jogo.Name}");
         }
         else
         {
@@ -304,9 +311,9 @@ public partial class MainWindow : Window
         {
             return;
         }
-        var termo = TxtTitulo.Text?.Trim() ?? string.Empty;
+        var gameName = TxtTitulo.Text?.Trim() ?? string.Empty;
 
-        if (string.IsNullOrEmpty(termo))
+        if (string.IsNullOrEmpty(gameName))
         {
             return;
         }
@@ -314,7 +321,7 @@ public partial class MainWindow : Window
         try
         {
             await Task.Delay(400, buscaAtual.Token);
-            var resultado = await new SteamCatalogService().BuscarJogosAsync(termo);
+            var resultado = await _igdbService.BuscarJogosAsync(gameName);
 
             buscaAtual.Token.ThrowIfCancellationRequested();
             ListaSugestoes.ItemsSource = resultado;

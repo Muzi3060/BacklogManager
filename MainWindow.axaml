@@ -310,8 +310,8 @@
                                     <TextBox x:Name="TxtTitulo" PlaceholderText="Ex.: Cyberpunk 2077" TextChanged="TxtTitulo_TextChanged"/>
                                     <ListBox x:Name="ListaSugestoes" SelectionChanged="ListaSugestoes_SelectionChanged">
                                         <ListBox.ItemTemplate>
-                                            <DataTemplate DataType="models:SteamGame">
-                                                <TextBlock Text="{Binding Nome}" />
+                                            <DataTemplate DataType="models:IgdbGame">
+                                                <TextBlock Text="{Binding Name}" />
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
