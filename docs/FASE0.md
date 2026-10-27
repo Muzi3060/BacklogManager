@@ -2,6 +2,8 @@
 
 Implementação limitada à Fase 0 de `Contrato.md` versão 1.1, incluindo a seção 19.1. Base: `7ce3009`. Branch: `chore/seguranca-estabilidade`. Não houve merge, exclusão de branch, push ou início da Fase 1.
 
+Registro complementado com a validação manual realizada pelo proprietário no Rider e informada nesta conversa. Os testes manuais utilizaram uma cópia do `backlog.json` em pasta temporária, sem utilizar a biblioteca original. Esta atualização altera somente este documento; não acrescenta execuções de compilação ou testes automatizados nem representa aprovação de merge ou de outra fase.
+
 ## O que foi implementado
 
 - A coleção local abre mesmo sem configuração IGDB. Cadastro continua exigindo uma seleção válida da pesquisa; edição, exclusão, filtros e consulta local funcionam sem internet.
@@ -52,13 +54,15 @@ A pasta tem permissão 700 e o backup tem permissão 600. O manifesto `verificac
 
 - Registros: **11**.
 - Tamanho: **1817 bytes**.
-- SHA-256 do original e do backup:
+- SHA-256 do original e do backup verificado durante a implementação inicial:
 
 ```text
 4cfc6e877e370f4c154f22afa521f725d652c31f3ef0425fd4d5623138cfc25e
 ```
 
-O arquivo real não foi gravado pelos testes nem pelo aplicativo durante a implementação. Uma cópia temporária dos dados reais foi carregada e salva pelo novo `FileManager`: os 11 registros e todos os valores JSON permaneceram semanticamente iguais; seu `.bak` preservou os bytes anteriores. O original e o backup externo permaneceram idênticos.
+Os dados de quantidade, tamanho e hash acima são o registro histórico da verificação realizada na implementação inicial, não uma afirmação sobre o estado da biblioteca após eventual uso posterior. Nesta atualização documental, a biblioteca original não foi modificada.
+
+O arquivo real não foi gravado pelos testes nem pelo aplicativo durante a implementação. Uma cópia temporária dos dados reais foi carregada e salva pelo novo `FileManager`: os 11 registros e todos os valores JSON permaneceram semanticamente iguais; seu `.bak` preservou os bytes anteriores. Ao concluir a implementação inicial, o original e o backup externo permaneceram idênticos.
 
 Em gravações futuras, o JSON continua sendo uma lista, sem envelope ou versão nova. `IgdbId` só é escrito quando preenchido. Os registros legados não são migrados. A formatação e a codificação do arquivo salvo podem mudar para UTF-8 sem BOM, preservando seus valores; o `.bak` retém os bytes anteriores.
 
@@ -94,7 +98,7 @@ Criados:
 
 `Contrato.md`, os arquivos `.axaml`, `SteamCatalogService.cs`, o JSON pessoal e `qodana.yaml` foram preservados. Não foram adicionadas dependências de produção; os novos pacotes são exclusivos do projeto de testes.
 
-## Validação executada
+## Validação automatizada executada durante a implementação
 
 Ambiente: Linux CachyOS, .NET SDK 10.0.113, runtime 10.0.13, Avalonia 12.1.4. Testes com xUnit v3 3.2.2 e Avalonia.Headless.XUnit 12.1.4.
 
@@ -125,7 +129,18 @@ Verificações adicionais executadas fora da suíte, com scripts temporários e 
 | X01 | Leitura/gravação de uma cópia dos dados reais | 11 registros, equivalência de todos os valores JSON, backup e original intactos | 11 registros; `JsonNode.DeepEquals` verdadeiro; bytes do backup e do original iguais aos iniciais | Automatizado, execução adicional isolada | Aprovado |
 | X02 | Inicialização desktop nativa sem credenciais | Processo permanece aberto, sem erro de inicialização nem gravação dos dados | Aberto por oito segundos; encerrado pelo verificador; log vazio; original e cópia intactos | Automatizado, teste de inicialização | Aprovado |
 
-**Total planejado: 187 cenários**, sendo 175 da suíte, duas verificações adicionais e dez validações manuais no Rider. **Executados: 177; aprovados: 177; reprovados atuais: zero; não executados: dez**, listados abaixo. As verificações adicionais não fazem parte da suíte repetível de 175 testes.
+**Total planejado: 187 cenários**, sendo 175 da suíte, duas verificações adicionais e dez validações manuais no Rider. Na entrega inicial, havia 177 verificações aprovadas e dez testes manuais pendentes. As verificações adicionais não fazem parte da suíte repetível de 175 testes.
+
+Após o registro dos resultados manuais informados pelo proprietário:
+
+| Conjunto | Planejados | Aprovados sem ressalva | Aprovados com ressalva | Reprovados na entrega | Não executados |
+|---|---:|---:|---:|---:|---:|
+| Suíte automatizada anterior | 175 | 175 | 0 | 0 | 0 |
+| Verificações adicionais anteriores (X01/X02) | 2 | 2 | 0 | 0 | 0 |
+| Validação manual no Rider | 10 | 8 | 1 | 0 | 1 |
+| **Total consolidado** | **187** | **185** | **1** | **0** | **1** |
+
+Há **186 cenários com execução registrada**: 185 integralmente aprovados e M10 executado parcialmente, aprovado com ressalva. M05 permanece não executado por decisão do proprietário. A restauração pelo `.bak` é a parte não executada de M10 e não é contada como um cenário adicional nem como aprovada. Os números automatizados são históricos e não correspondem a novas execuções nesta atualização.
 
 Foram capturadas e inspecionadas três imagens Skia com dados simulados: início sem credenciais, coleção local e aviso de falha ao gravar na janela mínima de 900×660. As imagens e o TRX desta execução estão em `/tmp/backlogmanager-resultados/`. O teste B23 regenera as imagens na pasta temporária do sistema. Isso não equivale a interação manual no Rider nem valida todas as plataformas.
 
@@ -175,24 +190,38 @@ printf '%s\n' "$pasta_validacao_fase0"
 3. Para testar pesquisa real, mantenha seu `IGDB_CLIENT_ID` e `IGDB_ACESS_TOKEN` somente nas variáveis da configuração local. O aplicativo também aceita `IGDB_ACCESS_TOKEN`, que tem preferência se preenchida. Não compartilhe tokens em logs, capturas, commits ou relatórios.
 4. Use a janela de testes do Rider ou o terminal para executar a suíte.
 
-Os cenários abaixo estão pendentes porque exigem sua interação/configuração no Rider ou autenticação real. As versões equivalentes simuladas estão cobertas pela suíte; não foi alegado sucesso nestes testes manuais.
+### Resultados manuais informados pelo proprietário
+
+Fonte: relato do proprietário nesta conversa, após testes no Rider com uma cópia da biblioteca em pasta temporária. O agente está registrando esses resultados; não executou novamente os testes nem inspecionou diretamente a sessão manual. Não foram fornecidas credenciais ou registradas evidências que contenham tokens.
 
 | ID | Cenário testado | Resultado esperado | Resultado observado | Tipo | Status |
 |---|---|---|---|---|---|
-| M01 | Abrir a solução e executar no Rider com a cópia | Janela abre e mostra 11 registros | Não realizado no Rider nesta sessão | Manual | Não executado |
-| M02 | Executar sem variáveis IGDB | Aviso; coleção, edição e exclusão locais disponíveis | Não realizado no Rider nesta sessão | Manual | Não executado |
-| M03 | Pesquisar com suas credenciais válidas usando o nome legado | Sugestões reais; seleção adiciona `IgdbId` na cópia | Não realizado; requer credenciais reais | Manual | Não executado |
-| M04 | Executar com token simulado inválido | Falha de autenticação sem encerrar aplicativo | Não realizado contra a API real | Manual | Não executado |
-| M05 | Interromper a conexão durante busca | Aviso de conexão/timeout; coleção continua disponível | Não realizado na sessão desktop do usuário | Manual | Não executado |
-| M06 | Digitar rapidamente, limpar e navegar durante buscas | Somente resultados atuais; nenhum resultado antigo reaparece | Não realizado manualmente no Rider | Manual | Não executado |
-| M07 | Editar nota/review de registro legado na cópia | `SteamAppId` preservado; nenhuma conversão ou deduplicação | Não realizado manualmente no Rider | Manual | Não executado |
-| M08 | Cadastrar, editar, remover e reiniciar usando a cópia | Operações confirmadas persistem; contadores e filtros corretos | Não realizado manualmente no Rider | Manual | Não executado |
-| M09 | Usar tamanho mínimo e passar o mouse nos avisos | Navegação/rolagem utilizáveis; mensagem completa no tooltip | Imagens Headless inspecionadas; interação nativa pendente | Manual | Não executado |
-| M10 | Simular falha de gravação e restaurar backup exclusivamente na cópia | Sem falso sucesso; arquivo anterior intacto; recuperação consciente | Não realizado manualmente no Rider | Manual | Não executado |
+| M01 | Inicializar pelo Rider com a cópia da biblioteca | Aplicativo abre e carrega os registros da cópia | Aplicativo inicializou corretamente com os registros da biblioteca | Manual, informado pelo proprietário | Aprovado |
+| M02 | Executar sem credenciais IGDB | Aviso esperado e uso local disponível, com edição e persistência | Aviso apresentado; uso local, edição e persistência verificados | Manual, informado pelo proprietário | Aprovado |
+| M03 | Pesquisar na IGDB real, selecionar e cadastrar | Sugestões reais; cadastro persistente; novos `IgdbId` e IDs legados preservados | Pesquisa real, sugestões, cadastro e persistência após reiniciar confirmados; jogos novos receberam `IgdbId` e antigos preservaram `SteamAppId` | Manual, informado pelo proprietário | Aprovado |
+| M04 | Pesquisar com token inválido | Mensagem de autenticação recusada sem encerrar o aplicativo | IGDB recusou a autenticação; mensagem adequada; sem encerramento inesperado | Manual, informado pelo proprietário | Aprovado |
+| M05 | Simular falha de conexão durante pesquisa | Aviso de conexão/timeout e continuidade do uso local | Não executado por decisão do proprietário nesta rodada | Manual | Não executado |
+| M06 | Pesquisar rapidamente, limpar o campo e navegar durante a busca | Somente resultados da consulta atual; sugestões removidas ao limpar; navegação funcional | Apenas resultados da última consulta; sugestões desapareceram ao limpar; navegação ocorreu normalmente | Manual, informado pelo proprietário | Aprovado |
+| M07 | Editar nota e review de registro legado e reiniciar | Alterações persistem sem converter ou alterar o identificador legado | Nota e review persistiram; `SteamAppId` do LEGO Batman permaneceu `361855`, sem migração indevida para `IgdbId` | Manual, informado pelo proprietário | Aprovado |
+| M08 | Adicionar, editar, excluir e reiniciar usando a cópia | Operações funcionam e persistem após reiniciar | Cadastro, edição e exclusão funcionaram corretamente, com persistência após reiniciar | Manual, informado pelo proprietário | Aprovado |
+| M09 | Usar a janela no menor tamanho permitido | Interface, navegação e avisos utilizáveis e legíveis | Interface, navegação e avisos permaneceram utilizáveis e legíveis no tamanho mínimo | Manual, informado pelo proprietário | Aprovado |
+| M10 | Simular falha de gravação, recuperar a capacidade de salvar e verificar restauração pelo `.bak` | Falha sem aplicar alterações; JSON válido preservado; retomada após corrigir o acesso; restauração pelo backup validada | Permissão de escrita da pasta de testes removida temporariamente: mensagem adequada, alteração não aplicada e JSON válido preservado; salvamento voltou a funcionar após restaurar as permissões. Restauração efetiva pelo `.bak` não testada manualmente | Manual, informado pelo proprietário | Aprovado com ressalva |
+
+**Ressalva de M10:** restaurar a permissão e voltar a salvar confirma a recuperação da capacidade de gravação. Isso não equivale a restaurar dados a partir do arquivo `.bak`. Essa parte do cenário continua pendente de validação manual, embora a suíte anterior tenha verificado a geração e preservação do backup.
+
+**Pendências manuais:** M05 foi dispensado nesta rodada por decisão do proprietário, sem receber aprovação. Se houver autorização futura, a simulação de falha de conexão deve usar a cópia em pasta temporária e verificar o aviso e a continuidade do uso local. Para concluir a parte de restauração de M10, use outra cópia isolada, feche o aplicativo, preserve o arquivo de teste, restaure conscientemente o `.bak` e confira os registros após reiniciar. Nenhum desses procedimentos foi executado nesta atualização.
+
+### Consistência com o contrato e escopo desta atualização
+
+O registro mantém a separação entre resultados esperados e observados exigida pela seção 19.1.3, identifica a origem dos resultados manuais, os testes não executados e a ressalva parcial de M10, conforme as seções 19 e 19.1.2. A seção 19.1.4 reserva a aprovação definitiva ao proprietário: o relatório não transforma pendências em aprovações nem autoriza merge ou avanço de fase.
+
+`docs/FASE0_TESTES.md` e `docs/resultados-fase0.json` permanecem integralmente preservados, incluindo os 175 resultados e suas durações. As compilações, verificações adicionais e repetições de testes descritas anteriormente são registros da implementação inicial. Nesta atualização documental não houve nova compilação, execução da suíte, teste manual pelo agente ou mudança de comportamento do aplicativo. Foram realizadas somente verificações de consistência documental, integridade dos arquivos e estado Git. Não foram encontrados novos bugs no relato manual, e nenhuma correção de código foi realizada.
 
 ## Limitações e riscos restantes
 
-- A pesquisa autenticada real não foi executada nesta sessão. Headers, endpoint, consultas, respostas, falhas e cancelamento foram verificados por simulação; a validação real está em M03/M04.
+- A pesquisa autenticada real e a recusa de token inválido foram aprovadas pelo proprietário no Rider (M03/M04). O agente não repetiu essas chamadas nesta atualização.
+- A falha de conexão real permanece sem teste manual (M05), por decisão do proprietário. A cobertura automatizada simulada anterior foi preservada, sem substituí-la por uma aprovação manual.
+- M10 foi aprovado com ressalva: falha por falta de permissão e retomada do salvamento verificadas; restauração efetiva dos dados pelo `.bak` ainda não testada manualmente.
 - O caminho depende do diretório de trabalho por compatibilidade. Alterar a configuração do Rider pode abrir outra coleção. Nenhum arquivo é movido automaticamente.
 - A origem dos IDs legados continua indeterminada. A correção impede novas misturas, sem converter o passado.
 - O bloqueio coordena instâncias deste aplicativo. Um editor externo que ignore o bloqueio ainda pode alterar o arquivo entre a conferência do hash e a substituição; evite editar o JSON com o aplicativo aberto.
@@ -205,6 +234,6 @@ Os cenários abaixo estão pendentes porque exigem sua interação/configuraçã
 
 ## Estado Git da entrega
 
-A branch da Fase 0 parte de `7ce3009`; `main` foi preservada. As mudanças da fase estão em commits próprios. `qodana.yaml` continua não rastreado e não faz parte dos commits; seu SHA-256 permaneceu `aabdb19b53fec2d5f02ef051fa2f505b69bc1fbe18d3e6c94564a05f3575f139`. `backlog.json` continua ignorado e intacto.
+A branch da Fase 0 parte de `7ce3009`; `main` foi preservada. A implementação foi registrada em `97e7e82` e os testes e relatórios iniciais em `0c3fac3`. Esta atualização documental é registrada em um commit próprio na mesma branch, contendo somente `docs/FASE0.md`. `qodana.yaml` continua não rastreado e não faz parte dos commits; seu SHA-256 permaneceu `aabdb19b53fec2d5f02ef051fa2f505b69bc1fbe18d3e6c94564a05f3575f139`. `backlog.json` continua ignorado e intacto.
 
-A implementação fica disponível para revisão. Merge e início da Fase 1 dependem de autorização explícita do proprietário.
+O registro da validação manual está finalizado com as pendências e ressalvas acima, disponível para revisão do proprietário. Merge e início da Fase 1 continuam dependendo de autorização explícita; nenhuma dessas ações foi realizada.
