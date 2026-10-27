@@ -1,6 +1,6 @@
 # CONTRATO DE DESENVOLVIMENTO — BACKLOGMANAGER
 
-**Versão:** 1.0
+**Versão:** 1.1
 **Status:** Planejamento aprovado; implementação pendente
 **Projeto atual:** BacklogManager
 **Tecnologias atuais:** C#, .NET, Avalonia UI, JSON, HTTP e IGDB
@@ -757,6 +757,91 @@ Ao concluir cada fase, o Codex deverá verificar:
 Quando testes visuais ou manuais não puderem ser executados, isso deverá ser declarado claramente.
 
 Não afirmar que algo foi testado quando apenas foi compilado.
+
+---
+
+## 19.1 — POLÍTICA OBRIGATÓRIA DE TESTES E QUALIDADE
+
+Para cada funcionalidade nova ou comportamento existente que seja modificado, o Codex deverá planejar e executar **no mínimo 10 cenários de teste distintos e relevantes**, sempre que tecnicamente aplicável.
+
+**IMPORTANTE: 10 testes são o mínimo, não o máximo.**
+
+Se a complexidade, os riscos ou a importância de uma funcionalidade justificarem mais testes, o Codex deverá criar e executar quantos cenários adicionais forem necessários para alcançar uma cobertura adequada.
+
+O objetivo não é apenas atingir uma quantidade numérica, mas garantir a estabilidade, a segurança e o funcionamento correto do aplicativo.
+
+### 19.1.1 — Cenários que devem ser considerados
+
+Os testes deverão abranger, conforme a funcionalidade:
+
+1. **Funcionamento normal:** verificar se a funcionalidade executa corretamente sua operação principal.
+2. **Entradas válidas:** testar diferentes valores aceitos pelo sistema.
+3. **Entradas inválidas:** verificar como o aplicativo reage a informações incorretas.
+4. **Valores vazios ou nulos:** garantir que campos não preenchidos sejam tratados adequadamente.
+5. **Casos extremos e limites:** testar valores mínimos, máximos e situações incomuns.
+6. **Falhas externas:** simular problemas de conexão, APIs indisponíveis e respostas inesperadas.
+7. **Cancelamentos e interrupções:** verificar o comportamento quando uma operação é interrompida.
+8. **Persistência e integridade:** confirmar que informações são salvas, carregadas e preservadas corretamente.
+9. **Compatibilidade e regressão:** garantir que alterações não prejudiquem funcionalidades existentes.
+10. **Recuperação de falhas:** verificar se o aplicativo consegue continuar funcionando ou recuperar dados após problemas.
+
+Essas categorias são referências para elaborar os testes, não uma lista rígida. O Codex deverá adaptar os cenários às características e aos riscos reais de cada funcionalidade.
+
+### 19.1.2 — Regras obrigatórias
+
+- Os testes devem ser diferentes e relevantes. Não repetir o mesmo teste dez vezes apenas para atingir a quantidade mínima.
+- A quantidade de 10 testes não deve limitar a cobertura. Funcionalidades complexas ou críticas deverão receber testes adicionais.
+- Sempre que possível, implementar testes automatizados que possam ser executados novamente nas próximas fases.
+- Testes de integração com APIs externas deverão utilizar simulações controladas quando necessário, evitando dependência de credenciais reais ou disponibilidade dos serviços.
+- Executar testes de regressão para verificar se funcionalidades anteriores continuam funcionando.
+- Quando um bug for identificado, corrigi-lo e executar novamente os testes afetados.
+- Não considerar uma funcionalidade aprovada enquanto existirem falhas críticas ou relevantes não resolvidas.
+- Não modificar ou excluir dados pessoais reais para realizar testes.
+- Utilizar arquivos temporários, dados simulados e ambientes isolados sempre que necessário.
+- Caso algum teste não possa ser executado, documentar o motivo e fornecer instruções para validação manual.
+- Não confundir compilação bem-sucedida com funcionamento correto.
+- Não afirmar que um teste passou sem tê-lo executado.
+- Não criar testes artificiais ou irrelevantes apenas para cumprir a quantidade mínima.
+
+### 19.1.3 — Relatório obrigatório dos testes
+
+Para cada funcionalidade implementada ou modificada, o Codex deverá apresentar uma tabela contendo:
+
+| ID | Cenário testado | Resultado esperado | Resultado observado | Tipo | Status |
+|---|---|---|---|---|---|
+| T01 | Descrição do cenário | Comportamento esperado | Resultado obtido | Automatizado/Manual | Aprovado/Reprovado/Não executado |
+| T02 | Descrição do cenário | Comportamento esperado | Resultado obtido | Automatizado/Manual | Aprovado/Reprovado/Não executado |
+
+A tabela acima é apenas um exemplo de formato, não representa testes executados.
+
+O relatório também deverá informar:
+
+- Quantidade total de cenários planejados.
+- Quantidade de cenários efetivamente executados.
+- Quantidade de testes aprovados.
+- Quantidade de testes reprovados.
+- Quantidade de testes não executados e suas justificativas.
+- Bugs encontrados e respectivas correções.
+- Testes executados novamente após as correções.
+- Riscos conhecidos que ainda precisam de atenção.
+
+### 19.1.4 — Critérios para aprovação
+
+Uma funcionalidade somente poderá ser considerada pronta para revisão quando:
+
+1. Os cenários relevantes tiverem sido executados.
+2. Os testes automatizados aplicáveis estiverem passando.
+3. Não existirem falhas críticas ou relevantes sem resolução.
+4. Os dados existentes estiverem preservados.
+5. Os testes de regressão aplicáveis tiverem sido realizados.
+6. Os resultados estiverem documentados.
+7. As limitações e os testes não executados estiverem claramente identificados.
+
+**A aprovação definitiva continua sendo responsabilidade do proprietário do projeto.**
+
+O Codex não poderá realizar merge na `main` ou avançar para a próxima fase sem autorização explícita.
+
+**Esta política é obrigatória para todas as fases de desenvolvimento do projeto.**
 
 ---
 
