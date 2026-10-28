@@ -1,0 +1,292 @@
+{
+  "branch": "feat/colecoes",
+  "base": "8c9d147",
+  "verificadoEm": "2026-10-28T20:10:12.543404+00:00",
+  "biblioteca": {
+    "registros": 9,
+    "bytes": 1535,
+    "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810"
+  },
+  "backupExterno": {
+    "caminho": "${HOME}/Backups/BacklogManager/fase4-20261028-164306/backlog.json",
+    "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+    "verificado": true
+  },
+  "preservados": {
+    "Contrato.md": {
+      "sha256": "cc521ad94ddb75c7011e0a375e3dd3bf1d6a06145418003c32f91aedccfd222a",
+      "preservado": true
+    },
+    "backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "qodana.yaml": {
+      "sha256": "aabdb19b53fec2d5f02ef051fa2f505b69bc1fbe18d3e6c94564a05f3575f139",
+      "preservado": true
+    },
+    "skills/system/run-workflow/SKILL.md": {
+      "sha256": "82ed7c2e93d79fd95a01188c78539b6987f4c2a2dfc49c3b8991bebbe8925bf8",
+      "preservado": true
+    },
+    "docs/FASE0.md": {
+      "sha256": "84a83953d121cdcc10c453b5e0d2354987ef157a165d02f209a808d8869a0f44",
+      "preservado": true
+    },
+    "docs/FASE0_TESTES.md": {
+      "sha256": "69b073d6e68a32bdb0ac4070beceede139bb642b2b667d535ebd9ce72bde527f",
+      "preservado": true
+    },
+    "docs/resultados-fase0.json": {
+      "sha256": "6d9bf7a55a595a6f1eca472113bb3d3033c735ccf8ed5a298a517759d32e055c",
+      "preservado": true
+    },
+    "docs/APROVACAO_FASE1.md": {
+      "sha256": "dd8e651390e94c88584231ffd60f465879d9da34a867e322d09a41a5f9b02a3e",
+      "preservado": true
+    },
+    "docs/ARQUITETURA.md": {
+      "sha256": "eae9d2d6596d1ccb5a38bdbb54354edd4b00e4d2afcd022d6876990ad3902dbb",
+      "preservado": true
+    },
+    "docs/FASE1.md": {
+      "sha256": "3427dba84c974ededc0f6d3fcd8b0f5f569ca6de41949458ce70f2a1db893a5a",
+      "preservado": true
+    },
+    "docs/FASE1_TESTES.md": {
+      "sha256": "ee70553106c1740381fad18ebc2fc238de6bd3273497f1805dcf21a0efc56604",
+      "preservado": true
+    },
+    "docs/resultados-fase1.json": {
+      "sha256": "4320878ebea8f925d486d606c0e978574f7fce65a82ca38750c3a747d182b518",
+      "preservado": true
+    },
+    "docs/APROVACAO_FASE2.md": {
+      "sha256": "a4299ba2ca15c1aeb66173959889117f8babffa73ff48f03e4cf4c349594c9eb",
+      "preservado": true
+    },
+    "docs/ARQUITETURA_FASE2.md": {
+      "sha256": "7c8b0267f4ec811ab91ec86a409ff585a6c7740f7f3cfeca409e52ff1d9fa0f2",
+      "preservado": true
+    },
+    "docs/FASE2.md": {
+      "sha256": "66c4877a43b9468953213a426dc7b97b1a9101ab04b8538704e8910f3bf5a500",
+      "preservado": true
+    },
+    "docs/FASE2_TESTES.md": {
+      "sha256": "eb2f9d2bd77c21cb62ea8d97614080801bc191b283292bc65bd96e2796773481",
+      "preservado": true
+    },
+    "docs/resultados-fase2.json": {
+      "sha256": "71b8a5f199352ad618cb8f9067e947d635213d577f5c4ea33f8ceb782a76bba4",
+      "preservado": true
+    },
+    "docs/resultados-fase3.json": {
+      "sha256": "f8d630d9054a9adf82331f15635cdebbac5afb3029d4e0e091bb205ebe11a5b8",
+      "preservado": true
+    },
+    "docs/FASE3_TESTES.md": {
+      "sha256": "71298ca065249343c10af5f14572159d28b390de5b8effcd286b3b4eee3f31e0",
+      "preservado": true
+    },
+    "docs/verificacoes-fase3.json": {
+      "sha256": "4b5932eb04962348deb3e6bbbe05118efdc2f0ef217590119bc11b0add8b8a3f",
+      "preservado": true
+    },
+    "docs/FASE3.md": {
+      "sha256": "67ff40f10e8ca5655c60ab3a53c78f0c0f645809c79bffa205f78e15d9b736c9",
+      "preservado": true
+    },
+    "docs/resultados-ajustes-fase3.json": {
+      "sha256": "096578a8542787a7b15abce5d395216a032eded523a245671591364a50dc47c6",
+      "preservado": true
+    },
+    "docs/AJUSTES_FASE3_TESTES.md": {
+      "sha256": "29b362b43d900bdb0f57a107787a8d73cfd49161ec9b4d1fbe625bbdfcb1dcee",
+      "preservado": true
+    },
+    "docs/AJUSTES_FASE3.md": {
+      "sha256": "84c311582194c68c66f7cb7eb36ed18427c69afd053269a1f742076d2e130c58",
+      "preservado": true
+    },
+    "docs/verificacoes-ajustes-fase3.json": {
+      "sha256": "f69aa8b22c57b79ae1665537dc989da76a29c859011ac5747ab19a37169e3b78",
+      "preservado": true
+    },
+    "docs/resultados-revisao2-fase3.json": {
+      "sha256": "e29cc34185d007f3b7b075da5e0b7c0023e142dc429e532b55da8eab8c6d57d5",
+      "preservado": true
+    },
+    "docs/REVISAO2_FASE3_TESTES.md": {
+      "sha256": "de1f5969af1e240430596d9475e4e9f7e033ed2c3f54a9e96852f7fd7678565e",
+      "preservado": true
+    },
+    "docs/verificacoes-revisao2-fase3.json": {
+      "sha256": "fbc067723106708cd98f8400d6907649337ce66b642f604963a4e47162b1e266",
+      "preservado": true
+    },
+    "docs/REVISAO2_FASE3.md": {
+      "sha256": "8bbb1648668b0b6f7e77f46a4240a0506d78070135b8fa10899c87433588dc36",
+      "preservado": true
+    },
+    "docs/resultados-revisao3-fase3.json": {
+      "sha256": "5b612c17bb2f7a5a9da13ab49678f071fc798d9f32d5e3459ec2249ad0ac828a",
+      "preservado": true
+    },
+    "docs/REVISAO3_FASE3_TESTES.md": {
+      "sha256": "caf0a0b70a127c03928bb028aebb494ef91c18971fb7f1378926c34cb642192f",
+      "preservado": true
+    },
+    "docs/verificacoes-revisao3-fase3.json": {
+      "sha256": "d9039bd68a8d8cc73dc691a5b08c1cb6179aae55036090bd2300477cb70df0e3",
+      "preservado": true
+    },
+    "docs/REVISAO3_FASE3.md": {
+      "sha256": "f3b385d1456290f5c6178215a4cedb998e658272e3449aae7d06e4e22fb8c122",
+      "preservado": true
+    }
+  },
+  "backupsAnteriores": {
+    "${HOME}/Backups/BacklogManager/fase0-20261027-170624/backlog.json": {
+      "sha256": "4cfc6e877e370f4c154f22afa521f725d652c31f3ef0425fd4d5623138cfc25e",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase0-20261027-170624/verificacao.json": {
+      "sha256": "79c552be5e25cd2311d8c446190a71bf3e1219bc91d9b8b1565ab061bb5a6bb6",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase1-20261027-205329/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase1-20261027-205329/verificacao.json": {
+      "sha256": "7aa7a004444ce5b58a4cb44186e8f50408488c32891248d04d7106cca5cba2a7",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase2-20261027-213204/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase2-20261027-213204/verificacao.json": {
+      "sha256": "8da5e03bc81c1c43e17bcafae513b9e96ced1d8550e469b8be0a3a97bb256232",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase3-20261028-103358/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase3-20261028-103358/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/ajustes-fase3-20261028-150858/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/ajustes-fase3-20261028-150858/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/revisao2-fase3-20261028-154612/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/revisao2-fase3-20261028-154612/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    }
+  },
+  "branchesAnteriores": {
+    "chore/seguranca-estabilidade": "10aab6a194f6f02cd034f262fbcc459b4083c073",
+    "feat/biblioteca": "bbcb99f7148820bc4e187765d9aa357f487e8a1f",
+    "feat/multimidia": "64fb4fb1a2ffcb11ac8b4a3b9399efdb894a9d45",
+    "fix/biblioteca-ajustes": "8c9d14766628a33cbe447c78ab2c390a8b89088e",
+    "main": "8c9d14766628a33cbe447c78ab2c390a8b89088e",
+    "refactor/arquitetura": "56bcd58f089478aaba7961b88c78e24e1ed80949"
+  },
+  "integracaoFase3": {
+    "tipo": "fast-forward",
+    "main": "8c9d14766628a33cbe447c78ab2c390a8b89088e",
+    "branchAjustes": "8c9d14766628a33cbe447c78ab2c390a8b89088e",
+    "arvoresIguais": true,
+    "aprovacaoGeral": "docs/APROVACAO_FASE3.md"
+  },
+  "rodadas": [
+    {
+      "arquivo": "fase4-base.trx",
+      "sha256": "f20041ca5e4cce49c3d7c9487eb15aae3d541053b7a56bc14717430d3673b81c",
+      "total": 949,
+      "executed": 949,
+      "passed": 949,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase4-integracao.trx",
+      "sha256": "d4ef9f1a94bd228bfe1fbf945c4b0bfcdfb35cab0a5dea7e780eb28c2083af9e",
+      "total": 1105,
+      "executed": 1105,
+      "passed": 1105,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase4-interface.trx",
+      "sha256": "9353c185cb231e9575e858226143f255530661b54c821f0046498e314b3ccdc5",
+      "total": 144,
+      "executed": 144,
+      "passed": 144,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase4-modelos-persistencia.trx",
+      "sha256": "38be5f0731629334b561ec5c316557f9828c1ec37ba4f4e13a87a491446f3b76",
+      "total": 120,
+      "executed": 120,
+      "passed": 120,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase4-regressao-inicial.trx",
+      "sha256": "cbe2b7feb9490d923af491aa35f495509e93b95961048e8559065d934042658e",
+      "total": 949,
+      "executed": 949,
+      "passed": 949,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase4-servicos-inicial.trx",
+      "sha256": "2315216771f47e99d571672a29ae9dfb245ee7d409f9ac6caa7d8c492ac82e21",
+      "total": 52,
+      "executed": 52,
+      "passed": 52,
+      "failed": 0,
+      "notExecuted": 0
+    }
+  ],
+  "compilacao": {
+    "erros": 0,
+    "avisos": 0
+  },
+  "manuais": {
+    "planejados": 12,
+    "executados": 0,
+    "naoExecutados": 12
+  },
+  "adicional": {
+    "id": "XS01",
+    "dadosExclusivamenteSimulados": true,
+    "abertoPorOitoSegundos": true,
+    "jsonPreservados": true,
+    "logVazio": true,
+    "interacaoManual": false
+  },
+  "commitsImplementacaoTestes": [
+    "549e81f test: cobre coleções, persistência e regressão com dados isolados",
+    "100fa44 feat: implementa coleções locais com associações por identidade interna"
+  ],
+  "conferenciaFinalProtecao": true
+}
