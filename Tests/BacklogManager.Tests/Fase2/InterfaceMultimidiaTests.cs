@@ -115,7 +115,7 @@ public sealed class InterfaceMultimidiaTests
     public async Task Renderizar()
     {
         using var t = new TelaTeste(Enum.GetValues<TipoMidia>().Select(tipo => ConversorBibliotecaJson.ParaRegistro(Item(tipo))), semServico: true);
-        t.Janela.Width = 900; t.Janela.Height = 660; var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-fase3-resultados", "imagens"); Directory.CreateDirectory(pasta);
+        t.Janela.Width = 900; t.Janela.Height = 660; var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-ajustes-fase3-resultados", "imagens"); Directory.CreateDirectory(pasta);
         foreach (var tipo in Enum.GetValues<TipoMidia>())
         {
             TipoBiblioteca(t, tipo); t.Clicar("NavBacklog"); Dispatcher.UIThread.RunJobs(); t.Janela.UpdateLayout();
@@ -136,12 +136,12 @@ public sealed class InterfaceMultimidiaTests
         t.Campo<NumericUpDown>("NumTemporada").Value = 2; t.Campo<NumericUpDown>("NumEpisodio").Value = 7; t.Clicar("BtnAdicionar");
         var p = Assert.Single(t.Salvos).Multimidia!.Progresso!; Assert.Equal(2, p.Temporada); Assert.Equal(7, p.Episodio);
     }
-    [AvaloniaFact(DisplayName = "UM22 | Mangá com capítulo e volume | Campos próprios preservados incluindo zero")]
+    [AvaloniaFact(DisplayName = "UM22 | Mangá com capítulo e volume positivos | Campos de posição preservados a partir de um")]
     public async Task MangaCompleto()
     {
         using var t = new TelaTeste(); await Selecionar(t, TipoMidia.Manga);
-        t.Campo<NumericUpDown>("NumCapituloManga").Value = 0; t.Campo<NumericUpDown>("NumVolume").Value = 2; t.Clicar("BtnAdicionar");
-        var p = Assert.Single(t.Salvos).Multimidia!.Progresso!; Assert.Equal(0, p.Capitulo); Assert.Equal(2, p.Volume);
+        t.Campo<NumericUpDown>("NumCapituloManga").Value = 1; t.Campo<NumericUpDown>("NumVolume").Value = 2; t.Clicar("BtnAdicionar");
+        var p = Assert.Single(t.Salvos).Multimidia!.Progresso!; Assert.Equal(1, p.Capitulo); Assert.Equal(2, p.Volume);
     }
     [AvaloniaFact(DisplayName = "UM23 | Livro com capítulo sem página | Campo opcional vazio permanece nulo")]
     public async Task LivroCapitulo()

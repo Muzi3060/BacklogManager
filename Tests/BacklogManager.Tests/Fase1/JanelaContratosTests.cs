@@ -82,7 +82,7 @@ public sealed class JanelaContratosTests
     public void GravacaoFalha()
     {
         var a = new ArmazenamentoSimulado { FalhaGravacao = new IOException() }; var j = Abrir(a);
-        try { Selecionar(j); Clicar(j, "BtnAdicionar"); Assert.Empty(a.Registros); Assert.Equal("0", Campo<TextBlock>(j, "TxtTotal").Text); Assert.Equal("Pesq", Campo<TextBox>(j, "TxtTitulo").Text); }
+        try { Selecionar(j); Clicar(j, "BtnAdicionar"); Assert.Empty(a.Registros); Assert.Equal("0", Campo<TextBlock>(j, "TxtTotal").Text); Assert.Equal("Jogo de teste", Campo<TextBox>(j, "TxtTitulo").Text); }
         finally { j.Close(); }
     }
     [AvaloniaFact(DisplayName = "UI07 | Pesquisa substituída por contrato | Sugestões usam modelo comum sem depender da IGDB")]

@@ -35,8 +35,8 @@ public sealed class FormularioJogoTests
     public void NotaZero() => Assert.Equal(0, Novo(Dados with { Nota = 0 }).Pessoal.Nota);
     [Fact(DisplayName = "FO08 | Nota cinco | Limite superior aceito")]
     public void NotaCinco() => Assert.Equal(5, Novo(Dados with { Nota = 5 }).Pessoal.Nota);
-    [Fact(DisplayName = "FO09 | Categoria em branco | Mensagem de dados incompletos")]
-    public void CategoriaVazia() => Assert.Equal("Dados incompletos", Assert.Throws<ValidacaoFormularioException>(() => Novo(Dados with { Categoria = " " })).Titulo);
+    [Fact(DisplayName = "FO09 | Jogo com seleção IGDB e categoria em branco | Cadastro usa somente os gêneros externos")]
+    public void CategoriaVazia() => Assert.Equal(string.Empty, Novo(Dados with { Categoria = " " }).Pessoal.Categoria);
     [Fact(DisplayName = "FO10 | Status ausente | Entrada recusada sem valor padrão inventado")]
     public void StatusVazio() => Assert.Throws<ValidacaoFormularioException>(() => Novo(Dados with { Status = null }));
     [Fact(DisplayName = "FO11 | Nova review vazia | Texto padrão preserva comportamento anterior")]

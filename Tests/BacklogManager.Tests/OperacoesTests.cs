@@ -24,8 +24,8 @@ public sealed class OperacoesTests
     public void NomeInvalido() { using var t = new TelaTeste(); t.Selecionar(42, " "); t.Clicar("BtnAdicionar"); Assert.Empty(t.Exibidos); Assert.False(File.Exists(t.Pasta.Arquivo)); }
     [AvaloniaFact(DisplayName = "A06 | Nota vazia no cadastro | Aviso e nenhuma gravação")]
     public void NotaVazia() { using var t = new TelaTeste(); t.Selecionar(); t.Campo<NumericUpDown>("NumNota").Value = null; t.Clicar("BtnAdicionar"); Assert.Empty(t.Exibidos); Assert.Contains("nota", t.Aviso); }
-    [AvaloniaFact(DisplayName = "A07 | Categoria não selecionada | Cadastro recusado")]
-    public void CategoriaVazia() { using var t = new TelaTeste(); t.Selecionar(); t.Campo<ComboBox>("CmbCategoria").SelectedIndex = -1; t.Clicar("BtnAdicionar"); Assert.Empty(t.Exibidos); Assert.Contains("categoria", t.Aviso); }
+    [AvaloniaFact(DisplayName = "A07 | Jogo IGDB sem categoria manual | Cadastro aceito sem categoria inventada")]
+    public void CategoriaVazia() { using var t = new TelaTeste(); t.Selecionar(); t.Campo<ComboBox>("CmbCategoria").SelectedIndex = -1; t.Clicar("BtnAdicionar"); Assert.Equal(string.Empty, Assert.Single(t.Exibidos).Categoria); Assert.Equal("Jogo adicionado", t.Campo<TextBlock>("TxtAvisoTitulo").Text); }
     [AvaloniaFact(DisplayName = "A08 | Status não selecionado | Cadastro recusado")]
     public void StatusVazio() { using var t = new TelaTeste(); t.Selecionar(); t.Campo<ComboBox>("CmbStatus").SelectedIndex = -1; t.Clicar("BtnAdicionar"); Assert.Empty(t.Exibidos); Assert.Contains("status", t.Aviso); }
     [AvaloniaFact(DisplayName = "A09 | Conflito ao adicionar | Memória e formulário preservados sem falso sucesso")]

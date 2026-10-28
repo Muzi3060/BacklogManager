@@ -96,7 +96,7 @@ public sealed class VisualizacoesTests
     {
         var registros = Enum.GetValues<TipoMidia>().Select(tipo => ConversorBibliotecaJson.ParaRegistro(ApoioMultimidia.Item(tipo, tipo == TipoMidia.Livro ? new() { Pagina = 17 } : null))).ToArray();
         using var t = Abrir(modo, registros); t.Janela.Width = 900; t.Janela.Height = 660;
-        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-fase3-resultados", "visualizacoes"); Directory.CreateDirectory(pasta);
+        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-ajustes-fase3-resultados", "visualizacoes"); Directory.CreateDirectory(pasta);
         foreach (var tipo in Enum.GetValues<TipoMidia>())
         {
             t.Campo<ComboBox>("CmbTipoBiblioteca").SelectedIndex = (int)tipo; Renderizar(t);
