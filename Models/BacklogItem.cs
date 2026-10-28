@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BacklogManager.Models;
 
+// Registro do formato JSON existente. O domínio e a interface usam ItemBiblioteca.
 public class BacklogItem
 {
     public string Titulo { get; set; } = string.Empty;

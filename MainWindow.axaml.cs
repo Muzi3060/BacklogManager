@@ -1,13 +1,13 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
 using System.IO;
 using System.Security;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using BacklogManager.Data;
+using BacklogManager.Contracts;
+using BacklogManager.Configuracao;
 using BacklogManager.Models;
 using BacklogManager.Services;
 using System.Threading;
@@ -16,55 +16,45 @@ namespace BacklogManager;
 
 public partial class MainWindow : Window
 {
-    private BacklogItem? _itemEmEdicao;
-    private readonly ObservableCollection<BacklogItem> _itens;
+    private ItemBiblioteca? _itemEmEdicao;
+    private readonly ServicoBiblioteca _biblioteca;
     private bool _interfacePronta;
-    private IgdbGame? _jogoSelecionado;
+    private ObraCatalogo? _jogoSelecionado;
     private string? _textoNaSelecao;
     private CancellationTokenSource? _buscaCancellation;
-    private readonly IgdbService? _igdbService;
-    private readonly FileManager _arquivos;
-    private readonly HttpClient? _clienteHttpProprio;
-    private bool _persistenciaDisponivel;
+    private readonly IPesquisaCatalogo? _pesquisa;
+    private readonly IDisposable? _recursoPesquisa;
+    private bool PersistenciaDisponivel => _biblioteca.Carregada;
     private bool _fechada;
     internal Task BuscaPendente { get; private set; } = Task.CompletedTask;
 
-    public MainWindow() : this(new FileManager(), null, usarConfiguracaoLocal: true) { }
+    public MainWindow() : this(ComposicaoAplicativo.Criar()) { }
 
-    // Permite testar a janela com arquivos temporários e HTTP simulado.
-    internal MainWindow(FileManager arquivos, IgdbService? servico, bool usarConfiguracaoLocal = false)
+    private MainWindow(DependenciasJanela dependencias)
+        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa) { }
+
+    internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null)
     {
-        _arquivos = arquivos;
-        _itens = new ObservableCollection<BacklogItem>();
+        _biblioteca = biblioteca;
+        _pesquisa = pesquisa;
+        _recursoPesquisa = recursoPesquisa;
         InitializeComponent();
         try
         {
-            foreach (var item in _arquivos.Carregar()) _itens.Add(item);
-            _persistenciaDisponivel = true;
+            _biblioteca.Carregar();
         }
         catch (Exception erro) when (FalhaDeArquivo(erro))
         {
-            ExibirAviso("Coleção não carregada", $"O original foi preservado. Gravação bloqueada. Arquivo: {_arquivos.CaminhoArquivo}", true);
+            ExibirAviso("Coleção não carregada", $"O original foi preservado. Gravação bloqueada. Arquivo: {_biblioteca.DescricaoOrigem}", true);
         }
-
-        _igdbService = servico;
-        if (usarConfiguracaoLocal && ConfiguracaoIgdb.TentarLer(out var clientId, out var accessToken))
-        {
-            _clienteHttpProprio = new HttpClient(new SocketsHttpHandler
-            {
-                PooledConnectionLifetime = TimeSpan.FromMinutes(5)
-            })
-            { Timeout = TimeSpan.FromSeconds(15) };
-            _igdbService = new IgdbService(_clienteHttpProprio, clientId, accessToken);
-        }
-        if (_persistenciaDisponivel && _igdbService == null)
+        if (PersistenciaDisponivel && _pesquisa == null)
             ExibirAviso("Pesquisa indisponível", "Configure IGDB_CLIENT_ID e IGDB_ACESS_TOKEN (ou IGDB_ACCESS_TOKEN). Sua coleção local continua disponível.", true);
 
         _interfacePronta = true;
         AtualizarColecao();
-        BtnAdicionar.IsEnabled = _persistenciaDisponivel;
-        BtnAtualizar.IsEnabled = _persistenciaDisponivel;
-        if (!_persistenciaDisponivel)
+        BtnAdicionar.IsEnabled = PersistenciaDisponivel;
+        BtnAtualizar.IsEnabled = PersistenciaDisponivel;
+        if (!PersistenciaDisponivel)
         {
             TxtListaVazia.Text = "Não foi possível carregar a coleção";
             TxtDicaListaVazia.Text = "O arquivo original foi preservado. Verifique o aviso antes de reabrir o aplicativo.";
@@ -72,18 +62,18 @@ public partial class MainWindow : Window
     }
 
     private static bool FalhaDeArquivo(Exception erro) => erro is IOException or InvalidDataException or
-        UnauthorizedAccessException or SecurityException or InvalidOperationException or System.Text.Json.JsonException;
+        UnauthorizedAccessException or SecurityException or InvalidOperationException or System.Text.Json.JsonException or NotSupportedException;
 
-    private bool TentarSalvar(System.Collections.Generic.List<BacklogItem> candidatos)
+    private bool TentarExecutar(Action operacao)
     {
-        if (!_persistenciaDisponivel)
+        if (!PersistenciaDisponivel)
         {
             ExibirAviso("Gravação bloqueada", "A coleção não foi carregada. O arquivo original será preservado.", true);
             return false;
         }
         try
         {
-            _arquivos.Salvar(candidatos);
+            operacao();
             return true;
         }
         catch (Exception erro) when (FalhaDeArquivo(erro))
@@ -112,7 +102,7 @@ public partial class MainWindow : Window
     {
         _fechada = true;
         CancelarBusca();
-        _clienteHttpProprio?.Dispose();
+        _recursoPesquisa?.Dispose();
         base.OnClosed(e);
     }
 
@@ -181,41 +171,20 @@ public partial class MainWindow : Window
         BtnAtualizar.IsVisible = editando;
     }
 
-    private BacklogItem? LerFormulario()
+    private ItemBiblioteca? LerFormulario()
     {
-        if (_itemEmEdicao == null && (_jogoSelecionado == null || _jogoSelecionado.Id <= 0 ||
-            string.IsNullOrWhiteSpace(_jogoSelecionado.Name) || TxtTitulo.Text != _textoNaSelecao))
+        var dados = new DadosFormularioJogo(TxtTitulo.Text,
+            (CmbCategoria.SelectedItem as ComboBoxItem)?.Content?.ToString(),
+            (CmbStatus.SelectedItem as ComboBoxItem)?.Content?.ToString(), NumNota.Value, TxtReview.Text);
+        try
         {
-            ExibirAviso("Selecione um jogo", "Escolha uma sugestão válida antes de adicionar à coleção.", true);
+            return FormularioJogo.Preparar(dados, _jogoSelecionado, _textoNaSelecao, _itemEmEdicao);
+        }
+        catch (ValidacaoFormularioException erro)
+        {
+            ExibirAviso(erro.Titulo, erro.Message, true);
             return null;
         }
-        if (NumNota.Value is not decimal nota || nota < 0 || nota > 5)
-        {
-            ExibirAviso("Nota inválida", "Informe uma nota entre 0 e 5.", true);
-            return null;
-        }
-        var categoria = (CmbCategoria.SelectedItem as ComboBoxItem)?.Content?.ToString();
-        var status = (CmbStatus.SelectedItem as ComboBoxItem)?.Content?.ToString();
-        if (string.IsNullOrWhiteSpace(categoria) || string.IsNullOrWhiteSpace(status))
-        {
-            ExibirAviso("Dados incompletos", "Selecione categoria e status antes de salvar.", true);
-            return null;
-        }
-        var textoReview = TxtReview.Text;
-        var reviewInalterada = _itemEmEdicao != null && textoReview == _itemEmEdicao.Review;
-        var review = reviewInalterada ? textoReview : textoReview?.Trim();
-        if (review?.Length > 1000 && review != _itemEmEdicao?.Review)
-        {
-            ExibirAviso("Review muito longa", "Use até 1000 caracteres na review.", true);
-            return null;
-        }
-        return new BacklogItem(_itemEmEdicao?.Titulo ?? _jogoSelecionado!.Name, categoria, status,
-            (double)nota, reviewInalterada ? review! : string.IsNullOrWhiteSpace(review) ? "Nenhuma Review" : review,
-            _itemEmEdicao?.SteamAppId)
-        {
-            IgdbId = _itemEmEdicao?.IgdbId ?? (_itemEmEdicao == null ? _jogoSelecionado?.Id : null),
-            DadosAdicionais = _itemEmEdicao?.DadosAdicionais
-        };
     }
 
     private void BtnAdicionar_Click(object? sender, RoutedEventArgs e)
@@ -230,13 +199,10 @@ public partial class MainWindow : Window
         var novoItem = LerFormulario();
         if (novoItem == null) return;
 
-        var candidatos = _itens.ToList();
-        candidatos.Add(novoItem);
-        if (!TentarSalvar(candidatos)) return;
-        _itens.Add(novoItem);
+        if (!TentarExecutar(() => _biblioteca.Adicionar(novoItem))) return;
         LimparFormulario();
         AtualizarColecao();
-        ExibirAviso("Jogo adicionado", $"“{novoItem.Titulo}” foi adicionado à sua coleção.");
+        ExibirAviso("Jogo adicionado", $"“{novoItem.Catalogo.Titulo}” foi adicionado à sua coleção.");
     }
 
     private void BtnAtualizar_Click(object? sender, RoutedEventArgs e)
@@ -246,15 +212,10 @@ public partial class MainWindow : Window
         var atualizado = LerFormulario();
         if (atualizado == null) return;
 
-        var index = _itens.IndexOf(_itemEmEdicao);
-        if (index < 0) return;
-        var candidatos = _itens.ToList();
-        candidatos[index] = atualizado;
-        if (!TentarSalvar(candidatos)) return;
-        _itens[index] = atualizado;
+        if (!TentarExecutar(() => _biblioteca.Atualizar(_itemEmEdicao, atualizado.Pessoal))) return;
         LimparFormulario();
         AtualizarColecao();
-        ExibirAviso("Jogo atualizado", $"As alterações de “{atualizado.Titulo}” foram salvas com sucesso.");
+        ExibirAviso("Jogo atualizado", $"As alterações de “{atualizado.Catalogo.Titulo}” foram salvas com sucesso.");
     }
 
     private void ExibirAviso(string titulo, string mensagem, bool erro = false)
@@ -274,50 +235,47 @@ public partial class MainWindow : Window
 
     private void BtnRemover_Click(object? sender, RoutedEventArgs e)
     {
-        if (ListaBacklog.SelectedItem is not BacklogItem item) return;
+        if (ListaBacklog.SelectedItem is not ItemBiblioteca item) return;
 
-        var candidatos = _itens.ToList();
-        candidatos.Remove(item);
-        if (!TentarSalvar(candidatos)) return;
-        _itens.Remove(item);
-        if (_itemEmEdicao == item)
+        if (!TentarExecutar(() => _biblioteca.Remover(item))) return;
+        if (ReferenceEquals(_itemEmEdicao, item))
             LimparFormulario();
         AtualizarColecao();
-        ExibirAviso("Jogo removido", $"“{item.Titulo}” foi removido da coleção.");
+        ExibirAviso("Jogo removido", $"“{item.Catalogo.Titulo}” foi removido da coleção.");
     }
 
     private void ListaBacklog_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (!_interfacePronta) return;
-        var selecionado = ListaBacklog.SelectedItem is BacklogItem;
+        var selecionado = ListaBacklog.SelectedItem is ItemBiblioteca;
         BtnEditar.IsEnabled = selecionado;
-        BtnRemover.IsEnabled = selecionado && _persistenciaDisponivel;
+        BtnRemover.IsEnabled = selecionado && PersistenciaDisponivel;
     }
 
     private void EditarSelecionado_Click(object? sender, RoutedEventArgs e)
     {
-        if (ListaBacklog.SelectedItem is BacklogItem item)
+        if (ListaBacklog.SelectedItem is ItemBiblioteca item)
             EditarJogo(item);
     }
 
     private void Recente_Click(object? sender, RoutedEventArgs e)
     {
-        if (sender is Button { Tag: BacklogItem item })
+        if (sender is Button { Tag: ItemBiblioteca item })
             EditarJogo(item);
     }
 
-    private void EditarJogo(BacklogItem item)
+    private void EditarJogo(ItemBiblioteca item)
     {
         CancelarBusca();
         ListaSugestoes.IsVisible = false;
         _jogoSelecionado = null;
         _itemEmEdicao = item;
-        TxtTitulo.Text = item.Titulo;
-        SelecionarValor(CmbCategoria, item.Categoria);
-        SelecionarValor(CmbStatus, item.Status);
-        NumNota.Value = (decimal)item.Nota;
-        TxtReview.MaxLength = Math.Max(1000, item.Review.Length);
-        TxtReview.Text = item.Review;
+        TxtTitulo.Text = item.Catalogo.Titulo;
+        SelecionarValor(CmbCategoria, item.Pessoal.Categoria);
+        SelecionarValor(CmbStatus, item.Pessoal.Status);
+        NumNota.Value = (decimal)item.Pessoal.Nota;
+        TxtReview.MaxLength = Math.Max(1000, item.Pessoal.Review.Length);
+        TxtReview.Text = item.Pessoal.Review;
         AtualizarModoFormulario();
         MostrarPagina("cadastro");
     }
@@ -345,13 +303,14 @@ public partial class MainWindow : Window
 
     private void AtualizarColecao()
     {
-        var total = _itens.Count;
-        var zerados = _itens.Count(item => item.Status == "Zerado");
-        var naFila = _itens.Count(item => item.Status == "Na Fila");
-        var progresso = total == 0 ? 0 : (double)zerados / total * 100;
+        var resumo = _biblioteca.ObterResumo();
+        var total = resumo.Total;
+        var zerados = resumo.Zerados;
+        var naFila = resumo.NaFila;
+        var progresso = resumo.Progresso;
 
         TxtTotal.Text = total.ToString();
-        TxtJogando.Text = _itens.Count(item => item.Status == "Jogando").ToString();
+        TxtJogando.Text = resumo.Jogando.ToString();
         TxtZerados.Text = zerados.ToString();
         TxtContagemNav.Text = total.ToString();
         TxtProgresso.Text = $"{progresso:0}% concluído";
@@ -359,7 +318,7 @@ public partial class MainWindow : Window
         TxtResumo.Text = total == 0
             ? "Adicione seu primeiro jogo e comece a acompanhar seu progresso."
             : $"{zerados} de {total} jogos zerados · {naFila} na fila para a próxima aventura.";
-        ListaRecentes.ItemsSource = _itens.Reverse().Take(3).ToArray();
+        ListaRecentes.ItemsSource = _biblioteca.ObterRecentes();
         EstadoInicioVazio.IsVisible = total == 0;
         AtualizarLista();
     }
@@ -370,28 +329,29 @@ public partial class MainWindow : Window
         var status = CmbFiltroStatus.SelectedIndex > 0
             ? (CmbFiltroStatus.SelectedItem as ComboBoxItem)?.Content?.ToString()
             : null;
-        var selecionado = ListaBacklog.SelectedItem as BacklogItem;
-        var filtrados = _itens.Where(item =>
-            (status == null || item.Status == status) &&
-            (item.Titulo.Contains(busca, StringComparison.OrdinalIgnoreCase) ||
-             item.Categoria.Contains(busca, StringComparison.OrdinalIgnoreCase))).ToArray();
+        var selecionado = ListaBacklog.SelectedItem as ItemBiblioteca;
+        var filtrados = _biblioteca.Filtrar(busca, status);
 
         ListaBacklog.ItemsSource = filtrados;
-        if (selecionado != null && filtrados.Contains(selecionado))
-            ListaBacklog.SelectedItem = selecionado;
-        BtnEditar.IsEnabled = ListaBacklog.SelectedItem is BacklogItem;
-        BtnRemover.IsEnabled = BtnEditar.IsEnabled && _persistenciaDisponivel;
-        TxtContagemLista.Text = $"{filtrados.Length} de {_itens.Count} jogos · Selecione para editar";
-        EstadoListaVazia.IsVisible = filtrados.Length == 0;
-        TxtListaVazia.Text = _itens.Count == 0 ? "Sua coleção ainda está vazia" : "Nenhum jogo encontrado";
-        TxtDicaListaVazia.Text = _itens.Count == 0
+        // Records iguais podem representar registros pessoais diferentes.
+        // Restaurar pelo índice da instância evita que o ListBox escolha a primeira cópia igual.
+        var indiceSelecionado = -1;
+        for (var i = 0; i < filtrados.Count; i++)
+            if (ReferenceEquals(filtrados[i], selecionado)) { indiceSelecionado = i; break; }
+        ListaBacklog.SelectedIndex = indiceSelecionado;
+        BtnEditar.IsEnabled = ListaBacklog.SelectedItem is ItemBiblioteca;
+        BtnRemover.IsEnabled = BtnEditar.IsEnabled && PersistenciaDisponivel;
+        TxtContagemLista.Text = $"{filtrados.Count} de {_biblioteca.Itens.Count} jogos · Selecione para editar";
+        EstadoListaVazia.IsVisible = filtrados.Count == 0;
+        TxtListaVazia.Text = _biblioteca.Itens.Count == 0 ? "Sua coleção ainda está vazia" : "Nenhum jogo encontrado";
+        TxtDicaListaVazia.Text = _biblioteca.Itens.Count == 0
             ? "Use “Adicionar jogo” para começar seu backlog."
             : "Tente outro título, categoria ou status.";
     }
 
     private void ListaSugestoes_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (ListaSugestoes.SelectedItem is IgdbGame { Id: > 0 } jogo && !string.IsNullOrWhiteSpace(jogo.Name))
+        if (ListaSugestoes.SelectedItem is ObraCatalogo jogo && FormularioJogo.SelecaoValida(jogo))
         {
             CancelarBusca();
             _jogoSelecionado = jogo;
@@ -419,7 +379,7 @@ public partial class MainWindow : Window
         ListaSugestoes.IsVisible = false;
         var termo = TxtTitulo.Text?.Trim() ?? string.Empty;
         if (_itemEmEdicao != null || termo.Length == 0) return;
-        if (_igdbService == null)
+        if (_pesquisa == null)
         {
             ExibirAviso("Pesquisa indisponível", "Configure as credenciais locais da IGDB para pesquisar. Sua coleção continua disponível.", true);
             return;
@@ -432,7 +392,7 @@ public partial class MainWindow : Window
         try
         {
             await Task.Delay(400, buscaAtual.Token);
-            var resultado = await _igdbService.BuscarJogosAsync(termo, buscaAtual.Token);
+            var resultado = await _pesquisa.BuscarAsync(termo, buscaAtual.Token);
             if (!Atual()) return;
             ListaSugestoes.ItemsSource = resultado;
             ListaSugestoes.IsVisible = resultado.Count > 0;

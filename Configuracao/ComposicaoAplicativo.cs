@@ -1,0 +1,29 @@
+using System;
+using System.Net.Http;
+using BacklogManager.Contracts;
+using BacklogManager.Data;
+using BacklogManager.Services;
+
+namespace BacklogManager.Configuracao;
+
+internal sealed record DependenciasJanela(ServicoBiblioteca Biblioteca, IPesquisaCatalogo? Pesquisa, IDisposable? RecursoPesquisa);
+
+internal static class ComposicaoAplicativo
+{
+    internal static DependenciasJanela Criar(string caminhoArquivo = "backlog.json",
+        Func<string, string?>? lerVariavel = null, Func<HttpClient>? criarCliente = null)
+    {
+        var biblioteca = new ServicoBiblioteca(new ArmazenamentoJsonBiblioteca(new FileManager(caminhoArquivo)));
+        if (!ConfiguracaoIgdb.TentarLer(out var clientId, out var token, lerVariavel))
+            return new DependenciasJanela(biblioteca, null, null);
+
+        // O cliente produzido pela fábrica pertence a esta composição e será fechado pela janela.
+        var cliente = criarCliente?.Invoke() ?? new HttpClient(new SocketsHttpHandler
+        {
+            PooledConnectionLifetime = TimeSpan.FromMinutes(5)
+        });
+        cliente.Timeout = TimeSpan.FromSeconds(15);
+        var pesquisa = new PesquisaJogosIgdb(new IgdbService(cliente, clientId, token));
+        return new DependenciasJanela(biblioteca, pesquisa, cliente);
+    }
+}

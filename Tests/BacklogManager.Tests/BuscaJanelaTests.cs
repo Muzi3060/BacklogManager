@@ -131,7 +131,7 @@ public sealed class BuscaJanelaTests
     [AvaloniaFact(DisplayName = "B17 | Títulos iguais com IDs diferentes | ID da sugestão escolhida é utilizado")]
     public void MesmoTitulo()
     {
-        using var t = new TelaTeste(); var jogos = new[] { new BacklogManager.Models.IgdbGame(1, "Mesmo"), new BacklogManager.Models.IgdbGame(2, "Mesmo") };
+        using var t = new TelaTeste(); var jogos = new[] { new BacklogManager.Models.ObraCatalogo { Titulo = "Mesmo", Origem = "IGDB", IdentificadorExterno = "1" }, new BacklogManager.Models.ObraCatalogo { Titulo = "Mesmo", Origem = "IGDB", IdentificadorExterno = "2" } };
         t.Campo<ListBox>("ListaSugestoes").ItemsSource = jogos; t.Campo<ListBox>("ListaSugestoes").SelectedIndex = 1;
         t.Clicar("BtnAdicionar"); Assert.Equal(2, Assert.Single(t.Salvos).IgdbId);
     }
@@ -166,7 +166,7 @@ public sealed class BuscaJanelaTests
     public void RenderizarTelas()
     {
         using var t = new TelaTeste(Enumerable.Range(1, 11).Select(n => PastaTeste.Jogo($"Jogo simulado {n}")), semServico: true);
-        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-resultados", "imagens");
+        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-fase1-resultados", "imagens");
         Directory.CreateDirectory(pasta);
         void Capturar(string nome)
         {

@@ -205,7 +205,7 @@
                                     <ItemsPanelTemplate><UniformGrid Columns="3" /></ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="models:BacklogItem">
+                                    <DataTemplate DataType="models:ItemBiblioteca">
                                         <Button Classes="recent" Tag="{Binding}" Click="Recente_Click" Margin="0,0,10,0" ToolTip.Tip="Abrir este jogo para editar">
                                             <Border Classes="card" Padding="0" ClipToBounds="True">
                                                 <StackPanel>
@@ -213,10 +213,10 @@
                                                         <Path Data="{StaticResource GameIcon}" Stroke="#AC8CD1" StrokeThickness="1.2" Width="48" Height="35" Stretch="Uniform" Opacity="0.7" />
                                                     </Border>
                                                     <StackPanel Margin="14,12" Spacing="7">
-                                                        <TextBlock Text="{Binding Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                                        <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                                         <Grid ColumnDefinitions="*,Auto">
-                                                            <TextBlock Text="{Binding Status}" Classes="muted" FontSize="11" />
-                                                            <TextBlock Grid.Column="1" Text="{Binding Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontSize="11" />
+                                                            <TextBlock Text="{Binding Pessoal.Status}" Classes="muted" FontSize="11" />
+                                                            <TextBlock Grid.Column="1" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontSize="11" />
                                                         </Grid>
                                                     </StackPanel>
                                                 </StackPanel>
@@ -255,25 +255,25 @@
                     <Grid Grid.Row="2">
                         <ListBox x:Name="ListaBacklog" SelectionChanged="ListaBacklog_SelectionChanged">
                             <ListBox.ItemTemplate>
-                                <DataTemplate DataType="models:BacklogItem">
+                                <DataTemplate DataType="models:ItemBiblioteca">
                                     <Border Classes="card gameCard" Padding="18">
                                         <Grid ColumnDefinitions="44,*,Auto">
                                             <Border Background="#40344E" CornerRadius="8" Width="34" Height="34" VerticalAlignment="Top">
                                                 <Path Data="{StaticResource GameIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.5" Width="23" Height="18" Stretch="Uniform" />
                                             </Border>
                                             <StackPanel Grid.Column="1" Spacing="9" Margin="8,0,18,0">
-                                                <TextBlock Text="{Binding Titulo}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding Catalogo.Titulo}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                                     <Border Background="#3E3E42" CornerRadius="4" Padding="8,3">
-                                                        <TextBlock Text="{Binding Categoria}" FontSize="11" Foreground="#CCCCD2" />
+                                                        <TextBlock Text="{Binding Pessoal.Categoria}" FontSize="11" Foreground="#CCCCD2" />
                                                     </Border>
                                                     <Border Background="#3C3548" CornerRadius="4" Padding="8,3">
-                                                        <TextBlock Text="{Binding Status}" FontSize="11" Foreground="#C5A8EF" />
+                                                        <TextBlock Text="{Binding Pessoal.Status}" FontSize="11" Foreground="#C5A8EF" />
                                                     </Border>
                                                 </StackPanel>
-                                                <TextBlock Text="{Binding Review}" Classes="muted" FontSize="12" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding Pessoal.Review}" Classes="muted" FontSize="12" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
                                             </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="{Binding Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontWeight="SemiBold" />
+                                            <TextBlock Grid.Column="2" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontWeight="SemiBold" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
@@ -310,8 +310,8 @@
                                     <TextBox x:Name="TxtTitulo" PlaceholderText="Ex.: Cyberpunk 2077" TextChanged="TxtTitulo_TextChanged"/>
                                     <ListBox x:Name="ListaSugestoes" SelectionChanged="ListaSugestoes_SelectionChanged">
                                         <ListBox.ItemTemplate>
-                                            <DataTemplate DataType="models:IgdbGame">
-                                                <TextBlock Text="{Binding Name}" />
+                                            <DataTemplate DataType="models:ObraCatalogo">
+                                                <TextBlock Text="{Binding Titulo}" />
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>

@@ -18,7 +18,7 @@ internal sealed class TelaTeste : IDisposable
         if (json != null) File.WriteAllText(Pasta.Arquivo, json);
         else if (iniciais != null) File.WriteAllText(Pasta.Arquivo, JsonSerializer.Serialize(iniciais));
         _cliente = new HttpClient(Http);
-        Janela = new MainWindow(new FileManager(Pasta.Arquivo), semServico ? null : new IgdbService(_cliente, "cliente-simulado", "token-simulado"));
+        Janela = new MainWindow(new ServicoBiblioteca(new ArmazenamentoJsonBiblioteca(new FileManager(Pasta.Arquivo))), semServico ? null : new PesquisaJogosIgdb(new IgdbService(_cliente, "cliente-simulado", "token-simulado")));
         Janela.Show();
     }
     public T Campo<T>(string nome) where T : Control => Janela.FindControl<T>(nome)!;
@@ -27,9 +27,9 @@ internal sealed class TelaTeste : IDisposable
     {
         Campo<TextBox>("TxtTitulo").Text = nome;
         var lista = Campo<ListBox>("ListaSugestoes");
-        var jogo = new IgdbGame(id, nome); lista.ItemsSource = new[] { jogo }; lista.SelectedItem = jogo;
+        var jogo = new ObraCatalogo { Titulo = nome, Origem = "IGDB", IdentificadorExterno = id.ToString(System.Globalization.CultureInfo.InvariantCulture) }; lista.ItemsSource = new[] { jogo }; lista.SelectedItem = jogo;
     }
-    public BacklogItem[] Exibidos => Campo<ListBox>("ListaBacklog").Items.Cast<BacklogItem>().ToArray();
+    public BacklogItem[] Exibidos => Campo<ListBox>("ListaBacklog").Items.Cast<ItemBiblioteca>().Select(ConversorBibliotecaJson.ParaRegistro).ToArray();
     public List<BacklogItem> Salvos => new FileManager(Pasta.Arquivo).Carregar();
     public string Aviso => Campo<TextBlock>("TxtAvisoMensagem").Text ?? "";
     public void Editar(int index = 0)
