@@ -61,8 +61,8 @@ public sealed class InterfaceMultimidiaTests
     public async Task TrocaSelecao() { using var t = new TelaTeste(); await Selecionar(t, TipoMidia.Anime); TipoCadastro(t, TipoMidia.Livro); t.Clicar("BtnAdicionar"); Assert.Empty(t.Salvos); }
     [AvaloniaFact(DisplayName = "UM09 | Cadastro simulado sem progresso | Nenhum zero automático é gravado")]
     public async Task SemProgresso() { using var t = new TelaTeste(); await Selecionar(t, TipoMidia.Livro); t.Clicar("BtnAdicionar"); Assert.Null(Assert.Single(t.Salvos).Multimidia!.Progresso); }
-    [AvaloniaFact(DisplayName = "UM10 | Campo inteiro recebe fração | Aviso de progresso inválido sem truncamento ou encerramento")]
-    public async Task FracaoInteira() { using var t = new TelaTeste(); await Selecionar(t, TipoMidia.Livro); t.Campo<NumericUpDown>("NumPagina").Value = 1.5m; t.Clicar("BtnAdicionar"); Assert.Empty(t.Salvos); Assert.Equal("Progresso inválido", t.Campo<TextBlock>("TxtAvisoTitulo").Text); }
+    [AvaloniaFact(DisplayName = "UM10 | Campo de posição recebe fração | Último inteiro válido é conservado antes do salvamento")]
+    public async Task FracaoInteira() { using var t = new TelaTeste(); await Selecionar(t, TipoMidia.Livro); t.Campo<NumericUpDown>("NumPagina").Value = 2; t.Campo<NumericUpDown>("NumPagina").Value = 1.5m; Assert.Equal(2, t.Campo<NumericUpDown>("NumPagina").Value); t.Clicar("BtnAdicionar"); Assert.Equal(2, Assert.Single(t.Salvos).Multimidia!.Progresso!.Pagina); }
     [AvaloniaFact(DisplayName = "UM11 | Editar livro e reiniciar | Página e origem simulada permanecem")]
     public async Task EditarReiniciar()
     {
@@ -115,7 +115,7 @@ public sealed class InterfaceMultimidiaTests
     public async Task Renderizar()
     {
         using var t = new TelaTeste(Enum.GetValues<TipoMidia>().Select(tipo => ConversorBibliotecaJson.ParaRegistro(Item(tipo))), semServico: true);
-        t.Janela.Width = 900; t.Janela.Height = 660; var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-ajustes-fase3-resultados", "imagens"); Directory.CreateDirectory(pasta);
+        t.Janela.Width = 900; t.Janela.Height = 660; var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-revisao2-resultados", "imagens"); Directory.CreateDirectory(pasta);
         foreach (var tipo in Enum.GetValues<TipoMidia>())
         {
             TipoBiblioteca(t, tipo); t.Clicar("NavBacklog"); Dispatcher.UIThread.RunJobs(); t.Janela.UpdateLayout();
