@@ -20,7 +20,7 @@ public sealed class IgdbTests : IDisposable
             Assert.Equal("cliente-simulado", Assert.Single(r.Headers.GetValues("Client-ID")));
             Assert.Equal("Bearer", r.Headers.Authorization!.Scheme); Assert.Equal("token-simulado", r.Headers.Authorization.Parameter);
             Assert.Equal("text/plain", r.Content!.Headers.ContentType!.MediaType);
-            Assert.Equal("search \"Persona\"; fields id,name; limit 15;", await r.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
+            Assert.Equal("search \"Persona\"; fields id,name,cover.image_id,cover.url,genres.name,platforms.name; limit 15;", await r.Content.ReadAsStringAsync(TestContext.Current.CancellationToken));
             return HttpSimulado.Json("[{\"id\":123,\"name\":\"Persona\"}]");
         };
         var jogo = Assert.Single(await _servico.BuscarJogosAsync("Persona", TestContext.Current.CancellationToken)); Assert.Equal(123, jogo.Id); Assert.Equal("Persona", jogo.Name);
@@ -154,7 +154,7 @@ public sealed class IgdbTests : IDisposable
     public async Task TermosValidosSaoEscapadosOuNaoEnviados(string id, string? termo, string? esperado)
     {
         _ = id; _http.Responder = async (r, _) =>
-        { Assert.Equal($"search \"{esperado}\"; fields id,name; limit 15;", await r.Content!.ReadAsStringAsync(TestContext.Current.CancellationToken)); return HttpSimulado.Json("[]"); };
+        { Assert.Equal($"search \"{esperado}\"; fields id,name,cover.image_id,cover.url,genres.name,platforms.name; limit 15;", await r.Content!.ReadAsStringAsync(TestContext.Current.CancellationToken)); return HttpSimulado.Json("[]"); };
         Assert.Empty(await _servico.BuscarJogosAsync(termo!, TestContext.Current.CancellationToken)); Assert.Equal(esperado == null ? 0 : 1, _http.Chamadas);
     }
 
