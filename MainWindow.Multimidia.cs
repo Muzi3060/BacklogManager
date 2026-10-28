@@ -93,9 +93,9 @@ public partial class MainWindow
         NumTemporada.Value = progresso?.Temporada;
         NumEpisodio.Value = progresso?.Episodio;
         NumMinutosAssistidos.Value = progresso?.MinutosAssistidos;
-        NumCapituloManga.Value = TipoCadastro == TipoMidia.Manga ? progresso?.Capitulo : null;
-        NumVolume.Value = progresso?.Volume;
-        NumPagina.Value = progresso?.Pagina;
-        NumCapituloLivro.Value = TipoCadastro == TipoMidia.Livro ? progresso?.Capitulo : null;
+        NumCapituloManga.CarregarValorLegado(TipoCadastro == TipoMidia.Manga ? progresso?.Capitulo : null);
+        NumVolume.CarregarValorLegado(progresso?.Volume);
+        NumPagina.CarregarValorLegado(progresso?.Pagina);
+        NumCapituloLivro.CarregarValorLegado(TipoCadastro == TipoMidia.Livro ? progresso?.Capitulo : null);
     }
 }

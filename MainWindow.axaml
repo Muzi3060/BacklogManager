@@ -16,6 +16,13 @@
             <Border Classes="card gameCard gradeCard" Width="180" Padding="10" Margin="0,0,10,0">
                 <StackPanel Spacing="5">
                     <controls:CapaObra Classes="capaGrade" Endereco="{Binding Catalogo.CapaUrl}" Preenchimento="UniformToFill" />
+                    <Grid ColumnDefinitions="*,Auto" Height="14">
+                        <Border Classes="indicadorSelecao" Height="3" Background="{DynamicResource AccentBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5">
+                            <TextBlock Classes="textoSelecao" Text="✓ Selecionado" FontSize="10" Foreground="{DynamicResource AccentBrush}" />
+                            <TextBlock Classes="textoFoco" Text="Foco" FontSize="10" Foreground="{DynamicResource AccentBrush}" />
+                        </StackPanel>
+                    </Grid>
                     <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
                     <TextBlock Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
                     <TextBlock Text="{Binding StatusExibido}" FontSize="12" Foreground="#C5A8EF" />
@@ -29,7 +36,7 @@
         <DataTemplate x:Key="TemplateLista" DataType="models:ItemBiblioteca">
             <Border Classes="card gameCard" Padding="12">
                 <Grid ColumnDefinitions="64,*,58">
-                    <controls:CapaObra Endereco="{Binding Catalogo.CapaUrl}" Height="96" VerticalAlignment="Top" />
+                    <controls:CapaObra Classes="capaLista" Endereco="{Binding Catalogo.CapaUrl}" Height="96" VerticalAlignment="Top" Preenchimento="UniformToFill" />
                     <StackPanel Grid.Column="1" Margin="12,0" Spacing="5">
                         <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
                         <TextBlock Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
@@ -44,9 +51,20 @@
         </DataTemplate>
     </Window.Resources>
     <Window.Styles>
-        <Style Selector="Border.gradeCard"><Setter Property="Height" Value="352" /></Style>
+        <Style Selector="Border.gradeCard">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style Selector="Border.indicadorSelecao"><Setter Property="IsVisible" Value="False" /></Style>
+        <Style Selector="TextBlock.textoSelecao"><Setter Property="IsVisible" Value="False" /></Style>
+        <Style Selector="TextBlock.textoFoco"><Setter Property="IsVisible" Value="False" /></Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected Border.indicadorSelecao"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected TextBlock.textoSelecao"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible Border.indicadorSelecao"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible TextBlock.textoFoco"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible Border.gameCard"><Setter Property="Background" Value="#35313D" /></Style>
         <Style Selector="controls|CapaObra.capaGrade"><Setter Property="Height" Value="174" /></Style>
-        <Style Selector="Window.compact Border.gradeCard"><Setter Property="Height" Value="270" /></Style>
         <Style Selector="Window.compact controls|CapaObra.capaGrade"><Setter Property="Height" Value="104" /></Style>
         <Style Selector="Button.navigation">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -85,8 +103,9 @@
         <Style Selector="ListBox#ListaBacklog ListBoxItem">
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Border Background="Transparent" CornerRadius="10">
-                        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                    <Border Background="Transparent">
+                        <ContentPresenter Name="PART_ContentPresenter" Background="Transparent" BorderThickness="0" CornerRadius="0"
+                                          Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
                 </ControlTemplate>
@@ -94,7 +113,8 @@
             <Setter Property="Padding" Value="0" />
             <Setter Property="Margin" Value="0,0,0,10" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="FocusAdorner" Value="{x:Null}" />
         </Style>
         <Style Selector="ListBox#ListaBacklog ListBoxItem:pointerover Border.gameCard">
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
@@ -102,6 +122,19 @@
         <Style Selector="ListBox#ListaBacklog ListBoxItem:selected Border.gameCard">
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Background" Value="#35313D" />
+        </Style>
+        <!-- Os estados do tema têm precedência sobre valores definidos no template. -->
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
         </Style>
         <Style Selector="Border#AvisoOperacao">
             <Setter Property="Background" Value="#223B31" />
@@ -466,15 +499,15 @@
                                     </StackPanel>
                                     <StackPanel x:Name="ProgressoManga" IsVisible="False" Spacing="7">
                                         <TextBlock Text="Capítulo" Classes="muted" />
-                                        <NumericUpDown x:Name="NumCapituloManga" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <controls:PosicaoNumerica x:Name="NumCapituloManga" />
                                         <TextBlock Text="Volume" Classes="muted" />
-                                        <NumericUpDown x:Name="NumVolume" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <controls:PosicaoNumerica x:Name="NumVolume" />
                                     </StackPanel>
                                     <StackPanel x:Name="ProgressoLivro" IsVisible="False" Spacing="7">
                                         <TextBlock Text="Página" Classes="muted" />
-                                        <NumericUpDown x:Name="NumPagina" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <controls:PosicaoNumerica x:Name="NumPagina" />
                                         <TextBlock Text="Capítulo" Classes="muted" />
-                                        <NumericUpDown x:Name="NumCapituloLivro" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <controls:PosicaoNumerica x:Name="NumCapituloLivro" />
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Spacing="8">
