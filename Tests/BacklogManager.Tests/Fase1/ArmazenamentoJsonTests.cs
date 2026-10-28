@@ -57,20 +57,20 @@ public sealed class ArmazenamentoJsonTests : IDisposable
         File.WriteAllText(_pasta.Arquivo, JsonSerializer.Serialize(new[] { r })); var a = Criar(); a.Salvar(a.Carregar());
         Assert.Equal(2, Assert.Single(a.Carregar()).DadosAdicionais!["futuro"][1].GetInt32());
     }
-    [Fact(DisplayName = "AR09 | Tentar salvar anime no formato atual | Recusa explícita antes de qualquer gravação")]
-    public void Anime() => Recusar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Anime, Titulo = "Anime" } });
-    [Fact(DisplayName = "AR10 | Tentar salvar série no formato atual | Recusa explícita sem perder dados")]
-    public void Serie() => Recusar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Serie, Titulo = "Série" } });
-    [Fact(DisplayName = "AR11 | Tentar salvar filme no formato atual | Recusa explícita sem perder dados")]
-    public void Filme() => Recusar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Filme, Titulo = "Filme" } });
-    [Fact(DisplayName = "AR12 | Tentar salvar mangá no formato atual | Recusa explícita sem perder dados")]
-    public void Manga() => Recusar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Manga, Titulo = "Mangá" } });
-    [Fact(DisplayName = "AR13 | Tentar salvar livro no formato atual | Recusa explícita sem perder dados")]
-    public void Livro() => Recusar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Livro, Titulo = "Livro" } });
-    [Fact(DisplayName = "AR14 | Catálogo com capa no formato atual | Recusa em vez de descartar a capa")]
-    public void Capa() { var j = Jogo(); Recusar(j with { Catalogo = j.Catalogo with { CapaUrl = "https://example.invalid/capa" } }); }
-    [Fact(DisplayName = "AR15 | Catálogo com gêneros no formato atual | Recusa em vez de descartar gêneros")]
-    public void Generos() { var j = Jogo(); Recusar(j with { Catalogo = j.Catalogo with { Generos = new[] { "Ação" } } }); }
+    [Fact(DisplayName = "AR09 | Salvar anime no formato estendido | Tipo preservado no bloco versionado")]
+    public void Anime() => Aceitar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Anime, Titulo = "Anime" } });
+    [Fact(DisplayName = "AR10 | Salvar série no formato estendido | Tipo preservado no bloco versionado")]
+    public void Serie() => Aceitar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Serie, Titulo = "Série" } });
+    [Fact(DisplayName = "AR11 | Salvar filme no formato estendido | Tipo preservado no bloco versionado")]
+    public void Filme() => Aceitar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Filme, Titulo = "Filme" } });
+    [Fact(DisplayName = "AR12 | Salvar mangá no formato estendido | Tipo preservado no bloco versionado")]
+    public void Manga() => Aceitar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Manga, Titulo = "Mangá" } });
+    [Fact(DisplayName = "AR13 | Salvar livro no formato estendido | Tipo preservado no bloco versionado")]
+    public void Livro() => Aceitar(Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Livro, Titulo = "Livro" } });
+    [Fact(DisplayName = "AR14 | Catálogo com capa | Referência preservada sem download")]
+    public void Capa() { var j = Jogo(); Aceitar(j with { Catalogo = j.Catalogo with { CapaUrl = "https://example.invalid/capa" } }); }
+    [Fact(DisplayName = "AR15 | Catálogo com gêneros | Gêneros preservados no bloco versionado")]
+    public void Generos() { var j = Jogo(); Aceitar(j with { Catalogo = j.Catalogo with { Generos = new[] { "Ação" } } }); }
     [Fact(DisplayName = "AR16 | Referência externa de outro catálogo | Nenhuma conversão para ID IGDB")]
     public void OutraOrigem() { var j = Jogo(); Recusar(j with { Catalogo = j.Catalogo with { Origem = "Outro" } }); }
     [Fact(DisplayName = "AR17 | ID externo não numérico | Recusa sem conversão presumida")]
@@ -81,7 +81,7 @@ public sealed class ArmazenamentoJsonTests : IDisposable
     public void LoteInvalido()
     {
         var a = Criar(); a.Carregar(); a.Salvar(new[] { Jogo() }); var antes = File.ReadAllBytes(_pasta.Arquivo);
-        var livro = Jogo() with { Catalogo = new ObraCatalogo { Tipo = TipoMidia.Livro, Titulo = "Livro" } };
+        var livro = Jogo() with { Catalogo = new ObraCatalogo { Tipo = (TipoMidia)999, Titulo = "Inválido" } };
         Assert.Throws<NotSupportedException>(() => a.Salvar(new[] { Jogo("Alterado"), livro }));
         Assert.Equal(antes, File.ReadAllBytes(_pasta.Arquivo)); Assert.False(File.Exists(_pasta.Arquivo + ".bak"));
     }
@@ -92,6 +92,15 @@ public sealed class ArmazenamentoJsonTests : IDisposable
         File.WriteAllText(_pasta.Arquivo, JsonSerializer.Serialize(registros)); var a = Criar(); a.Salvar(a.Carregar());
         Assert.Equal(11, a.Carregar().Count);
         Assert.Equal(JsonSerializer.Serialize(registros), JsonSerializer.Serialize(new FileManager(_pasta.Arquivo).Carregar()));
+    }
+    private void Aceitar(ItemBiblioteca item)
+    {
+        var a = Criar(); a.Carregar(); a.Salvar(new[] { item });
+        var lido = Assert.Single(a.Carregar());
+        Assert.Equal(item.Catalogo.Tipo, lido.Catalogo.Tipo);
+        Assert.Equal(item.Catalogo.CapaUrl, lido.Catalogo.CapaUrl);
+        Assert.Equal(item.Catalogo.Generos, lido.Catalogo.Generos);
+        Assert.Equal(1, new FileManager(_pasta.Arquivo).Carregar()[0].Multimidia!.Versao);
     }
     private void Recusar(ItemBiblioteca item)
     {

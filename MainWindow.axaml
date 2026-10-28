@@ -103,7 +103,7 @@
                     <Button x:Name="NavBacklog" Classes="navigation" Tag="backlog" Click="Navegar_Click">
                         <Grid ColumnDefinitions="Auto,*,Auto">
                             <Path Data="{StaticResource LibraryIcon}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1.6" Width="18" Height="18" Stretch="Uniform" />
-                            <TextBlock Grid.Column="1" Text="Meu backlog" Margin="13,0,0,0" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="Minha biblioteca" Margin="13,0,0,0" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" x:Name="TxtContagemNav" FontSize="11" VerticalAlignment="Center" Opacity="0.7" />
                         </Grid>
                     </Button>
@@ -159,19 +159,19 @@
                             <Border Classes="card" Margin="0,0,10,0">
                                 <StackPanel Spacing="8">
                                     <TextBlock x:Name="TxtTotal" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" />
-                                    <TextBlock Text="Jogos na coleção" Classes="muted" />
+                                    <TextBlock Text="Obras na coleção" Classes="muted" />
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="1" Classes="card" Margin="0,0,10,0">
                                 <StackPanel Spacing="8">
                                     <TextBlock x:Name="TxtJogando" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" />
-                                    <TextBlock Text="Jogando agora" Classes="muted" />
+                                    <TextBlock Text="Em andamento" Classes="muted" />
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="2" Classes="card">
                                 <StackPanel Spacing="8">
                                     <TextBlock x:Name="TxtZerados" FontSize="32" FontWeight="Bold" Foreground="#E7BD78" />
-                                    <TextBlock Text="Jogos zerados" Classes="muted" />
+                                    <TextBlock Text="Concluídas" Classes="muted" />
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -190,7 +190,7 @@
                                             <TextBlock Text="Qual vai ser o próximo jogo?" FontWeight="SemiBold" />
                                             <TextBlock Text="Adicione um título à sua coleção." Classes="muted" FontSize="12" />
                                         </StackPanel>
-                                        <Button Grid.Column="2" Content="Adicionar jogo" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
+                                        <Button Grid.Column="2" Content="Adicionar obra" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
                                     </Grid>
                                 </Border>
                             </StackPanel>
@@ -215,7 +215,7 @@
                                                     <StackPanel Margin="14,12" Spacing="7">
                                                         <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                                         <Grid ColumnDefinitions="*,Auto">
-                                                            <TextBlock Text="{Binding Pessoal.Status}" Classes="muted" FontSize="11" />
+                                                            <TextBlock Text="{Binding StatusExibido}" Classes="muted" FontSize="11" />
                                                             <TextBlock Grid.Column="1" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontSize="11" />
                                                         </Grid>
                                                     </StackPanel>
@@ -233,15 +233,26 @@
                 </ScrollViewer>
 
                 <!-- MEU BACKLOG -->
-                <Grid x:Name="PaginaBacklog" IsVisible="False" RowDefinitions="Auto,Auto,*,Auto">
+                <Grid x:Name="PaginaBacklog" IsVisible="False" RowDefinitions="Auto,Auto,Auto,*,Auto">
                     <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,24">
                         <StackPanel Spacing="7">
-                            <TextBlock Text="Meu backlog" Classes="pageTitle" />
-                            <TextBlock Text="Todos os seus jogos, em um só lugar." Classes="muted" />
+                            <TextBlock Text="Minha biblioteca" Classes="pageTitle" />
+                            <TextBlock Text="Suas obras, separadas por tipo de mídia." Classes="muted" />
                         </StackPanel>
-                        <Button Grid.Column="1" Content="+  Adicionar jogo" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
+                        <Button Grid.Column="1" Content="+  Adicionar obra" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
                     </Grid>
-                    <Grid Grid.Row="1" ColumnDefinitions="*,180" Margin="0,0,0,20">
+                    <StackPanel Grid.Row="1" Spacing="7" Margin="0,0,0,16">
+                        <TextBlock Text="Tipo de mídia" Classes="muted" />
+                        <ComboBox x:Name="CmbTipoBiblioteca" SelectedIndex="0" SelectionChanged="TipoBiblioteca_Changed">
+                            <ComboBoxItem Content="Jogos" Tag="Jogo" />
+                            <ComboBoxItem Content="Animes" Tag="Anime" />
+                            <ComboBoxItem Content="Séries" Tag="Serie" />
+                            <ComboBoxItem Content="Filmes" Tag="Filme" />
+                            <ComboBoxItem Content="Mangás" Tag="Manga" />
+                            <ComboBoxItem Content="Livros" Tag="Livro" />
+                        </ComboBox>
+                    </StackPanel>
+                    <Grid Grid.Row="2" ColumnDefinitions="*,180" Margin="0,0,0,20">
                         <TextBox x:Name="TxtBusca" PlaceholderText="Buscar por título ou categoria..." TextChanged="Filtros_Changed" Margin="0,0,12,0" />
                         <ComboBox Grid.Column="1" x:Name="CmbFiltroStatus" SelectedIndex="0" SelectionChanged="Filtros_Changed">
                             <ComboBoxItem Content="Todos os status" />
@@ -252,7 +263,7 @@
                             <ComboBoxItem Content="Abandonado" />
                         </ComboBox>
                     </Grid>
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="3">
                         <ListBox x:Name="ListaBacklog" SelectionChanged="ListaBacklog_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate DataType="models:ItemBiblioteca">
@@ -268,9 +279,11 @@
                                                         <TextBlock Text="{Binding Pessoal.Categoria}" FontSize="11" Foreground="#CCCCD2" />
                                                     </Border>
                                                     <Border Background="#3C3548" CornerRadius="4" Padding="8,3">
-                                                        <TextBlock Text="{Binding Pessoal.Status}" FontSize="11" Foreground="#C5A8EF" />
+                                                        <TextBlock Text="{Binding StatusExibido}" FontSize="11" Foreground="#C5A8EF" />
                                                     </Border>
                                                 </StackPanel>
+                                                <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="11" />
+                                                <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" Classes="muted" FontSize="12" />
                                                 <TextBlock Text="{Binding Pessoal.Review}" Classes="muted" FontSize="12" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
                                             </StackPanel>
                                             <TextBlock Grid.Column="2" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontWeight="SemiBold" />
@@ -285,7 +298,7 @@
                             <TextBlock x:Name="TxtDicaListaVazia" Classes="muted" TextWrapping="Wrap" TextAlignment="Center" />
                         </StackPanel>
                     </Grid>
-                    <Border Grid.Row="3" BorderBrush="#3C3C3C" BorderThickness="0,1,0,0" Padding="0,16,0,0" Margin="0,12,0,0">
+                    <Border Grid.Row="4" BorderBrush="#3C3C3C" BorderThickness="0,1,0,0" Padding="0,16,0,0" Margin="0,12,0,0">
                         <Grid ColumnDefinitions="*,Auto,Auto">
                             <TextBlock x:Name="TxtContagemLista" Classes="muted" FontSize="12"
                                        VerticalAlignment="Center" Margin="0,0,12,0" />
@@ -304,14 +317,32 @@
                         </StackPanel>
                         <Border Classes="card" Padding="24">
                             <StackPanel Spacing="18">
-                                <TextBlock Text="DADOS DO JOGO" Classes="sectionLabel" />
+                                <TextBlock Text="DADOS DA OBRA" Classes="sectionLabel" />
+                                <StackPanel Spacing="7">
+                                    <TextBlock Text="Tipo de mídia" FontWeight="SemiBold" />
+                                    <ComboBox x:Name="CmbTipoCadastro" SelectedIndex="0" SelectionChanged="TipoCadastro_Changed">
+                            <ComboBoxItem Content="Jogos" Tag="Jogo" />
+                            <ComboBoxItem Content="Animes" Tag="Anime" />
+                            <ComboBoxItem Content="Séries" Tag="Serie" />
+                            <ComboBoxItem Content="Filmes" Tag="Filme" />
+                            <ComboBoxItem Content="Mangás" Tag="Manga" />
+                            <ComboBoxItem Content="Livros" Tag="Livro" />
+                        </ComboBox>
+                                </StackPanel>
+                                <Border x:Name="AvisoCatalogoSimulado" IsVisible="False" Background="#40344E" CornerRadius="6" Padding="12">
+                                    <TextBlock Text="Catálogo de demonstração: os resultados desta categoria são simulados." TextWrapping="Wrap" />
+                                </Border>
                                 <StackPanel Spacing="8">
-                                    <TextBlock Text="Título do jogo" FontWeight="SemiBold" />
+                                    <TextBlock Text="Título" FontWeight="SemiBold" />
                                     <TextBox x:Name="TxtTitulo" PlaceholderText="Ex.: Cyberpunk 2077" TextChanged="TxtTitulo_TextChanged"/>
                                     <ListBox x:Name="ListaSugestoes" SelectionChanged="ListaSugestoes_SelectionChanged">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate DataType="models:ObraCatalogo">
-                                                <TextBlock Text="{Binding Titulo}" />
+                                                <StackPanel Spacing="3">
+                                                    <TextBlock Text="{Binding Titulo}" />
+                                                    <TextBlock Text="{Binding GenerosTexto}" Classes="muted" FontSize="11" />
+                                                    <TextBlock Text="Dados simulados" IsVisible="{Binding Simulado}" Foreground="#E7BD78" FontSize="11" />
+                                                </StackPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
@@ -345,6 +376,39 @@
                                         <NumericUpDown x:Name="NumNota" Minimum="0" Maximum="5" Increment="0.5" FormatString="0.0" Value="5.0" />
                                         <TextBlock Grid.Column="1" Text="De 0 a 5 estrelas" Classes="muted" VerticalAlignment="Center" Margin="14,0,0,0" />
                                     </Grid>
+                                </StackPanel>
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Progresso pessoal (opcional)" FontWeight="SemiBold" />
+                                    <StackPanel x:Name="ProgressoJogo" IsVisible="False" Spacing="7">
+                                        <TextBlock Text="Horas jogadas" Classes="muted" />
+                                        <NumericUpDown x:Name="NumHorasJogadas" Minimum="0" Maximum="79228162514264337593543950335" Increment="0.5" FormatString="0.##" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="ProgressoAnime" IsVisible="False" Spacing="7">
+                                        <TextBlock Text="Episódios assistidos" Classes="muted" />
+                                        <NumericUpDown x:Name="NumEpisodiosAssistidos" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="ProgressoSerie" IsVisible="False" Spacing="7">
+                                        <TextBlock Text="Temporada" Classes="muted" />
+                                        <NumericUpDown x:Name="NumTemporada" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <TextBlock Text="Episódio" Classes="muted" />
+                                        <NumericUpDown x:Name="NumEpisodio" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="ProgressoFilme" IsVisible="False" Spacing="7">
+                                        <TextBlock Text="Minutos assistidos" Classes="muted" />
+                                        <NumericUpDown x:Name="NumMinutosAssistidos" Minimum="0" Maximum="79228162514264337593543950335" Increment="0.5" FormatString="0.##" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="ProgressoManga" IsVisible="False" Spacing="7">
+                                        <TextBlock Text="Capítulo" Classes="muted" />
+                                        <NumericUpDown x:Name="NumCapituloManga" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <TextBlock Text="Volume" Classes="muted" />
+                                        <NumericUpDown x:Name="NumVolume" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="ProgressoLivro" IsVisible="False" Spacing="7">
+                                        <TextBlock Text="Página" Classes="muted" />
+                                        <NumericUpDown x:Name="NumPagina" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <TextBlock Text="Capítulo" Classes="muted" />
+                                        <NumericUpDown x:Name="NumCapituloLivro" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                    </StackPanel>
                                 </StackPanel>
                                 <StackPanel Spacing="8">
                                     <Grid ColumnDefinitions="*,Auto">

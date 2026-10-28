@@ -20,6 +20,9 @@ public class BacklogItem
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? IgdbId { get; set; }
 
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public DadosMultimidiaJson? Multimidia { get; set; }
+
     [JsonExtensionData]
     public Dictionary<string, JsonElement>? DadosAdicionais { get; set; }
 

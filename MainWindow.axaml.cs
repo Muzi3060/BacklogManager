@@ -22,7 +22,7 @@ public partial class MainWindow : Window
     private ObraCatalogo? _jogoSelecionado;
     private string? _textoNaSelecao;
     private CancellationTokenSource? _buscaCancellation;
-    private readonly IPesquisaCatalogo? _pesquisa;
+    private readonly RoteadorPesquisaCatalogo _roteador;
     private readonly IDisposable? _recursoPesquisa;
     private bool PersistenciaDisponivel => _biblioteca.Carregada;
     private bool _fechada;
@@ -36,9 +36,10 @@ public partial class MainWindow : Window
     internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null)
     {
         _biblioteca = biblioteca;
-        _pesquisa = pesquisa;
+        _roteador = new RoteadorPesquisaCatalogo(pesquisa);
         _recursoPesquisa = recursoPesquisa;
         InitializeComponent();
+        PreencherProgresso(null);
         try
         {
             _biblioteca.Carregar();
@@ -47,10 +48,11 @@ public partial class MainWindow : Window
         {
             ExibirAviso("Coleção não carregada", $"O original foi preservado. Gravação bloqueada. Arquivo: {_biblioteca.DescricaoOrigem}", true);
         }
-        if (PersistenciaDisponivel && _pesquisa == null)
+        if (PersistenciaDisponivel && pesquisa == null)
             ExibirAviso("Pesquisa indisponível", "Configure IGDB_CLIENT_ID e IGDB_ACESS_TOKEN (ou IGDB_ACCESS_TOKEN). Sua coleção local continua disponível.", true);
 
         _interfacePronta = true;
+        AtualizarFormularioMidia();
         AtualizarColecao();
         BtnAdicionar.IsEnabled = PersistenciaDisponivel;
         BtnAtualizar.IsEnabled = PersistenciaDisponivel;
@@ -129,6 +131,7 @@ public partial class MainWindow : Window
 
     private void NovoJogo_Click(object? sender, RoutedEventArgs e)
     {
+        DefinirTipo(CmbTipoCadastro, TipoBiblioteca);
         LimparFormulario();
         MostrarPagina("cadastro");
         TxtTitulo.Focus();
@@ -153,6 +156,8 @@ public partial class MainWindow : Window
         NumNota.Value = 5.0m;
         TxtReview.Text = string.Empty;
         TxtReview.MaxLength = 1000;
+        PreencherProgresso(null);
+        AtualizarFormularioMidia();
         AtualizarModoFormulario();
     }
 
@@ -161,9 +166,12 @@ public partial class MainWindow : Window
         var editando = _itemEmEdicao != null;
 
         TxtTitulo.IsReadOnly = editando;
+        CmbTipoCadastro.IsEnabled = !editando;
 
 
-        TxtTituloCadastro.Text = editando ? "Editar jogo" : "Adicionar jogo";
+        TxtTituloCadastro.Text = TipoCadastro == TipoMidia.Jogo
+            ? editando ? "Editar jogo" : "Adicionar jogo"
+            : editando ? "Editar obra" : "Adicionar obra";
         TxtSubtituloCadastro.Text = editando
             ? "Atualize os detalhes e registre seu progresso."
             : "Uma nova aventura para a sua coleção.";
@@ -173,12 +181,12 @@ public partial class MainWindow : Window
 
     private ItemBiblioteca? LerFormulario()
     {
-        var dados = new DadosFormularioJogo(TxtTitulo.Text,
-            (CmbCategoria.SelectedItem as ComboBoxItem)?.Content?.ToString(),
-            (CmbStatus.SelectedItem as ComboBoxItem)?.Content?.ToString(), NumNota.Value, TxtReview.Text);
         try
         {
-            return FormularioJogo.Preparar(dados, _jogoSelecionado, _textoNaSelecao, _itemEmEdicao);
+            var dados = new DadosFormularioJogo(TxtTitulo.Text,
+            (CmbCategoria.SelectedItem as ComboBoxItem)?.Content?.ToString(),
+            (CmbStatus.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? (CmbStatus.SelectedItem as ComboBoxItem)?.Content?.ToString(), NumNota.Value, TxtReview.Text, LerProgresso());
+            return FormularioObra.Preparar(dados, _jogoSelecionado, _textoNaSelecao, _itemEmEdicao, TipoCadastro);
         }
         catch (ValidacaoFormularioException erro)
         {
@@ -192,7 +200,7 @@ public partial class MainWindow : Window
 
         if (_jogoSelecionado == null)
         {
-            ExibirAviso("Selecione um jogo", "Escolha um jogo antes de adicionar à sua coleção.", true);
+            ExibirAviso(TipoCadastro == TipoMidia.Jogo ? "Selecione um jogo" : "Selecione uma obra", "Escolha uma sugestão antes de adicionar à sua coleção.", true);
             return;
         }
 
@@ -202,7 +210,7 @@ public partial class MainWindow : Window
         if (!TentarExecutar(() => _biblioteca.Adicionar(novoItem))) return;
         LimparFormulario();
         AtualizarColecao();
-        ExibirAviso("Jogo adicionado", $"“{novoItem.Catalogo.Titulo}” foi adicionado à sua coleção.");
+        ExibirAviso(novoItem.Catalogo.Tipo == TipoMidia.Jogo ? "Jogo adicionado" : "Obra adicionada", $"“{novoItem.Catalogo.Titulo}” foi " + (novoItem.Catalogo.Tipo == TipoMidia.Jogo ? "adicionado" : "adicionada") + " à sua coleção.");
     }
 
     private void BtnAtualizar_Click(object? sender, RoutedEventArgs e)
@@ -215,7 +223,7 @@ public partial class MainWindow : Window
         if (!TentarExecutar(() => _biblioteca.Atualizar(_itemEmEdicao, atualizado.Pessoal))) return;
         LimparFormulario();
         AtualizarColecao();
-        ExibirAviso("Jogo atualizado", $"As alterações de “{atualizado.Catalogo.Titulo}” foram salvas com sucesso.");
+        ExibirAviso(atualizado.Catalogo.Tipo == TipoMidia.Jogo ? "Jogo atualizado" : "Obra atualizada", $"As alterações de “{atualizado.Catalogo.Titulo}” foram salvas com sucesso.");
     }
 
     private void ExibirAviso(string titulo, string mensagem, bool erro = false)
@@ -241,7 +249,7 @@ public partial class MainWindow : Window
         if (ReferenceEquals(_itemEmEdicao, item))
             LimparFormulario();
         AtualizarColecao();
-        ExibirAviso("Jogo removido", $"“{item.Catalogo.Titulo}” foi removido da coleção.");
+        ExibirAviso(item.Catalogo.Tipo == TipoMidia.Jogo ? "Jogo removido" : "Obra removida", $"“{item.Catalogo.Titulo}” foi " + (item.Catalogo.Tipo == TipoMidia.Jogo ? "removido" : "removida") + " da coleção.");
     }
 
     private void ListaBacklog_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -270,6 +278,9 @@ public partial class MainWindow : Window
         ListaSugestoes.IsVisible = false;
         _jogoSelecionado = null;
         _itemEmEdicao = item;
+        DefinirTipo(CmbTipoCadastro, item.Catalogo.Tipo);
+        AtualizarFormularioMidia();
+        PreencherProgresso(item.Pessoal.Progresso);
         TxtTitulo.Text = item.Catalogo.Titulo;
         SelecionarValor(CmbCategoria, item.Pessoal.Categoria);
         SelecionarValor(CmbStatus, item.Pessoal.Status);
@@ -284,7 +295,7 @@ public partial class MainWindow : Window
     {
         foreach (var opcao in comboBox.Items.OfType<ComboBoxItem>())
         {
-            if (opcao.Content?.ToString() != valor) continue;
+            if ((opcao.Tag?.ToString() ?? opcao.Content?.ToString()) != valor) continue;
             comboBox.SelectedItem = opcao;
             return;
         }
@@ -317,7 +328,7 @@ public partial class MainWindow : Window
         ProgressoBacklog.Value = progresso;
         TxtResumo.Text = total == 0
             ? "Adicione seu primeiro jogo e comece a acompanhar seu progresso."
-            : $"{zerados} de {total} jogos zerados · {naFila} na fila para a próxima aventura.";
+            : $"{zerados} de {total} obras concluídas · {naFila} na fila.";
         ListaRecentes.ItemsSource = _biblioteca.ObterRecentes();
         EstadoInicioVazio.IsVisible = total == 0;
         AtualizarLista();
@@ -327,10 +338,10 @@ public partial class MainWindow : Window
     {
         var busca = TxtBusca.Text?.Trim() ?? string.Empty;
         var status = CmbFiltroStatus.SelectedIndex > 0
-            ? (CmbFiltroStatus.SelectedItem as ComboBoxItem)?.Content?.ToString()
+            ? (CmbFiltroStatus.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? (CmbFiltroStatus.SelectedItem as ComboBoxItem)?.Content?.ToString()
             : null;
         var selecionado = ListaBacklog.SelectedItem as ItemBiblioteca;
-        var filtrados = _biblioteca.Filtrar(busca, status);
+        var filtrados = _biblioteca.Filtrar(busca, status, TipoBiblioteca);
 
         ListaBacklog.ItemsSource = filtrados;
         // Records iguais podem representar registros pessoais diferentes.
@@ -341,21 +352,23 @@ public partial class MainWindow : Window
         ListaBacklog.SelectedIndex = indiceSelecionado;
         BtnEditar.IsEnabled = ListaBacklog.SelectedItem is ItemBiblioteca;
         BtnRemover.IsEnabled = BtnEditar.IsEnabled && PersistenciaDisponivel;
-        TxtContagemLista.Text = $"{filtrados.Count} de {_biblioteca.Itens.Count} jogos · Selecione para editar";
+        var totalTipo = _biblioteca.Filtrar(null, null, TipoBiblioteca).Count;
+        TxtContagemLista.Text = $"{filtrados.Count} de {totalTipo} {TextosMidia.Plural(TipoBiblioteca).ToLowerInvariant()} · Selecione para editar";
         EstadoListaVazia.IsVisible = filtrados.Count == 0;
-        TxtListaVazia.Text = _biblioteca.Itens.Count == 0 ? "Sua coleção ainda está vazia" : "Nenhum jogo encontrado";
-        TxtDicaListaVazia.Text = _biblioteca.Itens.Count == 0
-            ? "Use “Adicionar jogo” para começar seu backlog."
+        TxtListaVazia.Text = totalTipo == 0 ? "Nenhuma obra nesta categoria" : "Nenhuma obra encontrada";
+        TxtDicaListaVazia.Text = totalTipo == 0
+            ? "Use o cadastro para adicionar uma obra desta categoria."
             : "Tente outro título, categoria ou status.";
     }
 
     private void ListaSugestoes_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (ListaSugestoes.SelectedItem is ObraCatalogo jogo && FormularioJogo.SelecaoValida(jogo))
+        if (ListaSugestoes.SelectedItem is ObraCatalogo jogo && FormularioObra.SelecaoValida(jogo, TipoCadastro))
         {
             CancelarBusca();
             _jogoSelecionado = jogo;
             _textoNaSelecao = TxtTitulo.Text;
+            if (jogo.Tipo != TipoMidia.Jogo && jogo.Generos.Count > 0) SelecionarValor(CmbCategoria, jogo.Generos[0]);
             ListaSugestoes.IsVisible = false;
         }
         else
@@ -379,7 +392,9 @@ public partial class MainWindow : Window
         ListaSugestoes.IsVisible = false;
         var termo = TxtTitulo.Text?.Trim() ?? string.Empty;
         if (_itemEmEdicao != null || termo.Length == 0) return;
-        if (_pesquisa == null)
+        var tipoBusca = TipoCadastro;
+        var pesquisa = _roteador.Obter(tipoBusca);
+        if (pesquisa == null)
         {
             ExibirAviso("Pesquisa indisponível", "Configure as credenciais locais da IGDB para pesquisar. Sua coleção continua disponível.", true);
             return;
@@ -387,12 +402,12 @@ public partial class MainWindow : Window
 
         var buscaAtual = new CancellationTokenSource();
         _buscaCancellation = buscaAtual;
-        bool Atual() => !_fechada && _itemEmEdicao == null && TxtTitulo.Text?.Trim() == termo &&
+        bool Atual() => TipoCadastro == tipoBusca && !_fechada && _itemEmEdicao == null && TxtTitulo.Text?.Trim() == termo &&
             ReferenceEquals(_buscaCancellation, buscaAtual) && !buscaAtual.IsCancellationRequested;
         try
         {
             await Task.Delay(400, buscaAtual.Token);
-            var resultado = await _pesquisa.BuscarAsync(termo, buscaAtual.Token);
+            var resultado = await pesquisa.BuscarAsync(termo, buscaAtual.Token);
             if (!Atual()) return;
             ListaSugestoes.ItemsSource = resultado;
             ListaSugestoes.IsVisible = resultado.Count > 0;

@@ -119,6 +119,9 @@ public sealed class FileManager
                 item.Review == null || !double.IsFinite(item.Nota) || item.Nota < 0 || item.Nota > 5 ||
                 item.IgdbId is <= 0)
                 throw new InvalidDataException("A coleção contém um registro inválido. Nenhum registro foi descartado.");
+            if (item.Multimidia != null) ConversorBibliotecaJson.ValidarMultimidia(item);
+            if (item.DadosAdicionais?.ContainsKey("Multimidia") == true)
+                throw new InvalidDataException("O campo Multimidia está duplicado nos dados adicionais.");
         }
     }
 }

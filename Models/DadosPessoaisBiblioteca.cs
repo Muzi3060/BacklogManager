@@ -6,5 +6,6 @@ public sealed record DadosPessoaisBiblioteca
     public string Categoria { get; init; } = string.Empty;
     public string Status { get; init; } = string.Empty;
     public double Nota { get; init; }
+    public ProgressoPessoal? Progresso { get; init; }
     public string Review { get; init; } = string.Empty;
 }

@@ -166,7 +166,7 @@ public sealed class BuscaJanelaTests
     public void RenderizarTelas()
     {
         using var t = new TelaTeste(Enumerable.Range(1, 11).Select(n => PastaTeste.Jogo($"Jogo simulado {n}")), semServico: true);
-        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-fase1-resultados", "imagens");
+        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-fase2-resultados", "regressao-imagens");
         Directory.CreateDirectory(pasta);
         void Capturar(string nome)
         {

@@ -81,12 +81,14 @@ public sealed class ServicoBiblioteca
             string.IsNullOrWhiteSpace(item.Pessoal.Categoria) || string.IsNullOrWhiteSpace(item.Pessoal.Status) ||
             item.Pessoal.Review == null || !double.IsFinite(item.Pessoal.Nota) || item.Pessoal.Nota < 0 || item.Pessoal.Nota > 5)
             throw new InvalidDataException("A coleção contém um registro inválido. Nenhum registro foi descartado.");
+        RegrasProgresso.Validar(item.Catalogo.Tipo, item.Pessoal.Progresso);
     }
 
-    public IReadOnlyList<ItemBiblioteca> Filtrar(string? termo, string? status)
+    public IReadOnlyList<ItemBiblioteca> Filtrar(string? termo, string? status, TipoMidia? tipo = null)
     {
         var busca = termo?.Trim() ?? string.Empty;
         return _itens.Where(item =>
+            (tipo == null || item.Catalogo.Tipo == tipo) &&
             (status == null || item.Pessoal.Status == status) &&
             (item.Catalogo.Titulo.Contains(busca, StringComparison.OrdinalIgnoreCase) ||
              item.Pessoal.Categoria.Contains(busca, StringComparison.OrdinalIgnoreCase))).ToArray();
