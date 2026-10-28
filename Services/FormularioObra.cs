@@ -17,7 +17,8 @@ public static class FormularioObra
         if (dados.Nota is not decimal nota || nota < 0 || nota > 5)
             throw new ValidacaoFormularioException("Nota inválida", "Informe uma nota entre 0 e 5.");
         if (string.IsNullOrWhiteSpace(dados.Status) || tipo != TipoMidia.Jogo && string.IsNullOrWhiteSpace(dados.Categoria))
-            throw new ValidacaoFormularioException("Dados incompletos", "Selecione categoria e status antes de salvar.");
+            throw new ValidacaoFormularioException("Dados incompletos", tipo == TipoMidia.Jogo
+                ? "Selecione um status antes de salvar." : "Selecione categoria e status antes de salvar.");
         var inalterada = emEdicao != null && dados.Review == emEdicao.Pessoal.Review;
         var review = inalterada ? dados.Review : dados.Review?.Trim();
         if (review?.Length > 1000 && !inalterada)
