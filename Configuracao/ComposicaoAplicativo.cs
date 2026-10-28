@@ -7,7 +7,7 @@ using BacklogManager.Services;
 namespace BacklogManager.Configuracao;
 
 internal sealed record DependenciasJanela(ServicoBiblioteca Biblioteca, IPesquisaCatalogo? Pesquisa, IDisposable? RecursoPesquisa,
-    ArmazenamentoPreferenciasBiblioteca? Preferencias = null, ServicoColecoes? Colecoes = null);
+    ArmazenamentoPreferenciasBiblioteca? Preferencias = null, ServicoColecoes? Colecoes = null, BacklogManager.Aparencia.ServicoAparencia? Aparencia = null);
 
 internal static class ComposicaoAplicativo
 {
@@ -21,9 +21,12 @@ internal static class ComposicaoAplicativo
         var preferencias = new ArmazenamentoPreferenciasBiblioteca(caminhoPreferencias);
         var caminhoColecoes = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(caminhoBiblioteca)!,
             System.IO.Path.GetFileNameWithoutExtension(caminhoBiblioteca) + ".colecoes.json");
+        var caminhoAparencia = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(caminhoBiblioteca)!, "aparencia.preferencias.json");
+        if (caminhoAparencia == caminhoBiblioteca) caminhoAparencia += ".visual.json";
+        var aparencia = new BacklogManager.Aparencia.ServicoAparencia(new BacklogManager.Aparencia.ArmazenamentoAparenciaJson(caminhoAparencia));
         var colecoes = new ServicoColecoes(new ArmazenamentoColecoesJson(caminhoColecoes), biblioteca);
         if (!ConfiguracaoIgdb.TentarLer(out var clientId, out var token, lerVariavel))
-            return new DependenciasJanela(biblioteca, null, null, preferencias, colecoes);
+            return new DependenciasJanela(biblioteca, null, null, preferencias, colecoes, aparencia);
 
         // O cliente produzido pela fábrica pertence a esta composição e será fechado pela janela.
         var cliente = criarCliente?.Invoke() ?? new HttpClient(new SocketsHttpHandler
@@ -32,6 +35,6 @@ internal static class ComposicaoAplicativo
         });
         cliente.Timeout = TimeSpan.FromSeconds(15);
         var pesquisa = new PesquisaJogosIgdb(new IgdbService(cliente, clientId, token));
-        return new DependenciasJanela(biblioteca, pesquisa, cliente, preferencias, colecoes);
+        return new DependenciasJanela(biblioteca, pesquisa, cliente, preferencias, colecoes, aparencia);
     }
 }

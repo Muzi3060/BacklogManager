@@ -1,67 +1,48 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="BacklogManager.App"
-             RequestedThemeVariant="Dark">
-    <Application.Resources>
-        <SolidColorBrush x:Key="PageBackground">#262626</SolidColorBrush>
-        <SolidColorBrush x:Key="SidebarBackground">#202020</SolidColorBrush>
-        <SolidColorBrush x:Key="CardBackground">#303030</SolidColorBrush>
-        <SolidColorBrush x:Key="CardBorder">#3C3C3C</SolidColorBrush>
-        <SolidColorBrush x:Key="MutedForeground">#A0A0AA</SolidColorBrush>
-        <SolidColorBrush x:Key="AccentBrush">#AD8AF1</SolidColorBrush>
-        <SolidColorBrush x:Key="SuccessBrush">#52C7A0</SolidColorBrush>
-        <SolidColorBrush x:Key="ErrorBrush">#F28B96</SolidColorBrush>
-    </Application.Resources>
+             x:Class="BacklogManager.App" Name="Minhas Realizações" RequestedThemeVariant="Light">
     <Application.Styles>
         <FluentTheme />
         <Style Selector="Window">
             <Setter Property="Background" Value="{DynamicResource PageBackground}" />
-            <Setter Property="Foreground" Value="#F4F4F5" />
+            <Setter Property="Foreground" Value="{DynamicResource PageForeground}" />
             <Setter Property="FontSize" Value="13" />
         </Style>
-        <Style Selector="TextBlock.pageTitle">
-            <Setter Property="FontSize" Value="26" />
-            <Setter Property="FontWeight" Value="Bold" />
-        </Style>
-        <Style Selector="TextBlock.muted">
-            <Setter Property="Foreground" Value="{DynamicResource MutedForeground}" />
-        </Style>
-        <Style Selector="TextBlock.sectionLabel">
-            <Setter Property="Foreground" Value="{DynamicResource MutedForeground}" />
-            <Setter Property="FontSize" Value="11" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="LetterSpacing" Value="1.2" />
-        </Style>
+        <Style Selector="TextBlock.pageTitle"><Setter Property="FontSize" Value="26" /><Setter Property="FontWeight" Value="Bold" /></Style>
+        <Style Selector="TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource MutedForeground}" /></Style>
+        <Style Selector="TextBlock.sectionLabel"><Setter Property="Foreground" Value="{DynamicResource MutedForeground}" /><Setter Property="FontSize" Value="11" /><Setter Property="FontWeight" Value="SemiBold" /><Setter Property="LetterSpacing" Value="1.2" /></Style>
         <Style Selector="Border.card">
+            <Setter Property="Background" Value="{DynamicResource PanelBackground}" />
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource PanelForeground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource PanelBorder}" />
+            <Setter Property="BorderThickness" Value="1" /><Setter Property="CornerRadius" Value="10" /><Setter Property="Padding" Value="20" />
+        </Style>
+        <Style Selector="Border.card TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource PanelMuted}" /></Style>
+        <Style Selector="Border.gameCard, Border.recenteCard">
             <Setter Property="Background" Value="{DynamicResource CardBackground}" />
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource CardForeground}" />
             <Setter Property="BorderBrush" Value="{DynamicResource CardBorder}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Padding" Value="20" />
         </Style>
-        <Style Selector="Button">
-            <Setter Property="CornerRadius" Value="6" />
-            <Setter Property="Padding" Value="16,10" />
-            <Setter Property="Cursor" Value="Hand" />
+        <Style Selector="Border.gameCard TextBlock.muted, Border.recenteCard TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource CardMuted}" /></Style>
+        <Style Selector="TextBlock.statusObra"><Setter Property="Foreground" Value="{DynamicResource CardAccent}" /></Style>
+        <Style Selector="TextBlock.notaObra"><Setter Property="Foreground" Value="{DynamicResource WarningOnCard}" /></Style>
+        <Style Selector="Button"><Setter Property="CornerRadius" Value="6" /><Setter Property="Padding" Value="16,10" /><Setter Property="Cursor" Value="Hand" /></Style>
+        <Style Selector="Button.primary"><Setter Property="FontWeight" Value="SemiBold" /></Style>
+        <Style Selector="Button.danger"><Setter Property="Foreground" Value="{DynamicResource ErrorOnButton}" /></Style>
+        <Style Selector="Button:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonFocus}" /><Setter Property="BorderThickness" Value="2" />
         </Style>
-        <Style Selector="Button.primary">
-            <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
-            <Setter Property="Foreground" Value="#211A30" />
-            <Setter Property="FontWeight" Value="SemiBold" />
+        <Style Selector="TextBox, ComboBox, NumericUpDown"><Setter Property="CornerRadius" Value="6" /><Setter Property="MinHeight" Value="40" /></Style>
+        <Style Selector="ListBox"><Setter Property="Background" Value="{DynamicResource ControlBackground}" /><Setter Property="Foreground" Value="{DynamicResource ControlForeground}" /></Style>
+        <Style Selector="ListBox:not(.obras) TextBlock.muted, ComboBoxItem TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource PanelMuted}" /></Style>
+        <Style Selector="TextBlock.avisoPainel"><Setter Property="Foreground" Value="{DynamicResource WarningOnPanel}" /></Style>
+        <Style Selector="ListBox:not(.obras) ListBoxItem:selected TextBlock, ListBox:not(.obras) ListBoxItem:pointerover TextBlock, ComboBoxItem:selected TextBlock, ComboBoxItem:pointerover TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
         </Style>
-        <Style Selector="Button.primary:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="#BEA1F7" />
-            <Setter Property="Foreground" Value="#211A30" />
+        <Style Selector="TextBox, ComboBox, NumericUpDown, CalendarDatePicker">
+            <Setter Property="FocusAdorner"><Template><Border BorderBrush="{DynamicResource SystemControlFocusVisualPrimaryBrush}" BorderThickness="1" CornerRadius="6"><Border BorderBrush="{DynamicResource SystemControlFocusVisualSecondaryBrush}" BorderThickness="1" CornerRadius="5" /></Border></Template></Setter>
         </Style>
-        <Style Selector="Button.danger">
-            <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}" />
-        </Style>
-        <Style Selector="TextBox, ComboBox, NumericUpDown">
-            <Setter Property="CornerRadius" Value="6" />
-            <Setter Property="MinHeight" Value="40" />
-        </Style>
-        <Style Selector="ComboBox">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-        </Style>
+        <Style Selector="TextBox"><Setter Property="SelectionForegroundBrush" Value="{DynamicResource AccentForeground}" /></Style>
+        <Style Selector="ComboBox"><Setter Property="HorizontalAlignment" Value="Stretch" /></Style>
     </Application.Styles>
 </Application>

@@ -9,6 +9,7 @@ public partial class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new());
     }
 
     public override void OnFrameworkInitializationCompleted()

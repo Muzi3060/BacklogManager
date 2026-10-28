@@ -42,3 +42,7 @@ TestResults/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Preferências pessoais de aparência
+/aparencia.preferencias.json
+/aparencia.preferencias.json.lock

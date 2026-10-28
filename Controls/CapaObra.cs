@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
 using Avalonia.VisualTree;
 
@@ -20,7 +21,6 @@ public sealed class CapaObra : UserControl
     private readonly TextBlock _padrao = new()
     {
         Text = "Sem capa",
-        Foreground = Brush.Parse("#BEBEC5"),
         FontSize = 12,
         HorizontalAlignment = HorizontalAlignment.Center,
         VerticalAlignment = VerticalAlignment.Center
@@ -30,13 +30,15 @@ public sealed class CapaObra : UserControl
 
     public CapaObra()
     {
-        Content = new Border
+        _padrao.Bind(TextBlock.ForegroundProperty, new DynamicResourceExtension("CardForeground"));
+        var fundo = new Border
         {
-            Background = Brush.Parse("#39343F"),
             ClipToBounds = true,
             CornerRadius = new CornerRadius(RaioCantos),
             Child = new Grid { Children = { _padrao, _imagem } }
         };
+        fundo.Bind(Border.BackgroundProperty, new DynamicResourceExtension("CardBackground"));
+        Content = fundo;
         // O raio do fundo não recorta a imagem filha: o controle também precisa de clip arredondado.
         SizeChanged += (_, _) => Clip = new RectangleGeometry(new Rect(Bounds.Size), RaioCantos, RaioCantos);
     }

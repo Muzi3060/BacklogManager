@@ -34,10 +34,10 @@ public partial class MainWindow : Window
     public MainWindow() : this(ComposicaoAplicativo.Criar()) { }
 
     private MainWindow(DependenciasJanela dependencias)
-        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes) { }
+        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes, aparencia: dependencias.Aparencia) { }
 
     internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null,
-        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null, ServicoColecoes? colecoes = null)
+        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null, ServicoColecoes? colecoes = null, BacklogManager.Aparencia.ServicoAparencia? aparencia = null)
     {
         _preferencias = preferencias ?? new ArmazenamentoPreferenciasBiblioteca();
         Capas = capas ?? new CarregadorCapas();
@@ -65,6 +65,7 @@ public partial class MainWindow : Window
             TxtFalhaColecoes.Text = $"Coleções não carregadas. O original foi preservado; alterações de coleções estão bloqueadas. Arquivo: {_colecoes.DescricaoOrigem}";
         }
 
+        InicializarAparencia(aparencia);
         _interfacePronta = true;
         CarregarVisualizacao();
         AtualizarFormularioMidia();
@@ -145,6 +146,9 @@ public partial class MainWindow : Window
         NavBacklog.Classes.Set("active", pagina == "backlog");
         NavCadastro.Classes.Set("active", pagina == "cadastro");
         NavColecoes.Classes.Set("active", pagina == "colecoes");
+        PaginaAparencia.IsVisible = pagina == "aparencia";
+        if (pagina == "aparencia") AbrirAparencia();
+        NavAparencia.Classes.Set("active", pagina == "aparencia");
     }
 
     private void NovoJogo_Click(object? sender, RoutedEventArgs e)

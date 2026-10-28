@@ -3,7 +3,7 @@
         xmlns:models="clr-namespace:BacklogManager.Models"
         xmlns:controls="clr-namespace:BacklogManager.Controls"
         x:Class="BacklogManager.MainWindow"
-        Title="Backlog Manager" Width="1120" Height="780"
+        Title="Minhas Realizações" Width="1120" Height="780"
         MinWidth="900" MinHeight="660" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <StreamGeometry x:Key="HomeIcon">M3,10 L12,3 21,10 M5,9 V21 H10 V15 H14 V21 H19 V9</StreamGeometry>
@@ -17,19 +17,19 @@
                 <Grid RowDefinitions="Auto,14,18,14,16,18,14,14,14" RowSpacing="2">
                     <controls:CapaObra Grid.Row="0" Width="160" Classes="capaGrade" Endereco="{Binding Catalogo.CapaUrl}" Preenchimento="UniformToFill" />
                     <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Height="14">
-                        <Border Classes="indicadorSelecao" Height="3" Background="{DynamicResource AccentBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <Border Classes="indicadorSelecao" Height="3" Background="{DynamicResource SelectionBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
                         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5">
-                            <TextBlock Classes="textoSelecao" Text="✓ Selecionado" FontSize="10" Foreground="{DynamicResource AccentBrush}" />
-                            <TextBlock Classes="textoFoco" Text="Foco" FontSize="10" Foreground="{DynamicResource AccentBrush}" />
+                            <TextBlock Classes="textoSelecao" Text="✓ Selecionado" FontSize="10" Foreground="{DynamicResource SelectionText}" />
+                            <TextBlock Classes="textoFoco" Text="Foco" FontSize="10" Foreground="{DynamicResource SelectionText}" />
                         </StackPanel>
                     </Grid>
                     <TextBlock Grid.Row="2" Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
                     <TextBlock Grid.Row="3" Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
-                    <TextBlock Grid.Row="4" Text="{Binding StatusExibido}" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding StatusExibido}" FontSize="12" Foreground="#C5A8EF" />
-                    <TextBlock Grid.Row="5" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" />
+                    <TextBlock Grid.Row="4" Text="{Binding StatusExibido}" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding StatusExibido}" FontSize="12" Classes="statusObra" />
+                    <TextBlock Grid.Row="5" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="{DynamicResource WarningOnCard}" />
                     <TextBlock Grid.Row="6" Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="11" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
                     <TextBlock Grid.Row="7" Text="{Binding Pessoal.Review}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Pessoal.Review}" />
-                    <TextBlock Grid.Row="8" Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="10" />
+                    <TextBlock Grid.Row="8" Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="{DynamicResource WarningOnCard}" FontSize="10" />
                 </Grid>
             </Border>
         </DataTemplate>
@@ -40,17 +40,18 @@
                     <StackPanel Grid.Column="1" Margin="12,0" Spacing="5">
                         <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
                         <TextBlock Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="{Binding StatusExibido}" Foreground="#C5A8EF" FontSize="12" />
-                        <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="11" />
+                        <TextBlock Text="{Binding StatusExibido}" Classes="statusObra" FontSize="12" />
+                        <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="{DynamicResource WarningOnCard}" FontSize="11" />
                         <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
                         <TextBlock Text="{Binding Pessoal.Review}" Classes="muted" FontSize="12" MaxLines="2" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Pessoal.Review}" />
                     </StackPanel>
-                    <TextBlock Grid.Column="2" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" />
+                    <TextBlock Grid.Column="2" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="{DynamicResource WarningOnCard}" />
                 </Grid>
             </Border>
         </DataTemplate>
     </Window.Resources>
     <Window.Styles>
+        <Style Selector="Border.sidebar TextBlock.muted, Border.sidebar TextBlock.sectionLabel"><Setter Property="Foreground" Value="{DynamicResource SidebarMuted}" /></Style>
         <Style Selector="Border.gameCard"><Setter Property="CornerRadius" Value="8" /></Style>
         <Style Selector="Border.recenteCard"><Setter Property="CornerRadius" Value="8" /></Style>
         <Style Selector="Border.gradeCard">
@@ -65,32 +66,34 @@
         <Style Selector="ListBox.obras ListBoxItem:selected TextBlock.textoSelecao"><Setter Property="IsVisible" Value="True" /></Style>
         <Style Selector="ListBox.obras ListBoxItem:focus-visible Border.indicadorSelecao"><Setter Property="IsVisible" Value="True" /></Style>
         <Style Selector="ListBox.obras ListBoxItem:focus-visible TextBlock.textoFoco"><Setter Property="IsVisible" Value="True" /></Style>
-        <Style Selector="ListBox.obras ListBoxItem:focus-visible Border.gameCard"><Setter Property="Background" Value="#35313D" /></Style>
+        <Style Selector="ListBox.obras ListBoxItem:focus-visible Border.gameCard"><Setter Property="Background" Value="{DynamicResource CardBackground}" /></Style>
         <Style Selector="controls|CapaObra.capaGrade"><Setter Property="Height" Value="174" /></Style>
         <Style Selector="Window.compact controls|CapaObra.capaGrade"><Setter Property="Height" Value="104" /></Style>
         <Style Selector="Button.navigation">
+            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="#BEBEC5" />
+            <Setter Property="Foreground" Value="{DynamicResource SidebarForeground}" />
             <Setter Property="Padding" Value="14,13" />
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
                         <ContentPresenter Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" />
                     </Border>
                 </ControlTemplate>
             </Setter>
         </Style>
         <Style Selector="Button.navigation:pointerover">
-            <Setter Property="Background" Value="#2A2A2A" />
+            <Setter Property="Foreground" Value="{DynamicResource SidebarHoverText}" /><Setter Property="Background" Value="{DynamicResource SidebarHover}" />
         </Style>
         <Style Selector="Button.navigation.active">
-            <Setter Property="Background" Value="#343038" />
-            <Setter Property="Foreground" Value="#C4A8F7" />
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
         </Style>
         <Style Selector="Button.navigation:focus-visible">
-            <Setter Property="Background" Value="#40384E" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SidebarBorder}" /><Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Background" Value="{DynamicResource SidebarBackground}" /><Setter Property="Foreground" Value="{DynamicResource SidebarForeground}" />
         </Style>
         <Style Selector="Button.recent">
             <Setter Property="Padding" Value="0" />
@@ -119,11 +122,11 @@
             <Setter Property="FocusAdorner" Value="{x:Null}" />
         </Style>
         <Style Selector="ListBox.obras ListBoxItem:pointerover Border.gameCard">
-            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SelectionBrush}" />
         </Style>
         <Style Selector="ListBox.obras ListBoxItem:selected Border.gameCard">
-            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
-            <Setter Property="Background" Value="#35313D" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SelectionBrush}" />
+            <Setter Property="Background" Value="{DynamicResource CardBackground}" />
         </Style>
         <!-- Os estados do tema têm precedência sobre valores definidos no template. -->
         <Style Selector="ListBox.obras ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
@@ -139,21 +142,23 @@
             <Setter Property="BorderThickness" Value="0" />
         </Style>
         <Style Selector="Border#AvisoOperacao">
-            <Setter Property="Background" Value="#223B31" />
-            <Setter Property="BorderBrush" Value="#42785E" />
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource SuccessBrush}" />
+            <Setter Property="Background" Value="{DynamicResource SuccessBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SuccessBrush}" />
         </Style>
         <Style Selector="Border#IconeAviso">
-            <Setter Property="Background" Value="#335848" />
+            <Setter Property="Background" Value="{DynamicResource SuccessBackground}" />
         </Style>
         <Style Selector="TextBlock#TxtIconeAviso">
             <Setter Property="Foreground" Value="{DynamicResource SuccessBrush}" />
         </Style>
         <Style Selector="Border#AvisoOperacao.erro">
-            <Setter Property="Background" Value="#41272D" />
-            <Setter Property="BorderBrush" Value="#99505D" />
+            <Setter Property="TextElement.Foreground" Value="{DynamicResource ErrorBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ErrorBackground}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ErrorBrush}" />
         </Style>
         <Style Selector="Border#AvisoOperacao.erro Border#IconeAviso">
-            <Setter Property="Background" Value="#683743" />
+            <Setter Property="Background" Value="{DynamicResource ErrorBackground}" />
         </Style>
         <Style Selector="Border#AvisoOperacao.erro TextBlock#TxtIconeAviso">
             <Setter Property="Foreground" Value="{DynamicResource ErrorBrush}" />
@@ -162,15 +167,14 @@
 
     <Grid ColumnDefinitions="202,*">
         <!-- A navegação permanece visível enquanto o conteúdo da página muda. -->
-        <Border Background="{DynamicResource SidebarBackground}" BorderBrush="#353535" BorderThickness="0,0,1,0">
+        <Border Classes="sidebar" TextElement.Foreground="{DynamicResource SidebarForeground}" Background="{DynamicResource SidebarBackground}" BorderBrush="{DynamicResource SidebarBorder}" BorderThickness="0,0,1,0">
             <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="12,0">
                 <Grid ColumnDefinitions="Auto,*" Margin="10,28,4,32">
-                    <Border Background="#3D304E" CornerRadius="9" Width="32" Height="32">
-                        <Path Data="{StaticResource GameIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.7" Width="21" Height="18" Stretch="Uniform" />
+                    <Border Background="{DynamicResource SidebarBackground}" CornerRadius="9" Width="32" Height="32">
+                        <Path Data="{StaticResource GameIcon}" Stroke="{DynamicResource PanelAccent}" StrokeThickness="1.7" Width="21" Height="18" Stretch="Uniform" />
                     </Border>
                     <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
-                        <TextBlock Text="Backlog" FontWeight="Bold" FontSize="16" />
-                        <TextBlock Text="MANAGER" FontSize="9" LetterSpacing="2" Classes="muted" />
+                        <TextBlock Text="Minhas Realizações" TextWrapping="Wrap" FontWeight="Bold" FontSize="16" />
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="1" Spacing="6">
@@ -185,7 +189,7 @@
                         <Grid ColumnDefinitions="Auto,*,Auto">
                             <Path Data="{StaticResource LibraryIcon}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1.6" Width="18" Height="18" Stretch="Uniform" />
                             <TextBlock Grid.Column="1" Text="Minha biblioteca" Margin="13,0,0,0" VerticalAlignment="Center" />
-                            <TextBlock Grid.Column="2" x:Name="TxtContagemNav" FontSize="11" VerticalAlignment="Center" Opacity="0.7" />
+                            <TextBlock Grid.Column="2" x:Name="TxtContagemNav" FontSize="11" VerticalAlignment="Center" />
                         </Grid>
                     </Button>
                     <Button x:Name="NavColecoes" Classes="navigation" Tag="colecoes" Click="Navegar_Click">
@@ -200,12 +204,13 @@
                             <TextBlock Text="Adicionar / editar" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
+                    <Button x:Name="NavAparencia" Classes="navigation" Tag="aparencia" Click="Navegar_Click" Content="Aparência" />
                 </StackPanel>
-                <Border Grid.Row="3" BorderBrush="#363636" BorderThickness="0,1,0,0" Padding="10,18" Margin="0,0,0,8">
+                <Border Grid.Row="3" BorderBrush="{DynamicResource SidebarBorder}" BorderThickness="0,1,0,0" Padding="10,18" Margin="0,0,0,8">
                     <StackPanel Spacing="7">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Ellipse Fill="{DynamicResource SuccessBrush}" Width="6" Height="6" VerticalAlignment="Center" />
-                            <TextBlock Text="Sua coleção, no seu ritmo" FontSize="11" />
+                            <TextBlock Text="Dados neste computador" FontSize="11" />
                         </StackPanel>
                         <TextBlock Text="Armazenamento local" Classes="muted" FontSize="10" Margin="14,0,0,0" />
                     </StackPanel>
@@ -230,7 +235,7 @@
                     </StackPanel>
                     <Button Grid.Column="2" Content="×" Click="FecharAviso_Click"
                             AutomationProperties.Name="Fechar aviso" ToolTip.Tip="Fechar aviso"
-                            Background="Transparent" FontSize="22" Padding="8,2"
+                            Foreground="{DynamicResource ControlForeground}" FontSize="22" Padding="8,2"
                             VerticalAlignment="Center" />
                 </Grid>
             </Border>
@@ -245,19 +250,19 @@
                         <Grid ColumnDefinitions="*,*,*">
                             <Border Classes="card" Margin="0,0,10,0">
                                 <StackPanel Spacing="8">
-                                    <TextBlock x:Name="TxtTotal" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" />
+                                    <TextBlock x:Name="TxtTotal" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" />
                                     <TextBlock Text="Obras na coleção" Classes="muted" />
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="1" Classes="card" Margin="0,0,10,0">
                                 <StackPanel Spacing="8">
-                                    <TextBlock x:Name="TxtJogando" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource SuccessBrush}" />
+                                    <TextBlock x:Name="TxtJogando" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource SuccessOnPanel}" />
                                     <TextBlock Text="Em andamento" Classes="muted" />
                                 </StackPanel>
                             </Border>
                             <Border Grid.Column="2" Classes="card">
                                 <StackPanel Spacing="8">
-                                    <TextBlock x:Name="TxtZerados" FontSize="32" FontWeight="Bold" Foreground="#E7BD78" />
+                                    <TextBlock x:Name="TxtZerados" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource WarningOnPanel}" />
                                     <TextBlock Text="Concluídas" Classes="muted" />
                                 </StackPanel>
                             </Border>
@@ -265,14 +270,14 @@
                         <Border Classes="card">
                             <StackPanel Spacing="18">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <TextBlock Text="Cada obra, uma história" FontSize="16" FontWeight="SemiBold" />
-                                    <TextBlock Grid.Column="1" x:Name="TxtProgresso" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
+                                    <TextBlock Text="Progresso da biblioteca" FontSize="16" FontWeight="SemiBold" />
+                                    <TextBlock Grid.Column="1" x:Name="TxtProgresso" Foreground="{DynamicResource PanelAccent}" FontWeight="SemiBold" />
                                 </Grid>
-                                <ProgressBar x:Name="ProgressoBacklog" Minimum="0" Maximum="100" Height="5" Foreground="{DynamicResource AccentBrush}" Background="#444148" />
+                                <ProgressBar x:Name="ProgressoBacklog" Minimum="0" Maximum="100" Height="5" Foreground="{DynamicResource SelectionBrush}" Background="{DynamicResource PanelBorder}" />
                                 <TextBlock x:Name="TxtResumo" Classes="muted" TextWrapping="Wrap" />
                                 <Border BorderBrush="{DynamicResource CardBorder}" BorderThickness="0,1,0,0" Padding="0,16,0,0">
                                     <Grid ColumnDefinitions="Auto,*,Auto">
-                                        <Path Data="{StaticResource PlusIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.6" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" />
+                                        <Path Data="{StaticResource PlusIcon}" Stroke="{DynamicResource PanelAccent}" StrokeThickness="1.6" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" />
                                         <StackPanel Grid.Column="1" Margin="14,0" Spacing="4" VerticalAlignment="Center">
                                             <TextBlock Text="Qual será sua próxima obra?" FontWeight="SemiBold" />
                                             <TextBlock Text="Adicione um título à sua coleção." Classes="muted" FontSize="12" />
@@ -285,7 +290,7 @@
                         <StackPanel Spacing="14">
                             <Grid ColumnDefinitions="*,Auto">
                                 <TextBlock Text="Adicionados recentemente" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                <Button Grid.Column="1" Content="Ver coleção  →" Background="Transparent" Foreground="{DynamicResource MutedForeground}" Tag="backlog" Click="Navegar_Click" Padding="4,6" />
+                                <Button Grid.Column="1" Content="Ver coleção  →" Foreground="{DynamicResource ButtonForeground}" Tag="backlog" Click="Navegar_Click" Padding="4,6" />
                             </Grid>
                             <ItemsControl x:Name="ListaRecentes">
                                 <ItemsControl.ItemsPanel>
@@ -301,7 +306,7 @@
                                                         <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                                         <Grid ColumnDefinitions="*,Auto">
                                                             <TextBlock Text="{Binding StatusExibido}" Classes="muted" FontSize="11" />
-                                                            <TextBlock Grid.Column="1" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontSize="11" />
+                                                            <TextBlock Grid.Column="1" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="{DynamicResource WarningOnCard}" FontSize="11" />
                                                         </Grid>
                                                     </StackPanel>
                                                 </StackPanel>
@@ -385,19 +390,19 @@
                                 </WrapPanel>
                             </ScrollViewer>
                         </Expander>
-                        <TextBlock x:Name="TxtErroFiltros" IsVisible="False" TextWrapping="Wrap" Foreground="#E7BD78" FontSize="11" />
+                        <TextBlock x:Name="TxtErroFiltros" IsVisible="False" TextWrapping="Wrap" Foreground="{DynamicResource WarningOnPage}" FontSize="11" />
                     </StackPanel>
                     <Grid Grid.Row="3">
                         <ListBox x:Name="ListaBacklog" Classes="obras" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListaBacklog_SelectionChanged">
 
                         </ListBox>
                         <StackPanel x:Name="EstadoListaVazia" IsVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="12" Margin="20">
-                            <Path Data="{StaticResource LibraryIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.4" Width="32" Height="32" Stretch="Uniform" Margin="0,0,0,4" />
+                            <Path Data="{StaticResource LibraryIcon}" Stroke="{DynamicResource PanelAccent}" StrokeThickness="1.4" Width="32" Height="32" Stretch="Uniform" Margin="0,0,0,4" />
                             <TextBlock x:Name="TxtListaVazia" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" />
                             <TextBlock x:Name="TxtDicaListaVazia" Classes="muted" TextWrapping="Wrap" TextAlignment="Center" />
                         </StackPanel>
                     </Grid>
-                    <Border Grid.Row="4" BorderBrush="#3C3C3C" BorderThickness="0,1,0,0" Padding="0,16,0,0" Margin="0,12,0,0">
+                    <Border Grid.Row="4" BorderBrush="{DynamicResource PageBorder}" BorderThickness="0,1,0,0" Padding="0,16,0,0" Margin="0,12,0,0">
                         <Grid ColumnDefinitions="*,Auto,Auto">
                             <TextBlock x:Name="TxtContagemLista" Classes="muted" FontSize="12"
                                        VerticalAlignment="Center" Margin="0,0,12,0" />
@@ -413,7 +418,7 @@
                         <TextBlock Text="Minhas coleções" Classes="pageTitle" />
                         <TextBlock Text="Organize obras de qualquer mídia. Uma obra pode participar de várias coleções." Classes="muted" TextWrapping="Wrap" />
                         <Border x:Name="AvisoColecoesIndisponiveis" IsVisible="False" Classes="card">
-                            <TextBlock x:Name="TxtFalhaColecoes" TextWrapping="Wrap" Foreground="{DynamicResource ErrorBrush}" />
+                            <TextBlock x:Name="TxtFalhaColecoes" TextWrapping="Wrap" Foreground="{DynamicResource ErrorOnPanel}" />
                         </Border>
                         <TextBlock Text="Coleção" FontWeight="SemiBold" />
                         <ComboBox x:Name="CmbColecoes" SelectionChanged="Colecao_Changed" PlaceholderText="Crie ou selecione uma coleção">
@@ -448,7 +453,7 @@
                                             <StackPanel Orientation="Horizontal" Spacing="8">
                                                 <TextBlock Text="{Binding Catalogo.Tipo}" Classes="muted" FontSize="11" />
                                                 <TextBlock Text="{Binding StatusExibido}" Classes="muted" FontSize="11" />
-                                                <TextBlock Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontSize="11" />
+                                                <TextBlock Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Classes="avisoPainel" FontSize="11" />
                                             </StackPanel>
                                         </StackPanel>
                                     </DataTemplate>
@@ -463,6 +468,45 @@
                             <Button x:Name="BtnEditarObraColecao" Content="Editar dados pessoais" Click="EditarObraColecao_Click" Margin="0,0,8,12" />
                             <Button x:Name="BtnRemoverObraColecao" Content="Remover da coleção" Click="RemoverObraColecao_Click" Margin="0,0,0,12" />
                         </WrapPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <ScrollViewer x:Name="PaginaAparencia" IsVisible="False" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Spacing="16" MaxWidth="{Binding #PaginaAparencia.Viewport.Width}" Margin="0,0,16,0">
+                        <TextBlock Text="Aparência" Classes="pageTitle" />
+                        <TextBlock Text="As escolhas válidas são aplicadas e salvas automaticamente. Cada tema e modo guarda suas próprias cores." Classes="muted" TextWrapping="Wrap" />
+                        <WrapPanel>
+                            <StackPanel Width="220" Margin="0,0,12,12" Spacing="6">
+                                <TextBlock Text="Tema" />
+                                <ComboBox x:Name="CmbTema" SelectionChanged="TemaAparencia_Changed" AutomationProperties.Name="Tema visual">
+                                    <ComboBoxItem Content="Moderno" /><ComboBoxItem Content="Tecnológico" /><ComboBoxItem Content="Acolhedor" />
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Width="180" Margin="0,0,0,12" Spacing="6">
+                                <TextBlock Text="Modo" />
+                                <ComboBox x:Name="CmbModo" SelectionChanged="TemaAparencia_Changed" AutomationProperties.Name="Modo claro ou escuro">
+                                    <ComboBoxItem Content="Claro" /><ComboBoxItem Content="Escuro" />
+                                </ComboBox>
+                            </StackPanel>
+                        </WrapPanel>
+                        <TextBlock x:Name="TxtEstadoAparencia" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                        <Button x:Name="BtnRepetirSalvarAparencia" Content="Tentar salvar novamente" IsVisible="False" Click="RepetirSalvarAparencia_Click" />
+                        <WrapPanel>
+                            <Button x:Name="BtnRestaurarCores" Content="Restaurar cores deste tema e modo" Click="RestaurarCores_Click" Margin="0,0,10,10" />
+                            <Button x:Name="BtnRestaurarAparencia" Content="Restaurar toda a aparência" Click="PedirRestauracao_Click" Margin="0,0,0,10" />
+                        </WrapPanel>
+                        <Border x:Name="ConfirmacaoRestaurarAparencia" Classes="card" IsVisible="False">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Restaurar Moderno claro e apagar as cores personalizadas dos seis conjuntos? Biblioteca, coleções e outras configurações serão preservadas." TextWrapping="Wrap" />
+                                <WrapPanel>
+                                    <Button x:Name="BtnConfirmarRestaurarAparencia" Content="Confirmar restauração" Click="ConfirmarRestauracao_Click" Margin="0,0,10,0" />
+                                    <Button x:Name="BtnCancelarRestaurarAparencia" Content="Cancelar" Click="CancelarRestauracao_Click" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+                        <TextBlock Text="Cores por elemento" FontSize="18" FontWeight="SemiBold" />
+                        <TextBlock Text="Escolha uma amostra ou digite #RRGGBB, como #3366CC. Ajustes de contraste mantêm a leitura e preservam a cor que você escolheu." Classes="muted" TextWrapping="Wrap" />
+                        <WrapPanel x:Name="EditoresCores" />
                     </StackPanel>
                 </ScrollViewer>
 
@@ -487,7 +531,7 @@
                             <ComboBoxItem Content="Livros" Tag="Livro" />
                         </ComboBox>
                                 </StackPanel>
-                                <Border x:Name="AvisoCatalogoSimulado" IsVisible="False" Background="#40344E" CornerRadius="6" Padding="12">
+                                <Border x:Name="AvisoCatalogoSimulado" IsVisible="False" TextElement.Foreground="{DynamicResource WarningBrush}" Background="{DynamicResource WarningBackground}" CornerRadius="6" Padding="12">
                                     <TextBlock Text="Catálogo de demonstração: os resultados desta categoria são simulados." TextWrapping="Wrap" />
                                 </Border>
                                 <StackPanel Spacing="8">
@@ -501,7 +545,7 @@
                                                     <StackPanel Grid.Column="1" Spacing="3" Margin="10,0,0,0" VerticalAlignment="Center">
                                                         <TextBlock Text="{Binding Titulo}" TextTrimming="CharacterEllipsis" />
                                                         <TextBlock Text="{Binding GenerosTexto}" Classes="muted" FontSize="11" TextTrimming="CharacterEllipsis" />
-                                                        <TextBlock Text="Dados simulados" IsVisible="{Binding Simulado}" Foreground="#E7BD78" FontSize="11" />
+                                                        <TextBlock Text="Dados simulados" IsVisible="{Binding Simulado}" Classes="avisoPainel" FontSize="11" />
                                                     </StackPanel>
                                                 </Grid>
                                             </DataTemplate>
