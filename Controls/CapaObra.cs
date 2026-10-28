@@ -11,6 +11,7 @@ namespace BacklogManager.Controls;
 
 public sealed class CapaObra : UserControl
 {
+    internal const double RaioCantos = 8;
     public static readonly StyledProperty<string?> EnderecoProperty = AvaloniaProperty.Register<CapaObra, string?>(nameof(Endereco));
     public string? Endereco { get => GetValue(EnderecoProperty); set => SetValue(EnderecoProperty, value); }
     public static readonly StyledProperty<Stretch> PreenchimentoProperty = AvaloniaProperty.Register<CapaObra, Stretch>(nameof(Preenchimento), Stretch.Uniform);
@@ -33,9 +34,11 @@ public sealed class CapaObra : UserControl
         {
             Background = Brush.Parse("#39343F"),
             ClipToBounds = true,
-            CornerRadius = new CornerRadius(5),
+            CornerRadius = new CornerRadius(RaioCantos),
             Child = new Grid { Children = { _padrao, _imagem } }
         };
+        // O raio do fundo não recorta a imagem filha: o controle também precisa de clip arredondado.
+        SizeChanged += (_, _) => Clip = new RectangleGeometry(new Rect(Bounds.Size), RaioCantos, RaioCantos);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

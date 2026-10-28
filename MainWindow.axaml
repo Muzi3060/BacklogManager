@@ -14,23 +14,23 @@
         <StreamGeometry x:Key="ArrowIcon">M4,12 H20 M14,6 L20,12 14,18</StreamGeometry>
         <DataTemplate x:Key="TemplateGrade" DataType="models:ItemBiblioteca">
             <Border Classes="card gameCard gradeCard" Width="180" Padding="10" Margin="0,0,10,0">
-                <StackPanel Spacing="5">
-                    <controls:CapaObra Classes="capaGrade" Endereco="{Binding Catalogo.CapaUrl}" Preenchimento="UniformToFill" />
-                    <Grid ColumnDefinitions="*,Auto" Height="14">
+                <Grid RowDefinitions="Auto,14,18,14,16,18,14,14,14" RowSpacing="2">
+                    <controls:CapaObra Grid.Row="0" Width="160" Classes="capaGrade" Endereco="{Binding Catalogo.CapaUrl}" Preenchimento="UniformToFill" />
+                    <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Height="14">
                         <Border Classes="indicadorSelecao" Height="3" Background="{DynamicResource AccentBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
                         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5">
                             <TextBlock Classes="textoSelecao" Text="✓ Selecionado" FontSize="10" Foreground="{DynamicResource AccentBrush}" />
                             <TextBlock Classes="textoFoco" Text="Foco" FontSize="10" Foreground="{DynamicResource AccentBrush}" />
                         </StackPanel>
                     </Grid>
-                    <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
-                    <TextBlock Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
-                    <TextBlock Text="{Binding StatusExibido}" FontSize="12" Foreground="#C5A8EF" />
-                    <TextBlock Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" />
-                    <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="11" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
-                    <TextBlock Text="{Binding Pessoal.Review}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Pessoal.Review}" />
-                    <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="10" />
-                </StackPanel>
+                    <TextBlock Grid.Row="2" Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
+                    <TextBlock Grid.Row="3" Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Grid.Row="4" Text="{Binding StatusExibido}" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding StatusExibido}" FontSize="12" Foreground="#C5A8EF" />
+                    <TextBlock Grid.Row="5" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" />
+                    <TextBlock Grid.Row="6" Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="11" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
+                    <TextBlock Grid.Row="7" Text="{Binding Pessoal.Review}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Pessoal.Review}" />
+                    <TextBlock Grid.Row="8" Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="10" />
+                </Grid>
             </Border>
         </DataTemplate>
         <DataTemplate x:Key="TemplateLista" DataType="models:ItemBiblioteca">
@@ -51,9 +51,11 @@
         </DataTemplate>
     </Window.Resources>
     <Window.Styles>
+        <Style Selector="Border.gameCard"><Setter Property="CornerRadius" Value="8" /></Style>
+        <Style Selector="Border.recenteCard"><Setter Property="CornerRadius" Value="8" /></Style>
         <Style Selector="Border.gradeCard">
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="CornerRadius" Value="8" />
             <Setter Property="VerticalAlignment" Value="Top" />
         </Style>
         <Style Selector="Border.indicadorSelecao"><Setter Property="IsVisible" Value="False" /></Style>
@@ -286,11 +288,9 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate DataType="models:ItemBiblioteca">
                                         <Button Classes="recent" Tag="{Binding}" Click="Recente_Click" Margin="0,0,10,0" ToolTip.Tip="Abrir esta obra para editar">
-                                            <Border Classes="card" Padding="0" ClipToBounds="True">
+                                            <Border Classes="card recenteCard" Padding="0" ClipToBounds="True">
                                                 <StackPanel>
-                                                    <Border Height="72" Background="#39313F">
-                                                        <Path Data="{StaticResource GameIcon}" Stroke="#AC8CD1" StrokeThickness="1.2" Width="48" Height="35" Stretch="Uniform" Opacity="0.7" />
-                                                    </Border>
+                                                    <controls:CapaObra Classes="capaRecente" Endereco="{Binding Catalogo.CapaUrl}" Height="72" Preenchimento="UniformToFill" />
                                                     <StackPanel Margin="14,12" Spacing="7">
                                                         <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
                                                         <Grid ColumnDefinitions="*,Auto">
