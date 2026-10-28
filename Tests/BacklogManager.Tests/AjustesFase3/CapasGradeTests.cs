@@ -51,7 +51,7 @@ public sealed class CapasGradeTests
         using var antes = t.Janela.CaptureRenderedFrame(); Assert.NotNull(antes); var pos = Capa(t).TranslatePoint(new Point(40, 40), t.Janela)!.Value;
         var bytesAntes = Pixel(antes, pos);
         Hover(t); using var depois = t.Janela.CaptureRenderedFrame(); Assert.NotNull(depois); var bytesDepois = Pixel(depois, pos); Assert.Equal(bytesAntes, bytesDepois);
-        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-revisao2-resultados", "imagens"); Directory.CreateDirectory(pasta); antes.Save(Path.Combine(pasta, "grade-sem-hover.png"), PngBitmapEncoderOptions.Default); depois.Save(Path.Combine(pasta, "grade-hover.png"), PngBitmapEncoderOptions.Default);
+        var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-revisao3-resultados", "imagens"); Directory.CreateDirectory(pasta); antes.Save(Path.Combine(pasta, "grade-sem-hover.png"), PngBitmapEncoderOptions.Default); depois.Save(Path.Combine(pasta, "grade-hover.png"), PngBitmapEncoderOptions.Default);
     }
     private static byte[] Pixel(Bitmap imagem, Point ponto)
     {

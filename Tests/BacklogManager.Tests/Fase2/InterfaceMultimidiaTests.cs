@@ -115,7 +115,7 @@ public sealed class InterfaceMultimidiaTests
     public async Task Renderizar()
     {
         using var t = new TelaTeste(Enum.GetValues<TipoMidia>().Select(tipo => ConversorBibliotecaJson.ParaRegistro(Item(tipo))), semServico: true);
-        t.Janela.Width = 900; t.Janela.Height = 660; var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-revisao2-resultados", "imagens"); Directory.CreateDirectory(pasta);
+        t.Janela.Width = 900; t.Janela.Height = 660; var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-revisao3-resultados", "imagens"); Directory.CreateDirectory(pasta);
         foreach (var tipo in Enum.GetValues<TipoMidia>())
         {
             TipoBiblioteca(t, tipo); t.Clicar("NavBacklog"); Dispatcher.UIThread.RunJobs(); t.Janela.UpdateLayout();

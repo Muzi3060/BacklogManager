@@ -25,8 +25,8 @@ public sealed class GradeRefinadaTests
     private static ListBoxItem Item(TelaTeste t) => t.Campo<ListBox>("ListaBacklog").GetVisualDescendants().OfType<ListBoxItem>().First();
     private static Border Cartao(TelaTeste t) => Item(t).GetVisualDescendants().OfType<Border>().First(b => b.Classes.Contains("gradeCard"));
     private static TextBlock Selecao(TelaTeste t) => Item(t).GetVisualDescendants().OfType<TextBlock>().First(b => b.Classes.Contains("textoSelecao"));
-    [AvaloniaFact(DisplayName = "CG01 | Grade sem hover | Cartão não tem traço externo ou cantos arredondados")]
-    public void SemContorno() { using var t = Tela(); Assert.Equal(new Thickness(0), Cartao(t).BorderThickness); Assert.Equal(new CornerRadius(0), Cartao(t).CornerRadius); }
+    [AvaloniaFact(DisplayName = "CG01 | Grade sem hover | Cartão mantém cantos discretos sem traço externo")]
+    public void SemContorno() { using var t = Tela(); Assert.Equal(new Thickness(0), Cartao(t).BorderThickness); Assert.Equal(new CornerRadius(8), Cartao(t).CornerRadius); }
     [AvaloniaFact(DisplayName = "CG02 | Hover real na grade | Contorno continua ausente")]
     public void Hover() { using var t = Tela(); t.Janela.MouseMove(Item(t).TranslatePoint(new Point(20, 20), t.Janela)!.Value, RawInputModifiers.None); Renderizar(t); Assert.True(Item(t).IsPointerOver); Assert.Equal(new Thickness(0), Cartao(t).BorderThickness); }
     [AvaloniaFact(DisplayName = "CG03 | Selecionar cartão | Marca interna e texto indicam seleção sem contorno")]
@@ -41,14 +41,14 @@ public sealed class GradeRefinadaTests
     public void Altura() { using var t = Tela(); Assert.True(double.IsNaN(Cartao(t).Height)); Assert.True(Cartao(t).Bounds.Height < 352); Assert.True(Cartao(t).Bounds.Height > 174); }
     [AvaloniaFact(DisplayName = "CG08 | Janela mínima | Cartão compacto também usa altura de conteúdo")]
     public void Compacto() { using var t = Tela(); t.Janela.Width = 900; t.Janela.Height = 660; Renderizar(t); Assert.True(double.IsNaN(Cartao(t).Height)); Assert.True(Cartao(t).Bounds.Height < 270); Assert.Equal(new Thickness(0), Cartao(t).BorderThickness); }
-    [AvaloniaFact(DisplayName = "CG09 | Cartão com progresso | Conteúdo adicional aumenta altura apenas pelo espaço necessário")]
-    public void Conteudo() { using var comum = Tela(); var altura = Cartao(comum).Bounds.Height; using var completo = Tela(true); Assert.True(Cartao(completo).Bounds.Height > altura); Assert.Contains(Cartao(completo).GetVisualDescendants().OfType<TextBlock>(), b => b.Text != null && b.Text.Contains("Página 10")); }
+    [AvaloniaFact(DisplayName = "CG09 | Cartão com progresso | Altura permanece igual aos cartões sem progresso")]
+    public void Conteudo() { using var comum = Tela(); var altura = Cartao(comum).Bounds.Height; using var completo = Tela(true); Assert.Equal(altura, Cartao(completo).Bounds.Height); Assert.Contains(Cartao(completo).GetVisualDescendants().OfType<TextBlock>(), b => b.Text != null && b.Text.Contains("Página 10")); }
     [AvaloniaFact(DisplayName = "CG10 | Seleção e foco juntos | Ações de edição continuam habilitadas e ID não muda")]
     public void Acoes() { using var t = Tela(); t.Campo<ListBox>("ListaBacklog").SelectedIndex = 0; Item(t).Focus(NavigationMethod.Tab); Assert.True(t.Campo<Button>("BtnEditar").IsEnabled); Assert.True(t.Campo<Button>("BtnRemover").IsEnabled); t.Clicar("BtnEditar"); Assert.Equal((int)TipoMidia.Livro, t.Campo<ComboBox>("CmbTipoCadastro").SelectedIndex); }
     [AvaloniaFact(DisplayName = "CG11 | Trocar visualização com seleção | Seleção permanece ao retornar à grade sem contorno")]
     public void Trocar() { using var t = Tela(); var lista = t.Campo<ListBox>("ListaBacklog"); lista.SelectedIndex = 0; var item = lista.SelectedItem; t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex = 1; t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex = 0; Renderizar(t); Assert.Same(item, lista.SelectedItem); Assert.True(Selecao(t).IsVisible); Assert.Equal(new Thickness(0), Cartao(t).BorderThickness); }
     [AvaloniaFact(DisplayName = "CG12 | Captura de grade selecionada no mínimo | Marca interna e conteúdo renderizam sem contorno externo")]
-    public void Captura() { using var t = Tela(true); t.Janela.Width = 900; t.Janela.Height = 660; t.Campo<ListBox>("ListaBacklog").SelectedIndex = 0; Item(t).Focus(NavigationMethod.Tab); Renderizar(t); using var imagem = t.Janela.CaptureRenderedFrame(); Assert.NotNull(imagem); var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-revisao2-resultados", "imagens"); Directory.CreateDirectory(pasta); imagem.Save(Path.Combine(pasta, "grade-selecionada-foco.png"), PngBitmapEncoderOptions.Default); }
+    public void Captura() { using var t = Tela(true); t.Janela.Width = 900; t.Janela.Height = 660; t.Campo<ListBox>("ListaBacklog").SelectedIndex = 0; Item(t).Focus(NavigationMethod.Tab); Renderizar(t); using var imagem = t.Janela.CaptureRenderedFrame(); Assert.NotNull(imagem); var pasta = Path.Combine(Path.GetTempPath(), "backlogmanager-revisao3-resultados", "imagens"); Directory.CreateDirectory(pasta); imagem.Save(Path.Combine(pasta, "grade-selecionada-foco.png"), PngBitmapEncoderOptions.Default); }
     private static byte[] Pixel(Bitmap imagem, Point p)
     {
         var memoria = System.Runtime.InteropServices.Marshal.AllocHGlobal(4);
