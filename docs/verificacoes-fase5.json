@@ -1,0 +1,968 @@
+{
+  "branch": "feat/identidade-visual",
+  "base": "807638a",
+  "verificadoEm": "2026-10-28T21:40:36.343464+00:00",
+  "integracaoFase4": {
+    "tipo": "fast-forward",
+    "de": "8c9d147",
+    "para": "807638a",
+    "arvoresMainEColecoesIguais": true
+  },
+  "dados": {
+    "${PROJETO}/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    }
+  },
+  "backupExterno": {
+    "pasta": "${HOME}/Backups/BacklogManager/fase5-20261028-180111",
+    "verificado": true
+  },
+  "arquivosIntocados": {
+    "Assets/CapasSimuladas/Anime.svg": {
+      "sha256": "624d71277c96f1a997713cdd81b76e599d25609bd25c52c6e2529fdfa27f6faf",
+      "preservado": true
+    },
+    "Assets/CapasSimuladas/Filme.svg": {
+      "sha256": "27ef9a169541019425416404b1a4157021cfeee87cd5cbe6822806e89e44fe6f",
+      "preservado": true
+    },
+    "Assets/CapasSimuladas/Livro.svg": {
+      "sha256": "ca86c4f878a22b704a749496a9dad02892e6bf909240fbf583727d63a7a8542c",
+      "preservado": true
+    },
+    "Assets/CapasSimuladas/Manga.svg": {
+      "sha256": "163583cd596041643c2e4463a9e0b3214e3afd9d3ed41460b2629cad5f42a750",
+      "preservado": true
+    },
+    "Assets/CapasSimuladas/Serie.svg": {
+      "sha256": "fa0b078da2934147de98a39d6efa1dfb60db0f108727338636862f708103ea60",
+      "preservado": true
+    },
+    "BacklogManager.slnx": {
+      "sha256": "bad34dccb6b28b6c9b330cf465ee857ec1e276bebb704ee4daec9b3154dd07b0",
+      "preservado": true
+    },
+    "Contracts/IArmazenamentoBiblioteca.cs": {
+      "sha256": "18f6812a02f13866c240b75e035689e4b00da8cd1c4eabfab069b034e0497eb6",
+      "preservado": true
+    },
+    "Contracts/IArmazenamentoColecoes.cs": {
+      "sha256": "b08038fc8e4545aa03e5072e3e55eacc33a5616e21db5a7e02c678ec586df995",
+      "preservado": true
+    },
+    "Contracts/IPesquisaCatalogo.cs": {
+      "sha256": "1f73c2bf3efbd60f7f0c6ada2715a79498c8f8e5bd209d52d24cff9e3699ef73",
+      "preservado": true
+    },
+    "Contrato.md": {
+      "sha256": "cc521ad94ddb75c7011e0a375e3dd3bf1d6a06145418003c32f91aedccfd222a",
+      "preservado": true
+    },
+    "Controls/PosicaoNumerica.cs": {
+      "sha256": "a169fae52598acad546559e67862354b4f2d315eb78facc4b60ce269aa5ac193",
+      "preservado": true
+    },
+    "Data/ArmazenamentoColecoesJson.cs": {
+      "sha256": "fd739e2ac23589c8a0fed4daa17daec49343707e9662f50a0d410cb322ad9d09",
+      "preservado": true
+    },
+    "Data/ArmazenamentoJsonBiblioteca.cs": {
+      "sha256": "c04811ae6eee438dfbb4614c233c63a2f41f20ef6559a7b7c1dfaea2fdc58481",
+      "preservado": true
+    },
+    "Data/ArmazenamentoPreferenciasBiblioteca.cs": {
+      "sha256": "15b237080eb39bba3e62951c9f0a80625c55ceaa5dbb2c3c145582a45676cfbd",
+      "preservado": true
+    },
+    "Data/ConversorBibliotecaJson.cs": {
+      "sha256": "9cfbb6ff83445167f6f3e0124bacc6d13b03903b116c87e73d49f9a83bacace4",
+      "preservado": true
+    },
+    "Data/FileManager.cs": {
+      "sha256": "e8a442e5731a7d518b317eaf422ca96107d232bbdd5e67db9573a5b78612e1df",
+      "preservado": true
+    },
+    "FASE5_INSTRUCOES.md": {
+      "sha256": "05d030374e8edd053cc45756527ffbffeb1d87968062aef7d6efcc31326ceaea",
+      "preservado": true
+    },
+    "MainWindow.AjustesBiblioteca.cs": {
+      "sha256": "a0ff50a75011daaf34f12a3342d7cafed3711b0e6c8b32994a5d86ca134d349a",
+      "preservado": true
+    },
+    "MainWindow.Biblioteca.cs": {
+      "sha256": "830f455b96c0972fc458e569bb691f24dedd61d1a056dfe8ab9c57bbe5fb6d2e",
+      "preservado": true
+    },
+    "MainWindow.Colecoes.cs": {
+      "sha256": "7986e8d95e3a29272113eeddc4c630894bcc0b9f25b6fe4a5e4ece9cfc726acd",
+      "preservado": true
+    },
+    "MainWindow.Multimidia.cs": {
+      "sha256": "7dd516cc1bd28aabbc7748f13399973deb954d8cbf58bb0975f51efc2977e11b",
+      "preservado": true
+    },
+    "Models/BacklogItem.cs": {
+      "sha256": "4cb7a6be4dc9dc50d620507df46172cc18251732c4fa84c4f71d1442114795b5",
+      "preservado": true
+    },
+    "Models/ColecaoPersonalizada.cs": {
+      "sha256": "639defd91564882b2078b16ac2100edf3c201c1172faf73d74f6e45554590ebf",
+      "preservado": true
+    },
+    "Models/ConsultaBiblioteca.cs": {
+      "sha256": "184f8d2d55f02a1097c237eb00219a5c2734c7a00c268c5ecbde726bc21424e9",
+      "preservado": true
+    },
+    "Models/DadosMultimidiaJson.cs": {
+      "sha256": "876f84669120fab9ca0283f284de836ae54287fcdc3bf760d8e49c759537a808",
+      "preservado": true
+    },
+    "Models/DadosPessoaisBiblioteca.cs": {
+      "sha256": "6548b5252e82650ce197ef2b66b2f532447fa21a8e81501d6c033991abf52dc9",
+      "preservado": true
+    },
+    "Models/IgdbGame.cs": {
+      "sha256": "76b0fd3023178fd87c508b402d2c31c7b7bb001b6a651d4a275f89fd671fd07a",
+      "preservado": true
+    },
+    "Models/ItemBiblioteca.cs": {
+      "sha256": "773cace88ed8ca51db8bd70934bbe4123f576648edb58ee275435ccd65e4d1d2",
+      "preservado": true
+    },
+    "Models/ObraCatalogo.cs": {
+      "sha256": "9160684e483b00dfd683e3bae4eba56d2e246955a3245da6443a8d815ac5f645",
+      "preservado": true
+    },
+    "Models/ProgressoPessoal.cs": {
+      "sha256": "3c7faa50549b052404e9c64f42b41b083fea476f2d98b6f1e651bbd7ef87ee4f",
+      "preservado": true
+    },
+    "Models/TextosMidia.cs": {
+      "sha256": "4af83994c4dab7b3b0e374996a2cecef1ac9a61acda8e55c83a6bcd827c84967",
+      "preservado": true
+    },
+    "Models/TipoMidia.cs": {
+      "sha256": "a1877cc7f892902265670ee75806a6582289c55c0142dd27c0cd12fc94d5e889",
+      "preservado": true
+    },
+    "Program.cs": {
+      "sha256": "1aa494d62aa6e2ccbbbf63876d0c7d73af67e64d49efbeba42f53bedcab01090",
+      "preservado": true
+    },
+    "Properties/AssemblyInfo.cs": {
+      "sha256": "41933d52e0470f556be1ac6e8dac0f717b4be98e6b5b4eda4566a0aac774fc0b",
+      "preservado": true
+    },
+    "Services/CarregadorCapas.cs": {
+      "sha256": "2ad0288c9b01f01288b173e54db2ec1f552fb2d829b8b907af491e2f3eb80952",
+      "preservado": true
+    },
+    "Services/CatalogoSimulado.cs": {
+      "sha256": "ba49529c3d9dec069e7f5022eb93d35eb70dbaaef137c633a62d0c7e6d6b69a8",
+      "preservado": true
+    },
+    "Services/ConfiguracaoIgdb.cs": {
+      "sha256": "7c200201618885d16dad8f69a72676601c5edaa9a562914f13c885505c34d986",
+      "preservado": true
+    },
+    "Services/FormularioJogo.cs": {
+      "sha256": "d9aaec68858c6f1c54f97098712f6356c37da0879113c40d49f308528644d724",
+      "preservado": true
+    },
+    "Services/FormularioObra.cs": {
+      "sha256": "8996e2711d4e34673a50bd7d171b7d478103285c714875a3f65f46979be717a8",
+      "preservado": true
+    },
+    "Services/IgdbService.cs": {
+      "sha256": "2a9e012f223de94f6144f1e2e90da883ca126c5724aaaaa96b335a4c37f48b84",
+      "preservado": true
+    },
+    "Services/PesquisaJogosIgdb.cs": {
+      "sha256": "1a8d434b7e0fc13336dec023c9c52cd2a7fc5906dbbd9ba118ce4b4ccf10fa3d",
+      "preservado": true
+    },
+    "Services/RoteadorPesquisaCatalogo.cs": {
+      "sha256": "cf04c31a71853a855779b81061e5d0cb3a2fc78e0e6eda5649bd018adfd46b30",
+      "preservado": true
+    },
+    "Services/ServicoBiblioteca.cs": {
+      "sha256": "00625d0fbe71ea40a7c503331ac206848f165d80709b924052ec618c68861fce",
+      "preservado": true
+    },
+    "Services/ServicoColecoes.cs": {
+      "sha256": "2b7bd6285e24acca1eaa13dcb4a3e3a41dfb16048b3468b119f3dcfcfdd52ee5",
+      "preservado": true
+    },
+    "Services/SteamCatalogService.cs": {
+      "sha256": "827d2fc8eeb5dca297d47754178067009004b9bb0e234611f789ff6e8877b440",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/CadastroIgdbTests.cs": {
+      "sha256": "0b40b6f31baec020caab5ada59f5cef22f48a11bf27cb181e13922aa8ff03623",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/CapasGradeTests.cs": {
+      "sha256": "e9678c0b07c94c3b373580a4bb72fa9bc7fc4ca286c86ebf2d20806975b9b2bc",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/ComandosTests.cs": {
+      "sha256": "13175ceac731b776f7254cb2409c50f6ff7616f197caa89ce705d41838d659c6",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/GenerosLegadosTests.cs": {
+      "sha256": "68738068cf4ab47c2398cafbbe64c7332fb70d79cb3a521637430afa8a16e6ab",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/OfflineTests.cs": {
+      "sha256": "6ba92b62adea7d1b770fb65df3d3eff46f1620297641b33e5ff2afb08e9a6e6b",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/PosicoesJanelaTests.cs": {
+      "sha256": "83c548b688bba85f88735719e341e0e4daa2a487f6d0a889cdf543d672dda923",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/PosicoesTests.cs": {
+      "sha256": "91b7d6632b556b2cb6e0aaa247870245fb08215ff34f1a6285158fc91dac780d",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/AjustesFase3/TitulosTests.cs": {
+      "sha256": "84cec65dd5dd2cc981e13b0d44bb9bbd9564166ccba6c7fa4194eb9c081fb053",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Apoio.cs": {
+      "sha256": "e7cbc344c64f91c8f84f51d6d97ef1ffef0b1bcac4e51844afc3543cba6ebce6",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/BacklogManager.Tests.csproj": {
+      "sha256": "069980da956536eaaf83ca22b8b221c91e458017812535a2d69b1b60983d23e6",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/BuscaJanelaTests.cs": {
+      "sha256": "bdeec6cb7e20ccda11b14fddd28f54edce7a39f1eec94f4dba397e01fbd2fe3d",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/ConfiguracaoTests.cs": {
+      "sha256": "2c3ab2681270489ff9998b4a61c36e1ea6faad2d06431fb476f84f61bb741cf9",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/ApoioArquitetura.cs": {
+      "sha256": "1f8f5c40d1a35809e0e640fdf5db8d6ecbf1bb9628119631f7c57f2bf4f5861d",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/ArmazenamentoJsonTests.cs": {
+      "sha256": "b4c8f972f01f16e623ac2ad547dd74ddd79b071c32fdab940e2da22f67454588",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/ComposicaoTests.cs": {
+      "sha256": "29d51e5200c24896e573e102771537f6588cb737fa6b860d8b9231b73dbc60e2",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/ConsultasBibliotecaTests.cs": {
+      "sha256": "ecffd632733bb20e3efb6ba38c897a133e0ed5c59c8e9717103de3faa58626ff",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/ConversorBibliotecaTests.cs": {
+      "sha256": "05d29bbcc94ef4ad6f70966f2e8756087170a62d0a24e352fa3b5fb26ef81483",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/FormularioJogoTests.cs": {
+      "sha256": "b0ad7b4a949a0f38bf53ad7b870b5af74283fa1878201f9d3afbbeadad829996",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/JanelaContratosTests.cs": {
+      "sha256": "fecd18fc9af5d9f8f57dc2a1c9c8ec2687636b59dc9464aabf882788f02e3379",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/PesquisaCatalogoTests.cs": {
+      "sha256": "5f7add92ae95eaf7d12834f0f0c138572ce5e3df4236e631f939e7b64047aa5c",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase1/ServicoBibliotecaTests.cs": {
+      "sha256": "7b38952e7f9c2d676eef8c6c1ea87f889c5226578c71d0d8c4d2b54c9d3aafc8",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/ApoioMultimidia.cs": {
+      "sha256": "c4f4033665a9cd6ee490cd4260fbacbe441e3f23edfeb78cb2ee2af04d4ec569",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/CatalogosSimuladosTests.cs": {
+      "sha256": "52601b12cb4b77ee65b83698ce7a98fc943276dd1d5784003d265e85c9505d91",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/CategoriasBibliotecaTests.cs": {
+      "sha256": "cd564c220b9dd9969e3bcffe3177053a45f2e569e1495a514273dfff475a3b3c",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/FormularioMultimidiaTests.cs": {
+      "sha256": "e555812f255e662f77ef0ce1d337de91687c3bb0e5a5f56752064a6c4759f445",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/InterfaceMultimidiaTests.cs": {
+      "sha256": "35b98f15b8c2f19923bcfabaae89f90267690faea38707515b9c6e3265e1b815",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/PersistenciaMultimidiaTests.cs": {
+      "sha256": "e3a00c5c8111fa170b410c4e5a56599fc357eacccf50d35d27676625b57c9646",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/ProgressoTests.cs": {
+      "sha256": "ea733f0a1e4eeee12143f3f27a717fd467b2a71a47fad821d862ecb6a7254152",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase2/RoteadorTests.cs": {
+      "sha256": "0403a32306129d1f8888edd401cadff20d5406482d7d02e6cda517296694f06b",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase3/CapasTests.cs": {
+      "sha256": "d855947b808c2514087977632c458777b8ca12247bee444182f4af950af0fd34",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase3/ConsultasTests.cs": {
+      "sha256": "79315bf1f3535541c5a01f61bb55c9b7c4004f8ab3bdc582840f7026df4203dc",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase3/InteracaoBibliotecaTests.cs": {
+      "sha256": "16f547747defcd6528e21f91096780610b9c417b31fe312d8b666a9f9ff0483a",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase3/MetadadosBibliotecaTests.cs": {
+      "sha256": "01e987be1008ba11c2410e51d84934221b28f8a380bb4f82aa84ad92ca919065",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase3/MetadadosIgdbTests.cs": {
+      "sha256": "c82a24ab6195a1a989dd7f58a8ec05f3cb11d9db01210c0ef1d756dc7c51cff0",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase3/PreferenciasTests.cs": {
+      "sha256": "80488f3f796f4bb799018d34d5e6656ba8b9cba3fa9baee175d909858d4a2972",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase3/VisualizacoesTests.cs": {
+      "sha256": "b8e5f458890ed893ff4f1bef668ffe73a6bfaccfff8d96510021ebc570a6da1f",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/ApoioColecoes.cs": {
+      "sha256": "f99c64b105e008fc2280c33e6e29ac4ade8f57bb920a787c878359b494b08689",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/CriarEditarTests.cs": {
+      "sha256": "0f68f54c08e1fe21a1496eb998ec9b660ab72cfeae0ad87ce8edc05075e44990",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/ExcluirAssociarTests.cs": {
+      "sha256": "707a62d3233499cae5578628524222ef7adcf6213b7c682140bf2faf646b562b",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/IdentidadeTests.cs": {
+      "sha256": "80707141abc2fe71b182dc8dfd1e887df333c0db8a29f3a546888ab15ec65b3d",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/IntegracaoColecoesTests.cs": {
+      "sha256": "599609948f8f26db9627998fc8e99c216e0681806e488c644055c24fe2f565cc",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/InterfaceColecoesTests.cs": {
+      "sha256": "4acf8d1c9cb0ae7ac4fa555956abb393c8df16b65c59a3d51ae811c097cab150",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/PersistenciaColecoesTests.cs": {
+      "sha256": "fa1ee15ca3a7e4d3bd9e5927cc8f5926ec932eac0c0fde3bce76bdc4bbd46cd4",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/RemoverConsultarTests.cs": {
+      "sha256": "9b90c394ecbfbf9243d79d580e6bc1f30ae9d1aff40dee05f1fa5df871dc7f1b",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Fase4/TelaColecoes.cs": {
+      "sha256": "a80e842d17212e4dfc73a8639c4aa67d3f95859cc769630394abbd429ff73cb0",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/FiltrosTests.cs": {
+      "sha256": "03630c7611fb3a7e58690f8473f3f76aa1bfb40e5c39dad69f63a4340fa96269",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/IdentificadoresTests.cs": {
+      "sha256": "a44d6dd85a84739c211c60a65b75bc5b6c84d977d2fede8dc862013049e6fd57",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/IgdbTests.cs": {
+      "sha256": "6ee14f5e47accfacc69d36a7d4aba230613bcabe4fa0077f98f2e53a0c51c7d4",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/OperacoesTests.cs": {
+      "sha256": "80366a04cea2fc364f0d2bf456ec95c61faf622508c36a781a3065c950a0efad",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/PersistenciaTests.cs": {
+      "sha256": "8f02a53bb87990afcf2a11b65393157fa59f7c8c1d4d4602666799fd79882fd1",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Revisao2/GradeRefinadaTests.cs": {
+      "sha256": "43fe3eeb0ccf4cb58d6dd7bac51659657ebd9a69b8faa3d4efde6b07cf072a89",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Revisao2/MiniaturasTests.cs": {
+      "sha256": "e273bd61ca79526663cde1ca679731541fbd74a35ec710bcfd8b3e6c52e5862c",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Revisao2/PosicaoImediataTests.cs": {
+      "sha256": "a664b242d8415d12e225927aa025debfdd4b039e2480edc0be550fb4b24418b0",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Revisao3/ApoioVisual.cs": {
+      "sha256": "4361f192b1c4021a8a743e32f7f7c780b2d341356df727c9528f52e5ae22c50a",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Revisao3/ArredondamentoTests.cs": {
+      "sha256": "d7527e5a4cfc2870f4bff1e3f69d557c4c85781438169c260028e8db7215f104",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Revisao3/DimensoesGradeTests.cs": {
+      "sha256": "e8e6dc416d3badda3978d1ed7a02f7e04b6f1661f8fa514edb289c8cd033405f",
+      "preservado": true
+    },
+    "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs": {
+      "sha256": "e4e808997b452133a43f900997ebdac014a0ed7b5e8538e42253711957eff9f7",
+      "preservado": true
+    },
+    "app.manifest": {
+      "sha256": "34d9104c8db2f3a45283bb14f921315d7b1c7891b6a08a4d0f9ebca7bd576319",
+      "preservado": true
+    },
+    "docs/AJUSTES_FASE3.md": {
+      "sha256": "84c311582194c68c66f7cb7eb36ed18427c69afd053269a1f742076d2e130c58",
+      "preservado": true
+    },
+    "docs/AJUSTES_FASE3_TESTES.md": {
+      "sha256": "29b362b43d900bdb0f57a107787a8d73cfd49161ec9b4d1fbe625bbdfcb1dcee",
+      "preservado": true
+    },
+    "docs/APROVACAO_FASE1.md": {
+      "sha256": "dd8e651390e94c88584231ffd60f465879d9da34a867e322d09a41a5f9b02a3e",
+      "preservado": true
+    },
+    "docs/APROVACAO_FASE2.md": {
+      "sha256": "a4299ba2ca15c1aeb66173959889117f8babffa73ff48f03e4cf4c349594c9eb",
+      "preservado": true
+    },
+    "docs/APROVACAO_FASE3.md": {
+      "sha256": "8f8529e9e61b5b9640f0630337bd022adff50213ba581ca8b31e87fd4813f7a4",
+      "preservado": true
+    },
+    "docs/ARQUITETURA.md": {
+      "sha256": "eae9d2d6596d1ccb5a38bdbb54354edd4b00e4d2afcd022d6876990ad3902dbb",
+      "preservado": true
+    },
+    "docs/ARQUITETURA_FASE2.md": {
+      "sha256": "7c8b0267f4ec811ab91ec86a409ff585a6c7740f7f3cfeca409e52ff1d9fa0f2",
+      "preservado": true
+    },
+    "docs/FASE0.md": {
+      "sha256": "84a83953d121cdcc10c453b5e0d2354987ef157a165d02f209a808d8869a0f44",
+      "preservado": true
+    },
+    "docs/FASE0_TESTES.md": {
+      "sha256": "69b073d6e68a32bdb0ac4070beceede139bb642b2b667d535ebd9ce72bde527f",
+      "preservado": true
+    },
+    "docs/FASE1.md": {
+      "sha256": "3427dba84c974ededc0f6d3fcd8b0f5f569ca6de41949458ce70f2a1db893a5a",
+      "preservado": true
+    },
+    "docs/FASE1_TESTES.md": {
+      "sha256": "ee70553106c1740381fad18ebc2fc238de6bd3273497f1805dcf21a0efc56604",
+      "preservado": true
+    },
+    "docs/FASE2.md": {
+      "sha256": "66c4877a43b9468953213a426dc7b97b1a9101ab04b8538704e8910f3bf5a500",
+      "preservado": true
+    },
+    "docs/FASE2_TESTES.md": {
+      "sha256": "eb2f9d2bd77c21cb62ea8d97614080801bc191b283292bc65bd96e2796773481",
+      "preservado": true
+    },
+    "docs/FASE3.md": {
+      "sha256": "67ff40f10e8ca5655c60ab3a53c78f0c0f645809c79bffa205f78e15d9b736c9",
+      "preservado": true
+    },
+    "docs/FASE3_TESTES.md": {
+      "sha256": "71298ca065249343c10af5f14572159d28b390de5b8effcd286b3b4eee3f31e0",
+      "preservado": true
+    },
+    "docs/FASE4.md": {
+      "sha256": "370e8ad7c0e551abf320db54917061bc345b11dae9e7e0f1063712d2eec61930",
+      "preservado": true
+    },
+    "docs/FASE4_TESTES.md": {
+      "sha256": "04815d7a5df0d4f1fe05bc9c13791ddd350ccf4de50e92be194f02e7c63aa439",
+      "preservado": true
+    },
+    "docs/REVISAO2_FASE3.md": {
+      "sha256": "8bbb1648668b0b6f7e77f46a4240a0506d78070135b8fa10899c87433588dc36",
+      "preservado": true
+    },
+    "docs/REVISAO2_FASE3_TESTES.md": {
+      "sha256": "de1f5969af1e240430596d9475e4e9f7e033ed2c3f54a9e96852f7fd7678565e",
+      "preservado": true
+    },
+    "docs/REVISAO3_FASE3.md": {
+      "sha256": "f3b385d1456290f5c6178215a4cedb998e658272e3449aae7d06e4e22fb8c122",
+      "preservado": true
+    },
+    "docs/REVISAO3_FASE3_TESTES.md": {
+      "sha256": "caf0a0b70a127c03928bb028aebb494ef91c18971fb7f1378926c34cb642192f",
+      "preservado": true
+    },
+    "docs/resultados-ajustes-fase3.json": {
+      "sha256": "096578a8542787a7b15abce5d395216a032eded523a245671591364a50dc47c6",
+      "preservado": true
+    },
+    "docs/resultados-fase0.json": {
+      "sha256": "6d9bf7a55a595a6f1eca472113bb3d3033c735ccf8ed5a298a517759d32e055c",
+      "preservado": true
+    },
+    "docs/resultados-fase1.json": {
+      "sha256": "4320878ebea8f925d486d606c0e978574f7fce65a82ca38750c3a747d182b518",
+      "preservado": true
+    },
+    "docs/resultados-fase2.json": {
+      "sha256": "71b8a5f199352ad618cb8f9067e947d635213d577f5c4ea33f8ceb782a76bba4",
+      "preservado": true
+    },
+    "docs/resultados-fase3.json": {
+      "sha256": "f8d630d9054a9adf82331f15635cdebbac5afb3029d4e0e091bb205ebe11a5b8",
+      "preservado": true
+    },
+    "docs/resultados-fase4.json": {
+      "sha256": "b013f6dcb4a928dfbf3d5c5ab8629eada8334f9e101e181cc39163cd0244827d",
+      "preservado": true
+    },
+    "docs/resultados-revisao2-fase3.json": {
+      "sha256": "e29cc34185d007f3b7b075da5e0b7c0023e142dc429e532b55da8eab8c6d57d5",
+      "preservado": true
+    },
+    "docs/resultados-revisao3-fase3.json": {
+      "sha256": "5b612c17bb2f7a5a9da13ab49678f071fc798d9f32d5e3459ec2249ad0ac828a",
+      "preservado": true
+    },
+    "docs/verificacoes-ajustes-fase3.json": {
+      "sha256": "f69aa8b22c57b79ae1665537dc989da76a29c859011ac5747ab19a37169e3b78",
+      "preservado": true
+    },
+    "docs/verificacoes-fase3.json": {
+      "sha256": "4b5932eb04962348deb3e6bbbe05118efdc2f0ef217590119bc11b0add8b8a3f",
+      "preservado": true
+    },
+    "docs/verificacoes-fase4.json": {
+      "sha256": "c81881bf7a8591a2278b662ae0e169bc57ae202a9242056cb0a9e786447cacc2",
+      "preservado": true
+    },
+    "docs/verificacoes-revisao2-fase3.json": {
+      "sha256": "fbc067723106708cd98f8400d6907649337ce66b642f604963a4e47162b1e266",
+      "preservado": true
+    },
+    "docs/verificacoes-revisao3-fase3.json": {
+      "sha256": "d9039bd68a8d8cc73dc691a5b08c1cb6179aae55036090bd2300477cb70df0e3",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_ajustes_fase3.py": {
+      "sha256": "ae89515045da10299ccebe6008d1a77565fe6c37c88b43ff85b2700e1d0dedec",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_fase1.py": {
+      "sha256": "c63c22fa85ab26e41e422e9724a1a0ba4acfe9d8c8e60a64d07ca66378111e47",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_fase2.py": {
+      "sha256": "46456f5a2c8fb88909fa25176a79de37e28229e3274d95d0c9e2337a299cfe73",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_fase3.py": {
+      "sha256": "b5ebf914273ce3a301f41258455df4ee98db9f5eab7775e83c4df785d46708dd",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_fase4.py": {
+      "sha256": "428ef65baf91dc52fde19e7ecd762f02cc439a452133f44dca7893768b43396c",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_revisao2.py": {
+      "sha256": "3179c50a2016a32fe874aef3f47c4d06ecbb674da21505857e75e17d603dd413",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_revisao3.py": {
+      "sha256": "2fb42b43d0a9aa11517502031c68402c7bea3834f76ed10db78e5b5e781bc80f",
+      "preservado": true
+    },
+    "scripts/gerar_relatorio_testes.py": {
+      "sha256": "b2ecd06219b24378b20cd43547385162490915d38efbf1b68dba5b74fce8bc04",
+      "preservado": true
+    },
+    "qodana.yaml": {
+      "sha256": "aabdb19b53fec2d5f02ef051fa2f505b69bc1fbe18d3e6c94564a05f3575f139",
+      "preservado": true
+    },
+    "skills/system/run-workflow/SKILL.md": {
+      "sha256": "82ed7c2e93d79fd95a01188c78539b6987f4c2a2dfc49c3b8991bebbe8925bf8",
+      "preservado": true
+    }
+  },
+  "alteracoesPrevistas": [
+    ".gitignore",
+    "App.axaml",
+    "App.axaml.cs",
+    "BacklogManager.csproj",
+    "Configuracao/ComposicaoAplicativo.cs",
+    "Controls/CapaObra.cs",
+    "MainWindow.axaml",
+    "MainWindow.axaml.cs",
+    "Tests/BacklogManager.Tests/AjustesFase3/TextosTests.cs",
+    "Tests/BacklogManager.Tests/TelaTeste.cs"
+  ],
+  "backupsAnteriores": {
+    "${HOME}/Backups/BacklogManager/fase0-20261027-170624/backlog.json": {
+      "sha256": "4cfc6e877e370f4c154f22afa521f725d652c31f3ef0425fd4d5623138cfc25e",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase0-20261027-170624/verificacao.json": {
+      "sha256": "79c552be5e25cd2311d8c446190a71bf3e1219bc91d9b8b1565ab061bb5a6bb6",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase1-20261027-205329/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase1-20261027-205329/verificacao.json": {
+      "sha256": "7aa7a004444ce5b58a4cb44186e8f50408488c32891248d04d7106cca5cba2a7",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase2-20261027-213204/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase2-20261027-213204/verificacao.json": {
+      "sha256": "8da5e03bc81c1c43e17bcafae513b9e96ced1d8550e469b8be0a3a97bb256232",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase3-20261028-103358/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase3-20261028-103358/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/ajustes-fase3-20261028-150858/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/ajustes-fase3-20261028-150858/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/revisao2-fase3-20261028-154612/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/revisao2-fase3-20261028-154612/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase4-20261028-164306/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase4-20261028-164306/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    }
+  },
+  "branchesAnteriores": {
+    "chore/seguranca-estabilidade": "10aab6a194f6f02cd034f262fbcc459b4083c073",
+    "feat/biblioteca": "bbcb99f7148820bc4e187765d9aa357f487e8a1f",
+    "feat/colecoes": "807638a586c9d4371f79ed04c985d0af611dbf5b",
+    "feat/multimidia": "64fb4fb1a2ffcb11ac8b4a3b9399efdb894a9d45",
+    "fix/biblioteca-ajustes": "8c9d14766628a33cbe447c78ab2c390a8b89088e",
+    "main": "807638a586c9d4371f79ed04c985d0af611dbf5b",
+    "refactor/arquitetura": "56bcd58f089478aaba7961b88c78e24e1ed80949"
+  },
+  "instrucaoPreparadaPreservada": "A\tFASE5_INSTRUCOES.md\n",
+  "rodadas": [
+    {
+      "arquivo": "fase5-base.trx",
+      "sha256": "6dbf9f9f3738dfe0f8a59da6890df4ec6e07f4ac5807db8692b42a93c8591bd6",
+      "total": 1105,
+      "executed": 1105,
+      "passed": 1105,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-entrega.trx",
+      "sha256": "1d761f6a9c60c5d18f7eb8e49572cff71bc0436f33f64d484cc70cba08a58d38",
+      "total": 1264,
+      "executed": 1264,
+      "passed": 1264,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-estados.trx",
+      "sha256": "50944f30bd046d430098d290ad88a0ac87b1d4cb3241ed223e0f4368f34ad68d",
+      "total": 141,
+      "executed": 141,
+      "passed": 141,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-final.trx",
+      "sha256": "ec103c098e147c38d573d09019fbd7ba8dadf68bd4d2695c319230ce832f39c8",
+      "total": 1263,
+      "executed": 1263,
+      "passed": 1262,
+      "failed": 1,
+      "notExecuted": 0,
+      "reprovados": [
+        "TX02"
+      ]
+    },
+    {
+      "arquivo": "fase5-interface-inicial.trx",
+      "sha256": "be769a0f6ef315fab8b65493d08a5d20430476762446ae639df8db8b8c109679",
+      "total": 1,
+      "executed": 1,
+      "passed": 1,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-json-ambiguo.trx",
+      "sha256": "fab6227af33896514fadc61e5badf6dbd6219822d5cd634abf3d407c936a8271",
+      "total": 2,
+      "executed": 2,
+      "passed": 1,
+      "failed": 1,
+      "notExecuted": 0,
+      "reprovados": [
+        "VA26"
+      ]
+    },
+    {
+      "arquivo": "fase5-modelos.trx",
+      "sha256": "ec43fd6f9e6cf237d72fc67055cb57c2953290137653b068cc50fad86bb3da01",
+      "total": 68,
+      "executed": 68,
+      "passed": 68,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-persistencia.trx",
+      "sha256": "98f74a554cebc435fc47a6cc0a394f729e7fbeb5373b416c4084116b2a7e0776",
+      "total": 104,
+      "executed": 104,
+      "passed": 104,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-previa-corrigida.trx",
+      "sha256": "988d2832c22af541da93f7fce1563be09aa59f70c79e7116fa80c8a579d9df6f",
+      "total": 127,
+      "executed": 127,
+      "passed": 126,
+      "failed": 1,
+      "notExecuted": 0,
+      "reprovados": [
+        "VP09"
+      ]
+    },
+    {
+      "arquivo": "fase5-previa.trx",
+      "sha256": "8addef73b8725418d7d6c75211be4073b55caed43f2aafa36f8b8554d06c350e",
+      "total": 127,
+      "executed": 127,
+      "passed": 121,
+      "failed": 6,
+      "notExecuted": 0,
+      "reprovados": [
+        "VP08",
+        "VP10",
+        "VP13",
+        "VP09",
+        "VP11",
+        "VP20"
+      ]
+    },
+    {
+      "arquivo": "fase5-regressao-diagnostico.trx",
+      "sha256": "f223ac8c8ef6171dadf3055c2d0962a8ec52e896fa5fce03dd6c40ce449fcb48",
+      "total": 1105,
+      "executed": 1105,
+      "passed": 1105,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-validacao-final.trx",
+      "sha256": "ba8e324c906fd1dfed8b94b4414bcc1d0e02486d5a8b1eaf5c16e9e5d8e55c44",
+      "total": 1266,
+      "executed": 1266,
+      "passed": 1266,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-visuais-corrigidos.trx",
+      "sha256": "d264e91d5264cd552d4810d8f5312104533ed576ddc730172ac973af9635ab43",
+      "total": 154,
+      "executed": 154,
+      "passed": 154,
+      "failed": 0,
+      "notExecuted": 0,
+      "reprovados": []
+    },
+    {
+      "arquivo": "fase5-visuais.trx",
+      "sha256": "6ba758e89918a722c9b0b3ffdfca7a2871566d49918d086b79647037afc89455",
+      "total": 154,
+      "executed": 154,
+      "passed": 104,
+      "failed": 50,
+      "notExecuted": 0,
+      "reprovados": [
+        "VE12",
+        "VF01",
+        "VE01",
+        "VP20",
+        "VF09",
+        "VF08",
+        "VE08",
+        "VP19",
+        "VP14",
+        "VE04",
+        "VE07",
+        "VE14",
+        "VP06",
+        "VP21",
+        "VP16",
+        "VF04",
+        "VF05",
+        "VE13",
+        "VP18",
+        "VP12",
+        "VP04",
+        "VP22",
+        "VE05",
+        "VF02",
+        "VP11",
+        "VP10",
+        "VF13",
+        "VP15",
+        "VP01",
+        "VF11",
+        "VF10",
+        "VP09",
+        "VF06",
+        "VP23",
+        "VP17",
+        "VE10",
+        "VF12",
+        "VE11",
+        "VP13",
+        "VF07",
+        "VP03",
+        "VF03",
+        "VP08",
+        "VP07",
+        "VE02",
+        "VP05",
+        "VE09",
+        "VE03",
+        "VP02",
+        "VE06"
+      ]
+    }
+  ],
+  "regressaoInicialInterrompida": {
+    "arquivoLog": "/tmp/backlogmanager-fase5-regressao.log",
+    "estado": "Cancelada para diagnóstico, sem resultado completo; contagens não inferidas"
+  },
+  "compilacao": {
+    "erros": 0,
+    "avisos": 0,
+    "logSha256": "a598d133042269c6a3f3fdfda9ae25e3d498f6f68eb5c777dffd27d931c11af8"
+  },
+  "smoke": {
+    "id": "XN01",
+    "dadosExclusivamenteSimulados": true,
+    "abertoPorOitoSegundos": true,
+    "jsonsPreservados": true,
+    "logVazio": true,
+    "interacaoManual": false
+  },
+  "imagens": {
+    "personalizacoes.png": "7a1ea97fa922750cae41df5ff37c1223d434ecd983ee0f9efd8cd83f700817e7",
+    "seis-temas.png": "b7e753d12d86f6d06c257636a434ea879b7d90df26eec7b7e25ec9faf1653099",
+    "personalizado-E0E0E0-biblioteca.png": "e9fd42dea0c560221ad86287cfca725bea635f77f94c1f6800fa38c23e7d283e",
+    "personalizado-E0E0E0-inicio.png": "171e6bbf03fec7523990919fad1aceb2077b0440bb3a5250fd402caa121a8aad",
+    "personalizado-884422-biblioteca.png": "9b5ed478f49bbcdd896aea3f77f066cc90919a6f591a5b2fc438cb90d06985a4",
+    "personalizado-884422-inicio.png": "28ffbe96364b8d39aeaae1370324708b5681679e2db1e52810bd87fde0d9298a",
+    "personalizado-163A63-biblioteca.png": "8fb97927d515c0f58ef4bbc3f3c2fbc0d51e9280c2f4ef827b3f2f46566556d8",
+    "personalizado-163A63-inicio.png": "666bfe712f3e2fac71fe1da61b50ad1ae4b6a28d2773bbaae99f7885827752aa",
+    "personalizado-FFF5CC-biblioteca.png": "815f837e8fa6569821243ed9f5493e8aecd2e41b080fd0749cf9151977082030",
+    "personalizado-FFF5CC-inicio.png": "67fa7619eefa4b64a8a12a00c07aaf8e5572672a9f97b5a8ea42a5fe02d89bf6",
+    "personalizado-F7A1B3-biblioteca.png": "20c6b57263a68e0a3ba8c69f4ace766296ed155fc65d34e54bc7c9e74fade0cc",
+    "personalizado-F7A1B3-inicio.png": "b8a8333cf296283d1ae5a6d4ee680499ff77cc6c2cf6018f085a569eb4a0d96f",
+    "personalizado-000000-biblioteca.png": "e06f93f890cfb73920cf1a2c24f29d9727995f5b0c3cb1f7ec8a91bbace746fa",
+    "personalizado-000000-inicio.png": "bf8618e6f303fbcb10249fc26a247aceaa97fa7a68efb5d4ab20a1b0cc6f4e04",
+    "Tecnologico-Claro-aparencia.png": "83c19e9fd00912cf8bee3deca2486e8abaa33b0893df4ad7c81e32501e1cacc8",
+    "Tecnologico-Claro-biblioteca.png": "bafa1058f0bd3c8368494bd25c08ce0ca09b639daee8e156f725161ce5943d02",
+    "Tecnologico-Claro-inicio.png": "c734fa8bd702ceed88879b1411adb91aca2d53305919a2b62f7026d44955fe8b",
+    "Moderno-Escuro-aparencia.png": "91409cfe270e256fca27a2fee778a9c13107b40afeb77a7a01f6f061b11f0abc",
+    "Moderno-Escuro-biblioteca.png": "0314722e4c71a5d24f1f607e2cf1e9e14c34929f4150e87f46736e56b36c41ee",
+    "Moderno-Escuro-inicio.png": "a1591bcf55b651b8714d1125620ca6e4c0a19164b4caf2d8342186407663ca15",
+    "aparencia-minima-fim.png": "e9634b1796e00ab40954d6e2eef0b2baa3e4f3240f0e320282106103eafe7122",
+    "aparencia-minima-topo.png": "aa0f8341d9b9c825c69a055bba38c22cbd4651e9178a5d0b4af22967350a2f1c",
+    "Acolhedor-Claro-aparencia.png": "017ac823e2b485aed54ea72e978357189a497103371e2eae36bfe4bcfd73b7ba",
+    "Acolhedor-Claro-biblioteca.png": "4ebe938cf89553e553a450ad2fd66e9896004572d6632e90124bd3904fef7b10",
+    "Acolhedor-Claro-inicio.png": "9a0e694f11e0ba0eef0fce1b05b092434d73d4e9bf72f9ba1e47f1b6bcaa5b67",
+    "Tecnologico-Escuro-aparencia.png": "02db235a5c79e9728009298ea407a47295d4c67be19e2b9eecb01edbcb54f048",
+    "Tecnologico-Escuro-biblioteca.png": "c56de2ff90d9091368871de0fd167eab05431681a8fd75ad9acf4bfecb546827",
+    "Tecnologico-Escuro-inicio.png": "e6916acf6814d2b0719e4cad030cc35183f147ec0ddc4b076185ee109d31c5bf",
+    "Acolhedor-Escuro-aparencia.png": "4507f4de2710bba22fe456864d6bdcd4b1b072b09f00b313add920b2fb20f510",
+    "Acolhedor-Escuro-biblioteca.png": "a62ca278a2a7ac5e69022ee9fcca8a22ea178a071f166a774fc503ecfacc64e2",
+    "Acolhedor-Escuro-inicio.png": "40f99c12bc6994b79df59e34b2fbb0ecf210bc3c2d782d0c4d028518ae78b20a",
+    "Moderno-Claro-aparencia.png": "0ee776e3cdf504eda54bdf0f33cca343037aec67af5b46aec8740661c61c2ead",
+    "Moderno-Claro-biblioteca.png": "4cfe910700b0ae78a0aa91d6c5eaccceb424a45f1ee8ec2ac0065f8c3b6521cd",
+    "Moderno-Claro-inicio.png": "2276bc8367b53c3064c24d9ad8cfc698b64e1de4ff661dc3a3edee559e9d52f4"
+  },
+  "inspecionadas": [
+    "seis-temas.png",
+    "personalizacoes.png",
+    "Moderno-Claro-inicio.png",
+    "Moderno-Claro-aparencia.png",
+    "Tecnologico-Escuro-aparencia.png",
+    "aparencia-minima-topo.png",
+    "aparencia-minima-fim.png"
+  ],
+  "manuais": {
+    "planejados": 5,
+    "executados": 0,
+    "naoExecutados": 5
+  },
+  "commitsImplementacaoTestes": [
+    "f7efbb8 test: valida temas, contraste, preferências e regressões da Fase 5",
+    "f3ab358 feat: aplica identidade Minhas Realizações e aparência personalizável"
+  ]
+}
