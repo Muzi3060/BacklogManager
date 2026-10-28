@@ -27,18 +27,24 @@ public partial class MainWindow : Window
     private bool PersistenciaDisponivel => _biblioteca.Carregada;
     private bool _fechada;
     internal Task BuscaPendente { get; private set; } = Task.CompletedTask;
+    internal CarregadorCapas Capas { get; }
+    private readonly ArmazenamentoPreferenciasBiblioteca _preferencias;
 
     public MainWindow() : this(ComposicaoAplicativo.Criar()) { }
 
     private MainWindow(DependenciasJanela dependencias)
-        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa) { }
+        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias) { }
 
-    internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null)
+    internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null,
+        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null)
     {
+        _preferencias = preferencias ?? new ArmazenamentoPreferenciasBiblioteca();
+        Capas = capas ?? new CarregadorCapas();
         _biblioteca = biblioteca;
         _roteador = new RoteadorPesquisaCatalogo(pesquisa);
         _recursoPesquisa = recursoPesquisa;
         InitializeComponent();
+        SizeChanged += (_, evento) => Classes.Set("compact", evento.NewSize.Height < 740);
         PreencherProgresso(null);
         try
         {
@@ -52,6 +58,7 @@ public partial class MainWindow : Window
             ExibirAviso("Pesquisa indisponível", "Configure IGDB_CLIENT_ID e IGDB_ACESS_TOKEN (ou IGDB_ACCESS_TOKEN). Sua coleção local continua disponível.", true);
 
         _interfacePronta = true;
+        CarregarVisualizacao();
         AtualizarFormularioMidia();
         AtualizarColecao();
         BtnAdicionar.IsEnabled = PersistenciaDisponivel;
@@ -105,6 +112,7 @@ public partial class MainWindow : Window
         _fechada = true;
         CancelarBusca();
         _recursoPesquisa?.Dispose();
+        Capas.Dispose();
         base.OnClosed(e);
     }
 
@@ -308,7 +316,7 @@ public partial class MainWindow : Window
 
     private void Filtros_Changed(object? sender, RoutedEventArgs e)
     {
-        if (_interfacePronta)
+        if (_interfacePronta && !_ajustandoFiltros)
             AtualizarLista();
     }
 
@@ -331,6 +339,7 @@ public partial class MainWindow : Window
             : $"{zerados} de {total} obras concluídas · {naFila} na fila.";
         ListaRecentes.ItemsSource = _biblioteca.ObterRecentes();
         EstadoInicioVazio.IsVisible = total == 0;
+        AtualizarOpcoesFiltros();
         AtualizarLista();
     }
 
@@ -341,7 +350,15 @@ public partial class MainWindow : Window
             ? (CmbFiltroStatus.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? (CmbFiltroStatus.SelectedItem as ComboBoxItem)?.Content?.ToString()
             : null;
         var selecionado = ListaBacklog.SelectedItem as ItemBiblioteca;
-        var filtrados = _biblioteca.Filtrar(busca, status, TipoBiblioteca);
+        System.Collections.Generic.IReadOnlyList<ItemBiblioteca> filtrados;
+        try { filtrados = _biblioteca.Consultar(CriarConsulta(busca, status)); }
+        catch (ArgumentException)
+        {
+            TxtErroFiltros.Text = "Confira a nota (0–5) e as datas: o início deve ser anterior ao fim.";
+            TxtErroFiltros.IsVisible = true;
+            return;
+        }
+        TxtErroFiltros.IsVisible = false;
 
         ListaBacklog.ItemsSource = filtrados;
         // Records iguais podem representar registros pessoais diferentes.

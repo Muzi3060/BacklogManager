@@ -27,7 +27,22 @@ public sealed class PesquisaJogosIgdb : IPesquisaCatalogo
             Tipo = TipoMidia.Jogo,
             Titulo = jogo.Name,
             Origem = "IGDB",
-            IdentificadorExterno = jogo.Id.ToString(CultureInfo.InvariantCulture)
+            IdentificadorExterno = jogo.Id.ToString(CultureInfo.InvariantCulture),
+            CapaUrl = Capa(jogo.Cover),
+            Generos = Nomes(jogo.Genres),
+            Plataformas = Nomes(jogo.Platforms)
         }).ToArray();
+    }
+
+    private static string[] Nomes(IgdbNome[]? nomes) => nomes?
+        .Where(n => !string.IsNullOrWhiteSpace(n?.Name)).Select(n => n.Name!.Trim())
+        .Distinct(StringComparer.OrdinalIgnoreCase).ToArray() ?? Array.Empty<string>();
+
+    private static string? Capa(IgdbCover? capa)
+    {
+        var id = capa?.ImageId;
+        if (!string.IsNullOrEmpty(id) && id.Length <= 100 && id.All(c => char.IsAsciiLetterOrDigit(c) || c == '_'))
+            return $"https://images.igdb.com/igdb/image/upload/t_cover_big/{id}.jpg";
+        return CarregadorCapas.EnderecoRemoto(capa?.Url)?.AbsoluteUri;
     }
 }

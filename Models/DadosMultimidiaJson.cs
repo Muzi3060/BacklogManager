@@ -15,4 +15,8 @@ public sealed class DadosMultimidiaJson
     public string[] Generos { get; init; } = System.Array.Empty<string>();
     public bool Simulado { get; init; }
     public ProgressoPessoal? Progresso { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string[]? Plataformas { get; init; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public System.DateTimeOffset? DataAdicao { get; init; }
 }

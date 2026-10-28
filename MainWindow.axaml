@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:models="clr-namespace:BacklogManager.Models"
+        xmlns:controls="clr-namespace:BacklogManager.Controls"
         x:Class="BacklogManager.MainWindow"
         Title="Backlog Manager" Width="1120" Height="780"
         MinWidth="900" MinHeight="660" WindowStartupLocation="CenterScreen">
@@ -11,8 +12,42 @@
         <StreamGeometry x:Key="GameIcon">M7,6 H17 Q21,6 22,11 L23,17 Q23,21 20,20 L16,16 H8 L4,20 Q1,21 1,17 L2,11 Q3,6 7,6 Z M5,11 H11 M8,8 V14 M16,10 H17 M19,13 H20</StreamGeometry>
         <StreamGeometry x:Key="CheckIcon">M5,12 L10,17 20,6</StreamGeometry>
         <StreamGeometry x:Key="ArrowIcon">M4,12 H20 M14,6 L20,12 14,18</StreamGeometry>
+        <DataTemplate x:Key="TemplateGrade" DataType="models:ItemBiblioteca">
+            <Border Classes="card gameCard gradeCard" Width="180" Padding="10" Margin="0,0,10,0">
+                <StackPanel Spacing="5">
+                    <controls:CapaObra Classes="capaGrade" Endereco="{Binding Catalogo.CapaUrl}" />
+                    <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
+                    <TextBlock Text="{Binding Pessoal.Categoria}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="{Binding StatusExibido}" FontSize="12" Foreground="#C5A8EF" />
+                    <TextBlock Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" />
+                    <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="11" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
+                    <TextBlock Text="{Binding Pessoal.Review}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Pessoal.Review}" />
+                    <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="10" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="TemplateLista" DataType="models:ItemBiblioteca">
+            <Border Classes="card gameCard" Padding="12">
+                <Grid ColumnDefinitions="64,*,58">
+                    <controls:CapaObra Endereco="{Binding Catalogo.CapaUrl}" Height="96" VerticalAlignment="Top" />
+                    <StackPanel Grid.Column="1" Margin="12,0" Spacing="5">
+                        <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
+                        <TextBlock Text="{Binding Pessoal.Categoria}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding StatusExibido}" Foreground="#C5A8EF" FontSize="12" />
+                        <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="11" />
+                        <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
+                        <TextBlock Text="{Binding Pessoal.Review}" Classes="muted" FontSize="12" MaxLines="2" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Pessoal.Review}" />
+                    </StackPanel>
+                    <TextBlock Grid.Column="2" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" />
+                </Grid>
+            </Border>
+        </DataTemplate>
     </Window.Resources>
     <Window.Styles>
+        <Style Selector="Border.gradeCard"><Setter Property="Height" Value="352" /></Style>
+        <Style Selector="controls|CapaObra.capaGrade"><Setter Property="Height" Value="174" /></Style>
+        <Style Selector="Window.compact Border.gradeCard"><Setter Property="Height" Value="270" /></Style>
+        <Style Selector="Window.compact controls|CapaObra.capaGrade"><Setter Property="Height" Value="104" /></Style>
         <Style Selector="Button.navigation">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -241,56 +276,70 @@
                         </StackPanel>
                         <Button Grid.Column="1" Content="+  Adicionar obra" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
                     </Grid>
-                    <StackPanel Grid.Row="1" Spacing="7" Margin="0,0,0,16">
-                        <TextBlock Text="Tipo de mídia" Classes="muted" />
-                        <ComboBox x:Name="CmbTipoBiblioteca" SelectedIndex="0" SelectionChanged="TipoBiblioteca_Changed">
-                            <ComboBoxItem Content="Jogos" Tag="Jogo" />
-                            <ComboBoxItem Content="Animes" Tag="Anime" />
-                            <ComboBoxItem Content="Séries" Tag="Serie" />
-                            <ComboBoxItem Content="Filmes" Tag="Filme" />
-                            <ComboBoxItem Content="Mangás" Tag="Manga" />
-                            <ComboBoxItem Content="Livros" Tag="Livro" />
-                        </ComboBox>
-                    </StackPanel>
-                    <Grid Grid.Row="2" ColumnDefinitions="*,180" Margin="0,0,0,20">
-                        <TextBox x:Name="TxtBusca" PlaceholderText="Buscar por título ou categoria..." TextChanged="Filtros_Changed" Margin="0,0,12,0" />
-                        <ComboBox Grid.Column="1" x:Name="CmbFiltroStatus" SelectedIndex="0" SelectionChanged="Filtros_Changed">
-                            <ComboBoxItem Content="Todos os status" />
-                            <ComboBoxItem Content="Na Fila" />
-                            <ComboBoxItem Content="Jogando" />
-                            <ComboBoxItem Content="Zerado" />
-                            <ComboBoxItem Content="Pausado" />
-                            <ComboBoxItem Content="Abandonado" />
-                        </ComboBox>
+                    <Grid Grid.Row="1" ColumnDefinitions="150,*,140" Margin="0,0,0,12">
+                        <StackPanel Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Tipo de mídia" Classes="muted" FontSize="12" />
+                            <ComboBox x:Name="CmbTipoBiblioteca" SelectedIndex="0" SelectionChanged="TipoBiblioteca_Changed">
+                                <ComboBoxItem Content="Jogos" Tag="Jogo" /><ComboBoxItem Content="Animes" Tag="Anime" />
+                                <ComboBoxItem Content="Séries" Tag="Serie" /><ComboBoxItem Content="Filmes" Tag="Filme" />
+                                <ComboBoxItem Content="Mangás" Tag="Manga" /><ComboBoxItem Content="Livros" Tag="Livro" />
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Spacing="5" Margin="0,0,10,0">
+                            <TextBlock Text="Ordenação" Classes="muted" FontSize="12" />
+                            <ComboBox x:Name="CmbOrdenacao" SelectedIndex="0" SelectionChanged="Filtros_Changed">
+                                <ComboBoxItem Content="Ordem de cadastro" /><ComboBoxItem Content="Título A–Z" />
+                                <ComboBoxItem Content="Título Z–A" /><ComboBoxItem Content="Maior nota" />
+                                <ComboBoxItem Content="Menor nota" /><ComboBoxItem Content="Adição recente" /><ComboBoxItem Content="Adição antiga" />
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Spacing="5">
+                            <TextBlock Text="Visualização" Classes="muted" FontSize="12" />
+                            <ComboBox x:Name="CmbVisualizacao" SelectedIndex="0" SelectionChanged="Visualizacao_Changed">
+                                <ComboBoxItem Content="Grade" /><ComboBoxItem Content="Lista" />
+                            </ComboBox>
+                        </StackPanel>
                     </Grid>
+                    <StackPanel Grid.Row="2" Spacing="6" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,180">
+                            <TextBox x:Name="TxtBusca" PlaceholderText="Buscar por título ou categoria..." TextChanged="Filtros_Changed" Margin="0,0,12,0" />
+                            <ComboBox Grid.Column="1" x:Name="CmbFiltroStatus" SelectedIndex="0" SelectionChanged="Filtros_Changed">
+                                <ComboBoxItem Content="Todos os status" /><ComboBoxItem Content="Na Fila" /><ComboBoxItem Content="Jogando" />
+                                <ComboBoxItem Content="Zerado" /><ComboBoxItem Content="Pausado" /><ComboBoxItem Content="Abandonado" />
+                            </ComboBox>
+                        </Grid>
+                        <Expander x:Name="FiltrosAvancados" Header="Mais filtros" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <ScrollViewer MaxHeight="150" HorizontalScrollBarVisibility="Disabled">
+                                <WrapPanel>
+                                    <StackPanel Width="170" Margin="0,0,10,8" Spacing="4">
+                                        <TextBlock Text="Gênero / categoria legada" FontSize="11" Classes="muted" />
+                                        <ComboBox x:Name="CmbGenero" SelectionChanged="Filtros_Changed" />
+                                    </StackPanel>
+                                    <StackPanel Width="170" Margin="0,0,10,8" Spacing="4">
+                                        <TextBlock Text="Plataforma (se disponível)" FontSize="11" Classes="muted" />
+                                        <ComboBox x:Name="CmbPlataforma" SelectionChanged="Filtros_Changed" />
+                                    </StackPanel>
+                                    <StackPanel Width="120" Margin="0,0,10,8" Spacing="4">
+                                        <TextBlock Text="Nota mínima" FontSize="11" Classes="muted" />
+                                        <NumericUpDown x:Name="NumNotaMinima" Minimum="0" Maximum="5" Increment="0.5" ValueChanged="NotaFiltro_Changed" PlaceholderText="Todas" />
+                                    </StackPanel>
+                                    <StackPanel Width="170" Margin="0,0,10,8" Spacing="4">
+                                        <TextBlock Text="Adicionada de (data local)" FontSize="11" Classes="muted" />
+                                        <CalendarDatePicker x:Name="DataAdicaoDe" SelectedDateChanged="DataFiltro_Changed" PlaceholderText="Qualquer data" />
+                                    </StackPanel>
+                                    <StackPanel Width="170" Margin="0,0,10,8" Spacing="4">
+                                        <TextBlock Text="Adicionada até (data local)" FontSize="11" Classes="muted" />
+                                        <CalendarDatePicker x:Name="DataAdicaoAte" SelectedDateChanged="DataFiltro_Changed" PlaceholderText="Qualquer data" />
+                                    </StackPanel>
+                                    <Button x:Name="BtnLimparFiltros" Content="Limpar filtros" Click="LimparFiltros_Click" VerticalAlignment="Bottom" Margin="0,0,0,8" />
+                                </WrapPanel>
+                            </ScrollViewer>
+                        </Expander>
+                        <TextBlock x:Name="TxtErroFiltros" IsVisible="False" TextWrapping="Wrap" Foreground="#E7BD78" FontSize="11" />
+                    </StackPanel>
                     <Grid Grid.Row="3">
-                        <ListBox x:Name="ListaBacklog" SelectionChanged="ListaBacklog_SelectionChanged">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="models:ItemBiblioteca">
-                                    <Border Classes="card gameCard" Padding="18">
-                                        <Grid ColumnDefinitions="44,*,Auto">
-                                            <Border Background="#40344E" CornerRadius="8" Width="34" Height="34" VerticalAlignment="Top">
-                                                <Path Data="{StaticResource GameIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.5" Width="23" Height="18" Stretch="Uniform" />
-                                            </Border>
-                                            <StackPanel Grid.Column="1" Spacing="9" Margin="8,0,18,0">
-                                                <TextBlock Text="{Binding Catalogo.Titulo}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                                                <StackPanel Orientation="Horizontal" Spacing="8">
-                                                    <Border Background="#3E3E42" CornerRadius="4" Padding="8,3">
-                                                        <TextBlock Text="{Binding Pessoal.Categoria}" FontSize="11" Foreground="#CCCCD2" />
-                                                    </Border>
-                                                    <Border Background="#3C3548" CornerRadius="4" Padding="8,3">
-                                                        <TextBlock Text="{Binding StatusExibido}" FontSize="11" Foreground="#C5A8EF" />
-                                                    </Border>
-                                                </StackPanel>
-                                                <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="11" />
-                                                <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" Classes="muted" FontSize="12" />
-                                                <TextBlock Text="{Binding Pessoal.Review}" Classes="muted" FontSize="12" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" />
-                                            </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontWeight="SemiBold" />
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
+                        <ListBox x:Name="ListaBacklog" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListaBacklog_SelectionChanged">
+
                         </ListBox>
                         <StackPanel x:Name="EstadoListaVazia" IsVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="12" Margin="20">
                             <Path Data="{StaticResource LibraryIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.4" Width="32" Height="32" Stretch="Uniform" Margin="0,0,0,4" />
@@ -338,11 +387,14 @@
                                     <ListBox x:Name="ListaSugestoes" SelectionChanged="ListaSugestoes_SelectionChanged">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate DataType="models:ObraCatalogo">
-                                                <StackPanel Spacing="3">
-                                                    <TextBlock Text="{Binding Titulo}" />
-                                                    <TextBlock Text="{Binding GenerosTexto}" Classes="muted" FontSize="11" />
-                                                    <TextBlock Text="Dados simulados" IsVisible="{Binding Simulado}" Foreground="#E7BD78" FontSize="11" />
-                                                </StackPanel>
+                                                <Grid ColumnDefinitions="44,*" MinHeight="64">
+                                                    <controls:CapaObra Endereco="{Binding CapaUrl}" Height="60" />
+                                                    <StackPanel Grid.Column="1" Spacing="3" Margin="10,0,0,0" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Titulo}" TextTrimming="CharacterEllipsis" />
+                                                        <TextBlock Text="{Binding GenerosTexto}" Classes="muted" FontSize="11" TextTrimming="CharacterEllipsis" />
+                                                        <TextBlock Text="Dados simulados" IsVisible="{Binding Simulado}" Foreground="#E7BD78" FontSize="11" />
+                                                    </StackPanel>
+                                                </Grid>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>

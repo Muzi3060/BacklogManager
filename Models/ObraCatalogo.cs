@@ -13,4 +13,5 @@ public sealed record ObraCatalogo
     public string GenerosTexto => string.Join(", ", Generos);
     public string? CapaUrl { get; init; }
     public IReadOnlyList<string> Generos { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> Plataformas { get; init; } = Array.Empty<string>();
 }

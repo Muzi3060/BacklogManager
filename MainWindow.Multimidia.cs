@@ -26,6 +26,7 @@ public partial class MainWindow
         ListaBacklog.SelectedItem = null;
         AtualizarStatus(CmbFiltroStatus, TipoBiblioteca, filtro: true);
         BtnEditar.Content = TipoBiblioteca == TipoMidia.Jogo ? "Editar jogo" : "Editar obra";
+        AtualizarOpcoesFiltros();
         AtualizarLista();
     }
 

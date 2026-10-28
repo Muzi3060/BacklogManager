@@ -42,7 +42,7 @@ public sealed class IgdbService
         using var requisicao = new HttpRequestMessage(HttpMethod.Post, "https://api.igdb.com/v4/games");
         requisicao.Headers.Add("Client-ID", _clientId);
         requisicao.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
-        requisicao.Content = new StringContent($"search \"{escapado}\"; fields id,name; limit 15;", Encoding.UTF8, "text/plain");
+        requisicao.Content = new StringContent($"search \"{escapado}\"; fields id,name,cover.image_id,cover.url,genres.name,platforms.name; limit 15;", Encoding.UTF8, "text/plain");
 
         try
         {

@@ -32,7 +32,8 @@ public static class FormularioObra
             Review = inalterada ? review! : string.IsNullOrWhiteSpace(review) ? "Nenhuma Review" : review,
             Progresso = dados.Progresso is { Vazio: false } ? dados.Progresso : null
         };
-        return emEdicao == null ? new ItemBiblioteca(selecionada!, pessoal) : emEdicao with { Pessoal = pessoal };
+        return emEdicao == null ? new ItemBiblioteca(selecionada!, pessoal) { DataAdicao = DateTimeOffset.UtcNow }
+            : emEdicao with { Pessoal = pessoal };
     }
 
     public static bool SelecaoValida(ObraCatalogo? obra, TipoMidia tipo) =>

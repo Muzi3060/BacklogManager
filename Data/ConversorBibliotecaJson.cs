@@ -24,6 +24,7 @@ internal static class ConversorBibliotecaJson
             IdentificadorExterno = extra?.IdentificadorExterno ?? registro.IgdbId?.ToString(CultureInfo.InvariantCulture),
             CapaUrl = extra?.CapaUrl,
             Generos = extra?.Generos.ToArray() ?? Array.Empty<string>(),
+            Plataformas = extra?.Plataformas?.ToArray() ?? Array.Empty<string>(),
             Simulado = extra?.Simulado ?? false
         }, new DadosPessoaisBiblioteca
         {
@@ -35,6 +36,7 @@ internal static class ConversorBibliotecaJson
         })
         {
             SteamAppIdLegado = registro.SteamAppId,
+            DataAdicao = extra?.DataAdicao,
             DadosAdicionais = registro.DadosAdicionais == null ? null :
                 new ReadOnlyDictionary<string, JsonElement>(CopiarExtras(registro.DadosAdicionais)!)
         };
@@ -46,7 +48,9 @@ internal static class ConversorBibliotecaJson
         ArgumentNullException.ThrowIfNull(item.Catalogo);
         ArgumentNullException.ThrowIfNull(item.Pessoal);
         var catalogo = item.Catalogo;
-        if (!Enum.IsDefined(catalogo.Tipo) || catalogo.Generos == null || catalogo.Generos.Any(string.IsNullOrWhiteSpace))
+        if (!Enum.IsDefined(catalogo.Tipo) || catalogo.Generos == null || catalogo.Generos.Any(string.IsNullOrWhiteSpace) ||
+            catalogo.Plataformas == null || catalogo.Plataformas.Any(string.IsNullOrWhiteSpace) ||
+            catalogo.Tipo != TipoMidia.Jogo && catalogo.Plataformas.Count > 0)
             throw new NotSupportedException("Tipo de mídia ou gêneros inválidos.");
         RegrasProgresso.Validar(catalogo.Tipo, item.Pessoal.Progresso);
         ValidarReferencia(catalogo.Tipo, catalogo.Origem, catalogo.IdentificadorExterno, catalogo.Simulado);
@@ -54,7 +58,7 @@ internal static class ConversorBibliotecaJson
         int? igdbId = catalogo.Tipo == TipoMidia.Jogo && catalogo.IdentificadorExterno != null
             ? int.Parse(catalogo.IdentificadorExterno, CultureInfo.InvariantCulture) : null;
         var precisaBloco = catalogo.Tipo != TipoMidia.Jogo || catalogo.CapaUrl != null || catalogo.Generos.Count > 0 ||
-            item.Pessoal.Progresso is { Vazio: false };
+            item.Pessoal.Progresso is { Vazio: false } || catalogo.Plataformas.Count > 0 || item.DataAdicao != null;
         return new BacklogItem(catalogo.Titulo, item.Pessoal.Categoria, item.Pessoal.Status,
             item.Pessoal.Nota, item.Pessoal.Review, item.SteamAppIdLegado)
         {
@@ -68,6 +72,8 @@ internal static class ConversorBibliotecaJson
                 IdentificadorExterno = catalogo.IdentificadorExterno,
                 CapaUrl = catalogo.CapaUrl,
                 Generos = catalogo.Generos.ToArray(),
+                Plataformas = catalogo.Plataformas.Count == 0 ? null : catalogo.Plataformas.ToArray(),
+                DataAdicao = item.DataAdicao,
                 Simulado = catalogo.Simulado,
                 Progresso = item.Pessoal.Progresso is { Vazio: false } ? item.Pessoal.Progresso : null
             }
@@ -77,7 +83,9 @@ internal static class ConversorBibliotecaJson
     internal static void ValidarMultimidia(BacklogItem registro)
     {
         var dados = registro.Multimidia!;
-        if (dados.Versao != 1 || !Enum.IsDefined(dados.Tipo) || dados.Generos == null || dados.Generos.Any(string.IsNullOrWhiteSpace))
+        if (dados.Versao != 1 || !Enum.IsDefined(dados.Tipo) || dados.Generos == null || dados.Generos.Any(string.IsNullOrWhiteSpace) ||
+            dados.Plataformas?.Any(string.IsNullOrWhiteSpace) == true ||
+            dados.Tipo != TipoMidia.Jogo && dados.Plataformas is { Length: > 0 })
             throw new InvalidDataException("Formato multimídia desconhecido ou inválido. O original foi preservado.");
         try { ValidarReferencia(dados.Tipo, dados.Origem, dados.IdentificadorExterno, dados.Simulado); }
         catch (NotSupportedException) { throw new InvalidDataException("Referência de catálogo multimídia inválida."); }

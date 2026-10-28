@@ -77,7 +77,7 @@ public sealed class ServicoBiblioteca
     {
         ArgumentNullException.ThrowIfNull(item);
         if (item.Catalogo == null || item.Pessoal == null || !Enum.IsDefined(item.Catalogo.Tipo) ||
-            string.IsNullOrWhiteSpace(item.Catalogo.Titulo) || item.Catalogo.Generos == null ||
+            string.IsNullOrWhiteSpace(item.Catalogo.Titulo) || item.Catalogo.Generos == null || item.Catalogo.Plataformas == null ||
             string.IsNullOrWhiteSpace(item.Pessoal.Categoria) || string.IsNullOrWhiteSpace(item.Pessoal.Status) ||
             item.Pessoal.Review == null || !double.IsFinite(item.Pessoal.Nota) || item.Pessoal.Nota < 0 || item.Pessoal.Nota > 5)
             throw new InvalidDataException("A coleção contém um registro inválido. Nenhum registro foi descartado.");
@@ -85,14 +85,42 @@ public sealed class ServicoBiblioteca
     }
 
     public IReadOnlyList<ItemBiblioteca> Filtrar(string? termo, string? status, TipoMidia? tipo = null)
+        => Consultar(new ConsultaBiblioteca { Termo = termo, Status = status, Tipo = tipo });
+
+    public IReadOnlyList<ItemBiblioteca> Consultar(ConsultaBiblioteca consulta)
     {
-        var busca = termo?.Trim() ?? string.Empty;
-        return _itens.Where(item =>
-            (tipo == null || item.Catalogo.Tipo == tipo) &&
-            (status == null || item.Pessoal.Status == status) &&
+        ArgumentNullException.ThrowIfNull(consulta);
+        if (!Enum.IsDefined(consulta.Ordenacao) || consulta.Tipo is { } tipo && !Enum.IsDefined(tipo) ||
+            consulta.NotaMinima is { } nota && (!double.IsFinite(nota) || nota < 0 || nota > 5) ||
+            consulta.AdicionadaDe > consulta.AdicionadaAte)
+            throw new ArgumentException("Filtros inválidos. Use nota de 0 a 5 e um intervalo de datas válido.", nameof(consulta));
+        var busca = consulta.Termo?.Trim() ?? string.Empty;
+        var itens = _itens.Where(item =>
+            (consulta.Tipo == null || item.Catalogo.Tipo == consulta.Tipo) &&
+            (consulta.Status == null || item.Pessoal.Status == consulta.Status) &&
             (item.Catalogo.Titulo.Contains(busca, StringComparison.OrdinalIgnoreCase) ||
-             item.Pessoal.Categoria.Contains(busca, StringComparison.OrdinalIgnoreCase))).ToArray();
+             item.Pessoal.Categoria.Contains(busca, StringComparison.OrdinalIgnoreCase)) &&
+            (string.IsNullOrWhiteSpace(consulta.Genero) || GenerosParaFiltro(item).Contains(consulta.Genero, StringComparer.OrdinalIgnoreCase)) &&
+            (string.IsNullOrWhiteSpace(consulta.Plataforma) || item.Catalogo.Tipo == TipoMidia.Jogo &&
+                item.Catalogo.Plataformas.Contains(consulta.Plataforma, StringComparer.OrdinalIgnoreCase)) &&
+            (consulta.NotaMinima == null || item.Pessoal.Nota >= consulta.NotaMinima) &&
+            (consulta.AdicionadaDe == null || item.DataAdicao is { } de && DateOnly.FromDateTime(de.LocalDateTime) >= consulta.AdicionadaDe) &&
+            (consulta.AdicionadaAte == null || item.DataAdicao is { } ate && DateOnly.FromDateTime(ate.LocalDateTime) <= consulta.AdicionadaAte));
+        // OrderBy é estável: empates conservam a ordem e não descartam duplicatas.
+        return (consulta.Ordenacao switch
+        {
+            OrdenacaoBiblioteca.TituloAscendente => itens.OrderBy(i => i.Catalogo.Titulo, StringComparer.CurrentCultureIgnoreCase),
+            OrdenacaoBiblioteca.TituloDescendente => itens.OrderByDescending(i => i.Catalogo.Titulo, StringComparer.CurrentCultureIgnoreCase),
+            OrdenacaoBiblioteca.MaiorNota => itens.OrderByDescending(i => i.Pessoal.Nota),
+            OrdenacaoBiblioteca.MenorNota => itens.OrderBy(i => i.Pessoal.Nota),
+            OrdenacaoBiblioteca.AdicaoRecente => itens.OrderBy(i => i.DataAdicao == null).ThenByDescending(i => i.DataAdicao),
+            OrdenacaoBiblioteca.AdicaoAntiga => itens.OrderBy(i => i.DataAdicao == null).ThenBy(i => i.DataAdicao),
+            _ => itens
+        }).ToArray();
     }
+
+    public static System.Collections.Generic.IEnumerable<string> GenerosParaFiltro(ItemBiblioteca item) =>
+        item.Catalogo.Generos.Count > 0 ? item.Catalogo.Generos : new[] { item.Pessoal.Categoria };
 
     public IReadOnlyList<ItemBiblioteca> ObterRecentes() => _itens.Reverse().Take(3).ToArray();
 

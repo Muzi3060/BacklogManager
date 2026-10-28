@@ -19,6 +19,7 @@ TestResults/
 # Dados pessoais da coleção (criados pelo aplicativo)
 /backlog.json
 /backlog.json.lock
+/biblioteca.preferencias.json
 
 # Configurações locais, credenciais e ferramentas
 .env
