@@ -16,7 +16,7 @@ public sealed class TextosTests
     [AvaloniaFact(DisplayName = "TX01 | Página inicial vazia | Mensagens falam de obras e biblioteca")]
     public void Vazia() { using var t = new TelaTeste(); Dispatcher.UIThread.RunJobs(); Assert.Contains("Bem-vindo à sua biblioteca", Textos(t)); Assert.Contains("Sua coleção começa aqui. Adicione sua primeira obra!", Textos(t)); Assert.Contains("primeira obra", t.Campo<TextBlock>("TxtResumo").Text!); }
     [AvaloniaFact(DisplayName = "TX02 | Chamada para cadastro na página inicial | Convite é genérico para todas as mídias")]
-    public void Convite() { using var t = new TelaTeste(); Dispatcher.UIThread.RunJobs(); Assert.Contains("Qual será sua próxima obra?", Textos(t)); Assert.Contains("Cada obra, uma história", Textos(t)); }
+    public void Convite() { using var t = new TelaTeste(); Dispatcher.UIThread.RunJobs(); Assert.Contains("Qual será sua próxima obra?", Textos(t)); Assert.Contains("Progresso da biblioteca", Textos(t)); }
     [AvaloniaFact(DisplayName = "TX03 | Biblioteca com livro concluído | Resumo usa obras e mantém contagem correta")]
     public void Livro() { var i = ApoioMultimidia.Item(TipoMidia.Livro); i = i with { Pessoal = i.Pessoal with { Status = "Zerado" } }; using var t = new TelaTeste(new[] { ConversorBibliotecaJson.ParaRegistro(i) }); Assert.Equal("1 de 1 obras concluídas · 0 na fila.", t.Campo<TextBlock>("TxtResumo").Text); Assert.Equal("100% concluído", t.Campo<TextBlock>("TxtProgresso").Text); }
     [AvaloniaFact(DisplayName = "TX04 | Resumo de seis mídias | Contadores locais incluem todas as categorias")]
