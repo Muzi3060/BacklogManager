@@ -7,6 +7,8 @@ namespace BacklogManager.Models;
 // Registro do formato JSON existente. O domínio e a interface usam ItemBiblioteca.
 public class BacklogItem
 {
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public System.Guid? IdInterno { get; set; }
     public string Titulo { get; set; } = string.Empty;
     public string Categoria { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;

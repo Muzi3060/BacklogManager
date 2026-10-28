@@ -61,11 +61,11 @@
         <Style Selector="Border.indicadorSelecao"><Setter Property="IsVisible" Value="False" /></Style>
         <Style Selector="TextBlock.textoSelecao"><Setter Property="IsVisible" Value="False" /></Style>
         <Style Selector="TextBlock.textoFoco"><Setter Property="IsVisible" Value="False" /></Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected Border.indicadorSelecao"><Setter Property="IsVisible" Value="True" /></Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected TextBlock.textoSelecao"><Setter Property="IsVisible" Value="True" /></Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible Border.indicadorSelecao"><Setter Property="IsVisible" Value="True" /></Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible TextBlock.textoFoco"><Setter Property="IsVisible" Value="True" /></Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible Border.gameCard"><Setter Property="Background" Value="#35313D" /></Style>
+        <Style Selector="ListBox.obras ListBoxItem:selected Border.indicadorSelecao"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox.obras ListBoxItem:selected TextBlock.textoSelecao"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox.obras ListBoxItem:focus-visible Border.indicadorSelecao"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox.obras ListBoxItem:focus-visible TextBlock.textoFoco"><Setter Property="IsVisible" Value="True" /></Style>
+        <Style Selector="ListBox.obras ListBoxItem:focus-visible Border.gameCard"><Setter Property="Background" Value="#35313D" /></Style>
         <Style Selector="controls|CapaObra.capaGrade"><Setter Property="Height" Value="174" /></Style>
         <Style Selector="Window.compact controls|CapaObra.capaGrade"><Setter Property="Height" Value="104" /></Style>
         <Style Selector="Button.navigation">
@@ -98,11 +98,11 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Background" Value="Transparent" />
         </Style>
-        <Style Selector="ListBox#ListaBacklog">
+        <Style Selector="ListBox.obras">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Padding" Value="0" />
         </Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem">
+        <Style Selector="ListBox.obras ListBoxItem">
             <Setter Property="Template">
                 <ControlTemplate>
                     <Border Background="Transparent">
@@ -118,23 +118,23 @@
             <Setter Property="CornerRadius" Value="0" />
             <Setter Property="FocusAdorner" Value="{x:Null}" />
         </Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:pointerover Border.gameCard">
+        <Style Selector="ListBox.obras ListBoxItem:pointerover Border.gameCard">
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
         </Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected Border.gameCard">
+        <Style Selector="ListBox.obras ListBoxItem:selected Border.gameCard">
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
             <Setter Property="Background" Value="#35313D" />
         </Style>
         <!-- Os estados do tema têm precedência sobre valores definidos no template. -->
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+        <Style Selector="ListBox.obras ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Style Selector="ListBox.obras ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-        <Style Selector="ListBox#ListaBacklog ListBoxItem:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
+        <Style Selector="ListBox.obras ListBoxItem:focus-visible /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
@@ -187,6 +187,12 @@
                             <TextBlock Grid.Column="1" Text="Minha biblioteca" Margin="13,0,0,0" VerticalAlignment="Center" />
                             <TextBlock Grid.Column="2" x:Name="TxtContagemNav" FontSize="11" VerticalAlignment="Center" Opacity="0.7" />
                         </Grid>
+                    </Button>
+                    <Button x:Name="NavColecoes" Classes="navigation" Tag="colecoes" Click="Navegar_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="13">
+                            <Path Data="{StaticResource LibraryIcon}" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1.6" Width="18" Height="18" Stretch="Uniform" />
+                            <TextBlock Text="Coleções" VerticalAlignment="Center" />
+                        </StackPanel>
                     </Button>
                     <Button x:Name="NavCadastro" Classes="navigation" Tag="cadastro" Click="Navegar_Click">
                         <StackPanel Orientation="Horizontal" Spacing="13">
@@ -382,7 +388,7 @@
                         <TextBlock x:Name="TxtErroFiltros" IsVisible="False" TextWrapping="Wrap" Foreground="#E7BD78" FontSize="11" />
                     </StackPanel>
                     <Grid Grid.Row="3">
-                        <ListBox x:Name="ListaBacklog" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListaBacklog_SelectionChanged">
+                        <ListBox x:Name="ListaBacklog" Classes="obras" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListaBacklog_SelectionChanged">
 
                         </ListBox>
                         <StackPanel x:Name="EstadoListaVazia" IsVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="12" Margin="20">
@@ -400,6 +406,65 @@
                         </Grid>
                     </Border>
                 </Grid>
+
+                <!-- COLEÇÕES PESSOAIS: não dependem das categorias de mídia. -->
+                <ScrollViewer x:Name="PaginaColecoes" IsVisible="False" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Spacing="12" MaxWidth="900">
+                        <TextBlock Text="Minhas coleções" Classes="pageTitle" />
+                        <TextBlock Text="Organize obras de qualquer mídia. Uma obra pode participar de várias coleções." Classes="muted" TextWrapping="Wrap" />
+                        <Border x:Name="AvisoColecoesIndisponiveis" IsVisible="False" Classes="card">
+                            <TextBlock x:Name="TxtFalhaColecoes" TextWrapping="Wrap" Foreground="{DynamicResource ErrorBrush}" />
+                        </Border>
+                        <TextBlock Text="Coleção" FontWeight="SemiBold" />
+                        <ComboBox x:Name="CmbColecoes" SelectionChanged="Colecao_Changed" PlaceholderText="Crie ou selecione uma coleção">
+                            <ComboBox.ItemTemplate><DataTemplate DataType="models:ColecaoPersonalizada"><TextBlock Text="{Binding Nome}" TextTrimming="CharacterEllipsis" /></DataTemplate></ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <TextBlock Text="Nome da coleção" FontWeight="SemiBold" />
+                        <TextBox x:Name="TxtNomeColecao" MaxLength="120" PlaceholderText="Ex.: Meus favoritos" />
+                        <TextBlock Text="Descrição (opcional)" Classes="muted" />
+                        <TextBox x:Name="TxtDescricaoColecao" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="1000" Height="64" PlaceholderText="Como você quer organizar esta coleção?" />
+                        <WrapPanel>
+                            <Button x:Name="BtnNovaColecao" Content="Nova coleção" Click="NovaColecao_Click" Margin="0,0,8,8" />
+                            <Button x:Name="BtnCriarColecao" Content="Criar coleção" Classes="primary" Click="CriarColecao_Click" Margin="0,0,8,8" />
+                            <Button x:Name="BtnSalvarColecao" Content="Salvar alterações" Click="SalvarColecao_Click" Margin="0,0,8,8" />
+                            <Button x:Name="BtnExcluirColecao" Content="Excluir coleção" Classes="danger" Click="ExcluirColecao_Click" Margin="0,0,0,8" />
+                        </WrapPanel>
+                        <Border x:Name="ConfirmacaoExclusaoColecao" IsVisible="False" Classes="card">
+                            <StackPanel Spacing="10">
+                                <TextBlock x:Name="TxtConfirmacaoColecao" TextWrapping="Wrap" />
+                                <WrapPanel>
+                                    <Button x:Name="BtnConfirmarExcluirColecao" Content="Confirmar exclusão" Classes="danger" Click="ConfirmarExcluirColecao_Click" Margin="0,0,8,0" />
+                                    <Button x:Name="BtnCancelarExcluirColecao" Content="Cancelar" Click="CancelarExcluirColecao_Click" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+                        <TextBlock Text="Adicionar obra existente" FontWeight="SemiBold" />
+                        <Grid ColumnDefinitions="*,Auto">
+                            <ComboBox x:Name="CmbObraColecao" SelectionChanged="ObraColecao_Changed" PlaceholderText="Selecione uma obra da biblioteca" Margin="0,0,10,0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="models:ItemBiblioteca">
+                                        <StackPanel Spacing="2" ToolTip.Tip="{Binding Pessoal.Review}">
+                                            <TextBlock Text="{Binding Catalogo.Titulo}" TextTrimming="CharacterEllipsis" />
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <TextBlock Text="{Binding Catalogo.Tipo}" Classes="muted" FontSize="11" />
+                                                <TextBlock Text="{Binding StatusExibido}" Classes="muted" FontSize="11" />
+                                                <TextBlock Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" FontSize="11" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Grid.Column="1" x:Name="BtnAdicionarObraColecao" Content="Adicionar à coleção" Click="AdicionarObraColecao_Click" VerticalAlignment="Center" />
+                        </Grid>
+                        <TextBlock x:Name="TxtResumoColecao" Classes="muted" TextWrapping="Wrap" />
+                        <TextBlock x:Name="TxtColecaoVazia" Text="Selecione ou crie uma coleção para ver suas obras." Classes="muted" TextWrapping="Wrap" />
+                        <ListBox x:Name="ListaObrasColecao" Classes="obras" Height="220" ItemTemplate="{StaticResource TemplateLista}" SelectionChanged="ObraColecao_Changed" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                        <WrapPanel>
+                            <Button x:Name="BtnEditarObraColecao" Content="Editar dados pessoais" Click="EditarObraColecao_Click" Margin="0,0,8,12" />
+                            <Button x:Name="BtnRemoverObraColecao" Content="Remover da coleção" Click="RemoverObraColecao_Click" Margin="0,0,0,12" />
+                        </WrapPanel>
+                    </StackPanel>
+                </ScrollViewer>
 
                 <!-- CADASTRO / EDIÇÃO -->
                 <ScrollViewer x:Name="PaginaCadastro" IsVisible="False" HorizontalScrollBarVisibility="Disabled">

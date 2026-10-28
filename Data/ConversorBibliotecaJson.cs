@@ -35,6 +35,7 @@ internal static class ConversorBibliotecaJson
             Progresso = extra?.Progresso
         })
         {
+            IdInterno = registro.IdInterno,
             SteamAppIdLegado = registro.SteamAppId,
             DataAdicao = extra?.DataAdicao,
             DadosAdicionais = registro.DadosAdicionais == null ? null :
@@ -62,6 +63,7 @@ internal static class ConversorBibliotecaJson
         return new BacklogItem(catalogo.Titulo, item.Pessoal.Categoria, item.Pessoal.Status,
             item.Pessoal.Nota, item.Pessoal.Review, item.SteamAppIdLegado)
         {
+            IdInterno = item.IdInterno,
             IgdbId = igdbId,
             DadosAdicionais = CopiarExtras(item.DadosAdicionais),
             Multimidia = !precisaBloco ? null : new DadosMultimidiaJson

@@ -112,6 +112,7 @@ public sealed class FileManager
 
     private static void Validar(List<BacklogItem> itens)
     {
+        var identidades = new HashSet<Guid>();
         foreach (var item in itens)
         {
             if (item == null || string.IsNullOrWhiteSpace(item.Titulo) ||
@@ -119,9 +120,13 @@ public sealed class FileManager
                 item.Review == null || !double.IsFinite(item.Nota) || item.Nota < 0 || item.Nota > 5 ||
                 item.IgdbId is <= 0)
                 throw new InvalidDataException("A coleção contém um registro inválido. Nenhum registro foi descartado.");
+            if (item.IdInterno is { } id && (id == Guid.Empty || !identidades.Add(id)))
+                throw new InvalidDataException("A biblioteca contém identificadores internos vazios ou repetidos. Nenhum registro foi descartado.");
             if (item.Multimidia != null) ConversorBibliotecaJson.ValidarMultimidia(item);
             if (item.DadosAdicionais?.ContainsKey("Multimidia") == true)
                 throw new InvalidDataException("O campo Multimidia está duplicado nos dados adicionais.");
+            if (item.DadosAdicionais?.ContainsKey("IdInterno") == true)
+                throw new InvalidDataException("O campo IdInterno está duplicado nos dados adicionais.");
         }
     }
 }

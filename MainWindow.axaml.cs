@@ -29,18 +29,20 @@ public partial class MainWindow : Window
     internal Task BuscaPendente { get; private set; } = Task.CompletedTask;
     internal CarregadorCapas Capas { get; }
     private readonly ArmazenamentoPreferenciasBiblioteca _preferencias;
+    private readonly ServicoColecoes _colecoes;
 
     public MainWindow() : this(ComposicaoAplicativo.Criar()) { }
 
     private MainWindow(DependenciasJanela dependencias)
-        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias) { }
+        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes) { }
 
     internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null,
-        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null)
+        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null, ServicoColecoes? colecoes = null)
     {
         _preferencias = preferencias ?? new ArmazenamentoPreferenciasBiblioteca();
         Capas = capas ?? new CarregadorCapas();
         _biblioteca = biblioteca;
+        _colecoes = colecoes ?? new ServicoColecoes(new ArmazenamentoColecoesMemoria(), biblioteca);
         _roteador = new RoteadorPesquisaCatalogo(pesquisa);
         _recursoPesquisa = recursoPesquisa;
         InitializeComponent();
@@ -56,6 +58,12 @@ public partial class MainWindow : Window
         }
         if (PersistenciaDisponivel && pesquisa == null)
             ExibirAviso("Pesquisa indisponível", "Configure IGDB_CLIENT_ID e IGDB_ACESS_TOKEN (ou IGDB_ACCESS_TOKEN). Sua coleção local continua disponível.", true);
+        try { _colecoes.Carregar(); }
+        catch (Exception erro) when (FalhaDeArquivo(erro))
+        {
+            AvisoColecoesIndisponiveis.IsVisible = true;
+            TxtFalhaColecoes.Text = $"Coleções não carregadas. O original foi preservado; alterações de coleções estão bloqueadas. Arquivo: {_colecoes.DescricaoOrigem}";
+        }
 
         _interfacePronta = true;
         CarregarVisualizacao();
@@ -132,9 +140,11 @@ public partial class MainWindow : Window
         PaginaInicio.IsVisible = pagina == "inicio";
         PaginaBacklog.IsVisible = pagina == "backlog";
         PaginaCadastro.IsVisible = pagina == "cadastro";
+        PaginaColecoes.IsVisible = pagina == "colecoes";
         NavInicio.Classes.Set("active", pagina == "inicio");
         NavBacklog.Classes.Set("active", pagina == "backlog");
         NavCadastro.Classes.Set("active", pagina == "cadastro");
+        NavColecoes.Classes.Set("active", pagina == "colecoes");
     }
 
     private void NovoJogo_Click(object? sender, RoutedEventArgs e)
@@ -345,6 +355,7 @@ public partial class MainWindow : Window
         EstadoInicioVazio.IsVisible = total == 0;
         AtualizarOpcoesFiltros();
         AtualizarLista();
+        AtualizarPaginaColecoes();
     }
 
     private void AtualizarLista()

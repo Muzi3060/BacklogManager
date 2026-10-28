@@ -11,6 +11,7 @@ public sealed class ServicoBiblioteca
 {
     private readonly IArmazenamentoBiblioteca _armazenamento;
     private IReadOnlyList<ItemBiblioteca> _itens = Array.Empty<ItemBiblioteca>();
+    private readonly Dictionary<ItemBiblioteca, Guid> _identidadesAtribuidas = new(ReferenceEqualityComparer.Instance);
     public IReadOnlyList<ItemBiblioteca> Itens => _itens;
     public bool Carregada { get; private set; }
     public string DescricaoOrigem => _armazenamento.DescricaoOrigem;
@@ -26,7 +27,9 @@ public sealed class ServicoBiblioteca
         Carregada = false;
         var candidatos = _armazenamento.Carregar().ToList();
         foreach (var item in candidatos) Validar(item);
+        ValidarIdentidades(candidatos);
         _itens = candidatos.AsReadOnly();
+        _identidadesAtribuidas.Clear();
         Carregada = true;
     }
 
@@ -45,9 +48,10 @@ public sealed class ServicoBiblioteca
     {
         var indice = Encontrar(original);
         ArgumentNullException.ThrowIfNull(dadosPessoais);
-        var atualizado = original with { Pessoal = dadosPessoais };
+        var atual = _itens[indice];
+        var atualizado = atual with { Pessoal = dadosPessoais };
         Validar(atualizado);
-        RegrasProgresso.ValidarPreenchimento(atualizado.Catalogo.Tipo, dadosPessoais.Progresso, original.Pessoal.Progresso);
+        RegrasProgresso.ValidarPreenchimento(atualizado.Catalogo.Tipo, dadosPessoais.Progresso, atual.Pessoal.Progresso);
         var candidatos = _itens.ToList();
         candidatos[indice] = atualizado;
         Confirmar(candidatos);
@@ -63,18 +67,47 @@ public sealed class ServicoBiblioteca
 
     private int Encontrar(ItemBiblioteca item)
     {
+        ArgumentNullException.ThrowIfNull(item);
         // Registros iguais continuam independentes: removemos a instância selecionada.
         for (var i = 0; i < _itens.Count; i++)
             if (ReferenceEquals(_itens[i], item)) return i;
+        var id = item.IdInterno;
+        if (id == null && _identidadesAtribuidas.TryGetValue(item, out var atribuido)) id = atribuido;
+        if (id != null)
+            for (var i = 0; i < _itens.Count; i++) if (_itens[i].IdInterno == id) return i;
         throw new InvalidOperationException("O item não pertence à coleção carregada.");
+    }
+
+    public Guid GarantirIdentidade(ItemBiblioteca item)
+    {
+        var indice = Encontrar(item);
+        var atual = _itens[indice];
+        if (atual.IdInterno is { } existente) return existente;
+        var id = Guid.NewGuid();
+        var candidatos = _itens.ToList();
+        candidatos[indice] = atual with { IdInterno = id };
+        Confirmar(candidatos);
+        // A tela pode ainda guardar a instância anterior à atribuição. Ela continua apontando para a mesma obra.
+        _identidadesAtribuidas[item] = id;
+        _identidadesAtribuidas[atual] = id;
+        return id;
     }
 
     private void Confirmar(List<ItemBiblioteca> candidatos)
     {
         if (!Carregada)
             throw new InvalidOperationException("Carregue a coleção com sucesso antes de salvar.");
+        ValidarIdentidades(candidatos);
         _armazenamento.Salvar(candidatos.AsReadOnly());
         _itens = candidatos.AsReadOnly();
+    }
+
+    private static void ValidarIdentidades(IEnumerable<ItemBiblioteca> itens)
+    {
+        var ids = new HashSet<Guid>();
+        foreach (var item in itens)
+            if (item.IdInterno is { } id && (id == Guid.Empty || !ids.Add(id)))
+                throw new InvalidDataException("Identificadores internos vazios ou repetidos. Nenhum registro foi descartado.");
     }
 
     private static void Validar(ItemBiblioteca item)

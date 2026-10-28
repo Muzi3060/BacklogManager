@@ -20,6 +20,8 @@ TestResults/
 /backlog.json
 /backlog.json.lock
 /biblioteca.preferencias.json
+/backlog.colecoes.json
+/backlog.colecoes.json.lock
 
 # Configurações locais, credenciais e ferramentas
 .env

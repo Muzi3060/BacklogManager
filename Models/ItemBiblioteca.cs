@@ -6,6 +6,7 @@ namespace BacklogManager.Models;
 
 public sealed record ItemBiblioteca(ObraCatalogo Catalogo, DadosPessoaisBiblioteca Pessoal)
 {
+    public Guid? IdInterno { get; init; }
     // Ausente nos registros antigos: a data original não pode ser adivinhada.
     public DateTimeOffset? DataAdicao { get; init; }
     public bool TemProgresso => Pessoal.Progresso is { Vazio: false };
