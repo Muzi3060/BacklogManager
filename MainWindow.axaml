@@ -15,9 +15,9 @@
         <DataTemplate x:Key="TemplateGrade" DataType="models:ItemBiblioteca">
             <Border Classes="card gameCard gradeCard" Width="180" Padding="10" Margin="0,0,10,0">
                 <StackPanel Spacing="5">
-                    <controls:CapaObra Classes="capaGrade" Endereco="{Binding Catalogo.CapaUrl}" />
+                    <controls:CapaObra Classes="capaGrade" Endereco="{Binding Catalogo.CapaUrl}" Preenchimento="UniformToFill" />
                     <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
-                    <TextBlock Text="{Binding Pessoal.Categoria}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
                     <TextBlock Text="{Binding StatusExibido}" FontSize="12" Foreground="#C5A8EF" />
                     <TextBlock Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="#E7BD78" />
                     <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="11" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
@@ -32,7 +32,7 @@
                     <controls:CapaObra Endereco="{Binding Catalogo.CapaUrl}" Height="96" VerticalAlignment="Top" />
                     <StackPanel Grid.Column="1" Margin="12,0" Spacing="5">
                         <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Catalogo.Titulo}" />
-                        <TextBlock Text="{Binding Pessoal.Categoria}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding GenerosExibidos}" ToolTip.Tip="{Binding GenerosExibidos}" FontSize="11" Classes="muted" TextTrimming="CharacterEllipsis" />
                         <TextBlock Text="{Binding StatusExibido}" Foreground="#C5A8EF" FontSize="12" />
                         <TextBlock Text="Dados simulados" IsVisible="{Binding Catalogo.Simulado}" Foreground="#E7BD78" FontSize="11" />
                         <TextBlock Text="{Binding ProgressoExibido}" IsVisible="{Binding TemProgresso}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding ProgressoExibido}" />
@@ -83,10 +83,21 @@
             <Setter Property="Padding" Value="0" />
         </Style>
         <Style Selector="ListBox#ListaBacklog ListBoxItem">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="Transparent" CornerRadius="10">
+                        <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter>
             <Setter Property="Padding" Value="0" />
             <Setter Property="Margin" Value="0,0,0,10" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="CornerRadius" Value="10" />
+        </Style>
+        <Style Selector="ListBox#ListaBacklog ListBoxItem:pointerover Border.gameCard">
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
         </Style>
         <Style Selector="ListBox#ListaBacklog ListBoxItem:selected Border.gameCard">
             <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
@@ -187,8 +198,8 @@
                 <ScrollViewer x:Name="PaginaInicio" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Spacing="24" MaxWidth="1040">
                         <StackPanel Spacing="7">
-                            <TextBlock Text="Bem-vindo ao seu backlog" Classes="pageTitle" />
-                            <TextBlock Text="Organize suas próximas aventuras e registre cada conquista." Classes="muted" TextWrapping="Wrap" />
+                            <TextBlock Text="Bem-vindo à sua biblioteca" Classes="pageTitle" />
+                            <TextBlock Text="Organize suas obras e registre suas experiências." Classes="muted" TextWrapping="Wrap" />
                         </StackPanel>
                         <Grid ColumnDefinitions="*,*,*">
                             <Border Classes="card" Margin="0,0,10,0">
@@ -213,7 +224,7 @@
                         <Border Classes="card">
                             <StackPanel Spacing="18">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <TextBlock Text="Cada jogo, uma história" FontSize="16" FontWeight="SemiBold" />
+                                    <TextBlock Text="Cada obra, uma história" FontSize="16" FontWeight="SemiBold" />
                                     <TextBlock Grid.Column="1" x:Name="TxtProgresso" Foreground="{DynamicResource AccentBrush}" FontWeight="SemiBold" />
                                 </Grid>
                                 <ProgressBar x:Name="ProgressoBacklog" Minimum="0" Maximum="100" Height="5" Foreground="{DynamicResource AccentBrush}" Background="#444148" />
@@ -222,7 +233,7 @@
                                     <Grid ColumnDefinitions="Auto,*,Auto">
                                         <Path Data="{StaticResource PlusIcon}" Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.6" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" />
                                         <StackPanel Grid.Column="1" Margin="14,0" Spacing="4" VerticalAlignment="Center">
-                                            <TextBlock Text="Qual vai ser o próximo jogo?" FontWeight="SemiBold" />
+                                            <TextBlock Text="Qual será sua próxima obra?" FontWeight="SemiBold" />
                                             <TextBlock Text="Adicione um título à sua coleção." Classes="muted" FontSize="12" />
                                         </StackPanel>
                                         <Button Grid.Column="2" Content="Adicionar obra" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
@@ -241,7 +252,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate DataType="models:ItemBiblioteca">
-                                        <Button Classes="recent" Tag="{Binding}" Click="Recente_Click" Margin="0,0,10,0" ToolTip.Tip="Abrir este jogo para editar">
+                                        <Button Classes="recent" Tag="{Binding}" Click="Recente_Click" Margin="0,0,10,0" ToolTip.Tip="Abrir esta obra para editar">
                                             <Border Classes="card" Padding="0" ClipToBounds="True">
                                                 <StackPanel>
                                                     <Border Height="72" Background="#39313F">
@@ -261,7 +272,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <Border x:Name="EstadoInicioVazio" Classes="card" IsVisible="False">
-                                <TextBlock Text="Sua coleção começa aqui. Adicione seu primeiro jogo!" Classes="muted" TextWrapping="Wrap" />
+                                <TextBlock Text="Sua coleção começa aqui. Adicione sua primeira obra!" Classes="muted" TextWrapping="Wrap" />
                             </Border>
                         </StackPanel>
                     </StackPanel>
@@ -400,8 +411,8 @@
                                     </ListBox>
                                 </StackPanel>
                                 <Grid ColumnDefinitions="*,*">
-                                    <StackPanel Spacing="8" Margin="0,0,16,0">
-                                        <TextBlock Text="Categoria" FontWeight="SemiBold" />
+                                    <StackPanel x:Name="CampoCategoriaLegada" Spacing="8" Margin="0,0,16,0">
+                                        <TextBlock Text="Categoria pessoal" FontWeight="SemiBold" />
                                         <ComboBox x:Name="CmbCategoria" SelectedIndex="0">
                                             <ComboBoxItem Content="RPG" />
                                             <ComboBoxItem Content="Ação / Aventura" />
@@ -410,6 +421,10 @@
                                             <ComboBoxItem Content="Indie" />
                                             <ComboBoxItem Content="Outro" />
                                         </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel x:Name="CampoGenerosCatalogo" Spacing="8" Margin="0,0,16,0">
+                                        <TextBlock Text="Gêneros do catálogo" FontWeight="SemiBold" />
+                                        <TextBlock x:Name="TxtGenerosCatalogo" TextWrapping="Wrap" Classes="muted" />
                                     </StackPanel>
                                     <StackPanel Grid.Column="1" Spacing="8">
                                         <TextBlock Text="Status" FontWeight="SemiBold" />
@@ -451,15 +466,15 @@
                                     </StackPanel>
                                     <StackPanel x:Name="ProgressoManga" IsVisible="False" Spacing="7">
                                         <TextBlock Text="Capítulo" Classes="muted" />
-                                        <NumericUpDown x:Name="NumCapituloManga" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <NumericUpDown x:Name="NumCapituloManga" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
                                         <TextBlock Text="Volume" Classes="muted" />
-                                        <NumericUpDown x:Name="NumVolume" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <NumericUpDown x:Name="NumVolume" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
                                     </StackPanel>
                                     <StackPanel x:Name="ProgressoLivro" IsVisible="False" Spacing="7">
                                         <TextBlock Text="Página" Classes="muted" />
-                                        <NumericUpDown x:Name="NumPagina" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <NumericUpDown x:Name="NumPagina" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
                                         <TextBlock Text="Capítulo" Classes="muted" />
-                                        <NumericUpDown x:Name="NumCapituloLivro" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
+                                        <NumericUpDown x:Name="NumCapituloLivro" PlaceholderText="Não informado" Minimum="0" Maximum="2147483647" Increment="1" FormatString="0" />
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Spacing="8">
@@ -467,7 +482,7 @@
                                         <TextBlock Text="Review / comentários" FontWeight="SemiBold" />
                                         <TextBlock Grid.Column="1" Text="Opcional · até 1000 caracteres" Classes="muted" FontSize="11" VerticalAlignment="Center" />
                                     </Grid>
-                                    <TextBox x:Name="TxtReview" PlaceholderText="O que você achou do jogo? Registre suas impressões..." AcceptsReturn="True" TextWrapping="Wrap" MaxLength="1000" Height="120" VerticalContentAlignment="Top" />
+                                    <TextBox x:Name="TxtReview" PlaceholderText="O que você achou da obra? Registre suas impressões..." AcceptsReturn="True" TextWrapping="Wrap" MaxLength="1000" Height="120" VerticalContentAlignment="Top" />
                                 </StackPanel>
                             </StackPanel>
                         </Border>

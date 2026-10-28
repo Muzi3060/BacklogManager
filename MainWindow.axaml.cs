@@ -61,7 +61,7 @@ public partial class MainWindow : Window
         CarregarVisualizacao();
         AtualizarFormularioMidia();
         AtualizarColecao();
-        BtnAdicionar.IsEnabled = PersistenciaDisponivel;
+        AtualizarDisponibilidadeCadastro();
         BtnAtualizar.IsEnabled = PersistenciaDisponivel;
         if (!PersistenciaDisponivel)
         {
@@ -185,6 +185,8 @@ public partial class MainWindow : Window
             : "Uma nova aventura para a sua coleção.";
         BtnAdicionar.IsVisible = !editando;
         BtnAtualizar.IsVisible = editando;
+        AtualizarDisponibilidadeCadastro();
+        AtualizarGenerosCadastro();
     }
 
     private ItemBiblioteca? LerFormulario()
@@ -208,7 +210,9 @@ public partial class MainWindow : Window
 
         if (_jogoSelecionado == null)
         {
-            ExibirAviso(TipoCadastro == TipoMidia.Jogo ? "Selecione um jogo" : "Selecione uma obra", "Escolha uma sugestão antes de adicionar à sua coleção.", true);
+            ExibirAviso(TipoCadastro == TipoMidia.Jogo ? "Selecione um jogo" : "Selecione uma obra",
+                TipoCadastro == TipoMidia.Jogo ? "Novos jogos exigem selecionar um resultado válido da IGDB. Digitar um título não é suficiente." :
+                "Escolha uma sugestão antes de adicionar à sua coleção.", true);
             return;
         }
 
@@ -335,7 +339,7 @@ public partial class MainWindow : Window
         TxtProgresso.Text = $"{progresso:0}% concluído";
         ProgressoBacklog.Value = progresso;
         TxtResumo.Text = total == 0
-            ? "Adicione seu primeiro jogo e comece a acompanhar seu progresso."
+            ? "Adicione sua primeira obra e comece a acompanhar seu progresso."
             : $"{zerados} de {total} obras concluídas · {naFila} na fila.";
         ListaRecentes.ItemsSource = _biblioteca.ObterRecentes();
         EstadoInicioVazio.IsVisible = total == 0;
@@ -384,7 +388,8 @@ public partial class MainWindow : Window
         {
             CancelarBusca();
             _jogoSelecionado = jogo;
-            _textoNaSelecao = TxtTitulo.Text;
+            _textoNaSelecao = jogo.Titulo;
+            TxtTitulo.Text = jogo.Titulo;
             if (jogo.Tipo != TipoMidia.Jogo && jogo.Generos.Count > 0) SelecionarValor(CmbCategoria, jogo.Generos[0]);
             ListaSugestoes.IsVisible = false;
         }
@@ -392,11 +397,15 @@ public partial class MainWindow : Window
         {
             _jogoSelecionado = null;
         }
+        AtualizarDisponibilidadeCadastro();
+        AtualizarGenerosCadastro();
     }
 
     private async void TxtTitulo_TextChanged(object? sender, TextChangedEventArgs e)
     {
         if (!_interfacePronta || _fechada) return;
+        // TextChanged é enfileirado: preencher o título selecionado não deve iniciar outra busca.
+        if (_jogoSelecionado != null && TxtTitulo.Text == _textoNaSelecao) return;
         BuscaPendente = BuscarSugestoesAsync();
         await BuscaPendente;
     }
@@ -405,6 +414,8 @@ public partial class MainWindow : Window
     {
         CancelarBusca();
         _jogoSelecionado = null;
+        AtualizarDisponibilidadeCadastro();
+        AtualizarGenerosCadastro();
         ListaSugestoes.ItemsSource = null;
         ListaSugestoes.IsVisible = false;
         var termo = TxtTitulo.Text?.Trim() ?? string.Empty;
@@ -413,7 +424,7 @@ public partial class MainWindow : Window
         var pesquisa = _roteador.Obter(tipoBusca);
         if (pesquisa == null)
         {
-            ExibirAviso("Pesquisa indisponível", "Configure as credenciais locais da IGDB para pesquisar. Sua coleção continua disponível.", true);
+            ExibirAviso("Pesquisa indisponível", "Novos jogos exigem selecionar um resultado da IGDB. Configure as credenciais locais e a conexão para pesquisar. Sua biblioteca local continua disponível.", true);
             return;
         }
 
@@ -429,7 +440,7 @@ public partial class MainWindow : Window
             ListaSugestoes.ItemsSource = resultado;
             ListaSugestoes.IsVisible = resultado.Count > 0;
             if (resultado.Count == 0)
-                ExibirAviso("Nenhum resultado", "A pesquisa foi concluída, mas nenhum jogo foi encontrado.");
+                ExibirAviso("Nenhum resultado", "A pesquisa foi concluída, mas nenhuma obra foi encontrada.");
             else if (TxtAvisoTitulo.Text is "Falha na pesquisa" or "Nenhum resultado" or "Pesquisa indisponível")
                 AvisoOperacao.IsVisible = false;
         }

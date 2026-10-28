@@ -24,6 +24,18 @@ public sealed record ProgressoPessoal
 
 public static class RegrasProgresso
 {
+    public static void ValidarPreenchimento(TipoMidia tipo, ProgressoPessoal? progresso, ProgressoPessoal? anterior = null)
+    {
+        // A leitura continua compatível com zeros antigos. Só novas posições precisam começar em 1.
+        if (progresso != null && (PosicaoInvalida(progresso.Pagina, anterior?.Pagina) ||
+            PosicaoInvalida(progresso.Capitulo, anterior?.Capitulo) ||
+            PosicaoInvalida(progresso.Volume, anterior?.Volume)))
+            throw new InvalidDataException("Página, capítulo e volume devem começar em 1. Deixe em branco quando o progresso não estiver informado.");
+        Validar(tipo, progresso);
+    }
+
+    private static bool PosicaoInvalida(int? valor, int? anterior) => valor is <= 0 && valor != anterior;
+
     public static void Validar(TipoMidia tipo, ProgressoPessoal? progresso)
     {
         if (!Enum.IsDefined(tipo)) throw new InvalidDataException("Tipo de mídia inválido.");

@@ -33,6 +33,9 @@ public sealed class ServicoBiblioteca
     public void Adicionar(ItemBiblioteca item)
     {
         Validar(item);
+        if (item.Catalogo.Tipo == TipoMidia.Jogo && !FormularioJogo.SelecaoValida(item.Catalogo))
+            throw new InvalidDataException("Novos jogos exigem uma seleção válida do catálogo IGDB.");
+        RegrasProgresso.ValidarPreenchimento(item.Catalogo.Tipo, item.Pessoal.Progresso);
         var candidatos = _itens.ToList();
         candidatos.Add(item);
         Confirmar(candidatos);
@@ -44,6 +47,7 @@ public sealed class ServicoBiblioteca
         ArgumentNullException.ThrowIfNull(dadosPessoais);
         var atualizado = original with { Pessoal = dadosPessoais };
         Validar(atualizado);
+        RegrasProgresso.ValidarPreenchimento(atualizado.Catalogo.Tipo, dadosPessoais.Progresso, original.Pessoal.Progresso);
         var candidatos = _itens.ToList();
         candidatos[indice] = atualizado;
         Confirmar(candidatos);
@@ -78,7 +82,8 @@ public sealed class ServicoBiblioteca
         ArgumentNullException.ThrowIfNull(item);
         if (item.Catalogo == null || item.Pessoal == null || !Enum.IsDefined(item.Catalogo.Tipo) ||
             string.IsNullOrWhiteSpace(item.Catalogo.Titulo) || item.Catalogo.Generos == null || item.Catalogo.Plataformas == null ||
-            string.IsNullOrWhiteSpace(item.Pessoal.Categoria) || string.IsNullOrWhiteSpace(item.Pessoal.Status) ||
+            (string.IsNullOrWhiteSpace(item.Pessoal.Categoria) &&
+                !(item.Pessoal.Categoria == string.Empty && FormularioJogo.SelecaoValida(item.Catalogo))) || string.IsNullOrWhiteSpace(item.Pessoal.Status) ||
             item.Pessoal.Review == null || !double.IsFinite(item.Pessoal.Nota) || item.Pessoal.Nota < 0 || item.Pessoal.Nota > 5)
             throw new InvalidDataException("A coleção contém um registro inválido. Nenhum registro foi descartado.");
         RegrasProgresso.Validar(item.Catalogo.Tipo, item.Pessoal.Progresso);
@@ -120,7 +125,8 @@ public sealed class ServicoBiblioteca
     }
 
     public static System.Collections.Generic.IEnumerable<string> GenerosParaFiltro(ItemBiblioteca item) =>
-        item.Catalogo.Generos.Count > 0 ? item.Catalogo.Generos : new[] { item.Pessoal.Categoria };
+        item.Catalogo.Generos.Count > 0 ? item.Catalogo.Generos :
+            string.IsNullOrWhiteSpace(item.Pessoal.Categoria) ? Array.Empty<string>() : new[] { item.Pessoal.Categoria };
 
     public IReadOnlyList<ItemBiblioteca> ObterRecentes() => _itens.Reverse().Take(3).ToArray();
 

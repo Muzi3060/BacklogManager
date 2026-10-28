@@ -13,6 +13,8 @@ public sealed class CapaObra : UserControl
 {
     public static readonly StyledProperty<string?> EnderecoProperty = AvaloniaProperty.Register<CapaObra, string?>(nameof(Endereco));
     public string? Endereco { get => GetValue(EnderecoProperty); set => SetValue(EnderecoProperty, value); }
+    public static readonly StyledProperty<Stretch> PreenchimentoProperty = AvaloniaProperty.Register<CapaObra, Stretch>(nameof(Preenchimento), Stretch.Uniform);
+    public Stretch Preenchimento { get => GetValue(PreenchimentoProperty); set => SetValue(PreenchimentoProperty, value); }
     private readonly Image _imagem = new() { Stretch = Stretch.Uniform, IsVisible = false };
     private readonly TextBlock _padrao = new()
     {
@@ -39,6 +41,7 @@ public sealed class CapaObra : UserControl
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
+        if (change.Property == PreenchimentoProperty) _imagem.Stretch = Preenchimento;
         if (change.Property == EnderecoProperty && TopLevel.GetTopLevel(this) != null) Iniciar();
     }
 

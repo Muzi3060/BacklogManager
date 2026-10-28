@@ -115,7 +115,7 @@ public sealed class FileManager
         foreach (var item in itens)
         {
             if (item == null || string.IsNullOrWhiteSpace(item.Titulo) ||
-                string.IsNullOrWhiteSpace(item.Categoria) || string.IsNullOrWhiteSpace(item.Status) ||
+                (string.IsNullOrWhiteSpace(item.Categoria) && !(item.Categoria == string.Empty && item.IgdbId > 0)) || string.IsNullOrWhiteSpace(item.Status) ||
                 item.Review == null || !double.IsFinite(item.Nota) || item.Nota < 0 || item.Nota > 5 ||
                 item.IgdbId is <= 0)
                 throw new InvalidDataException("A coleção contém um registro inválido. Nenhum registro foi descartado.");

@@ -11,6 +11,8 @@ public sealed record ItemBiblioteca(ObraCatalogo Catalogo, DadosPessoaisBibliote
     public bool TemProgresso => Pessoal.Progresso is { Vazio: false };
     public string ProgressoExibido => TextosMidia.Progresso(Catalogo.Tipo, Pessoal.Progresso);
     public string StatusExibido => TextosMidia.Status(Catalogo.Tipo, Pessoal.Status);
+    public string GenerosExibidos => Catalogo.Generos.Count > 0 ? Catalogo.GenerosTexto :
+        string.IsNullOrWhiteSpace(Pessoal.Categoria) ? "Gêneros não informados" : $"Categoria legada: {Pessoal.Categoria}";
 
     // Metadados de compatibilidade: não são usados para identificar uma obra no catálogo.
     public int? SteamAppIdLegado { get; init; }
