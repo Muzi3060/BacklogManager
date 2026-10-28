@@ -17,12 +17,14 @@ internal sealed class TelaTeste : IDisposable
         Responder = (_, _) => Task.FromResult(new HttpResponseMessage(System.Net.HttpStatusCode.NotFound))
     });
     public MainWindow Janela { get; }
-    public TelaTeste(IEnumerable<BacklogItem>? iniciais = null, bool semServico = false, string? json = null, ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null)
+    public TelaTeste(IEnumerable<BacklogItem>? iniciais = null, bool semServico = false, string? json = null, ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null,
+        Func<ServicoBiblioteca, ServicoColecoes>? criarColecoes = null)
     {
         if (json != null) File.WriteAllText(Pasta.Arquivo, json);
         else if (iniciais != null) File.WriteAllText(Pasta.Arquivo, JsonSerializer.Serialize(iniciais));
         _cliente = new HttpClient(Http);
-        Janela = new MainWindow(new ServicoBiblioteca(new ArmazenamentoJsonBiblioteca(new FileManager(Pasta.Arquivo))), semServico ? null : new PesquisaJogosIgdb(new IgdbService(_cliente, "cliente-simulado", "token-simulado")), preferencias: preferencias, capas: capas ?? new CarregadorCapas(_clienteCapas));
+        var biblioteca = new ServicoBiblioteca(new ArmazenamentoJsonBiblioteca(new FileManager(Pasta.Arquivo)));
+        Janela = new MainWindow(biblioteca, semServico ? null : new PesquisaJogosIgdb(new IgdbService(_cliente, "cliente-simulado", "token-simulado")), preferencias: preferencias, capas: capas ?? new CarregadorCapas(_clienteCapas), colecoes: criarColecoes?.Invoke(biblioteca));
         Janela.Show();
     }
     public T Campo<T>(string nome) where T : Control => Janela.FindControl<T>(nome)!;
