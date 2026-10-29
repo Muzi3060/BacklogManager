@@ -6,6 +6,28 @@
         Title="Minhas Realizações" Width="1120" Height="780"
         MinWidth="900" MinHeight="660" WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <DataTemplate x:Key="TemplateDistribuicao" DataType="models:DistribuicaoDashboard">
+            <Border Classes="card" Width="270" Padding="12" Margin="0,0,12,8"><Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                <TextBlock Text="{Binding Nome}" /><TextBlock Grid.Column="1" Text="{Binding Quantidade}" FontWeight="Bold" />
+                <ProgressBar Grid.Row="1" Grid.ColumnSpan="2" Value="{Binding Percentual}" Maximum="100" Height="4" Margin="0,8,0,0" Foreground="{DynamicResource PanelAccent}" />
+            </Grid></Border>
+        </DataTemplate>
+        <DataTemplate x:Key="TemplateEntradaDashboard" DataType="models:EntradaDashboard">
+            <Button Classes="recent" Tag="{Binding}" Click="EditarDashboard_Click" HorizontalAlignment="Stretch" ToolTip.Tip="Abrir esta obra para editar" Margin="0,0,0,8">
+                <Border Classes="card recenteCard" Padding="10"><Grid ColumnDefinitions="64,*">
+                    <controls:CapaObra Endereco="{Binding Obra.Catalogo.CapaUrl}" Width="60" Height="64" Preenchimento="UniformToFill" />
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0" Spacing="4">
+                        <TextBlock Text="{Binding Obra.Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Obra.Catalogo.Titulo}" />
+                        <TextBlock Text="{Binding Midia}" Classes="muted" />
+                        <TextBlock Text="Dados simulados" IsVisible="{Binding Obra.Catalogo.Simulado}" Classes="muted" />
+                        <TextBlock Text="{Binding Obra.StatusExibido}" Classes="muted" />
+                        <TextBlock Text="{Binding Data}" Classes="muted" />
+                        <TextBlock Text="{Binding Progresso}" TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid></Border>
+            </Button>
+        </DataTemplate>
+
         <StreamGeometry x:Key="HomeIcon">M3,10 L12,3 21,10 M5,9 V21 H10 V15 H14 V21 H19 V9</StreamGeometry>
         <StreamGeometry x:Key="LibraryIcon">M4,4 H9 V21 H4 Z M11,4 H16 V21 H11 Z M18,3 L22,20</StreamGeometry>
         <StreamGeometry x:Key="PlusIcon">M12,4 V20 M4,12 H20</StreamGeometry>
@@ -240,58 +262,53 @@
                 </Grid>
             </Border>
             <Grid Grid.Row="1">
-                <!-- INÍCIO -->
+                <!-- INÍCIO: estatísticas locais, sem consultas de catálogo. -->
                 <ScrollViewer x:Name="PaginaInicio" HorizontalScrollBarVisibility="Disabled">
-                    <StackPanel Spacing="24" MaxWidth="1040">
-                        <StackPanel Spacing="7">
-                            <TextBlock Text="Bem-vindo à sua biblioteca" Classes="pageTitle" />
-                            <TextBlock Text="Organize suas obras e registre suas experiências." Classes="muted" TextWrapping="Wrap" />
-                        </StackPanel>
-                        <Grid ColumnDefinitions="*,*,*">
-                            <Border Classes="card" Margin="0,0,10,0">
-                                <StackPanel Spacing="8">
-                                    <TextBlock x:Name="TxtTotal" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" />
-                                    <TextBlock Text="Obras na coleção" Classes="muted" />
-                                </StackPanel>
-                            </Border>
-                            <Border Grid.Column="1" Classes="card" Margin="0,0,10,0">
-                                <StackPanel Spacing="8">
-                                    <TextBlock x:Name="TxtJogando" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource SuccessOnPanel}" />
-                                    <TextBlock Text="Em andamento" Classes="muted" />
-                                </StackPanel>
-                            </Border>
-                            <Border Grid.Column="2" Classes="card">
-                                <StackPanel Spacing="8">
-                                    <TextBlock x:Name="TxtZerados" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource WarningOnPanel}" />
-                                    <TextBlock Text="Concluídas" Classes="muted" />
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                        <Border Classes="card">
-                            <StackPanel Spacing="18">
-                                <Grid ColumnDefinitions="*,Auto">
-                                    <TextBlock Text="Progresso da biblioteca" FontSize="16" FontWeight="SemiBold" />
-                                    <TextBlock Grid.Column="1" x:Name="TxtProgresso" Foreground="{DynamicResource PanelAccent}" FontWeight="SemiBold" />
-                                </Grid>
-                                <ProgressBar x:Name="ProgressoBacklog" Minimum="0" Maximum="100" Height="5" Foreground="{DynamicResource SelectionBrush}" Background="{DynamicResource PanelBorder}" />
-                                <TextBlock x:Name="TxtResumo" Classes="muted" TextWrapping="Wrap" />
-                                <Border BorderBrush="{DynamicResource CardBorder}" BorderThickness="0,1,0,0" Padding="0,16,0,0">
-                                    <Grid ColumnDefinitions="Auto,*,Auto">
-                                        <Path Data="{StaticResource PlusIcon}" Stroke="{DynamicResource PanelAccent}" StrokeThickness="1.6" Width="20" Height="20" Stretch="Uniform" VerticalAlignment="Center" />
-                                        <StackPanel Grid.Column="1" Margin="14,0" Spacing="4" VerticalAlignment="Center">
-                                            <TextBlock Text="Qual será sua próxima obra?" FontWeight="SemiBold" />
-                                            <TextBlock Text="Adicione um título à sua coleção." Classes="muted" FontSize="12" />
-                                        </StackPanel>
-                                        <Button Grid.Column="2" Content="Adicionar obra" Classes="primary" Click="NovoJogo_Click" VerticalAlignment="Center" />
-                                    </Grid>
-                                </Border>
-                            </StackPanel>
+                    <StackPanel MaxWidth="{Binding #PaginaInicio.Viewport.Width}" Margin="0,0,16,0" Spacing="20">
+                        <TextBlock Text="Bem-vindo à sua biblioteca" Classes="pageTitle" TextWrapping="Wrap" />
+                        <Border x:Name="FalhaDashboard" Classes="card" IsVisible="False">
+                            <TextBlock Text="Não foi possível carregar a biblioteca. Estatísticas indisponíveis; o arquivo original foi preservado." TextWrapping="Wrap" />
                         </Border>
-                        <StackPanel Spacing="14">
-                            <Grid ColumnDefinitions="*,Auto">
-                                <TextBlock Text="Adicionados recentemente" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" />
-                                <Button Grid.Column="1" Content="Ver coleção  →" Foreground="{DynamicResource ButtonForeground}" Tag="backlog" Click="Navegar_Click" Padding="4,6" />
-                            </Grid>
+                        <StackPanel x:Name="ConteudoDashboard" Spacing="20">
+                            <TextBlock Text="Resumo atual da biblioteca" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock Text="Totais de todas as mídias, independentes dos filtros da biblioteca e do período abaixo." Classes="muted" TextWrapping="Wrap" />
+                            <WrapPanel>
+                                <Border Classes="card" Width="132" MinHeight="110" Margin="0,0,10,10" Padding="14"><StackPanel Spacing="8"><TextBlock x:Name="TxtTotal" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" /><TextBlock Text="Obras na coleção" TextWrapping="Wrap" /></StackPanel></Border>
+                                <Border Classes="card" Width="132" MinHeight="110" Margin="0,0,10,10" Padding="14"><StackPanel Spacing="8"><TextBlock x:Name="TxtJogando" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" /><TextBlock Text="Em andamento" TextWrapping="Wrap" /></StackPanel></Border>
+                                <Border Classes="card" Width="132" MinHeight="110" Margin="0,0,10,10" Padding="14"><StackPanel Spacing="8"><TextBlock x:Name="TxtZerados" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" /><TextBlock Text="Concluídas" TextWrapping="Wrap" /></StackPanel></Border>
+                                <Border Classes="card" Width="132" MinHeight="110" Margin="0,0,10,10" Padding="14"><StackPanel Spacing="8"><TextBlock x:Name="TxtNaFilaDashboard" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" /><TextBlock Text="Na fila" TextWrapping="Wrap" /></StackPanel></Border>
+                            </WrapPanel>
+                            <Border Classes="card"><StackPanel Spacing="10">
+                                <TextBlock Text="Progresso da biblioteca" FontWeight="SemiBold" FontSize="16" />
+                                <TextBlock Text="Obras concluídas na biblioteca — proporção de registros, não progresso pessoal de consumo." Classes="muted" TextWrapping="Wrap" />
+                                <TextBlock x:Name="TxtProgresso" />
+                                <ProgressBar x:Name="ProgressoBacklog" Minimum="0" Maximum="100" Height="6" Foreground="{DynamicResource PanelAccent}" />
+                                <TextBlock x:Name="TxtResumo" TextWrapping="Wrap" />
+                            </StackPanel></Border>
+                            <TextBlock Text="Distribuição por mídia" FontWeight="SemiBold" FontSize="18" />
+                            <ItemsControl x:Name="DistribuicaoMidias" ItemTemplate="{StaticResource TemplateDistribuicao}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel></ItemsControl>
+                            <TextBlock Text="Distribuição por status" FontWeight="SemiBold" FontSize="18" />
+                            <ItemsControl x:Name="DistribuicaoStatus" ItemTemplate="{StaticResource TemplateDistribuicao}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate></ItemsControl.ItemsPanel></ItemsControl>
+                            <Border Classes="card"><StackPanel Spacing="12">
+                                <TextBlock Text="Atividade recente — adições à biblioteca" FontSize="18" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                <ComboBox x:Name="CmbPeriodoDashboard" SelectedIndex="1" SelectionChanged="PeriodoDashboard_Changed" AutomationProperties.Name="Período da atividade recente">
+                                    <ComboBoxItem Content="Últimos 7 dias" /><ComboBoxItem Content="Últimos 30 dias" />
+                                </ComboBox>
+                                <TextBlock x:Name="TxtPeriodoDashboard" TextWrapping="Wrap" />
+                                <TextBlock x:Name="TxtAdicionadas" FontWeight="Bold" FontSize="26" />
+                                <TextBlock Text="Obras adicionadas no período, com data registrada." Classes="muted" TextWrapping="Wrap" />
+                                <TextBlock x:Name="TxtDatasDashboard" Classes="muted" TextWrapping="Wrap" />
+                                <TextBlock Text="Conclusões no período: indisponíveis, pois não há datas de conclusão registradas." Classes="muted" TextWrapping="Wrap" />
+                                <TextBlock x:Name="TxtAtividadeVazia" Text="Nenhuma adição com data conhecida neste período." TextWrapping="Wrap" />
+                                <ItemsControl x:Name="ListaAtividade" ItemTemplate="{StaticResource TemplateEntradaDashboard}" />
+                            </StackPanel></Border>
+                            <TextBlock Text="Continue de onde parou" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock Text="Obras em andamento, ordenadas por adição conhecida; não representa último acesso." Classes="muted" TextWrapping="Wrap" />
+                            <TextBlock x:Name="TxtContinuarVazio" Text="Nenhuma obra em andamento." />
+                            <ItemsControl x:Name="ListaContinuar" ItemTemplate="{StaticResource TemplateEntradaDashboard}" />
+                            <StackPanel x:Name="BlocoSemData" Spacing="10">
+                                <TextBlock Text="Sem data de adição registrada" FontSize="16" FontWeight="SemiBold" />
+                                <TextBlock Text="Amostra de até três obras, na ordem inversa da biblioteca. Não representam atividade datada." Classes="muted" TextWrapping="Wrap" />
                             <ItemsControl x:Name="ListaRecentes">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate><UniformGrid Columns="3" /></ItemsPanelTemplate>
@@ -315,9 +332,14 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <Border x:Name="EstadoInicioVazio" Classes="card" IsVisible="False">
-                                <TextBlock Text="Sua coleção começa aqui. Adicione sua primeira obra!" Classes="muted" TextWrapping="Wrap" />
-                            </Border>
+                            </StackPanel>
+                            <Border x:Name="EstadoInicioVazio" Classes="card" IsVisible="False"><TextBlock Text="Sua coleção começa aqui. Adicione sua primeira obra!" Classes="muted" TextWrapping="Wrap" /></Border>
+                            <WrapPanel>
+                                <Button Content="Ver biblioteca" Tag="backlog" Click="Navegar_Click" Margin="0,0,10,10" />
+                                <Button Content="Adicionar obra" Click="NovoJogo_Click" Margin="0,0,0,10" />
+                            </WrapPanel>
+                            <TextBlock Text="Qual será sua próxima obra?" FontWeight="SemiBold" />
+                            <Border Classes="card"><StackPanel Spacing="8"><TextBlock Text="Promoções futuras" FontWeight="SemiBold" /><TextBlock Text="Em desenvolvimento. Nenhuma oferta disponível nesta versão." Classes="muted" TextWrapping="Wrap" /></StackPanel></Border>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

@@ -37,8 +37,9 @@ public partial class MainWindow : Window
         : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes, aparencia: dependencias.Aparencia) { }
 
     internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null,
-        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null, ServicoColecoes? colecoes = null, BacklogManager.Aparencia.ServicoAparencia? aparencia = null)
+        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null, ServicoColecoes? colecoes = null, BacklogManager.Aparencia.ServicoAparencia? aparencia = null, ServicoDashboard? dashboard = null)
     {
+        _dashboard = dashboard ?? new ServicoDashboard();
         _preferencias = preferencias ?? new ArmazenamentoPreferenciasBiblioteca();
         Capas = capas ?? new CarregadorCapas();
         _biblioteca = biblioteca;
@@ -139,6 +140,7 @@ public partial class MainWindow : Window
             ListaSugestoes.IsVisible = false;
         }
         PaginaInicio.IsVisible = pagina == "inicio";
+        if (pagina == "inicio" && _interfacePronta) AtualizarDashboard();
         PaginaBacklog.IsVisible = pagina == "backlog";
         PaginaCadastro.IsVisible = pagina == "cadastro";
         PaginaColecoes.IsVisible = pagina == "colecoes";
@@ -340,23 +342,7 @@ public partial class MainWindow : Window
 
     private void AtualizarColecao()
     {
-        var resumo = _biblioteca.ObterResumo();
-        var total = resumo.Total;
-        var zerados = resumo.Zerados;
-        var naFila = resumo.NaFila;
-        var progresso = resumo.Progresso;
-
-        TxtTotal.Text = total.ToString();
-        TxtJogando.Text = resumo.Jogando.ToString();
-        TxtZerados.Text = zerados.ToString();
-        TxtContagemNav.Text = total.ToString();
-        TxtProgresso.Text = $"{progresso:0}% concluído";
-        ProgressoBacklog.Value = progresso;
-        TxtResumo.Text = total == 0
-            ? "Adicione sua primeira obra e comece a acompanhar seu progresso."
-            : $"{zerados} de {total} obras concluídas · {naFila} na fila.";
-        ListaRecentes.ItemsSource = _biblioteca.ObterRecentes();
-        EstadoInicioVazio.IsVisible = total == 0;
+        AtualizarDashboard();
         AtualizarOpcoesFiltros();
         AtualizarLista();
         AtualizarPaginaColecoes();
