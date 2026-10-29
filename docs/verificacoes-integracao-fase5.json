@@ -1,0 +1,163 @@
+{
+  "verificadoEm": "2026-10-29T15:52:24.633029+00:00",
+  "integracao": {
+    "tipo": "fast-forward",
+    "de": "807638a",
+    "para": "4a7c0bbacba4140d8f85fe240be51215dfd7c2ee",
+    "arvoresIguais": true,
+    "commits": [
+      "f3ab358 feat: aplica identidade Minhas Realizações e aparência personalizável",
+      "f7efbb8 test: valida temas, contraste, preferências e regressões da Fase 5",
+      "7703230 docs: registra Fase 5, evidências e cinco cenários manuais",
+      "4a7c0bb docs: versiona instruções e registra aprovação oficial da Fase 5"
+    ]
+  },
+  "branchPlanejamento": "feat/dashboard",
+  "codigoFase6Implementado": false,
+  "dados": {
+    "${PROJETO}/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    }
+  },
+  "backups": {
+    "${HOME}/Backups/BacklogManager/fase0-20261027-170624/backlog.json": {
+      "sha256": "4cfc6e877e370f4c154f22afa521f725d652c31f3ef0425fd4d5623138cfc25e",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase0-20261027-170624/verificacao.json": {
+      "sha256": "79c552be5e25cd2311d8c446190a71bf3e1219bc91d9b8b1565ab061bb5a6bb6",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase1-20261027-205329/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase1-20261027-205329/verificacao.json": {
+      "sha256": "7aa7a004444ce5b58a4cb44186e8f50408488c32891248d04d7106cca5cba2a7",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase2-20261027-213204/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase2-20261027-213204/verificacao.json": {
+      "sha256": "8da5e03bc81c1c43e17bcafae513b9e96ced1d8550e469b8be0a3a97bb256232",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase3-20261028-103358/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase3-20261028-103358/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/ajustes-fase3-20261028-150858/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/ajustes-fase3-20261028-150858/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/revisao2-fase3-20261028-154612/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/revisao2-fase3-20261028-154612/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase4-20261028-164306/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase4-20261028-164306/verificacao.json": {
+      "sha256": "6fe973b69b2c4dbfca7ac8a9573a74efe687c4ca3bcbe3d1d1b1454cec90e110",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase5-20261028-180111/backlog.json": {
+      "sha256": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810",
+      "preservado": true
+    },
+    "${HOME}/Backups/BacklogManager/fase5-20261028-180111/verificacao.json": {
+      "sha256": "86e262c615d48a13f6bb2ab800badd4b226369408f7ce6650310912dee50d461",
+      "preservado": true
+    }
+  },
+  "contrato": {
+    "sha256": "cc521ad94ddb75c7011e0a375e3dd3bf1d6a06145418003c32f91aedccfd222a",
+    "preservado": true
+  },
+  "instrucoesFase5": {
+    "sha256": "05d030374e8edd053cc45756527ffbffeb1d87968062aef7d6efcc31326ceaea",
+    "conteudoPreservado": true,
+    "versionado": true
+  },
+  "pessoais": {
+    "qodana.yaml": {
+      "sha256": "aabdb19b53fec2d5f02ef051fa2f505b69bc1fbe18d3e6c94564a05f3575f139",
+      "preservado": true
+    },
+    "skills/system/run-workflow/SKILL.md": {
+      "sha256": "82ed7c2e93d79fd95a01188c78539b6987f4c2a2dfc49c3b8991bebbe8925bf8",
+      "preservado": true
+    }
+  },
+  "relatoriosHistoricosPreservados": {
+    "docs/AJUSTES_FASE3.md": "84c311582194c68c66f7cb7eb36ed18427c69afd053269a1f742076d2e130c58",
+    "docs/AJUSTES_FASE3_TESTES.md": "29b362b43d900bdb0f57a107787a8d73cfd49161ec9b4d1fbe625bbdfcb1dcee",
+    "docs/APROVACAO_FASE1.md": "dd8e651390e94c88584231ffd60f465879d9da34a867e322d09a41a5f9b02a3e",
+    "docs/APROVACAO_FASE2.md": "a4299ba2ca15c1aeb66173959889117f8babffa73ff48f03e4cf4c349594c9eb",
+    "docs/APROVACAO_FASE3.md": "8f8529e9e61b5b9640f0630337bd022adff50213ba581ca8b31e87fd4813f7a4",
+    "docs/APROVACAO_FASE4.md": "3ff439e4afd367634d4b4a11fc2038f0acd7b27e30d624387f3fb5ed2b1c250c",
+    "docs/ARQUITETURA.md": "eae9d2d6596d1ccb5a38bdbb54354edd4b00e4d2afcd022d6876990ad3902dbb",
+    "docs/ARQUITETURA_FASE2.md": "7c8b0267f4ec811ab91ec86a409ff585a6c7740f7f3cfeca409e52ff1d9fa0f2",
+    "docs/FASE0.md": "84a83953d121cdcc10c453b5e0d2354987ef157a165d02f209a808d8869a0f44",
+    "docs/FASE0_TESTES.md": "69b073d6e68a32bdb0ac4070beceede139bb642b2b667d535ebd9ce72bde527f",
+    "docs/FASE1.md": "3427dba84c974ededc0f6d3fcd8b0f5f569ca6de41949458ce70f2a1db893a5a",
+    "docs/FASE1_TESTES.md": "ee70553106c1740381fad18ebc2fc238de6bd3273497f1805dcf21a0efc56604",
+    "docs/FASE2.md": "66c4877a43b9468953213a426dc7b97b1a9101ab04b8538704e8910f3bf5a500",
+    "docs/FASE2_TESTES.md": "eb2f9d2bd77c21cb62ea8d97614080801bc191b283292bc65bd96e2796773481",
+    "docs/FASE3.md": "67ff40f10e8ca5655c60ab3a53c78f0c0f645809c79bffa205f78e15d9b736c9",
+    "docs/FASE3_TESTES.md": "71298ca065249343c10af5f14572159d28b390de5b8effcd286b3b4eee3f31e0",
+    "docs/FASE4.md": "370e8ad7c0e551abf320db54917061bc345b11dae9e7e0f1063712d2eec61930",
+    "docs/FASE4_TESTES.md": "04815d7a5df0d4f1fe05bc9c13791ddd350ccf4de50e92be194f02e7c63aa439",
+    "docs/FASE5_TESTES.md": "33506dc104e18d5985535959b4df9fbed866a0550921c87ec9ee7bf9da1ea27f",
+    "docs/REVISAO2_FASE3.md": "8bbb1648668b0b6f7e77f46a4240a0506d78070135b8fa10899c87433588dc36",
+    "docs/REVISAO2_FASE3_TESTES.md": "de1f5969af1e240430596d9475e4e9f7e033ed2c3f54a9e96852f7fd7678565e",
+    "docs/REVISAO3_FASE3.md": "f3b385d1456290f5c6178215a4cedb998e658272e3449aae7d06e4e22fb8c122",
+    "docs/REVISAO3_FASE3_TESTES.md": "caf0a0b70a127c03928bb028aebb494ef91c18971fb7f1378926c34cb642192f",
+    "docs/resultados-ajustes-fase3.json": "096578a8542787a7b15abce5d395216a032eded523a245671591364a50dc47c6",
+    "docs/resultados-fase0.json": "6d9bf7a55a595a6f1eca472113bb3d3033c735ccf8ed5a298a517759d32e055c",
+    "docs/resultados-fase1.json": "4320878ebea8f925d486d606c0e978574f7fce65a82ca38750c3a747d182b518",
+    "docs/resultados-fase2.json": "71b8a5f199352ad618cb8f9067e947d635213d577f5c4ea33f8ceb782a76bba4",
+    "docs/resultados-fase3.json": "f8d630d9054a9adf82331f15635cdebbac5afb3029d4e0e091bb205ebe11a5b8",
+    "docs/resultados-fase4.json": "b013f6dcb4a928dfbf3d5c5ab8629eada8334f9e101e181cc39163cd0244827d",
+    "docs/resultados-fase5.json": "601c5df4f172ed69b14e74fe52566915f8ea25c21e5554351f30f3832169296b",
+    "docs/resultados-revisao2-fase3.json": "e29cc34185d007f3b7b075da5e0b7c0023e142dc429e532b55da8eab8c6d57d5",
+    "docs/resultados-revisao3-fase3.json": "5b612c17bb2f7a5a9da13ab49678f071fc798d9f32d5e3459ec2249ad0ac828a",
+    "docs/verificacoes-ajustes-fase3.json": "f69aa8b22c57b79ae1665537dc989da76a29c859011ac5747ab19a37169e3b78",
+    "docs/verificacoes-fase3.json": "4b5932eb04962348deb3e6bbbe05118efdc2f0ef217590119bc11b0add8b8a3f",
+    "docs/verificacoes-fase4.json": "c81881bf7a8591a2278b662ae0e169bc57ae202a9242056cb0a9e786447cacc2",
+    "docs/verificacoes-fase5.json": "55f90e8990dab2819140eb9cfadedfdb40daa3581e8f71a68398260063756b4f",
+    "docs/verificacoes-revisao2-fase3.json": "fbc067723106708cd98f8400d6907649337ce66b642f604963a4e47162b1e266",
+    "docs/verificacoes-revisao3-fase3.json": "d9039bd68a8d8cc73dc691a5b08c1cb6179aae55036090bd2300477cb70df0e3"
+  },
+  "alteracaoDocumental": "docs/FASE5.md recebeu somente nota de aprovação remetendo ao registro geral; tabelas e resultados anteriores preservados.",
+  "demaisBranches": {
+    "chore/seguranca-estabilidade": "10aab6a194f6f02cd034f262fbcc459b4083c073",
+    "feat/biblioteca": "bbcb99f7148820bc4e187765d9aa357f487e8a1f",
+    "feat/colecoes": "807638a586c9d4371f79ed04c985d0af611dbf5b",
+    "feat/multimidia": "64fb4fb1a2ffcb11ac8b4a3b9399efdb894a9d45",
+    "fix/biblioteca-ajustes": "8c9d14766628a33cbe447c78ab2c390a8b89088e",
+    "refactor/arquitetura": "56bcd58f089478aaba7961b88c78e24e1ed80949"
+  },
+  "testes": {
+    "novaExecucao": false,
+    "resultadoHistoricoConsultado": 1266,
+    "manuais": "Aprovação geral no Rider relatada pelo proprietário, sem aprovação individual inferida"
+  },
+  "plano": "docs/PLANEJAMENTO_FASE6.md"
+}
