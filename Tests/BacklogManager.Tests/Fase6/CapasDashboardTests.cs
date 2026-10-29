@@ -33,8 +33,8 @@ public sealed class CapasDashboardTests
     public async Task Editar(){using var a=Tela(null);await a.Prontas();var b=a.Tela.Campo<ItemsControl>("ListaAtividade").GetVisualDescendants().OfType<Button>().First();b.RaiseEvent(new Avalonia.Interactivity.RoutedEventArgs(Button.ClickEvent));Assert.True(a.Tela.Campo<ScrollViewer>("PaginaCadastro").IsVisible);}
     [AvaloniaFact(DisplayName="DK10 | Título longo | Tooltip conserva título completo")]
     public async Task Titulo(){var i=ApoioVisual.Jogo(new string('X',200)) with{DataAdicao=DateTimeOffset.UtcNow};using var a=new ApoioVisual(new[]{i});await a.Prontas();Assert.Contains(a.Tela.Campo<ItemsControl>("ListaAtividade").GetVisualDescendants().OfType<TextBlock>(),b=>b.Text==i.Catalogo.Titulo&&ToolTip.GetTip(b)?.ToString()==i.Catalogo.Titulo);}
-    [AvaloniaFact(DisplayName="DK11 | Sem data e com capa | Bloco legado permanece distinto da atividade")]
-    public async Task Legado(){using var a=new ApoioVisual();await a.Prontas();Assert.Empty(a.Tela.Campo<ItemsControl>("ListaAtividade").Items);Assert.Single(a.Recentes);}
+    [AvaloniaFact(DisplayName="DK11 | Sem data e com capa | Registro preservado sem bloco legado no Dashboard")]
+    public async Task Legado(){using var a=new ApoioVisual();await a.Prontas();Assert.Empty(a.Tela.Campo<ItemsControl>("ListaAtividade").Items);Assert.Null(a.Tela.Janela.FindControl<ItemsControl>("ListaRecentes"));Assert.Single(a.Tela.Salvos);}
     [AvaloniaFact(DisplayName="DK12 | Fechar com carregador ativo | Cancelamento não grava biblioteca")]
     public void Fechar(){using var a=Tela();var antes=File.ReadAllBytes(a.Tela.Pasta.Arquivo);a.Tela.Janela.Close();Assert.Equal(antes,File.ReadAllBytes(a.Tela.Pasta.Arquivo));}
 }

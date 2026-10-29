@@ -226,17 +226,9 @@
                             <TextBlock Text="Adicionar / editar" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
-                    <Button x:Name="NavConfiguracoes" Classes="navigation" Tag="configuracoes" Click="Navegar_Click" Content="Configurações" />
-                    <Button x:Name="NavAparencia" Classes="navigation" Tag="aparencia" Click="Navegar_Click" Content="Aparência" />
                 </StackPanel>
-                <Border Grid.Row="3" BorderBrush="{DynamicResource SidebarBorder}" BorderThickness="0,1,0,0" Padding="10,18" Margin="0,0,0,8">
-                    <StackPanel Spacing="7">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <Ellipse Fill="{DynamicResource SuccessBrush}" Width="6" Height="6" VerticalAlignment="Center" />
-                            <TextBlock Text="Dados neste computador" FontSize="11" />
-                        </StackPanel>
-                        <TextBlock Text="Armazenamento local" Classes="muted" FontSize="10" Margin="14,0,0,0" />
-                    </StackPanel>
+                <Border Grid.Row="3" BorderBrush="{DynamicResource SidebarBorder}" BorderThickness="0,1,0,0" Padding="0,12,0,0" Margin="0,0,0,8">
+                    <Button x:Name="NavConfiguracoes" Classes="navigation" Tag="configuracoes" Click="Navegar_Click" Content="Configurações" AutomationProperties.Name="Abrir configurações" />
                 </Border>
             </Grid>
         </Border>
@@ -272,7 +264,6 @@
                         </Border>
                         <StackPanel x:Name="ConteudoDashboard" Spacing="20">
                             <TextBlock Text="Resumo atual da biblioteca" FontSize="18" FontWeight="SemiBold" />
-                            <TextBlock Text="Totais de todas as mídias, independentes dos filtros da biblioteca e do período abaixo." Classes="muted" TextWrapping="Wrap" />
                             <WrapPanel>
                                 <Border Classes="card" Width="132" MinHeight="110" Margin="0,0,10,10" Padding="14"><StackPanel Spacing="8"><TextBlock x:Name="TxtTotal" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" /><TextBlock Text="Obras na coleção" TextWrapping="Wrap" /></StackPanel></Border>
                                 <Border Classes="card" Width="132" MinHeight="110" Margin="0,0,10,10" Padding="14"><StackPanel Spacing="8"><TextBlock x:Name="TxtJogando" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource PanelAccent}" /><TextBlock Text="Em andamento" TextWrapping="Wrap" /></StackPanel></Border>
@@ -281,7 +272,6 @@
                             </WrapPanel>
                             <Border Classes="card"><StackPanel Spacing="10">
                                 <TextBlock Text="Progresso da biblioteca" FontWeight="SemiBold" FontSize="16" />
-                                <TextBlock Text="Obras concluídas na biblioteca — proporção de registros, não progresso pessoal de consumo." Classes="muted" TextWrapping="Wrap" />
                                 <TextBlock x:Name="TxtProgresso" />
                                 <ProgressBar x:Name="ProgressoBacklog" Minimum="0" Maximum="100" Height="6" Foreground="{DynamicResource PanelAccent}" />
                                 <TextBlock x:Name="TxtResumo" TextWrapping="Wrap" />
@@ -297,50 +287,17 @@
                                 </ComboBox>
                                 <TextBlock x:Name="TxtPeriodoDashboard" TextWrapping="Wrap" />
                                 <TextBlock x:Name="TxtAdicionadas" FontWeight="Bold" FontSize="26" />
-                                <TextBlock Text="Obras adicionadas no período, com data registrada." Classes="muted" TextWrapping="Wrap" />
-                                <TextBlock x:Name="TxtDatasDashboard" Classes="muted" TextWrapping="Wrap" />
-                                <TextBlock Text="Conclusões no período: indisponíveis, pois não há datas de conclusão registradas." Classes="muted" TextWrapping="Wrap" />
                                 <TextBlock x:Name="TxtAtividadeVazia" Text="Nenhuma adição com data conhecida neste período." TextWrapping="Wrap" />
                                 <ItemsControl x:Name="ListaAtividade" ItemTemplate="{StaticResource TemplateEntradaDashboard}" />
                             </StackPanel></Border>
                             <TextBlock Text="Continue de onde parou" FontSize="18" FontWeight="SemiBold" />
-                            <TextBlock Text="Obras em andamento, ordenadas por adição conhecida; não representa último acesso." Classes="muted" TextWrapping="Wrap" />
                             <TextBlock x:Name="TxtContinuarVazio" Text="Nenhuma obra em andamento." />
                             <ItemsControl x:Name="ListaContinuar" ItemTemplate="{StaticResource TemplateEntradaDashboard}" />
-                            <StackPanel x:Name="BlocoSemData" Spacing="10">
-                                <TextBlock Text="Sem data de adição registrada" FontSize="16" FontWeight="SemiBold" />
-                                <TextBlock Text="Amostra de até três obras, na ordem inversa da biblioteca. Não representam atividade datada." Classes="muted" TextWrapping="Wrap" />
-                            <ItemsControl x:Name="ListaRecentes">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate><UniformGrid Columns="3" /></ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="models:ItemBiblioteca">
-                                        <Button Classes="recent" Tag="{Binding}" Click="Recente_Click" Margin="0,0,10,0" ToolTip.Tip="Abrir esta obra para editar">
-                                            <Border Classes="card recenteCard" Padding="0" ClipToBounds="True">
-                                                <StackPanel>
-                                                    <controls:CapaObra Classes="capaRecente" Endereco="{Binding Catalogo.CapaUrl}" Height="72" Preenchimento="UniformToFill" />
-                                                    <StackPanel Margin="14,12" Spacing="7">
-                                                        <TextBlock Text="{Binding Catalogo.Titulo}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-                                                        <Grid ColumnDefinitions="*,Auto">
-                                                            <TextBlock Text="{Binding StatusExibido}" Classes="muted" FontSize="11" />
-                                                            <TextBlock Grid.Column="1" Text="{Binding Pessoal.Nota, StringFormat='★ {0:0.0}'}" Foreground="{DynamicResource WarningOnCard}" FontSize="11" />
-                                                        </Grid>
-                                                    </StackPanel>
-                                                </StackPanel>
-                                            </Border>
-                                        </Button>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            </StackPanel>
                             <Border x:Name="EstadoInicioVazio" Classes="card" IsVisible="False"><TextBlock Text="Sua coleção começa aqui. Adicione sua primeira obra!" Classes="muted" TextWrapping="Wrap" /></Border>
                             <WrapPanel>
                                 <Button Content="Ver biblioteca" Tag="backlog" Click="Navegar_Click" Margin="0,0,10,10" />
                                 <Button Content="Adicionar obra" Click="NovoJogo_Click" Margin="0,0,0,10" />
                             </WrapPanel>
-                            <TextBlock Text="Qual será sua próxima obra?" FontWeight="SemiBold" />
-                            <Border Classes="card"><StackPanel Spacing="8"><TextBlock Text="Promoções futuras" FontWeight="SemiBold" /><TextBlock Text="Em desenvolvimento. Nenhuma oferta disponível nesta versão." Classes="muted" TextWrapping="Wrap" /></StackPanel></Border>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -497,13 +454,24 @@
                 <ScrollViewer x:Name="PaginaConfiguracoes" IsVisible="False" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Spacing="16" Margin="0,0,16,16" MaxWidth="{Binding #PaginaConfiguracoes.Viewport.Width}">
                         <TextBlock Text="Configurações" Classes="pageTitle" />
-                        <Border Classes="card" Padding="16"><StackPanel Spacing="10">
-                            <TextBlock Text="Preferências" FontSize="18" FontWeight="SemiBold" />
-                            <Button x:Name="BtnAparenciaConfiguracoes" Content="Personalizar aparência" Tag="aparencia" Click="Navegar_Click" />
-                            <TextBlock Text="Visualização da biblioteca (salva automaticamente)" TextWrapping="Wrap" />
-                            <ComboBox x:Name="CmbVisualizacaoConfiguracoes" SelectedIndex="0" SelectionChanged="VisualizacaoConfiguracoes_Changed" AutomationProperties.Name="Visualização da biblioteca nas configurações">
-                                <ComboBoxItem Content="Grade" /><ComboBoxItem Content="Lista" />
-                            </ComboBox>
+                        <Border x:Name="PreferenciasVisuais" Classes="card" Padding="16"><StackPanel Spacing="10">
+                            <TextBlock Text="Aparência" FontSize="18" FontWeight="SemiBold" />
+                            <WrapPanel>
+                                <StackPanel Width="220" Margin="0,0,12,12" Spacing="6">
+                                    <TextBlock Text="Tema" />
+                                    <ComboBox x:Name="CmbTema" SelectionChanged="TemaAparencia_Changed" AutomationProperties.Name="Tema visual">
+                                        <ComboBoxItem Content="Moderno" /><ComboBoxItem Content="Tecnológico" /><ComboBoxItem Content="Acolhedor" /><ComboBoxItem Content="Dark Mode" />
+                                    </ComboBox>
+                                </StackPanel>
+                                <StackPanel Width="180" Margin="0,0,0,12" Spacing="6">
+                                    <TextBlock Text="Modo" />
+                                    <ComboBox x:Name="CmbModo" SelectionChanged="TemaAparencia_Changed" AutomationProperties.Name="Modo claro ou escuro">
+                                        <ComboBoxItem Content="Claro" /><ComboBoxItem Content="Escuro" />
+                                    </ComboBox>
+                                </StackPanel>
+                            </WrapPanel>
+                            <TextBlock x:Name="TxtEstadoAparencia" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                            <Button x:Name="BtnRepetirSalvarAparencia" Content="Tentar salvar novamente" IsVisible="False" Click="RepetirSalvarAparencia_Click" />
                         </StackPanel></Border>
                         <Border Classes="card" Padding="16"><StackPanel Spacing="10">
                             <TextBlock Text="Armazenamento local ativo" FontSize="18" FontWeight="SemiBold" />
@@ -536,45 +504,6 @@
                             <TextBlock Text="Recursos futuros" FontSize="18" FontWeight="SemiBold" />
                             <TextBlock x:Name="TxtRecursosFuturos" Text="Nuvem, sincronização, modo híbrido e Google Drive ainda não estão disponíveis. O armazenamento e o backup desta fase são exclusivamente locais." Classes="muted" TextWrapping="Wrap" />
                         </StackPanel></Border>
-                    </StackPanel>
-                </ScrollViewer>
-
-                <ScrollViewer x:Name="PaginaAparencia" IsVisible="False" HorizontalScrollBarVisibility="Disabled">
-                    <StackPanel Spacing="16" MaxWidth="{Binding #PaginaAparencia.Viewport.Width}" Margin="0,0,16,0">
-                        <TextBlock Text="Aparência" Classes="pageTitle" />
-                        <TextBlock Text="As escolhas válidas são aplicadas e salvas automaticamente. Cada tema e modo guarda suas próprias cores." Classes="muted" TextWrapping="Wrap" />
-                        <WrapPanel>
-                            <StackPanel Width="220" Margin="0,0,12,12" Spacing="6">
-                                <TextBlock Text="Tema" />
-                                <ComboBox x:Name="CmbTema" SelectionChanged="TemaAparencia_Changed" AutomationProperties.Name="Tema visual">
-                                    <ComboBoxItem Content="Moderno" /><ComboBoxItem Content="Tecnológico" /><ComboBoxItem Content="Acolhedor" />
-                                </ComboBox>
-                            </StackPanel>
-                            <StackPanel Width="180" Margin="0,0,0,12" Spacing="6">
-                                <TextBlock Text="Modo" />
-                                <ComboBox x:Name="CmbModo" SelectionChanged="TemaAparencia_Changed" AutomationProperties.Name="Modo claro ou escuro">
-                                    <ComboBoxItem Content="Claro" /><ComboBoxItem Content="Escuro" />
-                                </ComboBox>
-                            </StackPanel>
-                        </WrapPanel>
-                        <TextBlock x:Name="TxtEstadoAparencia" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
-                        <Button x:Name="BtnRepetirSalvarAparencia" Content="Tentar salvar novamente" IsVisible="False" Click="RepetirSalvarAparencia_Click" />
-                        <WrapPanel>
-                            <Button x:Name="BtnRestaurarCores" Content="Restaurar cores deste tema e modo" Click="RestaurarCores_Click" Margin="0,0,10,10" />
-                            <Button x:Name="BtnRestaurarAparencia" Content="Restaurar toda a aparência" Click="PedirRestauracao_Click" Margin="0,0,0,10" />
-                        </WrapPanel>
-                        <Border x:Name="ConfirmacaoRestaurarAparencia" Classes="card" IsVisible="False">
-                            <StackPanel Spacing="10">
-                                <TextBlock Text="Restaurar Moderno claro e apagar as cores personalizadas dos seis conjuntos? Biblioteca, coleções e outras configurações serão preservadas." TextWrapping="Wrap" />
-                                <WrapPanel>
-                                    <Button x:Name="BtnConfirmarRestaurarAparencia" Content="Confirmar restauração" Click="ConfirmarRestauracao_Click" Margin="0,0,10,0" />
-                                    <Button x:Name="BtnCancelarRestaurarAparencia" Content="Cancelar" Click="CancelarRestauracao_Click" />
-                                </WrapPanel>
-                            </StackPanel>
-                        </Border>
-                        <TextBlock Text="Cores por elemento" FontSize="18" FontWeight="SemiBold" />
-                        <TextBlock Text="Escolha uma amostra ou digite #RRGGBB, como #3366CC. Ajustes de contraste mantêm a leitura e preservam a cor que você escolheu." Classes="muted" TextWrapping="Wrap" />
-                        <WrapPanel x:Name="EditoresCores" />
                     </StackPanel>
                 </ScrollViewer>
 

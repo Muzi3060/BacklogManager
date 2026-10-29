@@ -12,8 +12,6 @@ public static class ResolvedorAparencia
     public static AparenciaResolvida Resolver(PreferenciasAparencia preferencias)
     {
         var c = TemasPredefinidos.Obter(preferencias.Tema, preferencias.Modo).ToDictionary(p => p.Key, p => p.Value);
-        if (preferencias.Personalizacoes.TryGetValue(PreferenciasAparencia.Chave(preferencias.Tema, preferencias.Modo), out var escolhas))
-            foreach (var (e, cor) in escolhas) if (Enum.IsDefined(e) && CoresAparencia.TentarNormalizar(cor, out var valida)) c[e] = valida;
         var r = new Dictionary<string, string>(); var avisos = new Dictionary<ElementoCor, string>();
         string Cor(ElementoCor e) => c[e];
         void Par(ElementoCor fundo, ElementoCor texto, string chaveFundo, string chaveTexto)

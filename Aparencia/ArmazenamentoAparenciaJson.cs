@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -10,7 +8,7 @@ using BacklogManager.Data;
 
 namespace BacklogManager.Aparencia;
 
-// Arquivo próprio: restaurar aparência nunca grava biblioteca, coleções ou a preferência de grade/lista.
+// Arquivo próprio: selecionar aparência nunca grava biblioteca, coleções ou a preferência de grade/lista.
 public sealed class ArmazenamentoAparenciaJson : IArmazenamentoAparencia
 {
     public string CaminhoArquivo { get; }
@@ -34,7 +32,7 @@ public sealed class ArmazenamentoAparenciaJson : IArmazenamentoAparencia
                 using var json = JsonDocument.Parse(texto);
                 ValidarPropriedades(json.RootElement);
                 _documento = JsonNode.Parse(texto) as JsonObject ?? throw new JsonException();
-                _versaoFutura = _documento["Versao"] is JsonValue v && v.TryGetValue<int>(out var versao) && versao > 1;
+                _versaoFutura = _documento["Versao"] is JsonValue v && v.TryGetValue<int>(out var versao) && versao > 2;
                 if (_versaoFutura) aviso = "A aparência foi criada por uma versão mais recente. Usando valores conhecidos; gravação bloqueada para preservar o arquivo.";
             }
             catch (Exception e) when (e is JsonException or ArgumentException or InvalidOperationException)
@@ -42,44 +40,17 @@ public sealed class ArmazenamentoAparenciaJson : IArmazenamentoAparencia
         }
         var tema = LerEnum(_documento["Tema"], TemaVisual.Moderno);
         var modo = LerEnum(_documento["Modo"], ModoVisual.Claro);
-        var conjuntos = new Dictionary<string, IReadOnlyDictionary<ElementoCor, string>>();
-        if (_documento["Personalizacoes"] is JsonObject salvas)
-            foreach (var t in Enum.GetValues<TemaVisual>())
-                foreach (var m in Enum.GetValues<ModoVisual>())
-                {
-                    var chave = PreferenciasAparencia.Chave(t, m);
-                    if (salvas[chave] is not JsonObject cores) continue;
-                    var validas = new Dictionary<ElementoCor, string>();
-                    foreach (var e in Enum.GetValues<ElementoCor>())
-                        if (cores[e.ToString()] is JsonValue valor && valor.TryGetValue<string>(out var texto) && CoresAparencia.TentarNormalizar(texto, out var cor)) validas[e] = cor;
-                    if (validas.Count > 0) conjuntos[chave] = new ReadOnlyDictionary<ElementoCor, string>(validas);
-                }
+        // Cores legadas permanecem opacas no documento, sem efeito nos temas fixos.
         _carregado = true;
-        return new(new PreferenciasAparencia { Tema = tema, Modo = modo, Personalizacoes = new ReadOnlyDictionary<string, IReadOnlyDictionary<ElementoCor, string>>(conjuntos) }, aviso);
+        return new(new PreferenciasAparencia { Tema = tema, Modo = modo }, aviso);
     }
     public void Salvar(PreferenciasAparencia preferencias)
     {
         if (!_carregado || _versaoFutura) throw new InvalidOperationException("Reabra as preferências numa versão compatível antes de salvar.");
         if (!Enum.IsDefined(preferencias.Tema) || !Enum.IsDefined(preferencias.Modo)) throw new InvalidDataException("Tema ou modo inválido.");
         var candidato = (JsonObject)_documento.DeepClone();
-        candidato["Versao"] = 1; candidato["Tema"] = preferencias.Tema.ToString(); candidato["Modo"] = preferencias.Modo.ToString();
-        var conjuntos = candidato["Personalizacoes"] as JsonObject ?? new JsonObject();
-        foreach (var t in Enum.GetValues<TemaVisual>())
-            foreach (var m in Enum.GetValues<ModoVisual>())
-            {
-                var chave = PreferenciasAparencia.Chave(t, m);
-                var cores = conjuntos[chave] as JsonObject ?? new JsonObject();
-                foreach (var e in Enum.GetValues<ElementoCor>()) cores.Remove(e.ToString());
-                if (preferencias.Personalizacoes.TryGetValue(chave, out var escolhas))
-                    foreach (var (e, cor) in escolhas)
-                    {
-                        if (!Enum.IsDefined(e)) throw new InvalidDataException("Elemento de aparência desconhecido.");
-                        cores[e.ToString()] = CoresAparencia.Normalizar(cor);
-                    }
-                if (cores.Count > 0) conjuntos[chave] = cores.Parent == null ? cores : cores.DeepClone();
-                else conjuntos.Remove(chave);
-            }
-        candidato["Personalizacoes"] = conjuntos.Parent == null ? conjuntos : conjuntos.DeepClone();
+        candidato["Versao"] = 2; candidato["Tema"] = preferencias.Tema.ToString(); candidato["Modo"] = preferencias.Modo.ToString();
+        // DeepClone preserva extensões e personalizações antigas, inclusive nos backups.
         var bytes = JsonSerializer.SerializeToUtf8Bytes(candidato, new JsonSerializerOptions { WriteIndented = true });
         using var bloqueio = new FileStream(CaminhoArquivo + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
         BacklogManager.Backup.CaminhosDadosLocais.VerificarGravacao(CaminhoArquivo);
@@ -96,7 +67,7 @@ public sealed class ArmazenamentoAparenciaJson : IArmazenamentoAparencia
     }
     private static void ValidarPropriedades(JsonElement elemento)
     {
-        // JsonObject materializa dicionários sob demanda. Detectamos ambiguidades antes de acessar cores.
+        // JsonObject materializa dicionários sob demanda. Detectamos ambiguidades antes da leitura.
         if (elemento.ValueKind == JsonValueKind.Object)
         {
             var nomes = new HashSet<string>(StringComparer.Ordinal);

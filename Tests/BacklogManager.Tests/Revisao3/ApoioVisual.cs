@@ -40,7 +40,6 @@ internal sealed class ApoioVisual : IDisposable
     internal void Renderizar() { Dispatcher.UIThread.RunJobs(); Tela.Janela.UpdateLayout(); }
     internal async Task Prontas()
     { Renderizar(); await Task.WhenAll(Tela.Janela.GetVisualDescendants().OfType<CapaObra>().Select(c => c.CarregamentoPendente)); Renderizar(); }
-    internal CapaObra[] Recentes => Tela.Campo<ItemsControl>("ListaRecentes").GetVisualDescendants().OfType<CapaObra>().ToArray();
     internal Border[] Cartoes => Tela.Campo<ListBox>("ListaBacklog").GetVisualDescendants().OfType<Border>().Where(b => b.Classes.Contains("gradeCard")).ToArray();
     internal static byte[] Pixel(Bitmap imagem, Point ponto)
     {

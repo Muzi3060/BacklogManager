@@ -30,7 +30,7 @@ internal sealed class AmbienteBackup : IDisposable
     {
         new ArmazenamentoPreferenciasBiblioteca(Caminhos.Arquivos["Visualizacao"]).Salvar(VisualizacaoBiblioteca.Lista);
         var s = new ServicoAparencia(new ArmazenamentoAparenciaJson(Caminhos.Arquivos["Aparencia"])); s.Carregar();
-        s.Selecionar(tema, modo); s.Personalizar(ElementoCor.FundoPrincipal, "#102030");
+        s.Selecionar(tema, modo);
     }
     internal Dictionary<string, byte[]?> Snapshot() => Caminhos.Arquivos.ToDictionary(p=>p.Key,p=>ArquivosBackup.Ler(p.Value));
     internal void Igual(Dictionary<string, byte[]?> antes)

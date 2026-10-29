@@ -34,9 +34,6 @@ public partial class MainWindow
         ListaContinuar.ItemsSource = resumo.Continuar;
         TxtAtividadeVazia.IsVisible = resumo.Adicionadas == 0;
         TxtContinuarVazio.IsVisible = resumo.EmAndamento == 0;
-        TxtDatasDashboard.Text = $"{resumo.SemData} {(resumo.SemData == 1 ? "obra sem data de adição" : "obras sem data de adição")}. {resumo.DatasFuturas} com datas futuras, fora da atividade recente.";
-        ListaRecentes.ItemsSource = resumo.Legados;
-        BlocoSemData.IsVisible = resumo.SemData > 0;
         EstadoInicioVazio.IsVisible = resumo.Total == 0;
     }
     private void PeriodoDashboard_Changed(object? sender, SelectionChangedEventArgs e)

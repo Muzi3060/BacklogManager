@@ -24,14 +24,12 @@ public partial class MainWindow
         }
         finally { _carregandoVisualizacao = false; }
         AplicarVisualizacao();
-        SincronizarVisualizacaoConfiguracoes();
     }
 
     private void Visualizacao_Changed(object? sender, SelectionChangedEventArgs e)
     {
         if (!_interfacePronta || _carregandoVisualizacao) return;
         AplicarVisualizacao();
-        SincronizarVisualizacaoConfiguracoes();
         try { _preferencias.Salvar((VisualizacaoBiblioteca)CmbVisualizacao.SelectedIndex); }
         catch (Exception erro) when (FalhaDeArquivo(erro))
         {

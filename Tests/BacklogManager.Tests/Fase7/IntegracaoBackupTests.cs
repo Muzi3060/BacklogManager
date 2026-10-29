@@ -31,7 +31,7 @@ public sealed class IntegracaoBackupTests
     [AvaloniaFact(DisplayName="QI04 | Visualização após recarga | Preferência restaurada aparece nos dois seletores")]
     public async Task Caso04()
     {
-        using var a=new AmbienteBackup(); a.Preferencias();var d=a.Documento();File.Delete(a.Caminhos.Arquivos["Visualizacao"]);using var t=new TelaBackup(a);a.Importar(d);await t.Selecionar(a.Importado);t.Confirmar(true);Assert.Equal(1,t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex);Assert.Equal(1,t.Campo<ComboBox>("CmbVisualizacaoConfiguracoes").SelectedIndex);
+        using var a=new AmbienteBackup(); a.Preferencias();var d=a.Documento();File.Delete(a.Caminhos.Arquivos["Visualizacao"]);using var t=new TelaBackup(a);a.Importar(d);await t.Selecionar(a.Importado);t.Confirmar(true);Assert.Equal(1,t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex);Assert.Null(t.Janela.FindControl<ComboBox>("CmbVisualizacaoConfiguracoes"));
     }
     [AvaloniaFact(DisplayName="QI05 | Tema após recarga | Acolhedor escuro reaplicado sem reiniciar")]
     public async Task Caso05()
@@ -56,7 +56,7 @@ public sealed class IntegracaoBackupTests
     [AvaloniaFact(DisplayName="QI09 | Falha de preferência local | Visualização na sessão preserva dados")]
     public async Task Caso09()
     {
-        using var a=new AmbienteBackup(); using var t=new TelaBackup(a);using var trava=new FileStream(a.Caminhos.Arquivos["Visualizacao"]+".lock",FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.None);t.Campo<ComboBox>("CmbVisualizacaoConfiguracoes").SelectedIndex=1;Assert.Equal(1,t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex);Assert.False(File.Exists(a.Caminhos.Arquivos["Visualizacao"]));await Task.CompletedTask;
+        using var a=new AmbienteBackup(); using var t=new TelaBackup(a);using var trava=new FileStream(a.Caminhos.Arquivos["Visualizacao"]+".lock",FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.None);t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex=1;Assert.Equal(1,t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex);Assert.False(File.Exists(a.Caminhos.Arquivos["Visualizacao"]));await Task.CompletedTask;
     }
     [AvaloniaFact(DisplayName="QI10 | Biblioteca filtrada | Exportação contém biblioteca completa")]
     public async Task Caso10()

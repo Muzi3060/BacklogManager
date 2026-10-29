@@ -53,10 +53,10 @@ public sealed class PreferenciasBackupTests
     {
         using var a=new AmbienteBackup(); File.WriteAllText(a.Caminhos.Arquivos["Aparencia"],"{\"Versao\":1,\"Tema\":\"Moderno\",\"Modo\":\"Claro\",\"Extra\":123}"); var d=a.Documento(); File.Delete(a.Caminhos.Arquivos["Aparencia"]); a.Restaurado(a.Previa(d),true); Assert.Contains("Extra",File.ReadAllText(a.Caminhos.Arquivos["Aparencia"]));
     }
-    [Fact(DisplayName="QP09 | Hexadecimal personalizado | Preferências de cor persistem na reabertura")]
+    [Fact(DisplayName="QP09 | Tema fixo restaurado | Tema e modo persistem na reabertura")]
     public void Caso09()
     {
-        using var a=new AmbienteBackup(); a.Preferencias(); var d=a.Documento(); File.Delete(a.Caminhos.Arquivos["Aparencia"]); a.Restaurado(a.Previa(d),true); var l=new ArmazenamentoAparenciaJson(a.Caminhos.Arquivos["Aparencia"]).Carregar(); Assert.Equal("#102030",l.Preferencias.Personalizacoes["Acolhedor/Escuro"][ElementoCor.FundoPrincipal]);
+        using var a=new AmbienteBackup(); a.Preferencias(); var d=a.Documento(); File.Delete(a.Caminhos.Arquivos["Aparencia"]); a.Restaurado(a.Previa(d),true); var l=new ArmazenamentoAparenciaJson(a.Caminhos.Arquivos["Aparencia"]).Carregar(); Assert.Equal(TemaVisual.Acolhedor,l.Preferencias.Tema); Assert.Equal(ModoVisual.Escuro,l.Preferencias.Modo);
     }
     [Fact(DisplayName="QP10 | Lock de visualização | Gravação concorrente falha sem mudar a preferência")]
     public void Caso10()

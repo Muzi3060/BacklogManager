@@ -12,7 +12,6 @@ public partial class MainWindow
 {
     private readonly ServicoBackupLocal? _backup;
     private PreviaRestauracao? _previaBackup;
-    private bool _sincronizandoConfiguracoes;
     private bool _selecionandoBackup;
     internal Func<bool, Task<string?>>? SelecionarArquivoBackup { get; set; }
     internal Task OperacaoBackupPendente { get; private set; } = Task.CompletedTask;
@@ -25,20 +24,8 @@ public partial class MainWindow
         BtnSelecionarBackup.IsEnabled = BtnExportarBackup.IsEnabled;
         PreviaBackup.IsEnabled = !_selecionandoBackup;
         BtnRecuperarBackup.IsVisible = _backup?.Pendencia != null || _recargaBackupPendente;
-        PaginaAparencia.IsEnabled = _backup?.Pendencia == null;
+        PreferenciasVisuais.IsEnabled = _backup?.Pendencia == null;
         if (_backup?.Pendencia != null) TxtEstadoBackup.Text = _backup.Pendencia + " Nenhuma gravação será permitida até resolver a recuperação.";
-        SincronizarVisualizacaoConfiguracoes();
-    }
-    private void SincronizarVisualizacaoConfiguracoes()
-    {
-        _sincronizandoConfiguracoes = true;
-        try { CmbVisualizacaoConfiguracoes.SelectedIndex = CmbVisualizacao.SelectedIndex; }
-        finally { _sincronizandoConfiguracoes = false; }
-    }
-    private void VisualizacaoConfiguracoes_Changed(object? sender, SelectionChangedEventArgs e)
-    {
-        if (_interfacePronta && !_sincronizandoConfiguracoes && _backup?.Pendencia == null)
-            CmbVisualizacao.SelectedIndex = CmbVisualizacaoConfiguracoes.SelectedIndex;
     }
     private async Task<string?> EscolherArquivo(bool exportar)
     {
@@ -141,7 +128,7 @@ public partial class MainWindow
         _biblioteca.Carregar(); _colecoes.Carregar();
         CmbColecoes.SelectedIndex = -1; CmbObraColecao.SelectedIndex = -1;
         TxtNomeColecao.Text = TxtDescricaoColecao.Text = string.Empty; CancelarExclusaoColecao();
-        if (aparencia) { _aparencia.Carregar(); AtualizarAparencia(true); }
+        if (aparencia) { _aparencia.Carregar(); AtualizarAparencia(); }
         if (visualizacao) CarregarVisualizacao();
         _recargaBackupPendente = false;
         AtualizarColecao(); AtualizarDisponibilidadeCadastro();

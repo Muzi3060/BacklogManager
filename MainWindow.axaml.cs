@@ -154,9 +154,7 @@ public partial class MainWindow : Window
         PaginaConfiguracoes.IsVisible = pagina == "configuracoes";
         NavConfiguracoes.Classes.Set("active", pagina == "configuracoes");
         if (pagina == "configuracoes") InicializarConfiguracoes();
-        PaginaAparencia.IsVisible = pagina == "aparencia";
-        if (pagina == "aparencia") AbrirAparencia();
-        NavAparencia.Classes.Set("active", pagina == "aparencia");
+
     }
 
     private void NovoJogo_Click(object? sender, RoutedEventArgs e)
@@ -297,12 +295,6 @@ public partial class MainWindow : Window
     private void EditarSelecionado_Click(object? sender, RoutedEventArgs e)
     {
         if (ListaBacklog.SelectedItem is ItemBiblioteca item)
-            EditarJogo(item);
-    }
-
-    private void Recente_Click(object? sender, RoutedEventArgs e)
-    {
-        if (sender is Button { Tag: ItemBiblioteca item })
             EditarJogo(item);
     }
 

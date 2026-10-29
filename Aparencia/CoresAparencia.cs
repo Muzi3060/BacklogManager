@@ -8,9 +8,6 @@ namespace BacklogManager.Aparencia;
 
 public static class CoresAparencia
 {
-    public static readonly IReadOnlyList<string> Paleta = Array.AsReadOnly(new[]
-    { "#000000", "#FFFFFF", "#64748B", "#CBD5E1", "#163A63", "#3366CC", "#6D44B8", "#0F766E", "#70D6CB", "#7B3049", "#DAAF59", "#F5DCE6" });
-
     public static bool TentarNormalizar(string? texto, out string cor)
     {
         cor = texto?.Trim().ToUpperInvariant() ?? string.Empty;
@@ -80,10 +77,13 @@ public static class TemasPredefinidos
             (TemaVisual.Tecnologico, false) => ("#F1F6F5", "#DFEBE8", "#FFFFFF", "#FFFFFF", "#08675F", "#08675F"),
             (TemaVisual.Tecnologico, true) => ("#131A1B", "#0A1011", "#202A2C", "#273336", "#70D6CB", "#70D6CB"),
             (TemaVisual.Acolhedor, false) => ("#FBF4EA", "#EFE0CE", "#FFFCF6", "#FFFCF6", "#7B3049", "#7B3049"),
-            _ => ("#251B21", "#1A1217", "#352630", "#402E38", "#DAAF59", "#DAAF59")
+            (TemaVisual.Acolhedor, true) => ("#251B21", "#1A1217", "#352630", "#402E38", "#DAAF59", "#DAAF59"),
+            (TemaVisual.DarkMode, false) => ("#F2F2F2", "#E4E4E4", "#FFFFFF", "#FAFAFA", "#383838", "#383838"),
+            (TemaVisual.DarkMode, true) => ("#121212", "#0A0A0A", "#202020", "#282828", "#D0D0D0", "#D0D0D0"),
+            _ => throw new ArgumentOutOfRangeException(nameof(tema))
         };
-        var texto = escuro ? "#F6F3F8" : "#252330";
-        var secundario = escuro ? "#C0BCCD" : "#585568";
+        var texto = tema == TemaVisual.DarkMode ? (escuro ? "#F5F5F5" : "#252525") : escuro ? "#F6F3F8" : "#252330";
+        var secundario = tema == TemaVisual.DarkMode ? (escuro ? "#BBBBBB" : "#595959") : escuro ? "#C0BCCD" : "#585568";
         return new Dictionary<ElementoCor, string>
         {
             [ElementoCor.FundoPrincipal] = pagina, [ElementoCor.FundoSidebar] = lateral,
