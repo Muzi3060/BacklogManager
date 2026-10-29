@@ -1,5 +1,7 @@
 # Beta — Etapa 2: verificações das correções preventivas
 
+> Atualização: o proprietário aprovou oficialmente a Etapa 2 após revisar os resultados. Registro em [APROVACAO_BETA_ETAPA2.md](APROVACAO_BETA_ETAPA2.md). Tabelas e totais abaixo continuam históricos; não representam nova execução nem aprovação individual de testes manuais.
+
 Tabelas geradas dos resultados reais do verificador, das guardas CLI, da ferramenta de triagem e do TRX desta continuação. Não substituem os relatórios históricos das fases anteriores.
 
 **Verificações específicas: 139 planejadas, 139 executadas/aprovadas, 0 reprovadas, 0 não executadas. Regressão: 1541 executados/aprovados, 0 reprovados, 0 ignorados. Build: 0 avisos e 0 erros.** São 1680 verificações/testes nesta entrega, sem somar reexecuções como cenários novos.

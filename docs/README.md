@@ -1,6 +1,6 @@
 # Documentação do Minhas Realizações
 
-O [README principal](../README.md) apresenta a versão de desenvolvimento atual. A primeira beta ainda está em preparação; a auditoria e as correções da Etapa 2 aguardam revisão antes de qualquer integração ou publicação.
+O [README principal](../README.md) apresenta a versão de desenvolvimento atual. A primeira beta ainda está em preparação; a auditoria e as correções da Etapa 2 foram aprovadas, com integração por fast-forward autorizada. A Etapa 3 está autorizada somente para planejamento; implementação e publicação dependem de novas aprovações.
 
 - [Simplificação da interface](BETA_ETAPA1.md) e [resultados automatizados](BETA_ETAPA1_TESTES.md).
 - [Aprovação manual geral da Etapa 1](APROVACAO_BETA_ETAPA1.md), sem inferir execuções individuais.

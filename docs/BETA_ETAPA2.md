@@ -1,6 +1,6 @@
 # Beta — Etapa 2: auditoria antes da publicação
 
-**Data:** 29/10/2026. **Branch:** `chore/beta-auditoria`, criada da `main` em `7b82b64`. **Situação:** auditoria inicial e correções preventivas não destrutivas concluídas; integração da Etapa 2 aguarda revisão. As correções foram autorizadas posteriormente pelo proprietário e estão discriminadas na seção 11. Não houve alteração do aplicativo, das credenciais ou do histórico Git. O repositório não foi publicado.
+**Data:** 29/10/2026. **Branch:** `chore/beta-auditoria`, criada da `main` em `7b82b64`. **Situação:** Etapa 2 oficialmente aprovada pelo proprietário; integração por fast-forward autorizada. Registro em [APROVACAO_BETA_ETAPA2.md](APROVACAO_BETA_ETAPA2.md). O conteúdo abaixo preserva a auditoria e os resultados da entrega anterior. As correções foram autorizadas posteriormente pelo proprietário e estão discriminadas na seção 11. Não houve alteração do aplicativo, das credenciais ou do histórico Git. O repositório não foi publicado.
 
 A varredura e a revisão **não identificaram Client Secret, token real acidentalmente versionado ou biblioteca pessoal nos objetos Git examinados**. Isso é uma conclusão limitada aos métodos e ao conteúdo local disponível, não uma garantia universal de ausência de segredos. Foram encontrados riscos preventivos de inclusão acidental de arquivos e dados pessoais em caminhos/identidades Git, detalhados abaixo.
 
