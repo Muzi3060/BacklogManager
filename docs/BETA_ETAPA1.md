@@ -1,6 +1,8 @@
 # Beta — Etapa 1: simplificação da interface
 
-Implementação para revisão em `feat/beta-interface`, criada diretamente da `main` aprovada (`1771688`). A branch `feat/promocoes-ui` (`0aa420c`) e todas as branches anteriores foram preservadas. A Fase 8 não foi integrada. O escopo desta entrega é exclusivamente a simplificação autorizada; a validação manual e a aprovação desta etapa ainda estão pendentes.
+> Atualização de aprovação: o proprietário relatou validação manual no Rider e aprovou oficialmente a Etapa 1 em 29/10/2026. Registro geral em [APROVACAO_BETA_ETAPA1.md](APROVACAO_BETA_ETAPA1.md), sem inferir execução individual de cenários.
+
+Implementação entregue em `feat/beta-interface`, criada diretamente da `main` aprovada (`1771688`). A branch `feat/promocoes-ui` (`0aa420c`) e todas as branches anteriores foram preservadas. A Fase 8 não foi integrada. O escopo desta entrega é exclusivamente a simplificação autorizada; a aprovação geral desta etapa foi registrada no documento acima.
 
 ## Resultado
 
@@ -73,11 +75,11 @@ Prepare uma **nova pasta de dados fictícios**, executando `python3 scripts/prep
 
 | ID | Procedimento consolidado | Resultado esperado | Situação |
 |---|---|---|---|
-| MB01 | Em 900 × 660 e em janela maior, navegar entre Início, biblioteca, coleções e adicionar/editar. Acessar Configurações no rodapé e testar Tab/teclado. | Links principais preservados, Configurações acessível no rodapé, sem link Aparência ou indicador antigo. | Não executado — aguardando proprietário |
-| MB02 | Em Configurações, experimentar os quatro temas nos dois modos, alternando pelas telas; fechar e reabrir com o mesmo Working directory. | Oito combinações legíveis, mudança imediata, escolha persistida, sem editor de cores ou seletor redundante de grade/lista. | Não executado — aguardando proprietário |
-| MB03 | Conferir o Dashboard com os dados fictícios datados e o jogo legado sem data; alternar 7/30 dias e abrir uma obra em andamento para edição. | Estatísticas corretas, sem blocos/explicações removidos, sem promoções. Registro sem data preservado na biblioteca. | Não executado — aguardando proprietário |
-| MB04 | Na biblioteca, alternar grade/lista, filtros e mídia; editar review/progresso fictícios, conferir coleções e reiniciar. | Capas/cartões/filtros, dados pessoais e vínculos continuam funcionando e persistindo. | Não executado — aguardando proprietário |
-| MB05 | Exportar backup fictício com preferências; alterar tema e uma review de teste; selecionar o backup, conferir a prévia e confirmar primeiro sem preferências, depois com elas. | Prévia/consentimento obrigatórios, backup preventivo verificado, restauração de dados preserva tema quando desmarcado e reaplica o tema do backup quando marcado; nenhum aviso de gravação antiga pendente. | Não executado — aguardando proprietário |
+| MB01 | Em 900 × 660 e em janela maior, navegar entre Início, biblioteca, coleções e adicionar/editar. Acessar Configurações no rodapé e testar Tab/teclado. | Links principais preservados, Configurações acessível no rodapé, sem link Aparência ou indicador antigo. | Execução individual não discriminada; aprovação geral registrada |
+| MB02 | Em Configurações, experimentar os quatro temas nos dois modos, alternando pelas telas; fechar e reabrir com o mesmo Working directory. | Oito combinações legíveis, mudança imediata, escolha persistida, sem editor de cores ou seletor redundante de grade/lista. | Execução individual não discriminada; aprovação geral registrada |
+| MB03 | Conferir o Dashboard com os dados fictícios datados e o jogo legado sem data; alternar 7/30 dias e abrir uma obra em andamento para edição. | Estatísticas corretas, sem blocos/explicações removidos, sem promoções. Registro sem data preservado na biblioteca. | Execução individual não discriminada; aprovação geral registrada |
+| MB04 | Na biblioteca, alternar grade/lista, filtros e mídia; editar review/progresso fictícios, conferir coleções e reiniciar. | Capas/cartões/filtros, dados pessoais e vínculos continuam funcionando e persistindo. | Execução individual não discriminada; aprovação geral registrada |
+| MB05 | Exportar backup fictício com preferências; alterar tema e uma review de teste; selecionar o backup, conferir a prévia e confirmar primeiro sem preferências, depois com elas. | Prévia/consentimento obrigatórios, backup preventivo verificado, restauração de dados preserva tema quando desmarcado e reaplica o tema do backup quando marcado; nenhum aviso de gravação antiga pendente. | Execução individual não discriminada; aprovação geral registrada |
 
 ## Limitações e pendências
 
@@ -85,7 +87,7 @@ A substituição de biblioteca e coleções continua coordenada por diário e re
 
 Ao abrir uma aparência versão 2 na versão anterior do aplicativo, a gravação fica bloqueada por proteção; não se promete compatibilidade reversa de edição. As cores personalizadas antigas ficam preservadas no documento, mas não são editáveis nem aplicadas na beta.
 
-A validação automatizada utiliza Avalonia Headless/Skia e HTTP simulado. Não valida executáveis distribuídos Windows/Linux, disponibilidade real da IGDB ou todos os leitores de tela. Capas remotas continuam dependendo de acesso/cache conforme a implementação existente. Os cinco cenários manuais acima ainda estão pendentes; a aprovação definitiva desta etapa pertence ao proprietário.
+A validação automatizada utiliza Avalonia Headless/Skia e HTTP simulado. Não valida executáveis distribuídos Windows/Linux, disponibilidade real da IGDB ou todos os leitores de tela. Capas remotas continuam dependendo de acesso/cache conforme a implementação existente. O proprietário aprovou a etapa após validação manual geral; não discriminou a execução dos cinco cenários acima.
 
 A auditoria completa de código/histórico/documentos para tornar o repositório público e as etapas de distribuição/IGDB/atualizações não foram executadas nem aprovadas por esta entrega.
 

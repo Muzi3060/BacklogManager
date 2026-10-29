@@ -1,5 +1,7 @@
 # Beta — Etapa 1: testes reais
 
+> Atualização em 29/10/2026: aprovação manual geral registrada em [APROVACAO_BETA_ETAPA1.md](APROVACAO_BETA_ETAPA1.md). O proprietário relatou funcionamento correto no Rider, sem discriminar cenários individuais. Os totais, tabelas e pendências abaixo representam o relatório automatizado histórico, sem nova atribuição de resultados manuais.
+
 Gerado por `scripts/gerar_relatorio_beta_etapa1.py` a partir dos TRX reais. Somente arquivos sintéticos/temporários e HTTP simulado. Nenhuma chamada autenticada à IGDB nem teste na biblioteca pessoal.
 
 Referência anterior: **1551 testes**. Suíte beta: **1541 planejados/executados**, **1541 aprovados**, **0 reprovados**, **0 não executados**. São 95 novos e 1446 de regressão mantidos/adaptados.
