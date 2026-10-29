@@ -1,6 +1,6 @@
 # Beta — Etapa 2: auditoria antes da publicação
 
-**Data:** 29/10/2026. **Branch:** `chore/beta-auditoria`, criada da `main` em `7b82b64`. **Situação:** auditoria concluída para o escopo local descrito abaixo; correções propostas aguardam autorização. Nenhuma alteração de código, `.gitignore`, credenciais ou histórico foi aplicada nesta etapa. O repositório não foi publicado.
+**Data:** 29/10/2026. **Branch:** `chore/beta-auditoria`, criada da `main` em `7b82b64`. **Situação:** auditoria inicial e correções preventivas não destrutivas concluídas; integração da Etapa 2 aguarda revisão. As correções foram autorizadas posteriormente pelo proprietário e estão discriminadas na seção 11. Não houve alteração do aplicativo, das credenciais ou do histórico Git. O repositório não foi publicado.
 
 A varredura e a revisão **não identificaram Client Secret, token real acidentalmente versionado ou biblioteca pessoal nos objetos Git examinados**. Isso é uma conclusão limitada aos métodos e ao conteúdo local disponível, não uma garantia universal de ausência de segredos. Foram encontrados riscos preventivos de inclusão acidental de arquivos e dados pessoais em caminhos/identidades Git, detalhados abaixo.
 
@@ -78,7 +78,7 @@ Uma URL autenticada apontada pela heurística é um fixture de `Tests/BacklogMan
 
 As expressões locais têm falsos positivos e podem ter falsos negativos. Não constituem análise completa de fluxo de dados, código ofuscado, todas as codificações ou dependências. Uma segunda varredura com ferramenta dedicada é recomendada antes da publicação, sobretudo após introduzir os componentes da Etapa 3.
 
-## 4. Riscos e recomendações — nenhuma correção aplicada
+## 4. Achados da auditoria inicial — antes das correções autorizadas
 
 “Alta preventiva” significa risco de inclusão acidental, **não evidência de vazamento já publicado**. Não foi confirmado achado crítico de credencial comprometida no conteúdo Git local.
 
@@ -97,9 +97,9 @@ Os caminhos pessoais não foram reproduzidos integralmente neste relatório. Usa
 
 Os arquivos pessoais atuais e os backups foram lidos somente para identificação estrutural e preservação. Não se reinterpretou `SteamAppId`, não se atribuiu nova data, não se deduplicou nem removeu registro. O relato histórico de 11 registros em fases anteriores não foi usado para sobrescrever ou “corrigir” o estado atual.
 
-## 5. Matriz efetiva de exclusões
+## 5. Matriz de exclusões da auditoria inicial
 
-Os 19 caminhos abaixo foram consultados com `git check-ignore --no-index`, sem criar, renomear ou apagar arquivos. “Sem regra” indica cobertura ausente, não que o arquivo já tenha sido publicado.
+Esta tabela preserva a constatação inicial em `c14f588`; a cobertura após as correções está na seção 11 e no novo relatório de testes. Os 19 caminhos abaixo foram consultados com `git check-ignore --no-index`, sem criar, renomear ou apagar arquivos. “Sem regra” indica cobertura ausente, não que o arquivo já tenha sido publicado.
 
 | Caminho consultado | Situação observada | Origem |
 |---|---|---|
@@ -123,9 +123,9 @@ Os 19 caminhos abaixo foram consultados com `git check-ignore --no-index`, sem c
 | `dados/backlog.json` | Sem regra; a proteção do arquivo ativo é específica da raiz | — |
 | `backlog-copia.json` | Sem regra | — |
 
-São 12 correspondências do `.gitignore`, 1 exclusão local e 6 caminhos sem regra. As regras atuais protegem o armazenamento ativo conhecido, mas não todas as possíveis cópias/exportações pessoais. Não foi alterado `.gitignore` nem acrescentada outra regra local nesta etapa.
+São 12 correspondências do `.gitignore`, 1 exclusão local e 6 caminhos sem regra. As regras atuais protegem o armazenamento ativo conhecido, mas não todas as possíveis cópias/exportações pessoais. Na execução inicial registrada em `c14f588`, não foi alterado `.gitignore` nem acrescentada outra regra local. A seção 11 registra a correção posterior autorizada.
 
-## 6. Build, testes e preservação
+## 6. Build, testes e preservação da auditoria inicial
 
 | Verificação executada | Esperado | Observado | Resultado |
 |---|---|---|---|
@@ -141,24 +141,24 @@ A validação da ferramenta utilizou somente valores fictícios: marcador de cha
 
 O build e a regressão foram executados antes do fast-forward, sobre o mesmo código aprovado. Depois da integração foi verificada a igualdade do código; não se apresenta essa conferência como uma segunda execução de testes. TRX real: `beta2-integracao.trx`, em diretório temporário externo ao repositório. Os relatórios automatizados anteriores não foram regenerados ou substituídos.
 
-Nenhuma funcionalidade nova nem comportamento do aplicativo foi implementado na Etapa 2; portanto, não há novo grupo funcional ao qual atribuir artificialmente dez cenários da seção 19.1. A regressão aplicável foi executada, e as verificações estáticas/instrumentais estão discriminadas acima. A aprovação manual da Etapa 1 é geral; não houve nova sessão manual do Codex no Rider nesta auditoria.
+Na auditoria inicial, nenhuma funcionalidade nova nem comportamento do aplicativo foi implementado; portanto, não há novo grupo funcional ao qual atribuir artificialmente dez cenários da seção 19.1. A regressão aplicável foi executada, e as verificações estáticas/instrumentais estão discriminadas acima. A aprovação manual da Etapa 1 é geral; não houve nova sessão manual do Codex no Rider nesta auditoria.
 
 A proteção de múltiplos arquivos permanece a da Fase 7: diário e recuperação, **sem atomicidade absoluta conjunta**. Aparência versão 2 e a compatibilidade legada da Etapa 1 não sofreram alterações.
 
-## 7. Plano de correções proposto — aguarda autorização
+## 7. Plano proposto na auditoria inicial
 
 1. **Exclusões compartilhadas, sem mexer nos arquivos pessoais.** Acrescentar regras específicas para a instrução privada da beta, `skills/`, `qodana.yaml` e a convenção aprovada de backups/exportações. Manter os arquivos onde estão. Testar caminhos protegidos e confirmar que código, relatórios e fixtures legítimos continuam versionáveis. Não aplicar uma regra global `*.json`.
 2. **Documentação pública e privacidade.** Preparar README; decidir licença e documentos públicos; propor substituição dos caminhos pessoais por exemplos portáveis nos documentos atuais, preservando originais privados conforme autorização específica. Os resultados dos testes não devem ser inventados, alterados ou apagados para fazer essa limpeza.
 3. **Decisão explícita sobre o histórico.** Se o proprietário aceitar nomes/e-mails/caminhos históricos, registrar a aceitação. Se não aceitar, apresentar estratégia específica que preserve o repositório privado original, backups e branches, com consequências e autorização próprias. **Não executar rebase, filter-repo, exclusões de objetos, troca retroativa de autoria ou force-push.** Limpar somente a versão atual não apaga esses dados da história.
 4. **Revisão antes de publicar.** Repetir a detecção, inspecionar exatamente as referências e arquivos que serão publicados e apresentar o resultado para autorização. A revisão dos pacotes será complementada somente depois da Etapa 3 aprovada.
 
-Esses passos são recomendações. Nesta entrega foi produzido somente o diagnóstico, sem implementar a lista de correções.
+O proprietário autorizou posteriormente as exclusões preventivas, a generalização de caminhos atuais e a documentação pública básica, sem escolher licença. Esses itens foram implementados na seção 11. A reescrita do histórico, a alteração de autoria, a escolha de licença e a Etapa 3 continuam fora da autorização.
 
 ## 8. Decisões necessárias do proprietário
 
-- Autorizar ou ajustar o conjunto de regras compartilhadas de exclusão, incluindo a convenção para exportações reais.
+- Revisar as correções e a convenção de exclusões implementadas antes de autorizar a integração da Etapa 2.
 - Decidir se aceita tornar públicos nomes/e-mails dos commits e caminhos históricos; se não, escolher uma estratégia separada, com autorização própria.
-- Decidir quais documentos de desenvolvimento/instruções permanecerão públicos e autorizar a preparação do README e da licença escolhida.
+- Decidir quais documentos históricos pretende tornar públicos e escolher uma licença, se desejar. O README básico já foi preparado; nenhuma licença foi escolhida ou adicionada.
 - Autorizar posteriormente a Etapa 3 e, em momento distinto, a publicação. A aprovação desta auditoria não deve ser confundida com essas autorizações.
 
 Não se recomenda revogar ou trocar credenciais com base apenas na existência de variáveis locais ignoradas. Validade dos tokens, acessos anteriores ao remoto e possíveis cópias fora deste escopo não foram verificados.
@@ -177,6 +177,87 @@ Não se recomenda revogar ou trocar credenciais com base apenas na existência d
 
 A Etapa 1 está integrada à `main` por fast-forward e a auditoria está isolada em `chore/beta-auditoria`. Os dados e as branches anteriores foram preservados.
 
-Não foi identificada necessidade de reescrever histórico por um segredo confirmado. Para preparar a publicação faltam decidir e tratar as exclusões preventivas e a privacidade dos documentos/metadados, preparar a documentação pública e repetir a auditoria sobre as mudanças e os pacotes da Etapa 3. A exposição intencional futura dos dois campos IGDB não foi usada como impedimento.
+Não foi identificada necessidade de reescrever histórico por um segredo confirmado. As exclusões preventivas, a sanitização dos caminhos atuais e a documentação básica foram implementadas após autorização. Para preparar a publicação ainda faltam revisar estas correções, decidir sobre os metadados/caminhos históricos e a licença, e repetir a auditoria sobre as mudanças e os pacotes da Etapa 3. A exposição intencional futura dos dois campos IGDB não foi usada como impedimento.
 
-O único arquivo criado nesta branch para entrega é `docs/BETA_ETAPA2.md`. Nenhuma correção do plano foi aplicada. Não houve merge da Etapa 2, push, publicação, revogação de credencial ou início da Etapa 3. Aguardamos a revisão e a autorização explícita do proprietário para as correções propostas.
+O commit `c14f588` entregou somente o diagnóstico inicial. A continuação autorizada acrescenta as correções e os documentos da seção 11 nesta mesma branch. Não houve merge da Etapa 2, push, publicação, revogação de credencial ou início da Etapa 3. Aguardamos a revisão e a autorização explícita do proprietário antes de integrar esta etapa à `main`.
+
+
+## 11. Correções preventivas autorizadas e implementadas
+
+A implementação foi realizada exclusivamente em `chore/beta-auditoria`, a partir de `c14f588`. A `main` permaneceu em `7b82b64`, `feat/promocoes-ui` em `0aa420c` e todas as referências anteriores foram preservadas. Não houve mudança em C#, Avalonia, modelos, persistência, APIs, credenciais ou configurações de autoria.
+
+### Exclusões compartilhadas
+
+O `.gitignore` agora protege o nome privado da instrução beta e suas cópias nomeadas, instruções marcadas como `.local`/`.privado`, `qodana.yaml` e `skills/`. O conteúdo desses arquivos foi preservado integralmente por hashes. A exclusão local anterior em `.git/info/exclude` também permanece intacta.
+
+Os nomes ativos conhecidos de biblioteca, coleções, preferências e coordenação passaram a ser ignorados também em subpastas. Foram reservados diretórios de dados pessoais (`dados`, `dados-pessoais`, `dados-locais`), backups e exportações. Na raiz, há regras para o nome padrão de exportação, cópias nomeadas de `backlog` e prefixos de backup/exportação. As regras não alteram caminhos usados pelo aplicativo e não removem arquivos já existentes.
+
+São regras específicas, sem `*.json` global. Relatórios, recursos, código, instruções históricas públicas e fixtures com nomes explícitos continuam versionáveis. O teste em repositório temporário confirma que o staging comum ignora as instruções privadas e a exportação fictícia, sem depender de `.git/info/exclude` deste clone.
+
+### Caminhos atuais e documentação
+
+Foram generalizadas **134 ocorrências em 19 documentos**, usando `${PROJETO}` e `${HOME}`. Os 10 JSON afetados foram validados sem propriedades repetidas, com comparação integral contra a versão anterior sob a mesma substituição de raízes. Os resultados, contagens, datas, hashes e demais conteúdos históricos foram preservados; chaves que representavam nomes de arquivos também receberam somente a substituição da raiz. Uma normalização que colidisse chaves é recusada pelo verificador.
+
+Antes da limpeza, os 62 documentos originais foram copiados para uma pasta temporária privada fora do Git, com acesso restrito. Essa cópia não é um novo backup da biblioteca e não muda os backups existentes. Os originais também continuam no histórico Git, que não foi reescrito.
+
+O novo `README.md` apresenta o Minhas Realizações, as funcionalidades atuais e as limitações da beta; inclui compilação, execução com dados separados, uso do Rider, configuração IGDB por variáveis, persistência e backup. Informa expressamente que a primeira beta está em desenvolvimento e que não há pacotes de distribuição aprovados. O novo `docs/README.md` explica os placeholders e como interpretar relatórios históricos. Nenhuma licença foi escolhida ou adicionada.
+
+### Verificações e resultados desta continuação
+
+Resultados individuais e tabela completa: [BETA_ETAPA2_CORRECOES_TESTES.md](BETA_ETAPA2_CORRECOES_TESTES.md). Evidência estruturada: [resultados-beta-etapa2-correcoes.json](resultados-beta-etapa2-correcoes.json).
+
+- Build real: **0 avisos e 0 erros**.
+- Regressão real: **1541 executados/aprovados, 0 reprovados, 0 ignorados**, no TRX `beta2-correcoes.trx`. Os testes utilizaram dados simulados e ambientes isolados.
+- Verificações específicas: **120 aprovadas**, incluindo 43 cenários de exclusão/staging, 12 de arquivos permitidos, 17 da substituição de caminhos/validação JSON, 19 comparações de documentos, 10 comparações semânticas JSON, 12 verificações de documentação pública e 7 de preservação.
+- Guardas do verificador: **3 aprovadas**, confirmando recusa de saída no repositório, de nome reservado da biblioteca e de sobrescrita de resultado existente, somente com dados fictícios.
+- Reexecução da ferramenta local de triagem: **16 verificações sintéticas aprovadas**; examinou 53 commits e 438 blobs (708 objetos) existentes antes do commit desta continuação. Não foram encontrados os valores IGDB privados nesses objetos. Os achados heurísticos Git continuam sendo artefatos/testes já contextualizados na auditoria inicial.
+- Varredura da documentação atual: **zero caminhos pessoais concretos** após a generalização. A nova documentação e os arquivos a versionar foram revisados sem reproduzir valores de credenciais, nomes ou e-mails pessoais.
+- Preservação: contrato, 6 arquivos pessoais/dados locais e os 22 arquivos de backups externos mantiveram seus hashes. Fontes do aplicativo, demais referências Git e metadados antigos permaneceram intactos.
+
+Os 117 primeiros checks específicos já passaram; foram acrescentados três casos negativos para colisão de chaves, propriedades JSON repetidas e JSON truncado, com reexecução final de 120/120. O verificador também rejeita sobrescritas de resultados. Não houve bug do aplicativo identificado ou alteração de seus comportamentos. Os relatórios anteriores não foram regenerados: receberam somente a sanitização de caminhos autorizada.
+
+Comandos desta continuação:
+
+```bash
+dotnet build --no-restore
+dotnet test --no-build --no-restore --logger 'trx;LogFileName=beta2-correcoes.trx' --results-directory /tmp/minhas-realizacoes-beta2-correcoes-resultados
+python3 scripts/verificar_beta_etapa2.py
+```
+
+O verificador cria um repositório temporário com arquivos fictícios, não escreve no índice real e não inicializa o aplicativo. A opção privada `--manifesto` permite conferir hashes contra o estado anterior; sem ela, as verificações de comparação externa são omitidas explicitamente pela ausência da referência privada. A opção `--saida` aceita apenas um arquivo novo fora do repositório, diferente dos nomes de dados ativos. Manifesto, cópias originais e logs privados não foram adicionados ao Git.
+
+### Riscos que permanecem
+
+AUD01/AUD02/AUD04 foram mitigados pelas regras compartilhadas para os nomes e diretórios previstos. Arquivos já rastreados, `git add -f`, exportações com nomes arbitrários fora dessas convenções e o conteúdo de futuros pacotes não são protegidos automaticamente por `.gitignore`. Guarde dados reais fora do repositório e revise o índice e a lista de distribuição antes de publicar.
+
+AUD03 foi mitigado na **versão atual da documentação**, mas nomes/e-mails e caminhos de commits anteriores continuam existentes e não foram alterados. Nenhuma aceitação pública desses metadados foi inferida; essa decisão continua pendente. Os relatórios históricos também conservam hashes e informações técnicas de ambiente que o proprietário pode querer revisar.
+
+AUD05 continua sendo uma configuração local ignorada do Rider, sem alteração ou revogação de credenciais. AUD06 foi parcialmente atendido com o README; licença e seleção de documentos históricos públicos continuam pendentes. AUD07 mantém as limitações de varredura heurística, ausência de verificação remota e falta de pacotes reais. AUD08 permanece uma decisão aprovada para a futura distribuição, sem antecipação da Etapa 3.
+
+Os testes de pacotes Windows/Linux e novas verificações após a Etapa 3 permanecem **não executados**, pois essa implementação não foi autorizada nem iniciada. Não houve nova validação manual no Rider nesta continuação; a interface não foi alterada. A limitação de persistência entre múltiplos arquivos, sem atomicidade absoluta, permanece registrada.
+
+### Arquivos desta continuação
+
+Novos: `README.md`, `docs/README.md`, `scripts/verificar_beta_etapa2.py`, `docs/BETA_ETAPA2_CORRECOES_TESTES.md` e `docs/resultados-beta-etapa2-correcoes.json`.
+
+Modificados: `.gitignore`, este relatório e os 19 documentos sanitizados abaixo. Nenhum arquivo pessoal foi apagado, movido ou modificado.
+
+- `docs/AJUSTES_FASE3.md`
+- `docs/EVIDENCIAS_FASE7.json`
+- `docs/FASE0.md`
+- `docs/FASE1.md`
+- `docs/FASE2.md`
+- `docs/FASE3.md`
+- `docs/FASE4.md`
+- `docs/FASE5.md`
+- `docs/FASE7.md`
+- `docs/REVISAO2_FASE3.md`
+- `docs/verificacoes-ajustes-fase3.json`
+- `docs/verificacoes-fase3.json`
+- `docs/verificacoes-fase4.json`
+- `docs/verificacoes-fase5.json`
+- `docs/verificacoes-fase6.json`
+- `docs/verificacoes-integracao-fase5.json`
+- `docs/verificacoes-integracao-fase6.json`
+- `docs/verificacoes-revisao2-fase3.json`
+- `docs/verificacoes-revisao3-fase3.json`

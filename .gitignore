@@ -17,11 +17,11 @@ TestResults/
 *.sln.docstates
 
 # Dados pessoais da coleção (criados pelo aplicativo)
-/backlog.json
-/backlog.json.lock
-/biblioteca.preferencias.json
-/backlog.colecoes.json
-/backlog.colecoes.json.lock
+backlog.json
+backlog.json.lock
+biblioteca.preferencias.json
+backlog.colecoes.json
+backlog.colecoes.json.lock
 
 # Configurações locais, credenciais e ferramentas
 .env
@@ -34,6 +34,34 @@ TestResults/
 *.p12
 /dotnet-install.sh
 
+# Instruções privadas: preservadas localmente, nunca incluídas por git add comum
+/FASE_BETA_INSTRUCOES.md
+/FASE_BETA_INSTRUCOES.*.md
+*_INSTRUCOES.local.md
+*_INSTRUCOES.privado.md
+
+# Configuração e habilidades pessoais deste projeto
+/qodana.yaml
+/skills/
+
+# Diretórios reservados a dados reais e exportações (não são fixtures)
+/[Bb]ackups/
+/[Ee]xports/
+/[Ee]xportacoes/
+/[Dd]ados/
+/dados-pessoais/
+/dados-locais/
+
+# Cópias/exportações na raiz; outros JSON continuam versionáveis
+/minhas-realizacoes-backup*.json
+/antes-restauracao-*.json
+/backlog-*.json
+/backlog_*.json
+/backup-*.json
+/backup_*.json
+/exportacao-*.json
+/exportacao_*.json
+
 # Arquivos temporários e do sistema operacional
 *.log
 *.tmp
@@ -44,10 +72,10 @@ Thumbs.db
 Desktop.ini
 
 # Preferências pessoais de aparência
-/aparencia.preferencias.json
-/aparencia.preferencias.json.lock
+aparencia.preferencias.json
+aparencia.preferencias.json.lock
 
 # Coordenação e recuperação local da Fase 7
-/.mr-restauracao.json
-/.mr-backup.lock
-/biblioteca.preferencias.json.lock
+.mr-restauracao.json
+.mr-backup.lock
+biblioteca.preferencias.json.lock

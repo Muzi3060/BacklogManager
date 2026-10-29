@@ -1,0 +1,1145 @@
+{
+  "base": "c14f588",
+  "verificacoes": {
+    "planejados": 139,
+    "executados": 139,
+    "aprovados": 139,
+    "reprovados": 0,
+    "naoExecutados": 0
+  },
+  "regressao": {
+    "arquivo": "beta2-correcoes.trx",
+    "sha256": "e5fb31ff11d50497c7cb53acc7901e822ede7f91fc163452e81b2bc515d0783f",
+    "inicio": "2026-10-29T20:24:33.6261548-03:00",
+    "fim": "2026-10-29T20:26:21.2295364-03:00",
+    "planejados": 1541,
+    "executados": 1541,
+    "aprovados": 1541,
+    "reprovados": 0,
+    "ignorados": 0
+  },
+  "build": {
+    "avisos": 0,
+    "erros": 0
+  },
+  "testes": [
+    {
+      "id": "IG01",
+      "cenario": "instrução privada da beta",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG02",
+      "cenario": "cópia privada da instrução",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG03",
+      "cenario": "instrução local genérica",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG04",
+      "cenario": "instrução privada em subpasta",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG05",
+      "cenario": "configuração pessoal Qodana",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG06",
+      "cenario": "habilidade pessoal",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG07",
+      "cenario": "biblioteca na raiz",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG08",
+      "cenario": "biblioteca em subpasta",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG09",
+      "cenario": "cópia da biblioteca com hífen",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG10",
+      "cenario": "cópia da biblioteca com sublinhado",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG11",
+      "cenario": "coleções na raiz",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG12",
+      "cenario": "coleções em subpasta",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG13",
+      "cenario": "preferência de visualização",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG14",
+      "cenario": "preferência de aparência",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG15",
+      "cenario": "lock de biblioteca",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG16",
+      "cenario": "lock de coleções",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG17",
+      "cenario": "lock de aparência",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG18",
+      "cenario": "lock de visualização",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG19",
+      "cenario": "diário de recuperação",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG20",
+      "cenario": "lock do conjunto",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG21",
+      "cenario": "exportação com nome padrão",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG22",
+      "cenario": "exportação com nome padrão e data",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG23",
+      "cenario": "segurança anterior à restauração",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG24",
+      "cenario": "backup nomeado com hífen",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG25",
+      "cenario": "backup nomeado com sublinhado",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG26",
+      "cenario": "exportação nomeada com hífen",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG27",
+      "cenario": "exportação nomeada com sublinhado",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG28",
+      "cenario": "diretório de backups",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG29",
+      "cenario": "diretório de backups com maiúscula",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG30",
+      "cenario": "diretório de exports",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG31",
+      "cenario": "diretório de exportações",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG32",
+      "cenario": "diretório de dados",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG33",
+      "cenario": "diretório de dados pessoais",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG34",
+      "cenario": "diretório de dados locais",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG35",
+      "cenario": "backup individual",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG36",
+      "cenario": "configuração da IDE",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG37",
+      "cenario": "credenciais de ambiente",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG38",
+      "cenario": "variante local de ambiente",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG39",
+      "cenario": "log de execução",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG40",
+      "cenario": "saída de compilação",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG41",
+      "cenario": "cache de compilação",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG42",
+      "cenario": "resultado de testes",
+      "esperado": "Ignorado pelas regras compartilhadas",
+      "observado": "Ignorado pelas regras compartilhadas",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP01",
+      "cenario": "código C#",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP02",
+      "cenario": "interface Avalonia",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP03",
+      "cenario": "documentação pública",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP04",
+      "cenario": "contrato protegido e versionado",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP05",
+      "cenario": "instrução histórica sem marca privada",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP06",
+      "cenario": "relatório JSON",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP07",
+      "cenario": "fixture JSON com nome explícito",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP08",
+      "cenario": "fixture de backup em testes",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP09",
+      "cenario": "configuração de exemplo",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP10",
+      "cenario": "recurso SVG",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP11",
+      "cenario": "roteiro de validação",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IP12",
+      "cenario": "JSON genérico",
+      "esperado": "Continua versionável",
+      "observado": "Continua versionável",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "IG43",
+      "cenario": "staging comum em clone sem exclusão local",
+      "esperado": "Somente README e .gitignore entram no dry-run",
+      "observado": "Somente README e .gitignore entram no dry-run",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN01",
+      "cenario": "projeto Linux",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN02",
+      "cenario": "backup Linux",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN03",
+      "cenario": "projeto macOS",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN04",
+      "cenario": "home macOS",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN05",
+      "cenario": "projeto Windows",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN06",
+      "cenario": "home Windows",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN07",
+      "cenario": "caminho Windows escapado em JSON",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN08",
+      "cenario": "raiz home sem sufixo",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN09",
+      "cenario": "nome de projeto semelhante",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN10",
+      "cenario": "caminho genérico já sanitizado",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN11",
+      "cenario": "placeholder anterior",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN12",
+      "cenario": "caminho temporário útil",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN13",
+      "cenario": "URL de catálogo",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN14",
+      "cenario": "contagens resultados e hash",
+      "esperado": "Substitui somente a raiz pessoal prevista",
+      "observado": "Substitui somente a raiz pessoal prevista",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN15",
+      "cenario": "normalização que colidiria duas chaves pessoais",
+      "esperado": "Colisão detectada sem descartar silenciosamente uma chave",
+      "observado": "Colisão detectada sem descartar silenciosamente uma chave",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN16",
+      "cenario": "propriedade duplicada em objeto aninhado",
+      "esperado": "JSON ambíguo recusado",
+      "observado": "JSON ambíguo recusado",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "SN17",
+      "cenario": "JSON truncado na verificação de preservação",
+      "esperado": "JSON inválido recusado",
+      "observado": "JSON inválido recusado",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH01",
+      "cenario": "docs/AJUSTES_FASE3.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH02",
+      "cenario": "docs/EVIDENCIAS_FASE7.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS02",
+      "cenario": "docs/EVIDENCIAS_FASE7.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH03",
+      "cenario": "docs/FASE0.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH04",
+      "cenario": "docs/FASE1.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH05",
+      "cenario": "docs/FASE2.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH06",
+      "cenario": "docs/FASE3.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH07",
+      "cenario": "docs/FASE4.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH08",
+      "cenario": "docs/FASE5.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH09",
+      "cenario": "docs/FASE7.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH10",
+      "cenario": "docs/REVISAO2_FASE3.md",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH11",
+      "cenario": "docs/verificacoes-ajustes-fase3.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS11",
+      "cenario": "docs/verificacoes-ajustes-fase3.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH12",
+      "cenario": "docs/verificacoes-fase3.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS12",
+      "cenario": "docs/verificacoes-fase3.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH13",
+      "cenario": "docs/verificacoes-fase4.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS13",
+      "cenario": "docs/verificacoes-fase4.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH14",
+      "cenario": "docs/verificacoes-fase5.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS14",
+      "cenario": "docs/verificacoes-fase5.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH15",
+      "cenario": "docs/verificacoes-fase6.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS15",
+      "cenario": "docs/verificacoes-fase6.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH16",
+      "cenario": "docs/verificacoes-integracao-fase5.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS16",
+      "cenario": "docs/verificacoes-integracao-fase5.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH17",
+      "cenario": "docs/verificacoes-integracao-fase6.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS17",
+      "cenario": "docs/verificacoes-integracao-fase6.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH18",
+      "cenario": "docs/verificacoes-revisao2-fase3.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS18",
+      "cenario": "docs/verificacoes-revisao2-fase3.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DH19",
+      "cenario": "docs/verificacoes-revisao3-fase3.json",
+      "esperado": "Documento histórico difere somente pelas raízes de caminhos",
+      "observado": "Documento histórico difere somente pelas raízes de caminhos",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "JS19",
+      "cenario": "docs/verificacoes-revisao3-fase3.json",
+      "esperado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "observado": "JSON válido; campos e resultados preservados sob a mesma substituição de raízes",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB01",
+      "cenario": "nome público",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB02",
+      "cenario": "beta em desenvolvimento",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB03",
+      "cenario": "SDK coincide com o projeto",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB04",
+      "cenario": "projeto indicado existe",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB05",
+      "cenario": "execução fora do repositório",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB06",
+      "cenario": "três nomes de configuração IGDB aceitos",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB07",
+      "cenario": "armazenamento ativo explicitado",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB08",
+      "cenario": "links locais do README existentes",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB09",
+      "cenario": "gerador fictício existente e documentado",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB10",
+      "cenario": "regressão documentada sem executar aplicativo real",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB11",
+      "cenario": "placeholders e histórico esclarecidos",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PB12",
+      "cenario": "licença não escolhida e pacotes não prometidos",
+      "esperado": "Documentação coerente com o projeto e seus limites",
+      "observado": "Documentação coerente com o projeto e seus limites",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PR01",
+      "cenario": "documentação atual sem raízes pessoais concretas",
+      "esperado": "Nenhuma raiz pessoal concreta nos documentos atuais",
+      "observado": "Nenhuma raiz pessoal concreta nos documentos atuais",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PR02",
+      "cenario": "código C# e Avalonia preservado",
+      "esperado": "Nenhum fonte do aplicativo alterado desde a base auditada",
+      "observado": "Nenhum fonte do aplicativo alterado desde a base auditada",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PR03",
+      "cenario": "contrato preservado",
+      "esperado": "Contrato idêntico ao da base auditada",
+      "observado": "Contrato idêntico ao da base auditada",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PR04",
+      "cenario": "pessoais fora do índice",
+      "esperado": "Instrução beta Qodana e skills não rastreados",
+      "observado": "Instrução beta Qodana e skills não rastreados",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PR05",
+      "cenario": "pessoais e dados locais",
+      "esperado": "Hashes iguais ao manifesto privado anterior",
+      "observado": "Hashes iguais ao manifesto privado anterior",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PR06",
+      "cenario": "backups externos",
+      "esperado": "Hashes iguais ao manifesto privado anterior",
+      "observado": "Hashes iguais ao manifesto privado anterior",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "PR07",
+      "cenario": "outras referências Git",
+      "esperado": "Nenhuma referência anterior alterada",
+      "observado": "Nenhuma referência anterior alterada",
+      "tipo": "Automatizado (verificação estática/isolada)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "CL01",
+      "cenario": "Saída dentro do repositório recusada",
+      "esperado": "Recusa explícita sem criar ou sobrescrever arquivo",
+      "observado": "Recusa explícita sem criar ou sobrescrever arquivo",
+      "tipo": "Automatizado (CLI em dados fictícios)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "CL02",
+      "cenario": "Nome de biblioteca recusado fora do repositório",
+      "esperado": "Recusa explícita sem criar ou sobrescrever arquivo",
+      "observado": "Recusa explícita sem criar ou sobrescrever arquivo",
+      "tipo": "Automatizado (CLI em dados fictícios)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "CL03",
+      "cenario": "Saída existente preservada",
+      "esperado": "Recusa explícita sem criar ou sobrescrever arquivo",
+      "observado": "Recusa explícita sem criar ou sobrescrever arquivo",
+      "tipo": "Automatizado (CLI em dados fictícios)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS01",
+      "cenario": "chave privada",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS02",
+      "cenario": "token GitHub",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS03",
+      "cenario": "secret literal",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS04",
+      "cenario": "password env",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS05",
+      "cenario": "header literal",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS06",
+      "cenario": "url autenticada",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS07",
+      "cenario": "URL com token",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS08",
+      "cenario": "token simulado",
+      "esperado": "Detecção esperada: False",
+      "observado": "Detecção observada: False",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS09",
+      "cenario": "nome de variável",
+      "esperado": "Detecção esperada: False",
+      "observado": "Detecção observada: False",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS10",
+      "cenario": "SHA hexadecimal",
+      "esperado": "Detecção esperada: False",
+      "observado": "Detecção observada: False",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS11",
+      "cenario": "e-mail",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS12",
+      "cenario": "caminho local",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS13",
+      "cenario": "JSON de biblioteca",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS14",
+      "cenario": "binário",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS15",
+      "cenario": "backup codificado",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    },
+    {
+      "id": "DS16",
+      "cenario": "env Rider",
+      "esperado": "Detecção esperada: True",
+      "observado": "Detecção observada: True",
+      "tipo": "Automatizado (triagem com dados sintéticos)",
+      "status": "Aprovado"
+    }
+  ],
+  "limites": [
+    "Verificações locais específicas executadas com manifesto privado, dados simulados e leitura dos arquivos reais apenas para conferir preservação.",
+    "Sem manifesto, PR05–PR07 são explicitamente não executadas na chamada pública; as três foram executadas com sucesso nesta entrega.",
+    "Nenhuma execução de pacotes Windows/Linux, teste real autenticado de IGDB ou nova sessão manual do Rider.",
+    "Histórico Git e identidades antigas não foram alterados."
+  ]
+}
