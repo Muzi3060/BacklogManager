@@ -35,6 +35,6 @@ public sealed class ArredondamentoTests
     [AvaloniaFact(DisplayName = "RD10 | Alternância das visualizações | Novos controles de capa conservam recorte arredondado")]
     public async Task Alternar() { using var a = new ApoioVisual(); a.Biblioteca(); await a.Prontas(); Assert.Equal(8, Assert.IsType<RectangleGeometry>(Capa(a.Cartoes[0]).Clip).RadiusX); a.Biblioteca(modo: 1); await a.Prontas(); var c = a.Tela.Campo<ListBox>("ListaBacklog").GetVisualDescendants().OfType<CapaObra>().Single(); Assert.Equal(8, Assert.IsType<RectangleGeometry>(c.Clip).RadiusX); }
 
-    [AvaloniaFact(DisplayName = "RD12 | Capturas no tamanho mínimo | Grade uniforme e cantos renderizam nas grade e lista")]
+    [AvaloniaFact(DisplayName = "RD12 | Capturas no tamanho mínimo | Grade uniforme e cantos renderizam na grade e na lista")]
     public async Task Capturas() { using var a = new ApoioVisual(ApoioVisual.Mistos()); a.Tela.Janela.Width = 900; a.Tela.Janela.Height = 660; await a.Prontas(); a.Biblioteca(); await a.Prontas(); a.Tela.Campo<ListBox>("ListaBacklog").SelectedIndex = 1; a.Renderizar(); a.Capturar("grade-uniforme-arredondada"); a.Biblioteca(modo: 1); await a.Prontas(); a.Capturar("lista-arredondada"); }
 }

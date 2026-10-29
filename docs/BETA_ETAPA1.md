@@ -37,7 +37,7 @@ A comparação final confirmou os bytes dos dados pessoais presentes e a ausênc
 
 Antes de qualquer commit, `/FASE_BETA_INSTRUCOES.md` foi incluído em `.git/info/exclude`, somente no clone local. O arquivo foi preservado, permanece fora do índice e não integra os commits. Essa proteção **não acompanha novos clones**: mantenha esse documento privado e preserve a exclusão local. `qodana.yaml` e `skills/` continuam não rastreados e intactos.
 
-Commit de implementação e testes: `f536428` — `feat(beta): simplifica interface e mantém temas fixos compatíveis`. A documentação e os resultados são registrados em um commit separado nesta mesma branch.
+Commit de implementação e testes: `f536428` — `feat(beta): simplifica interface e mantém temas fixos compatíveis`. A documentação inicial foi registrada em `11e528d`. A revisão final dos enunciados de três testes e a nova execução completa são registradas em um terceiro commit na mesma branch.
 
 Não houve merge, push ou publicação. Distribuição, adaptação das credenciais IGDB, verificação de atualizações e a auditoria completa para publicação permanecem fora desta etapa.
 
@@ -58,7 +58,9 @@ dotnet test --logger 'trx;LogFileName=beta1-base.trx' --results-directory /tmp/m
 # Depois das alterações e das correções:
 dotnet build --no-restore
 dotnet test --no-build --no-restore --logger 'trx;LogFileName=beta1-final.trx' --results-directory /tmp/minhas-realizacoes-beta1-resultados
-python3 scripts/gerar_relatorio_beta_etapa1.py /tmp/minhas-realizacoes-beta1-resultados/beta1-base.trx /tmp/minhas-realizacoes-beta1-resultados/beta1-final.trx
+# Reexecução após revisar os enunciados dos testes:
+dotnet test --no-restore --logger 'trx;LogFileName=beta1-final-revisado.trx' --results-directory /tmp/minhas-realizacoes-beta1-resultados
+python3 scripts/gerar_relatorio_beta_etapa1.py /tmp/minhas-realizacoes-beta1-resultados/beta1-base.trx /tmp/minhas-realizacoes-beta1-resultados/beta1-final-revisado.trx
 ```
 
 O TRX de referência corresponde ao código anterior às alterações. Para reproduzi-lo futuramente, use uma cópia separada do commit base, preservando o diretório de trabalho atual. O gerador não executa testes: lê os TRX, confere IDs/cobertura/transições e produz documentação portátil.

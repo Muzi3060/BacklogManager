@@ -61,7 +61,8 @@ def gerar(referencia, final):
                  if t['id'] in mapa_base and (t['cenario'], t['esperado']) !=
                  (mapa_base[t['id']]['cenario'], mapa_base[t['id']]['esperado'])]
     resumo = dict(referencia=totais(base), final=totais(atual), novos=len(novos),
-                  regressao=len(atual['testes']) - len(novos), retirados=len(retirados))
+                  regressao=len(atual['testes']) - len(novos), retirados=len(retirados),
+                  manuais=dict(planejados=5, executados=0, naoExecutados=5))
     dados = dict(resumo=resumo, referencia={k: v for k, v in base.items() if k != 'testes'}, final=atual, enunciadosAdaptados=adaptados,
                  observacao='Aprovação automatizada corresponde às asserções executadas; não é validação manual no Rider. Transições adicionais por mudança nos auxiliares estão descritas no relatório.')
     (RAIZ / 'docs/resultados-beta-etapa1.json').write_text(json.dumps(dados, ensure_ascii=False, indent=2) + '\n')
@@ -73,6 +74,9 @@ def gerar(referencia, final):
         f"**{resumo['final']['aprovados']} aprovados**, **{resumo['final']['reprovados']} reprovados**, "
         f"**{resumo['final']['naoExecutados']} não executados**. "
         f"São {len(novos)} novos e {resumo['regressao']} de regressão mantidos/adaptados.", '',
+        'Plano desta entrega: **1546 cenários** (1541 automatizados e 5 manuais). '
+        'Foram executados os 1541 automatizados; os cinco manuais aguardam o proprietário. '
+        'Execuções repetidas e a referência anterior não são somadas como cenários novos.', '',
         'Os 105 cenários da versão anterior retirados por remoção expressa das funcionalidades estão '
         'individualmente identificados em [beta-etapa1-transicao-testes.json](beta-etapa1-transicao-testes.json). '
         'Eles passaram na referência anterior; não são contados como aprovados ou ignorados na beta. '
@@ -111,7 +115,8 @@ def gerar(referencia, final):
                'A asserção agora aceita bloco ausente, sem inventar data.',
                '- Reprodução dirigida: BC15 falhou e outros três casos passaram. Bug confirmado: depois de restaurar aparência, '
                '`PendenteSalvar` ainda refletia a seleção anterior. `ServicoAparencia.Carregar()` agora limpa essa pendência ao substituir a sessão.',
-               '- Build final da solução: zero avisos e zero erros. Suíte completa final: 1541 aprovados, incluindo BC15, BD02, TX02 e TX05.',
+               '- Build final da solução: zero avisos e zero erros. Primeira suíte completa final: 1541 aprovados, incluindo BC15, BD02, TX02 e TX05.',
+               '- Após revisar os enunciados QI04/TX12/RD12, a suíte foi compilada e executada novamente: 1541 aprovados, zero falhas/ignorados. Essa última execução fornece os resultados individuais deste relatório.',
                '- Uma tentativa inicial de iniciar MSBuild no sandbox não executou cenários por falta de permissão para pipes locais; '
                'a execução foi repetida com as permissões de processo necessárias. Isso não foi registrado como teste aprovado.', '',
                '## Validação complementar e limites', '',

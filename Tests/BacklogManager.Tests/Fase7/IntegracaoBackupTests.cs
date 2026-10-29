@@ -28,7 +28,7 @@ public sealed class IntegracaoBackupTests
     {
         using var a=new AmbienteBackup(); var d=AmbienteBackup.Basico();d.Componentes["Colecoes"]=AmbienteBackup.C(JsonSerializer.SerializeToUtf8Bytes(new{Versao=1,Colecoes=new[]{new ColecaoPersonalizada(Guid.NewGuid(),"Nova","",Array.Empty<Guid>())}}));using var t=new TelaBackup(a);a.Importar(d);await t.Selecionar(a.Importado);t.Confirmar();Assert.Single(t.Colecoes.Colecoes);Assert.Equal("Nova",t.Colecoes.Colecoes[0].Nome);Assert.Single(t.Campo<ComboBox>("CmbColecoes").Items);
     }
-    [AvaloniaFact(DisplayName="QI04 | Visualização após recarga | Preferência restaurada aparece nos dois seletores")]
+    [AvaloniaFact(DisplayName="QI04 | Visualização após recarga | Preferência restaurada aparece no seletor da biblioteca sem duplicação")]
     public async Task Caso04()
     {
         using var a=new AmbienteBackup(); a.Preferencias();var d=a.Documento();File.Delete(a.Caminhos.Arquivos["Visualizacao"]);using var t=new TelaBackup(a);a.Importar(d);await t.Selecionar(a.Importado);t.Confirmar(true);Assert.Equal(1,t.Campo<ComboBox>("CmbVisualizacao").SelectedIndex);Assert.Null(t.Janela.FindControl<ComboBox>("CmbVisualizacaoConfiguracoes"));

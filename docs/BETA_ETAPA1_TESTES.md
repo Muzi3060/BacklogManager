@@ -4,6 +4,8 @@ Gerado por `scripts/gerar_relatorio_beta_etapa1.py` a partir dos TRX reais. Some
 
 Referência anterior: **1551 testes**. Suíte beta: **1541 planejados/executados**, **1541 aprovados**, **0 reprovados**, **0 não executados**. São 95 novos e 1446 de regressão mantidos/adaptados.
 
+Plano desta entrega: **1546 cenários** (1541 automatizados e 5 manuais). Foram executados os 1541 automatizados; os cinco manuais aguardam o proprietário. Execuções repetidas e a referência anterior não são somadas como cenários novos.
+
 Os 105 cenários da versão anterior retirados por remoção expressa das funcionalidades estão individualmente identificados em [beta-etapa1-transicao-testes.json](beta-etapa1-transicao-testes.json). Eles passaram na referência anterior; não são contados como aprovados ou ignorados na beta. A contabilidade é **1551 − 105 + 95 = 1541**.
 
 Resultados individuais da regressão, horários e hashes dos TRX: [resultados-beta-etapa1.json](resultados-beta-etapa1.json). Os relatórios anteriores permanecem históricos, sem alteração.
@@ -145,7 +147,8 @@ Adaptações: VH06–VH17 exercitam o validador hexadecimal interno usado pelas 
 - Primeira regressão adaptada: 1444 aprovados e 2 falhas (TX02 ainda exigia o convite removido; TX05 precisava conservar os demais dados pessoais do fixture e acessar o acompanhamento). Testes adaptados ao requisito e repetidos.
 - Primeiros 94 novos cenários: 93 aprovados e 1 falha de fixture (BD02 pressupunha um bloco multimídia obrigatório em jogo legado). A asserção agora aceita bloco ausente, sem inventar data.
 - Reprodução dirigida: BC15 falhou e outros três casos passaram. Bug confirmado: depois de restaurar aparência, `PendenteSalvar` ainda refletia a seleção anterior. `ServicoAparencia.Carregar()` agora limpa essa pendência ao substituir a sessão.
-- Build final da solução: zero avisos e zero erros. Suíte completa final: 1541 aprovados, incluindo BC15, BD02, TX02 e TX05.
+- Build final da solução: zero avisos e zero erros. Primeira suíte completa final: 1541 aprovados, incluindo BC15, BD02, TX02 e TX05.
+- Após revisar os enunciados QI04/TX12/RD12, a suíte foi compilada e executada novamente: 1541 aprovados, zero falhas/ignorados. Essa última execução fornece os resultados individuais deste relatório.
 - Uma tentativa inicial de iniciar MSBuild no sandbox não executou cenários por falta de permissão para pipes locais; a execução foi repetida com as permissões de processo necessárias. Isso não foi registrado como teste aprovado.
 
 ## Validação complementar e limites
