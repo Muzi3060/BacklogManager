@@ -29,6 +29,8 @@ public sealed class ArmazenamentoPreferenciasBiblioteca
     {
         if (!Enum.IsDefined(visualizacao)) throw new ArgumentOutOfRangeException(nameof(visualizacao));
         if (CaminhoArquivo == null) { _memoria = visualizacao; return; }
+        using var bloqueio = new FileStream(CaminhoArquivo + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+        BacklogManager.Backup.CaminhosDadosLocais.VerificarGravacao(CaminhoArquivo);
         var temporario = CaminhoArquivo + "." + Guid.NewGuid().ToString("N") + ".tmp";
         try
         {

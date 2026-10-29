@@ -82,6 +82,7 @@ public sealed class ArmazenamentoAparenciaJson : IArmazenamentoAparencia
         candidato["Personalizacoes"] = conjuntos.Parent == null ? conjuntos : conjuntos.DeepClone();
         var bytes = JsonSerializer.SerializeToUtf8Bytes(candidato, new JsonSerializerOptions { WriteIndented = true });
         using var bloqueio = new FileStream(CaminhoArquivo + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+        BacklogManager.Backup.CaminhosDadosLocais.VerificarGravacao(CaminhoArquivo);
         if (_hash != Hash(Ler())) throw new ArquivoAlteradoException();
         var temporario = CaminhoArquivo + "." + Guid.NewGuid().ToString("N") + ".tmp";
         try

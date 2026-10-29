@@ -1,32 +1,32 @@
 using System;
 using System.Net.Http;
 using BacklogManager.Contracts;
+using BacklogManager.Backup;
 using BacklogManager.Data;
 using BacklogManager.Services;
 
 namespace BacklogManager.Configuracao;
 
 internal sealed record DependenciasJanela(ServicoBiblioteca Biblioteca, IPesquisaCatalogo? Pesquisa, IDisposable? RecursoPesquisa,
-    ArmazenamentoPreferenciasBiblioteca? Preferencias = null, ServicoColecoes? Colecoes = null, BacklogManager.Aparencia.ServicoAparencia? Aparencia = null);
+    ArmazenamentoPreferenciasBiblioteca? Preferencias = null, ServicoColecoes? Colecoes = null, BacklogManager.Aparencia.ServicoAparencia? Aparencia = null, ServicoBackupLocal? Backup = null);
 
 internal static class ComposicaoAplicativo
 {
     internal static DependenciasJanela Criar(string caminhoArquivo = "backlog.json",
         Func<string, string?>? lerVariavel = null, Func<HttpClient>? criarCliente = null)
     {
-        var biblioteca = new ServicoBiblioteca(new ArmazenamentoJsonBiblioteca(new FileManager(caminhoArquivo)));
-        var caminhoBiblioteca = System.IO.Path.GetFullPath(caminhoArquivo);
-        var caminhoPreferencias = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(caminhoBiblioteca)!, "biblioteca.preferencias.json");
-        if (caminhoPreferencias == caminhoBiblioteca) caminhoPreferencias += ".visualizacao.json";
-        var preferencias = new ArmazenamentoPreferenciasBiblioteca(caminhoPreferencias);
-        var caminhoColecoes = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(caminhoBiblioteca)!,
-            System.IO.Path.GetFileNameWithoutExtension(caminhoBiblioteca) + ".colecoes.json");
-        var caminhoAparencia = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(caminhoBiblioteca)!, "aparencia.preferencias.json");
-        if (caminhoAparencia == caminhoBiblioteca) caminhoAparencia += ".visual.json";
-        var aparencia = new BacklogManager.Aparencia.ServicoAparencia(new BacklogManager.Aparencia.ArmazenamentoAparenciaJson(caminhoAparencia));
-        var colecoes = new ServicoColecoes(new ArmazenamentoColecoesJson(caminhoColecoes), biblioteca);
+        var caminhos = new CaminhosDadosLocais(caminhoArquivo);
+        var backup = new ServicoBackupLocal(caminhos);
+        backup.Recuperar(); // Sempre antes dos leitores e dos salvamentos automáticos de preferências.
+        var arquivoBiblioteca = new FileManager(caminhos.Arquivos["Biblioteca"]);
+        var arquivoColecoes = new ArmazenamentoColecoesJson(caminhos.Arquivos["Colecoes"]);
+        var biblioteca = new ServicoBiblioteca(new ArmazenamentoJsonBiblioteca(arquivoBiblioteca));
+        var preferencias = new ArmazenamentoPreferenciasBiblioteca(caminhos.Arquivos["Visualizacao"]);
+        var aparencia = new BacklogManager.Aparencia.ServicoAparencia(new BacklogManager.Aparencia.ArmazenamentoAparenciaJson(caminhos.Arquivos["Aparencia"]));
+        var colecoes = new ServicoColecoes(arquivoColecoes, biblioteca);
+        backup.ConferirEstadoCarregado = () => { arquivoBiblioteca.ConferirEstadoAtual(); arquivoColecoes.ConferirEstadoAtual(); };
         if (!ConfiguracaoIgdb.TentarLer(out var clientId, out var token, lerVariavel))
-            return new DependenciasJanela(biblioteca, null, null, preferencias, colecoes, aparencia);
+            return new DependenciasJanela(biblioteca, null, null, preferencias, colecoes, aparencia, backup);
 
         // O cliente produzido pela fábrica pertence a esta composição e será fechado pela janela.
         var cliente = criarCliente?.Invoke() ?? new HttpClient(new SocketsHttpHandler
@@ -35,6 +35,6 @@ internal static class ComposicaoAplicativo
         });
         cliente.Timeout = TimeSpan.FromSeconds(15);
         var pesquisa = new PesquisaJogosIgdb(new IgdbService(cliente, clientId, token));
-        return new DependenciasJanela(biblioteca, pesquisa, cliente, preferencias, colecoes, aparencia);
+        return new DependenciasJanela(biblioteca, pesquisa, cliente, preferencias, colecoes, aparencia, backup);
     }
 }

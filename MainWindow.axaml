@@ -226,6 +226,7 @@
                             <TextBlock Text="Adicionar / editar" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
+                    <Button x:Name="NavConfiguracoes" Classes="navigation" Tag="configuracoes" Click="Navegar_Click" Content="Configurações" />
                     <Button x:Name="NavAparencia" Classes="navigation" Tag="aparencia" Click="Navegar_Click" Content="Aparência" />
                 </StackPanel>
                 <Border Grid.Row="3" BorderBrush="{DynamicResource SidebarBorder}" BorderThickness="0,1,0,0" Padding="10,18" Margin="0,0,0,8">
@@ -490,6 +491,51 @@
                             <Button x:Name="BtnEditarObraColecao" Content="Editar dados pessoais" Click="EditarObraColecao_Click" Margin="0,0,8,12" />
                             <Button x:Name="BtnRemoverObraColecao" Content="Remover da coleção" Click="RemoverObraColecao_Click" Margin="0,0,0,12" />
                         </WrapPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <ScrollViewer x:Name="PaginaConfiguracoes" IsVisible="False" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Spacing="16" Margin="0,0,16,16" MaxWidth="{Binding #PaginaConfiguracoes.Viewport.Width}">
+                        <TextBlock Text="Configurações" Classes="pageTitle" />
+                        <Border Classes="card" Padding="16"><StackPanel Spacing="10">
+                            <TextBlock Text="Preferências" FontSize="18" FontWeight="SemiBold" />
+                            <Button x:Name="BtnAparenciaConfiguracoes" Content="Personalizar aparência" Tag="aparencia" Click="Navegar_Click" />
+                            <TextBlock Text="Visualização da biblioteca (salva automaticamente)" TextWrapping="Wrap" />
+                            <ComboBox x:Name="CmbVisualizacaoConfiguracoes" SelectedIndex="0" SelectionChanged="VisualizacaoConfiguracoes_Changed" AutomationProperties.Name="Visualização da biblioteca nas configurações">
+                                <ComboBoxItem Content="Grade" /><ComboBoxItem Content="Lista" />
+                            </ComboBox>
+                        </StackPanel></Border>
+                        <Border Classes="card" Padding="16"><StackPanel Spacing="10">
+                            <TextBlock Text="Armazenamento local ativo" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock Text="Os caminhos abaixo correspondem à sessão atual. Exportar um backup não muda a pasta da biblioteca." Classes="muted" TextWrapping="Wrap" />
+                            <TextBlock x:Name="TxtCaminhosDados" TextWrapping="Wrap" FontSize="12" />
+                        </StackPanel></Border>
+                        <Border Classes="card" Padding="16"><StackPanel Spacing="12">
+                            <TextBlock Text="Backup local" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock Text="Um único JSON inclui biblioteca e coleções. Capas permanecem como referências. Guarde o arquivo em um local seguro: ele contém suas informações pessoais e não é criptografado." TextWrapping="Wrap" />
+                            <CheckBox x:Name="ChkIncluirPreferencias" Background="{DynamicResource PanelBackground}" Foreground="{DynamicResource PanelForeground}" Content="Incluir aparência e visualização na exportação" IsChecked="True" />
+                            <WrapPanel>
+                                <Button x:Name="BtnExportarBackup" Content="Exportar backup" Click="ExportarBackup_Click" Margin="0,0,10,10" />
+                                <Button x:Name="BtnSelecionarBackup" Content="Selecionar e validar backup" Click="SelecionarBackup_Click" Margin="0,0,0,10" />
+                            </WrapPanel>
+                            <TextBlock x:Name="TxtEstadoBackup" Text="Nenhuma restauração iniciada." TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                            <Button x:Name="BtnRecuperarBackup" Content="Tentar recuperação pendente" Click="RecuperarBackup_Click" IsVisible="False" />
+                            <Border x:Name="PreviaBackup" Classes="card" Padding="12" IsVisible="False"><StackPanel Spacing="12">
+                                <TextBlock Text="Prévia da substituição" FontSize="16" FontWeight="SemiBold" />
+                                <TextBlock x:Name="TxtPreviaBackup" TextWrapping="Wrap" />
+                                <CheckBox x:Name="ChkRestaurarPreferencias" Background="{DynamicResource PanelBackground}" Foreground="{DynamicResource PanelForeground}" IsCheckedChanged="PreferenciasBackup_Changed"><TextBlock Text="Restaurar também as preferências disponíveis (substitui as atuais)" TextWrapping="Wrap" /></CheckBox>
+                                <TextBlock Text="Antes da escrita será criado e verificado um backup externo do estado atual. Se isso falhar, a restauração será cancelada. A substituição de vários arquivos não é uma transação atômica; falhas podem exigir recuperação." Classes="muted" TextWrapping="Wrap" />
+                                <CheckBox x:Name="ChkConfirmarSubstituicao" Background="{DynamicResource PanelBackground}" Foreground="{DynamicResource PanelForeground}" IsCheckedChanged="ConfirmacaoBackup_Changed"><TextBlock Text="Confirmo que a biblioteca e as coleções atuais serão substituídas pelo backup selecionado." TextWrapping="Wrap" /></CheckBox>
+                                <WrapPanel>
+                                    <Button x:Name="BtnConfirmarBackup" Content="Substituir dados atuais" Click="ConfirmarBackup_Click" IsEnabled="False" Margin="0,0,10,10" />
+                                    <Button x:Name="BtnCancelarBackup" Content="Cancelar" Click="CancelarBackup_Click" Margin="0,0,0,10" />
+                                </WrapPanel>
+                            </StackPanel></Border>
+                        </StackPanel></Border>
+                        <Border Classes="card" Padding="16"><StackPanel Spacing="8">
+                            <TextBlock Text="Recursos futuros" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock x:Name="TxtRecursosFuturos" Text="Nuvem, sincronização, modo híbrido e Google Drive ainda não estão disponíveis. O armazenamento e o backup desta fase são exclusivamente locais." Classes="muted" TextWrapping="Wrap" />
+                        </StackPanel></Border>
                     </StackPanel>
                 </ScrollViewer>
 

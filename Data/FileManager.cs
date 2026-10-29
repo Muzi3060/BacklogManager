@@ -38,6 +38,11 @@ public sealed class FileManager
         }
     }
 
+    internal void ConferirEstadoAtual()
+    {
+        if (!_carregado || CalcularHash(LerArquivoExistente()) != _hashCarregado) throw new ArquivoAlteradoException();
+    }
+
     public void Salvar(IEnumerable<BacklogItem> itens)
     {
         lock (_sincronizacao)
@@ -53,6 +58,7 @@ public sealed class FileManager
             // Outras instâncias deste aplicativo respeitam o bloqueio; editores externos podem não respeitá-lo.
             using var bloqueio = new FileStream(CaminhoArquivo + ".lock", FileMode.OpenOrCreate,
                 FileAccess.ReadWrite, FileShare.None);
+            BacklogManager.Backup.CaminhosDadosLocais.VerificarGravacao(CaminhoArquivo);
             if (CalcularHash(LerArquivoExistente()) != _hashCarregado)
                 throw new ArquivoAlteradoException();
 

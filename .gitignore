@@ -46,3 +46,8 @@ Desktop.ini
 # Preferências pessoais de aparência
 /aparencia.preferencias.json
 /aparencia.preferencias.json.lock
+
+# Coordenação e recuperação local da Fase 7
+/.mr-restauracao.json
+/.mr-backup.lock
+/biblioteca.preferencias.json.lock

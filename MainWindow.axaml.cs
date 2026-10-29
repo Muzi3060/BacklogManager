@@ -24,7 +24,7 @@ public partial class MainWindow : Window
     private CancellationTokenSource? _buscaCancellation;
     private readonly RoteadorPesquisaCatalogo _roteador;
     private readonly IDisposable? _recursoPesquisa;
-    private bool PersistenciaDisponivel => _biblioteca.Carregada;
+    private bool PersistenciaDisponivel => _biblioteca.Carregada && _backup?.Pendencia == null && !_recargaBackupPendente;
     private bool _fechada;
     internal Task BuscaPendente { get; private set; } = Task.CompletedTask;
     internal CarregadorCapas Capas { get; }
@@ -34,11 +34,12 @@ public partial class MainWindow : Window
     public MainWindow() : this(ComposicaoAplicativo.Criar()) { }
 
     private MainWindow(DependenciasJanela dependencias)
-        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes, aparencia: dependencias.Aparencia) { }
+        : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes, aparencia: dependencias.Aparencia, backup: dependencias.Backup) { }
 
     internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null,
-        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null, ServicoColecoes? colecoes = null, BacklogManager.Aparencia.ServicoAparencia? aparencia = null, ServicoDashboard? dashboard = null)
+        ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null, ServicoColecoes? colecoes = null, BacklogManager.Aparencia.ServicoAparencia? aparencia = null, ServicoDashboard? dashboard = null, BacklogManager.Backup.ServicoBackupLocal? backup = null)
     {
+        _backup = backup;
         _dashboard = dashboard ?? new ServicoDashboard();
         _preferencias = preferencias ?? new ArmazenamentoPreferenciasBiblioteca();
         Capas = capas ?? new CarregadorCapas();
@@ -51,6 +52,7 @@ public partial class MainWindow : Window
         PreencherProgresso(null);
         try
         {
+            if (_backup?.Pendencia != null) throw new InvalidOperationException(_backup.Pendencia);
             _biblioteca.Carregar();
         }
         catch (Exception erro) when (FalhaDeArquivo(erro))
@@ -59,7 +61,7 @@ public partial class MainWindow : Window
         }
         if (PersistenciaDisponivel && pesquisa == null)
             ExibirAviso("Pesquisa indisponível", "Configure IGDB_CLIENT_ID e IGDB_ACESS_TOKEN (ou IGDB_ACCESS_TOKEN). Sua coleção local continua disponível.", true);
-        try { _colecoes.Carregar(); }
+        try { if (_backup?.Pendencia != null) throw new InvalidOperationException(_backup.Pendencia); _colecoes.Carregar(); }
         catch (Exception erro) when (FalhaDeArquivo(erro))
         {
             AvisoColecoesIndisponiveis.IsVisible = true;
@@ -72,6 +74,7 @@ public partial class MainWindow : Window
         AtualizarFormularioMidia();
         AtualizarColecao();
         AtualizarDisponibilidadeCadastro();
+        InicializarConfiguracoes();
         BtnAtualizar.IsEnabled = PersistenciaDisponivel;
         if (!PersistenciaDisponivel)
         {
@@ -148,6 +151,9 @@ public partial class MainWindow : Window
         NavBacklog.Classes.Set("active", pagina == "backlog");
         NavCadastro.Classes.Set("active", pagina == "cadastro");
         NavColecoes.Classes.Set("active", pagina == "colecoes");
+        PaginaConfiguracoes.IsVisible = pagina == "configuracoes";
+        NavConfiguracoes.Classes.Set("active", pagina == "configuracoes");
+        if (pagina == "configuracoes") InicializarConfiguracoes();
         PaginaAparencia.IsVisible = pagina == "aparencia";
         if (pagina == "aparencia") AbrirAparencia();
         NavAparencia.Classes.Set("active", pagina == "aparencia");

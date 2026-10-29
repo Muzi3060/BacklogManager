@@ -16,7 +16,7 @@ public partial class MainWindow
     private void InicializarAparencia(ServicoAparencia? servico)
     {
         _aparencia = servico ?? new ServicoAparencia(new ArmazenamentoAparenciaMemoria());
-        _aparencia.Carregar();
+        if (_backup?.Pendencia == null) _aparencia.Carregar();
         AtualizarAparencia(true);
     }
     private void AbrirAparencia()

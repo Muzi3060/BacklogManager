@@ -49,6 +49,11 @@ public sealed class ArmazenamentoColecoesJson : IArmazenamentoColecoes
         }
     }
 
+    internal void ConferirEstadoAtual()
+    {
+        if (!_carregado || Hash(Ler()) != _hash) throw new ArquivoAlteradoException();
+    }
+
     public void Salvar(IReadOnlyList<ColecaoPersonalizada> colecoes)
     {
         lock (_sincronia)
@@ -58,6 +63,7 @@ public sealed class ArmazenamentoColecoesJson : IArmazenamentoColecoes
             var dados = new Documento { Versao = 1, Colecoes = colecoes.Select(c => new Registro { Id = c.Id, Nome = c.Nome, Descricao = c.Descricao, Obras = c.Obras.ToArray() }).ToArray() };
             var bytes = JsonSerializer.SerializeToUtf8Bytes(dados, new JsonSerializerOptions { WriteIndented = true });
             using var bloqueio = new FileStream(DescricaoOrigem + ".lock", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            BacklogManager.Backup.CaminhosDadosLocais.VerificarGravacao(DescricaoOrigem);
             if (Hash(Ler()) != _hash) throw new ArquivoAlteradoException();
             var temporario = DescricaoOrigem + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try

@@ -16,7 +16,7 @@ public partial class MainWindow
     private void CarregarVisualizacao()
     {
         _carregandoVisualizacao = true;
-        try { CmbVisualizacao.SelectedIndex = (int)_preferencias.Carregar(); }
+        try { CmbVisualizacao.SelectedIndex = _backup?.Pendencia != null ? 0 : (int)_preferencias.Carregar(); }
         catch (Exception erro) when (FalhaDeArquivo(erro))
         {
             CmbVisualizacao.SelectedIndex = 0;
@@ -24,12 +24,14 @@ public partial class MainWindow
         }
         finally { _carregandoVisualizacao = false; }
         AplicarVisualizacao();
+        SincronizarVisualizacaoConfiguracoes();
     }
 
     private void Visualizacao_Changed(object? sender, SelectionChangedEventArgs e)
     {
         if (!_interfacePronta || _carregandoVisualizacao) return;
         AplicarVisualizacao();
+        SincronizarVisualizacaoConfiguracoes();
         try { _preferencias.Salvar((VisualizacaoBiblioteca)CmbVisualizacao.SelectedIndex); }
         catch (Exception erro) when (FalhaDeArquivo(erro))
         {
