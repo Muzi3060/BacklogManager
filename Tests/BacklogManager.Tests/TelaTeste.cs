@@ -18,13 +18,13 @@ internal sealed class TelaTeste : IDisposable
     });
     public MainWindow Janela { get; }
     public TelaTeste(IEnumerable<BacklogItem>? iniciais = null, bool semServico = false, string? json = null, ArmazenamentoPreferenciasBiblioteca? preferencias = null, CarregadorCapas? capas = null,
-        Func<ServicoBiblioteca, ServicoColecoes>? criarColecoes = null, BacklogManager.Aparencia.ServicoAparencia? aparencia = null)
+        Func<ServicoBiblioteca, ServicoColecoes>? criarColecoes = null, BacklogManager.Aparencia.ServicoAparencia? aparencia = null, ServicoDashboard? dashboard = null)
     {
         if (json != null) File.WriteAllText(Pasta.Arquivo, json);
         else if (iniciais != null) File.WriteAllText(Pasta.Arquivo, JsonSerializer.Serialize(iniciais));
         _cliente = new HttpClient(Http);
         var biblioteca = new ServicoBiblioteca(new ArmazenamentoJsonBiblioteca(new FileManager(Pasta.Arquivo)));
-        Janela = new MainWindow(biblioteca, semServico ? null : new PesquisaJogosIgdb(new IgdbService(_cliente, "cliente-simulado", "token-simulado")), preferencias: preferencias, capas: capas ?? new CarregadorCapas(_clienteCapas), colecoes: criarColecoes?.Invoke(biblioteca), aparencia: aparencia);
+        Janela = new MainWindow(biblioteca, semServico ? null : new PesquisaJogosIgdb(new IgdbService(_cliente, "cliente-simulado", "token-simulado")), preferencias: preferencias, capas: capas ?? new CarregadorCapas(_clienteCapas), colecoes: criarColecoes?.Invoke(biblioteca), aparencia: aparencia, dashboard: dashboard);
         Janela.Show();
     }
     public T Campo<T>(string nome) where T : Control => Janela.FindControl<T>(nome)!;
