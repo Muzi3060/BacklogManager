@@ -1,0 +1,741 @@
+{
+  "base": "1771688",
+  "retirados": [
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF01 | Personalização azul em todas as superfícies | Cores independentes chegam à janela barra e cartões",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF01",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF02 | Personalização inteiramente acinzentada | Interface funciona sem cores obrigatórias dos presets",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF02",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF03 | Personalização preta | Preto válido aplicado com textos seguros",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF03",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF04 | Personalização rosada fora dos temas | Escolhas arbitrárias preservadas com contraste",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF04",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF05 | Personalização quente independente | Painéis e cartões usam fundos próprios",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF05",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF06 | Todas as escolhas com contraste insuficiente | Preferências mantidas e textos efetivos legíveis",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF06",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF07 | Lista de sugestões com painel personalizado | Não combina texto da página com fundo do controle",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF07",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF08 | Menu suspenso com painel personalizado | Itens não selecionados recebem texto e fundo coerentes",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF08",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF09 | Seleção branca com texto branco solicitado | Seleção efetiva mantém contraste e preserva a solicitação",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF09",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF10 | Fallback de capa após personalizar cartão | Texto e fundo do fallback acompanham cartão",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF10",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF11 | Trocar presets sem editar | Preenchimento dos campos não cria personalizações",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF11",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF12 | Preferência anterior de lista | Aparência não altera configuração de visualização",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF12",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/CompatibilidadeVisualTests.cs",
+      "cenario": "VF13 | Preferência JSON aplicada em nova janela | Tema modo e código arbitrário reaparecem após fechar",
+      "motivo": "Editor de cores e restauração de aparência removidos por decisão aprovada; contraste e preservação cobertos pela beta.",
+      "id": "VF13",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC07 | Branco sobre branco | Texto efetivo legível e preferência solicitada intacta",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC07",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC08 | Preto sobre preto | Texto efetivo legível e preferência solicitada intacta",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC08",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC09 | Azul sobre azul | Texto efetivo legível e preferência solicitada intacta",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC09",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC10 | Dourado sobre rosa | Texto efetivo legível e preferência solicitada intacta",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC10",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC11 | Cinzas iguais | Texto efetivo legível e preferência solicitada intacta",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC11",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC12 | Par próximo do limite válido | Texto efetivo legível e preferência solicitada intacta",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC12",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC13 | Fundo volta a permitir o texto escolhido | Cor solicitada reaplicada sem perdê-la",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC13",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC15 | Hover e pressionado de botão customizado | Cada estado tem texto legível",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC15",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC16 | Destaque igual ao cartão | Indicador derivado contrasta sem apagar a escolha",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC16",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC18 | Texto secundário de baixo contraste | Aviso explícito e texto seguro",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC18",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC19 | Todos os fundos customizados de uma só cor | Textos gerais e de grupos continuam legíveis",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC19",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/ContrasteTests.cs",
+      "cenario": "VC20 | Foco com destaque limítrofe e botão branco | Indicador contrasta nos estados normal hover e pressionado",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VC20",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA02 | Tema modo e cor após reiniciar | Preferências solicitadas e cores efetivas recuperadas",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA02",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA08 | Versão futura | Abertura funciona e gravação fica bloqueada",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA08",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA09 | Campos desconhecidos | Metadados e conjuntos futuros são preservados na gravação",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA09",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA18 | Objeto com conjuntos de tipo inesperado | Ignora somente configuração inválida e mantém tema válido",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA18",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA19 | Biblioteca coleções e visualização vizinhas | Nenhum dos três arquivos de negócio é alterado",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA19",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA20 | Persistir seis combinações | Todas as personalizações sobrevivem a nova instância",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA20",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA21 | Texto solicitado de baixo contraste após reiniciar | Solicitado e efetivo diferentes são reproduzidos sem perda",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA21",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA23 | UTF16 com BOM | Preferência válida é reconhecida e regravada com backup",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA23",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA25 | Conflito de preferências visto pelo serviço | Aviso orienta reabrir e preserva alteração externa",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA25",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersistenciaAparenciaTests.cs",
+      "cenario": "VA26 | Chaves duplicadas no conjunto de cores | Abertura usa padrão e original fica preservado",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VA26",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI01 | Personalizar FundoPrincipal | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI01",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI02 | Personalizar FundoSidebar | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI02",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI03 | Personalizar TextoSidebar | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI03",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI04 | Personalizar FundoPainel | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI04",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI05 | Personalizar TextoPainel | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI05",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI06 | Personalizar FundoCartao | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI06",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI07 | Personalizar TextoCartao | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI07",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI08 | Personalizar FundoBotao | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI08",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI09 | Personalizar TextoBotao | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI09",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI10 | Personalizar Destaque | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI10",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI11 | Personalizar TextoDestaque | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI11",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI12 | Personalizar TextoPrincipal | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI12",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI13 | Personalizar TextoSecundario | Somente a escolha solicitada muda e demais escolhas permanecem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI13",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI14 | Isolar modo claro do escuro | Personalização clara reaparece ao voltar",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI14",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI15 | Isolar os seis conjuntos | Cada conjunto recupera sua própria escolha",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI15",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI16 | Reeditar um grupo após outro | Última escolha substitui apenas o próprio grupo",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI16",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI17 | Cor arbitrária fora da paleta | Hexadecimal válido é aceito sem limitação temática",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI17",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI18 | Grupo inexistente | Entrada inválida não grava",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI18",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PersonalizacaoTests.cs",
+      "cenario": "VI19 | Snapshot anterior de personalizações | Alteração posterior não modifica snapshot anterior",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VI19",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP07 | Cor do fundo principal em tempo real | Brush da janela atualiza sem recriar janela",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP07",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP08 | Texto incompleto durante digitação | Mantém última cor e não grava estado intermediário",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP08",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP09 | Paleta sincroniza campo e amostra | Escolha pronta aplica código e prévia correspondente",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP09",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP10 | Hexadecimal arbitrário sincroniza amostra | Cor fora da paleta é mostrada e normalizada",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP10",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP11 | Aviso de contraste na própria tela | Ajuste explícito mantém campo solicitado e texto efetivo legível",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP11",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP13 | Nova janela recebe tema carregado | Preferência persistida é aplicada ao abrir novamente",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP13",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP17 | Restaurar global exige confirmação | Solicitar não altera as cores antes de confirmar",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP17",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP18 | Cancelar restauração global | Mantém as escolhas e fecha confirmação",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP18",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP19 | Confirmar restauração global | Moderno claro é aplicado imediatamente",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP19",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP20 | Restaurar ativo pela interface | Campos e amostra retornam aos padrões e outro modo permanece",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP20",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP22 | Aparência no tamanho mínimo | Todos os grupos ficam alcançáveis pela rolagem",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP22",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/PreviaInterfaceTests.cs",
+      "cenario": "VP23 | Prévia mantém biblioteca e coleções | Aparência não grava registros nem seus vínculos",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VP23",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR01 | Restaurar conjunto ativo | Cores originais reaparecem sem trocar tema nem modo",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR01",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR02 | Restaurar ativo com outro tema personalizado | Outro tema mantém sua cor",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR02",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR03 | Restaurar ativo com outro modo personalizado | Outro modo mantém sua cor",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR03",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR04 | Restaurar todas as cores do ativo | Treze cores voltam à paleta original",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR04",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR05 | Restaurar conjunto sem personalização | Ação idempotente preserva padrão",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR05",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR06 | Restaurar toda a aparência | Moderno claro e nenhum conjunto personalizado",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR06",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR07 | Repetir restauração global | Não introduz personalização nem falha",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR07",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR08 | Restauração ativa persiste | Reabrir recupera paleta original do conjunto",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR08",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR09 | Restauração global persiste | Reabrir recupera Moderno claro sem cores pessoais",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR09",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR10 | Falha ao persistir restauração | Prévia usa padrão e avisa gravação pendente",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR10",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR11 | Restaurar conserva metadados desconhecidos | Arquivo não é apagado integralmente",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR11",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/RestauracaoAparenciaTests.cs",
+      "cenario": "VR12 | Restaurar remove somente ajustes de contraste do ativo | Aviso desaparece e cor original retorna",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VR12",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE01 | Botão normal | Texto efetivo contrasta com fundo personalizado",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE01",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE02 | Botão com hover | Estado muda e texto mantém contraste",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE02",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE03 | Botão pressionado | Estado pressionado mantém contraste",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE03",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE04 | Foco por teclado no botão | Indicador e texto permanecem visíveis",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE04",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE07 | Erro hexadecimal | Mensagem textual e preview anterior preservados",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE07",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE09 | Seleção com destaque igual ao cartão | Barra permanece visível sobre o cartão",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE09",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE13 | Abrir editores sem editar | Exibir padrões não provoca gravações",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE13",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE14 | Texto do cartão com fundo independente | Não herda indevidamente o texto do painel",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE14",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE15 | Corrigir entrada voltando à cor anterior | Mensagem inválida desaparece sem gravação redundante",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE15",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE16 | Foco de teclado com mouse sobre botão | Hover e foco simultâneos mantêm indicador visível",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE16",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Fase5/EstadosVisuaisTests.cs",
+      "cenario": "VE17 | Texto de seleção com destaque limítrofe | Texto pequeno atende a 4.5 mesmo quando indicador aceita 3",
+      "motivo": "Personalização de cores, editor e restauração de aparência removidos por decisão aprovada; substituídos por temas fixos/compatibilidade da beta.",
+      "id": "VE17",
+      "substitutos": "BT01–BT24, BP01–BP16, BC01–BC15"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR01 | Recente com URL de capa | Imagem do catálogo aparece no lugar do ícone fixo",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR01",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR02 | Recente sem capa | Fallback Sem capa permanece visível",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR02",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR03 | Recente com URL inválida | Fallback sem download externo",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR03",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR04 | CDN retorna 404 no recente | Imagem indisponível não interrompe página inicial",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR04",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR05 | Falha de conexão da capa recente | Uso local e fallback preservados",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR05",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR06 | Recente de catálogo simulado | Desenho local carrega sem HTTP",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR06",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR07 | Alternar início e biblioteca | Mesma capa é compartilhada pelo cache da sessão",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR07",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR08 | Abrir obra pelo recente com capa | Botão continua abrindo edição do registro correto",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR08",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR09 | Carregar e navegar com capa recente | Arquivo não é regravado ou enriquecido automaticamente",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR09",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR10 | Quatro obras na coleção | Recentes continuam limitados às três últimas na ordem anterior",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR10",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR11 | Recentes na janela mínima | Cabeçalho com capa mantém altura e texto legível",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR11",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR12 | Download recente pendente | Fallback inicial é substituído pela capa ao terminar",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR12",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR13 | Bytes inválidos no recente | Fallback controlado sem encerramento",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR13",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/RecentesCapasTests.cs",
+      "cenario": "CR14 | Biblioteca vazia | Nenhum recente fictício é criado para exibir capa",
+      "motivo": "Seção Sem data de adição removida do Dashboard; capas da biblioteca continuam cobertas e entradas datadas recebem cobertura beta.",
+      "id": "CR14",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/ArredondamentoTests.cs",
+      "cenario": "RD03 | Recentes e capas | Contêiner e recorte compartilham raio oito",
+      "motivo": "Cartões da seção Sem data removidos; arredondamento das demais capas permanece coberto.",
+      "id": "RD03",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    },
+    {
+      "arquivo": "Tests/BacklogManager.Tests/Revisao3/ArredondamentoTests.cs",
+      "cenario": "RD11 | Redimensionar recentes | Geometria de recorte acompanha a nova largura sem novo download",
+      "motivo": "Cartões da seção Sem data removidos; arredondamento das demais capas permanece coberto.",
+      "id": "RD11",
+      "substitutos": "BD01–BD16, DK01–DK12 (adaptado), RD01–RD12 (mantidos/adaptados, exceto RD03 e RD11)"
+    }
+  ],
+  "justificativa": "Cenários do editor/personalização/restauração de cores e da seção Sem data removidos porque esses comportamentos foram explicitamente retirados da beta. Não estão marcados como ignorados nem contados como aprovados na suíte beta. Código e execução de referência permanecem na main e em feat/promocoes-ui; relatórios históricos não foram alterados."
+}

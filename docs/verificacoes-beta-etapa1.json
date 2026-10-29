@@ -1,0 +1,18 @@
+{
+  "verificacoes": {
+    "untracked": true,
+    "dados": true,
+    "backups": true,
+    "contrato": true,
+    "backupExterno": true,
+    "documentacaoAnteriorMain": true,
+    "branchesAnteriores": true,
+    "instrucaoLocalIgnorada": true,
+    "instrucaoForaIndice": true
+  },
+  "metodo": "Comparação SHA-256/bytes contra o manifesto local anterior e referências Git; manifesto e backup externo permanecem privados.",
+  "arquivosBackupExterno": 2,
+  "arquivosBackupsAnteriores": 19,
+  "branchesAnteriores": 11,
+  "base": "1771688cb7e862a7ed13060f6697830afee63c0a"
+}
