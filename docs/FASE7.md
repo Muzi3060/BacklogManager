@@ -1,5 +1,7 @@
 # Fase 7 — Configurações e backup local
 
+> Atualização em 29/10/2026: a Fase 7 foi oficialmente aprovada pelo proprietário após validação manual geral no Rider, em ambiente isolado. Veja [APROVACAO_FASE7.md](APROVACAO_FASE7.md). O texto abaixo preserva o registro da entrega e suas pendências naquela data; não atribui execução individual aos cinco cenários manuais propostos.
+
 Estado: implementação na `feat/configuracoes`, aguardando revisão e validação manual do proprietário. Sem push, merge ou início da Fase 8. Contrato versão 1.1 preservado.
 
 ## Implementação e decisões

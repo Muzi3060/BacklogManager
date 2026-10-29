@@ -1,5 +1,7 @@
 # Fase 7 — Configurações e backup local: resultados individuais
 
+> Atualização em 29/10/2026: aprovação manual geral da Fase 7 registrada em [APROVACAO_FASE7.md](APROVACAO_FASE7.md), após relato do proprietário sobre validação no Rider em ambiente isolado. Não foram discriminados cenários individuais. As tabelas e os totais automatizados abaixo permanecem históricos e não representam nova execução.
+
 Gerado do TRX real por `scripts/gerar_relatorio_fase7.py`. Inclui a reexecução dos 1.365 cenários anteriores e 186 novos. PV03/PV10 reconhecem o lock de preferências e continuam exigindo limpeza de temporários; VE11 usa Assert.Contains equivalente para eliminar o aviso xUnit2017. Nenhum cenário anterior foi excluído. Relatórios históricos preservados.
 
 **Planejados na suíte: 1551; executados: 1551; aprovados: 1551; reprovados: 0; não executados: 0.**
