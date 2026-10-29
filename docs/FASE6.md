@@ -1,5 +1,7 @@
 # Fase 6 — Dashboard
 
+> Atualização em 29/10/2026: a Fase 6 foi oficialmente aprovada após validação manual geral do proprietário no Rider. Veja [APROVACAO_FASE6.md](APROVACAO_FASE6.md). O texto abaixo preserva o registro da entrega anterior e suas pendências naquela data; não atribui execução individual a cenários não discriminados.
+
 Implementação na branch **feat/dashboard**, base **6bd4213**, descendente da main **4a7c0bb** com a Fase 5 aprovada. Esta entrega aguarda revisão; não houve push, merge da Fase 6 ou início da Fase 7.
 
 ## Funcionalidades
