@@ -1,5 +1,7 @@
 # Fase 5 — Identidade visual e personalização
 
+> Atualização em 29/10/2026: o proprietário aprovou oficialmente a Fase 5 após validação manual geral no Rider. Veja [APROVACAO_FASE5.md](APROVACAO_FASE5.md). O conteúdo abaixo registra a entrega anterior e suas pendências naquela data; não atribui execução individual aos cenários manuais. As instruções antes pendentes passam a ser versionadas integralmente nesta integração autorizada.
+
 Implementação de **Minhas Realizações**, conforme FASE5_INSTRUCOES.md e Contrato.md versão 1.1, na branch **feat/identidade-visual**. Pronta para revisão do proprietário; sem push, release, merge da Fase 5 ou avanço à Fase 6.
 
 ## Base e preservação
