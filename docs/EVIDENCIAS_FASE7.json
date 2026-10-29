@@ -1,0 +1,163 @@
+{
+  "geradoEm": "2026-10-29T17:44:30.729565+00:00",
+  "branch": "feat/configuracoes",
+  "base": "0983fc7",
+  "implementacao": "64689c7",
+  "testes": "30e4bf5",
+  "build": {
+    "comando": "dotnet build --no-restore --no-incremental",
+    "resultado": "Aprovado",
+    "erros": 0,
+    "avisos": 0,
+    "log": "/tmp/backlogmanager-fase7-build-concluido.log",
+    "sha256": "d1f470561d27750b2fe06b80a300d1971897cdcf4840ea5e26725c83d92190fc"
+  },
+  "execucoes": [
+    {
+      "arquivo": "fase7-base.trx",
+      "sha256": "83e21d1f4b8153dfd5dd45803808ee48bdf89a89d9ab44b5b74f2fb486d37ace",
+      "total": 1365,
+      "executed": 1365,
+      "passed": 1365,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-concluido.trx",
+      "sha256": "c066301093d01d2293cd7505cfecd0931f259bfdb8b7726cd22ed00cc366e03c",
+      "total": 1551,
+      "executed": 1551,
+      "passed": 1551,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-entrega.trx",
+      "sha256": "4b87b9c8baf765095d6597d8ebe404645c0cda573dc10d69f89fada3db0c63da",
+      "total": 1546,
+      "executed": 1546,
+      "passed": 1546,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-final.trx",
+      "sha256": "39d285ce5a1624369609cff7d6f09346ebab84264c868f7b49957b44f417335d",
+      "total": 1530,
+      "executed": 1530,
+      "passed": 1528,
+      "failed": 2,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-finalizacao.trx",
+      "sha256": "0f3215ee23d76fbaa11349816357b8e858f67f2f181ff53e8e2c58cc432ee149",
+      "total": 1549,
+      "executed": 1549,
+      "passed": 1549,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-parcial3.trx",
+      "sha256": "74498ca2f0e8533924c93d094891ae2a6b4271427f2b37374820b5dcf0908da5",
+      "total": 152,
+      "executed": 152,
+      "passed": 144,
+      "failed": 8,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-parcial4.trx",
+      "sha256": "484902112dcb59962fd5ec3436c9804b97865ab4f1ecffb21c115a0038c3aeac",
+      "total": 152,
+      "executed": 152,
+      "passed": 152,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-parcial5.trx",
+      "sha256": "99ae93b531974edbdd8aba4c2b6a20749c9855e1513549f55eed2b2f883b16d2",
+      "total": 165,
+      "executed": 165,
+      "passed": 165,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-parcial7.trx",
+      "sha256": "04a26c6dbfb923aad96ad25f611ef189660f7cfdda10c65d66b05e56545992e8",
+      "total": 195,
+      "executed": 195,
+      "passed": 195,
+      "failed": 0,
+      "notExecuted": 0
+    },
+    {
+      "arquivo": "fase7-verificado.trx",
+      "sha256": "cfd6e508cc7b54c0d3836e80093a658ff3fc97b8f720cf636fd97e078c2a0dce",
+      "total": 1549,
+      "executed": 1549,
+      "passed": 1549,
+      "failed": 0,
+      "notExecuted": 0
+    }
+  ],
+  "entrega": "fase7-concluido.trx",
+  "preservacao": {
+    "dados": {
+      "${PROJETO}/backlog.json": "d33b826a57148dc8c7017ae22e15f6898163ba7d5d5eea57a7ba64b6ddaac810"
+    },
+    "arquivosProtegidosConferidos": 52,
+    "todosProtegidosIguais": true,
+    "backupsAnterioresConferidos": 16,
+    "todosBackupsAnterioresIguais": true,
+    "backupExternoVerificado": "${HOME}/Backups/BacklogManager/fase7-20261029-140929",
+    "hashContrato": "cc521ad94ddb75c7011e0a375e3dd3bf1d6a06145418003c32f91aedccfd222a",
+    "hashQodana": "aabdb19b53fec2d5f02ef051fa2f505b69bc1fbe18d3e6c94564a05f3575f139",
+    "skills": {
+      "skills/system/run-workflow/SKILL.md": "82ed7c2e93d79fd95a01188c78539b6987f4c2a2dfc49c3b8991bebbe8925bf8"
+    },
+    "branchesPreservadas": {
+      "chore/seguranca-estabilidade": "10aab6a194f6f02cd034f262fbcc459b4083c073",
+      "feat/biblioteca": "bbcb99f7148820bc4e187765d9aa357f487e8a1f",
+      "feat/colecoes": "807638a586c9d4371f79ed04c985d0af611dbf5b",
+      "feat/dashboard": "ca265a8f437bd5bddb993a3d6715add7cc869d0e",
+      "feat/identidade-visual": "4a7c0bbacba4140d8f85fe240be51215dfd7c2ee",
+      "feat/multimidia": "64fb4fb1a2ffcb11ac8b4a3b9399efdb894a9d45",
+      "fix/biblioteca-ajustes": "8c9d14766628a33cbe447c78ab2c390a8b89088e",
+      "main": "ca265a8f437bd5bddb993a3d6715add7cc869d0e",
+      "refactor/arquitetura": "56bcd58f089478aaba7961b88c78e24e1ed80949"
+    }
+  },
+  "smokeDesktop": {
+    "ativoApos8Segundos": true,
+    "hashesPreservados": true,
+    "arquivosJson": 4,
+    "bytesLog": 0,
+    "resultado": "Aprovado",
+    "assemblySha256": "0a267d8097a61caefaf0b248099ab438f3be861e4858b483b245919ec31c2af4"
+  },
+  "imagens": {
+    "Acolhedor-Claro.png": "46e3bffaba4153e64b1517cd3804b50854e384fa6b1777b64ad7c1dd85ce46a1",
+    "Acolhedor-Escuro.png": "3482abe1181d550c5c5abec682022b81bb5b65711fd4d623a24b054f783ab1ad",
+    "Moderno-Claro.png": "f66a23f03586896c6aea0278b0f923cb9b6e07a6705ebdef53859f74caf549d3",
+    "Moderno-Escuro.png": "4d17d6991f62a6b76dd4e5eba2bf332a1bdfb2bc693b2dc907c6fe39a2288fd6",
+    "Tecnologico-Claro.png": "9a86c4a6a242c2916c02ac2c5bd60a8ceeed139dd2d035329dfe5b1ac1917852",
+    "Tecnologico-Escuro.png": "010c0104af745ba4cbbaf27694c4dee808754a0ca8232aef9c74c914609e5677",
+    "minimo-fim.png": "89734eb620a38e2f4ab6858470e6bb2ffad7f14782295c939a45e940db74eb7a",
+    "personalizado.png": "3f6c78d7794028e71500cb5a97f90a774db8a61d49c0add4bcc97611f9d6f5ba",
+    "previa-minima.png": "293c406e44662a9cf862f7c476d5720a143ada19bf2a72d98cc0b11926eeea95"
+  },
+  "validacaoManual": {
+    "estado": "Pendente de validação do proprietário",
+    "cenariosPropostos": 5,
+    "aprovacoesManuaisIndividuais": 0
+  },
+  "limites": [
+    "TRX e imagens brutas estão em pasta temporária; resultados individuais estão versionados em JSON e Markdown.",
+    "Sem simulação física de disco cheio, falha de energia ou nova autenticação real na IGDB.",
+    "Seletores nativos ainda requerem validação manual no Rider."
+  ]
+}

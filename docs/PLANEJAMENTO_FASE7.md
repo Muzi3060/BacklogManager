@@ -1,5 +1,7 @@
 # Planejamento da Fase 7 — Configurações e backup
 
+> Atualização em 29/10/2026: planejamento aprovado pelo proprietário, com confirmação substitutiva, backup externo obrigatório e recuperação por diário. A implementação está em `feat/configuracoes`, aguardando validação manual. Consulte `FASE7.md` e `FASE7_TESTES.md`. O texto abaixo preserva a proposta original e o contexto anterior à autorização; suas indicações de “aguardando aprovação” são históricas.
+
 **Estado:** proposta aguardando aprovação; nenhuma implementação iniciada.
 **Branch:** feat/configuracoes, criada da main em ca265a8.
 **Base:** Fases 0–6 aprovadas; .NET 10 e Avalonia 12.1.4.
