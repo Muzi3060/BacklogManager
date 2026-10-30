@@ -24,7 +24,7 @@ def auditar(pasta, credenciais=()):
             raise ValueError('Subdiretório inesperado: revise o inventário antes de ampliar a permissão.')
         permitido = (nome in {'BacklogManager','BacklogManager.exe','createdump','createdump.exe','BacklogManager.deps.json','BacklogManager.runtimeconfig.json','manifesto-beta.json','LEIA-ME.txt','THIRD-PARTY-NOTICES.txt','LICENSE.txt'} or
                       nome.endswith(('.dll','.so','.dylib')) or re.fullmatch(r'lib[A-Za-z0-9_.+-]+\.so\.[0-9.]+',nome))
-        if not permitido or nome.lower().startswith(('backlog.json','test','qodana','fase_beta','backup','aparencia.','biblioteca.')):
+        if not permitido or 'backupworker' in nome.lower() or nome.lower().startswith(('backlog.json','test','qodana','fase_beta','backup','aparencia.','biblioteca.')):
             raise ValueError('Conteúdo não autorizado no pacote: '+relativo)
         if any(segredo.encode() in p.read_bytes() for segredo in credenciais if segredo) and nome != 'BacklogManager.dll':
             raise ValueError('Credencial fora do assembly aprovado.')

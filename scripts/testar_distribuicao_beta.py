@@ -43,6 +43,7 @@ class Pacotes(unittest.TestCase):
         import hashlib
         self.assertEqual(hashlib.sha256(b'conteudo-simulado').hexdigest(),auditar(self.p)['BacklogManager.dll'])
     def test_P11_testes_recusados(self):self.recusa('Tests.dll')
+    def test_P22_worker_recusado(self):self.recusa('BacklogManager.BackupWorker.dll')
     def test_P12_dados_recusados(self):self.recusa('backlog.json')
     def test_P12_backup_recusado(self):self.recusa('antes-restauracao.json')
     def test_P13_instrucao_recusada(self):self.recusa('FASE_BETA_INSTRUCOES.md')
