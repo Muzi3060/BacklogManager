@@ -1,10 +1,13 @@
 # Documentação do Minhas Realizações
 
-O [README principal](../README.md) apresenta a versão de desenvolvimento atual. A primeira beta ainda está em preparação; a auditoria e as correções da Etapa 2 foram aprovadas, com integração por fast-forward autorizada. A Etapa 3 está autorizada somente para planejamento; implementação e publicação dependem de novas aprovações.
+O [README principal](../README.md) apresenta a versão de desenvolvimento atual. A primeira beta ainda está em preparação; a Etapa 2 está integrada por fast-forward. A implementação da Etapa 3 está na branch `feat/beta-distribuicao`, com candidatos locais e validações nativas pendentes; merge e publicação dependem de aprovação própria.
 
 - [Simplificação da interface](BETA_ETAPA1.md) e [resultados automatizados](BETA_ETAPA1_TESTES.md).
 - [Aprovação manual geral da Etapa 1](APROVACAO_BETA_ETAPA1.md), sem inferir execuções individuais.
 - [Auditoria e correções preventivas da Etapa 2](BETA_ETAPA2.md).
+- [Planejamento aprovado da distribuição](PLANEJAMENTO_BETA_ETAPA3.md).
+- [Implementação, pacotes e validação manual da Etapa 3](BETA_ETAPA3.md).
+- [Resultados e cobertura prevista da Etapa 3](BETA_ETAPA3_TESTES.md).
 
 ## Relatórios históricos e caminhos genéricos
 

@@ -1,0 +1,205 @@
+[
+  {
+    "id": "H06",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Contrato comparado por SHA-256 com referência anterior à implementação.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H07",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Instrução privada intacta e não rastreada.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H08",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Arquivos pessoais existentes comparados por hash e ausentes do índice.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H09",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Todos os arquivos protegidos e 22 backups anteriores mantêm os hashes originais.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H10",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "main e todas as demais referências anteriores inalteradas.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H16",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Trabalho na branch autorizada; script não realiza operações remotas.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H01",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "1707 resultados automatizados lidos do TRX, incluindo regressão anterior.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H02",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Casos C# novos incorporados à execução completa.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H03",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Exclusões compartilhadas efetivamente avaliadas pelo Git.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H04",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Fixtures JSON continuam elegíveis ao versionamento.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H11",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Logs de teste/publicação inspecionados sem imprimir valores.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H12",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Novos relatórios sem caminhos pessoais concretos ou credenciais completas.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P09-linux-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Inventário SHA-256 confere com a publicação local.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P03-linux-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Runtime self-contained presente.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P14-linux-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Nenhum símbolo de depuração na publicação.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P07-linux-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Índice de recursos das cinco capas simuladas presente no assembly de cada RID.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P15-linux-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Par aprovado presente no assembly; auditoria rejeita presença em outros arquivos.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "CHECKSUM-MinhasRealizacoes-0.1.0-beta.1-linux-x64.tar.gz",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Checksum do artefato confere com a lista local.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P09-win-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Inventário SHA-256 confere com a publicação local.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P03-win-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Runtime self-contained presente.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P14-win-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Nenhum símbolo de depuração na publicação.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P07-win-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Índice de recursos das cinco capas simuladas presente no assembly de cada RID.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "P15-win-x64",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Par aprovado presente no assembly; auditoria rejeita presença em outros arquivos.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "CHECKSUM-MinhasRealizacoes-0.1.0-beta.1-win-x64.zip",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Checksum do artefato confere com a lista local.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "CHECKSUM-MinhasRealizacoes-0.1.0-beta.1-win-x64-setup.exe",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Checksum do artefato confere com a lista local.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H13",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Publicações finais auditadas por lista permitida e inventário, com tokens restritos ao assembly aprovado.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H05",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Verificador histórico intacto; transição de escopo documentada explicitamente.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H14",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Instruções públicas correspondem às opções e limites dos candidatos, sem anunciar qualificação nativa inexistente.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  },
+  {
+    "id": "H15",
+    "esperado": "Condição de preservação/qualidade satisfeita",
+    "observado": "Revisão estática e testes HTTP: consulta de releases sem instalação/download automático; abertura vinculada ao clique.",
+    "tipo": "Script local",
+    "status": "Aprovado"
+  }
+]

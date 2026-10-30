@@ -2,7 +2,7 @@
 
 Uma biblioteca pessoal para organizar jogos, animes, séries, filmes, mangás e livros, registrar experiências e acompanhar o que você está consumindo.
 
-**A primeira beta ainda está em desenvolvimento.** A interface simplificada está aprovada, mas não há pacotes de distribuição aprovados. Instaladores, adaptação da IGDB para distribuição e verificação de atualizações ainda não estão implementados.
+**A primeira beta ainda está em desenvolvimento.** A interface simplificada está aprovada, mas não há pacotes de distribuição aprovados. A Etapa 3 implementa candidatos locais Windows/Linux, credenciais IGDB da beta e consulta manual de atualizações; a qualificação nativa dos sistemas-alvo continua pendente. Consulte o relatório antes de distribuir.
 
 ## O que funciona atualmente
 
@@ -28,31 +28,23 @@ dotnet build BacklogManager.csproj
 
 O nome técnico `BacklogManager.csproj` permanece preservado. O nome exibido no aplicativo é Minhas Realizações.
 
-**Escolha uma pasta separada para os dados antes de abrir o aplicativo.** Nesta versão, os arquivos são relativos ao diretório de trabalho do processo. O exemplo Bash abaixo inicia com uma pasta temporária nova e vazia, sem ler a biblioteca do repositório:
+**Os dados agora ficam fora dos binários, em uma pasta persistente por usuário.** Para testes, escolha explicitamente uma pasta isolada:
 
 ```bash
-# Execute a partir da raiz do projeto.
-projeto="$(pwd)"
+# Bash, a partir da raiz do projeto. Não utiliza a biblioteca pessoal.
 dados="$(mktemp -d)"
-cd "$dados"
-dotnet run --project "$projeto/BacklogManager.csproj"
+dotnet run --project BacklogManager.csproj -- --data-dir "$dados"
 ```
 
-Guarde o caminho da pasta escolhida se quiser reabrir a mesma biblioteca. Para uso contínuo, configure um diretório persistente separado; pastas temporárias podem ser limpas pelo sistema. Estes passos não movem nem migram uma biblioteca existente.
+No Rider, abra `BacklogManager.slnx` e informe `--data-dir <pasta-absoluta-de-testes>` nos argumentos do programa. O Working directory não define mais o armazenamento da inicialização normal. Confira os caminhos em Configurações.
 
-No JetBrains Rider, abra `BacklogManager.slnx`, configure o projeto executável e defina o **Working directory** como a pasta de dados desejada. Isso também se aplica ao Windows: use uma pasta separada e confira os caminhos exibidos em Configurações antes de salvar ou restaurar.
+Para criar obras, coleções e backups fictícios, execute `python3 scripts/preparar_validacao_fase7.py`. Use a pasta de dados impressa pelo gerador como argumento `--data-dir`; a referência antiga dele ao Working directory é histórica. Pastas temporárias podem ser limpas pelo sistema; guarde seus dados reais em local persistente.
 
-Para experimentar com dados fictícios, execute na raiz do projeto:
-
-```bash
-python3 scripts/preparar_validacao_fase7.py
-```
-
-O gerador imprime uma pasta nova para o Working directory e arquivos de backup simulados. Não lê a biblioteca pessoal e não remove automaticamente a pasta criada.
+Para importar uma pasta antiga na primeira execução de um perfil novo, use `--data-dir <destino-novo-absoluto> --migrate-from <origem-absoluta>`. A tela valida, apresenta a prévia e exige confirmação. Sem origem legada identificada, uma instalação nova inicia normalmente. Um destino já ocupado não é sobrescrito; use o fluxo explícito de backup/restauração para substituição.
 
 ## Pesquisa de jogos na IGDB
 
-Na versão de desenvolvimento atual, configure no ambiente de execução:
+A versão de desenvolvimento comum continua aceitando configuração por ambiente:
 
 - `IGDB_CLIENT_ID`: identificador do cliente.
 - `IGDB_ACCESS_TOKEN`: token de acesso, com a grafia corrigida.
@@ -60,11 +52,11 @@ Na versão de desenvolvimento atual, configure no ambiente de execução:
 
 Quando ambos os nomes do token têm valores, a grafia corrigida tem preferência; se estiver vazia, o nome legado é usado. Sem credenciais válidas, o uso local continua disponível, mas novos cadastros de jogos dependem da IGDB. Uma seleção válida do catálogo é obrigatória.
 
-Não coloque credenciais reais no código, no README ou em arquivos versionados. O aplicativo não precisa do Client Secret da Twitch. A configuração da futura distribuição beta será tratada em etapa própria; não foi adicionada nesta entrega.
+Não coloque credenciais reais no código, no README ou em arquivos versionados. O aplicativo não precisa do Client Secret da Twitch. Os pacotes beta preparados localmente recebem o par aprovado no build e dispensam configuração pelos amigos. Um par completo no ambiente tem precedência; configurações parciais não são misturadas com as incorporadas. O token da beta é recuperável do binário, pode expirar e será substituído em uma versão futura. Nunca inclui Client Secret.
 
 ## Dados e backup
 
-A pasta de trabalho contém os arquivos ativos:
+A pasta de dados contém os arquivos ativos. Padrões: Windows `%LOCALAPPDATA%\MinhasRealizacoes\Dados`; Linux `$XDG_DATA_HOME/minhas-realizacoes/dados`, ou `~/.local/share/minhas-realizacoes/dados` quando XDG não está definido. Os formatos permanecem compatíveis:
 
 | Arquivo | Conteúdo |
 |---|---|
@@ -89,15 +81,18 @@ A suíte usa dados simulados, diretórios temporários e HTTP simulado; não exi
 ```bash
 dotnet build
 dotnet test
-python3 scripts/verificar_beta_etapa2.py
+python3 scripts/testar_distribuicao_beta.py
+python3 scripts/testar_instalador_beta.py
 ```
 
-O verificador adicional requer Git e Python 3.9 ou posterior. Ele avalia exclusões compartilhadas, documentação sanitizada e coerência das instruções, sem iniciar o aplicativo sobre dados reais. A comparação documental usa o commit-base `c14f588` e precisa de seu histórico local; um clone raso pode não contê-lo. As três comparações de preservação que dependem do manifesto privado são indicadas como não executadas quando ele não é fornecido.
+Os scripts requerem Python 3.9 ou posterior; a compilação do instalador requer Inno Setup 6.7.4. Os testes de scripts utilizam somente fixtures temporárias.
+
+O verificador da Etapa 2 permanece como evidência histórica: condições como ausência de alterações C# e os caminhos antigos não descrevem mais esta etapa. A transição dos checks e as novas verificações estão em [BETA_ETAPA3_TESTES.md](docs/BETA_ETAPA3_TESTES.md). Não interpretar falhas de condições históricas como uma nova execução aprovada nem removê-las para mascarar resultados.
 
 ## Documentação e situação da beta
 
 O [guia da documentação](docs/README.md) distingue registros históricos do comportamento atual. A [Etapa 1](docs/BETA_ETAPA1.md) descreve a simplificação; a [Etapa 2](docs/BETA_ETAPA2.md) registra a auditoria, correções preventivas e limites restantes.
 
-Distribuição Windows/Linux, integração de credenciais nos pacotes e atualização de versões ainda aguardam desenvolvimento e validação autorizados. Nuvem, sincronização, Google Drive e APIs reais das outras mídias permanecem futuras.
+A [Etapa 3](docs/BETA_ETAPA3.md) descreve a distribuição implementada, os limites e os testes pendentes. Atualizações são consultadas manualmente em Configurações e instaladas pelo usuário; nenhuma substituição automática é executada. O destino de releases configurado é `Muzi3060/BacklogManager`; sem acesso público, a consulta informa indisponibilidade. Nuvem, sincronização, Google Drive e APIs reais das outras mídias permanecem futuras.
 
 Uma licença ainda não foi escolhida. Nenhuma licença foi adicionada nesta etapa.
