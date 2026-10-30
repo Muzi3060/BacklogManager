@@ -30,7 +30,7 @@ public sealed class CredenciaisBetaTests
     {
         var h=new HttpSimulado{Responder=(_,_)=>Task.FromResult(new HttpResponseMessage((HttpStatusCode)codigo))};using var http=new HttpClient(h);
         var s=new IgdbService(http,"cliente-simulado","token-simulado",true);
-        var erro=await Assert.ThrowsAsync<PesquisaIgdbException>(()=>s.BuscarJogosAsync("Batman"));
+        var erro=await Assert.ThrowsAsync<PesquisaIgdbException>(()=>s.BuscarJogosAsync("Batman",TestContext.Current.CancellationToken));
         Assert.DoesNotContain("token-simulado",erro.Message);if(codigo is 401 or 403)Assert.Contains("pode ter expirado",erro.Message);Assert.Equal(1,h.Chamadas);Assert.NotEmpty(id);
     }
     [Fact]public void DesenvolvimentoSemRecursoNaoExigeSegredos()=>Assert.Null(ProvedorCredenciaisIgdb.Obter(_=>null,()=>null));

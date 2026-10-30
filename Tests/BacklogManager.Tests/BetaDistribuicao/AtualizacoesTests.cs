@@ -41,7 +41,7 @@ public sealed class AtualizacoesTests
          "U10" or "U11" or "U12" or "U18" or "U19" or "U20" or "U23"=>EstadoAtualizacao.Inconclusivo,
          "U13" or "U14" or "U15" or "U16" or "U21"=>EstadoAtualizacao.Indisponivel,_=>EstadoAtualizacao.Disponivel};
         Assert.Equal(esperado,resultado.Estado);if(id=="U06")Assert.Equal("0.1.0-beta.10",resultado.Versao);
-        if(id is "U14" or "U15"){await s.Consultar("0.1.0-beta.1","linux-x64");Assert.Equal(1,h.Chamadas);}
+        if(id is "U14" or "U15"){await s.Consultar("0.1.0-beta.1","linux-x64",TestContext.Current.CancellationToken);Assert.Equal(1,h.Chamadas);}
         if(resultado.Pagina!=null)Assert.True(s.PaginaOficial(resultado.Pagina));
     }
     [Theory]

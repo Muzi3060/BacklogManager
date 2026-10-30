@@ -75,6 +75,9 @@ def publicar(rid, saida, repositorio=None):
     if resultado.returncode:raise ValueError('dotnet publish falhou. Examine o log local sem compartilhar credenciais.')
     texto=log.read_bytes()
     if any(c.encode() in texto for c in credenciais):raise ValueError('O log contém credenciais; preserve-o localmente e não publique.')
+    # Símbolos nativos de pacotes podem ser copiados mesmo com DebugSymbols=false.
+    # Remover somente estes arquivos gerados dentro da saída recém-criada.
+    for simbolo in pasta.glob('*.pdb'):simbolo.unlink()
     runtime='coreclr.dll' if rid=='win-x64' else 'libcoreclr.so'
     if not (pasta/runtime).exists():raise ValueError('Runtime self-contained ausente.')
     if rid=='linux-x64':(pasta/'BacklogManager').chmod(0o755)

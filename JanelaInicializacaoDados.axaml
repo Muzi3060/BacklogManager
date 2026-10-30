@@ -1,5 +1,5 @@
 <Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="BacklogManager.JanelaInicializacaoDados"
- Title="Minhas Realizações — Dados locais" Width="900" Height="660" MinWidth="900" MinHeight="660" Background="{DynamicResource AppBackground}" Foreground="{DynamicResource PanelForeground}">
+ Title="Minhas Realizações — Dados locais" Width="900" Height="660" MinWidth="900" MinHeight="660" Background="{DynamicResource PageBackground}" Foreground="{DynamicResource PageForeground}">
  <ScrollViewer><StackPanel Margin="24" Spacing="16">
   <TextBlock Text="Seus dados locais" FontSize="24" FontWeight="SemiBold"/>
   <TextBlock x:Name="TxtDestino" TextWrapping="Wrap"/>
