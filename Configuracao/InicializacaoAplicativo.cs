@@ -31,6 +31,7 @@ internal static class InicializacaoAplicativo
     }
     private static void AbrirPrincipal(IClassicDesktopStyleApplicationLifetime desktop,CaminhosDadosLocais caminhos,Avalonia.Controls.Window? anterior)
     {
+        if(!new ServicoBackupLocal(caminhos).Recuperar()) throw new IOException("Há recuperação pendente. Reabra o aplicativo para tentar recuperá-la.");
         if(!File.Exists(caminhos.Arquivos["Biblioteca"]))
         { var arquivo=new Data.FileManager(caminhos.Arquivos["Biblioteca"]);var itens=arquivo.Carregar();arquivo.Salvar(itens); }
         var janela=new MainWindow(ComposicaoAplicativo.Criar(caminhos.Arquivos["Biblioteca"]));

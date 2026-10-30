@@ -30,7 +30,10 @@ public sealed class InicializacaoInterfaceTests
             if(id=="A05"){Click("BtnVazia");Assert.True(continuou);Assert.False(File.Exists(c.Arquivos["Biblioteca"]));return;}
             if(id=="A02"){Click("BtnMigrar");await w.OperacaoPendente;Assert.False(continuou);Assert.False(File.Exists(c.Arquivos["Biblioteca"]));return;}
             if(id=="A11"){w.Width=900;w.Height=660;w.UpdateLayout();Assert.True(Campo<Button>("BtnMigrar").Focusable);return;}
-            if(id=="A12"){Assert.NotNull(w.Background);Assert.Equal(900,w.MinWidth);return;}
+            if(id=="A12")
+            {foreach(var tema in Enum.GetValues<BacklogManager.Aparencia.TemaVisual>())foreach(var modo in Enum.GetValues<BacklogManager.Aparencia.ModoVisual>())
+              {BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new(){Tema=tema,Modo=modo});w.UpdateLayout();Assert.NotNull(w.Background);Assert.NotNull(Campo<TextBlock>("TxtEstado").Foreground);}
+             BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new());return;}
             if(id=="A08")File.WriteAllText(a.Seguranca,"sem acesso");
             Campo<CheckBox>("ChkConfirmar").IsChecked=true;Click("BtnMigrar");await w.OperacaoPendente;
             Assert.Equal(id!="A08",continuou);

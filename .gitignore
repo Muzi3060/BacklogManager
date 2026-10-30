@@ -79,3 +79,7 @@ aparencia.preferencias.json.lock
 .mr-restauracao.json
 .mr-backup.lock
 biblioteca.preferencias.json.lock
+
+# Cache dos scripts locais de preparação
+__pycache__/
+*.pyc

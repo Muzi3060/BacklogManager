@@ -19,7 +19,10 @@ public sealed class AtualizacoesInterfaceTests
         if(id=="T01"){Assert.Contains("0.1.0-beta.1",t.Campo<TextBlock>("TxtVersaoAplicativo").Text);return;}
         if(id=="T10"){Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").Focusable);return;}
         if(id=="T11"){t.Janela.Width=900;t.Janela.Height=660;t.Render();Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").IsVisible);return;}
-        if(id=="T12"){t.Janela.ConfigurarAtualizacoes(null);Assert.False(t.Campo<Button>("BtnVerificarAtualizacoes").IsEnabled);return;}
+        if(id=="T12")
+        {foreach(var tema in Enum.GetValues<BacklogManager.Aparencia.TemaVisual>())foreach(var modo in Enum.GetValues<BacklogManager.Aparencia.ModoVisual>())
+          {BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new(){Tema=tema,Modo=modo});t.Render();Assert.NotNull(t.Campo<TextBlock>("TxtEstadoAtualizacao").Foreground);Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").Focusable);}
+          BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new());return;}
         t.Clicar("BtnVerificarAtualizacoes");
         if(id is "T03" or "T04")
         {Assert.False(t.Campo<Button>("BtnVerificarAtualizacoes").IsEnabled);Assert.Contains("Consultando",t.Campo<TextBlock>("TxtEstadoAtualizacao").Text);t.Clicar("BtnVerificarAtualizacoes");Assert.Equal(1,h.Chamadas);gatilho.SetResult(AtualizacoesTests.Lista());}

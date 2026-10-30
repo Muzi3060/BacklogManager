@@ -63,6 +63,11 @@ public partial class JanelaInicializacaoDados:Window
         catch(Exception erro) when(ServicoBackupLocal.Falha(erro)){TxtEstado.Text="Importação não concluída. Preserve os backups. "+erro.Message;}
         finally{_ocupada=false;BtnVazia.IsEnabled=BtnEscolher.IsEnabled=BtnPrever.IsEnabled=TxtOrigem.IsEnabled=true;}
     }
-    private void Vazia_Click(object? sender,RoutedEventArgs e){if(!_ocupada)Continuar?.Invoke();}
+    private void Vazia_Click(object? sender,RoutedEventArgs e)
+    {
+        if(_ocupada)return;
+        try{Continuar?.Invoke();}
+        catch(Exception erro) when(ServicoBackupLocal.Falha(erro)){TxtEstado.Text="Não foi possível continuar. Nenhum perfil alternativo foi aberto. "+erro.Message;}
+    }
     protected override void OnClosing(WindowClosingEventArgs e){if(_ocupada)e.Cancel=true;base.OnClosing(e);}
 }

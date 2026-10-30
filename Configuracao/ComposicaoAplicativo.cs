@@ -12,6 +12,11 @@ internal sealed record DependenciasJanela(ServicoBiblioteca Biblioteca, IPesquis
 
 internal static class ComposicaoAplicativo
 {
+    internal static DependenciasJanela CriarDesign()
+    {
+        var pasta=ResolvedorDiretorios.Preparar(System.IO.Path.Combine(System.IO.Path.GetTempPath(),"MR.Designer",Guid.NewGuid().ToString("N")));
+        return Criar(pasta.Arquivos["Biblioteca"],nome=>nome=="IGDB_CLIENT_ID"?"designer-sem-token":null);
+    }
     internal static DependenciasJanela Criar(string caminhoArquivo = "backlog.json",
         Func<string, string?>? lerVariavel = null, Func<HttpClient>? criarCliente = null)
     {

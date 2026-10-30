@@ -31,7 +31,8 @@ public partial class MainWindow : Window
     private readonly ArmazenamentoPreferenciasBiblioteca _preferencias;
     private readonly ServicoColecoes _colecoes;
 
-    public MainWindow() : this(ComposicaoAplicativo.Criar()) { }
+    public MainWindow() : this(Design.IsDesignMode ? ComposicaoAplicativo.CriarDesign() :
+        ComposicaoAplicativo.Criar(ResolvedorDiretorios.Preparar(ResolvedorDiretorios.Atual([])).Arquivos["Biblioteca"])) { }
 
     internal MainWindow(DependenciasJanela dependencias)
         : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes, aparencia: dependencias.Aparencia, backup: dependencias.Backup) { }

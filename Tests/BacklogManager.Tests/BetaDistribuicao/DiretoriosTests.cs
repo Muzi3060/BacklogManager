@@ -36,6 +36,15 @@ public sealed class DiretoriosTests
         Assert.True(Directory.Exists(a.Destino));Assert.False(ResolvedorDiretorios.TemDados(c));
         Assert.Empty(Directory.GetFiles(a.Destino));Assert.NotEqual(c.Pasta,a.Origem);Assert.NotEmpty(id);
     }
+    [Fact]public void D11PastaEArquivoNaoSeConfundem()
+    {using var a=new AmbienteDistribuicao();var arquivo=Path.Combine(a.Pasta,"bloqueio");File.WriteAllText(arquivo,"preservado");Assert.Throws<IOException>(()=>ResolvedorDiretorios.Preparar(arquivo));Assert.Equal("preservado",File.ReadAllText(arquivo));}
+    [Fact]public async Task D17PreparacoesConcorrentesSaoIsoladas()
+    {using var a=new AmbienteDistribuicao();await Task.WhenAll(Enumerable.Range(0,10).Select(_=>Task.Run(()=>ResolvedorDiretorios.Preparar(a.Destino))));Assert.Empty(Directory.GetFiles(a.Destino));}
+    [Fact]public void D19ComposicaoPreservaCaminhoInjetado()
+    {using var a=new AmbienteDistribuicao();var deps=ComposicaoAplicativo.Criar(Path.Combine(a.Destino,"backlog.json"),_=>null);Assert.Equal(a.Destino,deps.Backup!.Caminhos.Pasta);Assert.False(File.Exists(Path.Combine(a.Origem,"backlog.json")));deps.RecursoPesquisa?.Dispose();}
+    [Fact]public void D20DesignerNaoAbrePerfilPessoal()
+    {var deps=ComposicaoAplicativo.CriarDesign();Assert.Contains("MR.Designer",deps.Backup!.Caminhos.Pasta);Assert.Null(deps.Pesquisa);Assert.False(File.Exists(deps.Backup.Caminhos.Arquivos["Biblioteca"]));Directory.Delete(deps.Backup.Caminhos.Pasta,true);}
+
 }
 internal sealed class AmbienteDistribuicao:IDisposable
 {
