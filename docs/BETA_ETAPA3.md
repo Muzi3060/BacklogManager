@@ -1,5 +1,7 @@
 # Beta — Etapa 3: distribuição local
 
+> Atualização de lançamento: Etapa 3 aprovada pelo proprietário, inclusive as 37 pendências nativas aceitas como não executadas. Licença MIT adicionada. O conteúdo abaixo registra a entrega original; a situação atual está em [LANCAMENTO_BETA_RESULTADO.md](LANCAMENTO_BETA_RESULTADO.md).
+
 **Estado:** implementação na branch `feat/beta-distribuicao`, aguardando revisão. Versão `0.1.0-beta.1`. Nenhum merge, push, release ou publicação foi realizado. Os pacotes são candidatos locais; a qualificação nativa em **Windows 11 x64 e Ubuntu 24.04 LTS x64 continua pendente**.
 
 O [planejamento](PLANEJAMENTO_BETA_ETAPA3.md) aprovado permanece como referência histórica. A autorização posterior permitiu prosseguir com os componentes comuns sem Windows, iniciar instalações novas sem obrigar migração e utilizar NuGet.Versioning. A validação realizada no CachyOS não substitui os sistemas-alvo.

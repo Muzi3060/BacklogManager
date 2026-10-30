@@ -28,3 +28,5 @@ As chaves de mapas JSON que representavam nomes absolutos de arquivos também fo
 A limpeza da versão atual **não remove caminhos, nomes ou e-mails do histórico Git**. Commits antigos e branches foram preservados. A decisão sobre eventual exposição desses metadados continua com o proprietário; nenhuma reescrita foi autorizada ou realizada.
 
 Os relatórios de auditoria não contêm valores completos de credenciais. As instruções privadas da beta, arquivos pessoais de ferramentas, bibliotecas reais e backups devem permanecer fora do versionamento. Regras de `.gitignore` ajudam no staging comum; não substituem a revisão de arquivos, referências e futuros pacotes antes de publicar.
+
+- [Resultado da preparação do lançamento e bloqueio de publicidade](LANCAMENTO_BETA_RESULTADO.md).

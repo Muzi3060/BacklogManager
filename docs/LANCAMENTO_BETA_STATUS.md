@@ -1,6 +1,6 @@
 # Preparação do lançamento 0.1.0-beta.1
 
-**Estado: publicação suspensa por critério explícito de identidade/titularidade.** Nenhuma reescrita, push, tag ou release foi realizada. O repositório de destino continua privado.
+**Estado atual: identidade resolvida e main saneada enviada ao destino privado; publicidade suspensa por retenção de commit antigo no GitHub.** O relato inicial abaixo é histórico. Resultado da retomada em [LANCAMENTO_BETA_RESULTADO.md](LANCAMENTO_BETA_RESULTADO.md). Nenhuma tag ou release foi criada.
 
 ## Trabalho concluído
 
