@@ -75,6 +75,9 @@ class Pacotes(unittest.TestCase):
     def test_L02_bit_executavel(self):
         destino=self.raiz/'pacote.tar.gz';compactar(self.p,destino,'linux-x64')
         with tarfile.open(destino) as t:self.assertTrue(t.getmember('BacklogManager').mode&0o111)
+    def test_P21_avisos_preservados(self):
+        (self.p/'THIRD-PARTY-NOTICES.txt').write_text('aviso de terceiro fictício')
+        self.assertIn('THIRD-PARTY-NOTICES.txt',auditar(self.p))
     def test_P20_sem_sobrescrita(self):
         destino=self.raiz/'pacote.zip';destino.write_bytes(b'anterior')
         with self.assertRaises(ValueError):compactar(self.p,destino,'win-x64')

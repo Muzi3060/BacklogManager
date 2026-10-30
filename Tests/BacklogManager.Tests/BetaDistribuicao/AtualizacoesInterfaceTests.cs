@@ -1,4 +1,7 @@
 using Avalonia.Controls;
+using Avalonia.Headless;
+using Avalonia.Input;
+using Avalonia.Input.Raw;
 using Avalonia.Headless.XUnit;
 using BacklogManager.Services;
 using Xunit;
@@ -17,7 +20,7 @@ public sealed class AtualizacoesInterfaceTests
         t.Janela.ConfigurarAtualizacoes(new(http,AtualizacoesTests.Repo));var abriu=false;
         t.Janela.AbrirPaginaAtualizacao=_=>{abriu=true;if(id=="U24")throw new InvalidOperationException();return Task.CompletedTask;};
         if(id=="T01"){Assert.Contains("0.1.0-beta.1",t.Campo<TextBlock>("TxtVersaoAplicativo").Text);return;}
-        if(id=="T10"){Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").Focusable);return;}
+        if(id=="T10"){t.Render();Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").Focus());t.Janela.KeyPress(Key.Space,RawInputModifiers.None,default,null);t.Janela.KeyRelease(Key.Space,RawInputModifiers.None,default,null);await t.Janela.ConsultaAtualizacaoPendente;Assert.Equal(1,h.Chamadas);return;}
         if(id=="T11"){t.Janela.Width=900;t.Janela.Height=660;t.Render();Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").IsVisible);return;}
         if(id=="T12")
         {foreach(var tema in Enum.GetValues<BacklogManager.Aparencia.TemaVisual>())foreach(var modo in Enum.GetValues<BacklogManager.Aparencia.ModoVisual>())

@@ -32,10 +32,10 @@ public sealed class AtualizacoesTests
             return Task.FromResult(resposta);
         };
         using var http=new HttpClient(h);var s=new ServicoAtualizacoesGitHub(http,Repo,paginas:id=="U20"?1:10,tamanhoPagina:id is "U07" or "U20"?1:30);
-        using var cts=new CancellationTokenSource();if(id=="U17")cts.Cancel();
+        using var cts=CancellationTokenSource.CreateLinkedTokenSource(TestContext.Current.CancellationToken);if(id=="U17")cts.Cancel();
         if(id=="U17"){await Assert.ThrowsAnyAsync<OperationCanceledException>(()=>s.Consultar("0.1.0-beta.1","linux-x64",cts.Token));return;}
         if(id=="U07")h.Responder=(r,_)=>Task.FromResult(h.Chamadas==1?Lista(Release("0.1.0-beta.1")):h.Chamadas==2?Lista(Release()):Lista());
-        var resultado=await s.Consultar(id=="U25"?"0.1.0":"0.1.0-beta.1","linux-x64");
+        var resultado=await s.Consultar(id=="U25"?"0.1.0":"0.1.0-beta.1","linux-x64",TestContext.Current.CancellationToken);
         var esperado=id switch
         {"U03" or "U04" or "U05" or "U25"=>EstadoAtualizacao.Atualizado,"U08" or "U09"=>EstadoAtualizacao.SemPacote,
          "U10" or "U11" or "U12" or "U18" or "U19" or "U20" or "U23"=>EstadoAtualizacao.Inconclusivo,

@@ -26,7 +26,7 @@ public sealed class MigracaoTests
     public void PreferenciasOpcionais(string id,bool aparencia,bool visualizacao)
     {
         using var a=new AmbienteDistribuicao();Biblioteca(a);
-        if(aparencia)File.WriteAllText(Path.Combine(a.Origem,"aparencia.preferencias.json"),"{\"Versao\":1,\"Tema\":\"Moderno\",\"Modo\":\"Claro\"}");
+        if(aparencia)File.WriteAllText(Path.Combine(a.Origem,"aparencia.preferencias.json"),id=="M06"?"{\"Versao\":2,\"Tema\":\"DarkMode\",\"Modo\":\"Escuro\",\"Personalizacoes\":{\"legado\":true}}":"{\"Versao\":1,\"Tema\":\"Moderno\",\"Modo\":\"Claro\"}");
         if(visualizacao)File.WriteAllText(Path.Combine(a.Origem,"biblioteca.preferencias.json"),"{\"Versao\":1,\"Visualizacao\":0}");
         var s=new ServicoMigracaoLocal(new(Path.Combine(a.Destino,"backlog.json")),a.Seguranca);s.Migrar(s.Prever(a.Origem),true,true);
         Assert.Equal(aparencia,File.Exists(Path.Combine(a.Destino,"aparencia.preferencias.json")));Assert.NotEmpty(id);
@@ -63,6 +63,16 @@ public sealed class MigracaoTests
         s.Migrar(p,true,true);
         foreach(var arquivo in new CaminhosDadosLocais(Path.Combine(a.Origem,"backlog.json")).Arquivos.Values)
             if(File.Exists(arquivo))Assert.Equal(File.ReadAllBytes(arquivo),File.ReadAllBytes(Path.Combine(a.Destino,Path.GetFileName(arquivo))));
+    }
+    [Fact]public async Task M32MigracoesConcorrentesNaoSobrescrevem()
+    {
+        using var a=new AmbienteDistribuicao();Biblioteca(a);
+        var c=new CaminhosDadosLocais(Path.Combine(a.Destino,"backlog.json"));
+        var s1=new ServicoMigracaoLocal(c,a.Seguranca);var s2=new ServicoMigracaoLocal(c,a.Seguranca);
+        var p1=s1.Prever(a.Origem);var p2=s2.Prever(a.Origem);
+        async Task<bool> Tentar(ServicoMigracaoLocal s,PreviaMigracao p)=>await Task.Run(()=>{try{s.Migrar(p,true,true);return true;}catch(IOException){return false;}});
+        var resultados=await Task.WhenAll(Tentar(s1,p1),Tentar(s2,p2));Assert.Single(resultados.Where(x=>x));
+        Assert.Equal("[]",File.ReadAllText(c.Arquivos["Biblioteca"]));Assert.False(File.Exists(c.Diario));
     }
     [Theory]
     [InlineData("M16")][InlineData("M17")][InlineData("M18")][InlineData("M19")][InlineData("M20")][InlineData("M21")][InlineData("M22")][InlineData("M24")][InlineData("M25")][InlineData("M27")][InlineData("M29")][InlineData("M30")]

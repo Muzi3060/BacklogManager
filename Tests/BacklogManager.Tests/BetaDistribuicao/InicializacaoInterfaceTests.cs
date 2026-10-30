@@ -1,4 +1,7 @@
 using Avalonia.Controls;
+using Avalonia.Headless;
+using Avalonia.Input;
+using Avalonia.Input.Raw;
 using Avalonia.Headless.XUnit;
 using Avalonia.Interactivity;
 using BacklogManager.Backup;
@@ -29,7 +32,7 @@ public sealed class InicializacaoInterfaceTests
             Assert.Contains("Obras: 0",Campo<TextBlock>("TxtEstado").Text);
             if(id=="A05"){Click("BtnVazia");Assert.True(continuou);Assert.False(File.Exists(c.Arquivos["Biblioteca"]));return;}
             if(id=="A02"){Click("BtnMigrar");await w.OperacaoPendente;Assert.False(continuou);Assert.False(File.Exists(c.Arquivos["Biblioteca"]));return;}
-            if(id=="A11"){w.Width=900;w.Height=660;w.UpdateLayout();Assert.True(Campo<Button>("BtnMigrar").Focusable);return;}
+            if(id=="A11"){w.Width=900;w.Height=660;w.UpdateLayout();Campo<TextBox>("TxtOrigem").Focus();w.KeyPress(Key.Tab,RawInputModifiers.None,default,null);w.KeyRelease(Key.Tab,RawInputModifiers.None,default,null);Avalonia.Threading.Dispatcher.UIThread.RunJobs();Assert.True(Campo<Button>("BtnEscolher").IsFocused);return;}
             if(id=="A12")
             {foreach(var tema in Enum.GetValues<BacklogManager.Aparencia.TemaVisual>())foreach(var modo in Enum.GetValues<BacklogManager.Aparencia.ModoVisual>())
               {BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new(){Tema=tema,Modo=modo});w.UpdateLayout();Assert.NotNull(w.Background);Assert.NotNull(Campo<TextBlock>("TxtEstado").Foreground);}

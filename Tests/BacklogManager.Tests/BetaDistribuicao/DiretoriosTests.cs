@@ -32,7 +32,9 @@ public sealed class DiretoriosTests
     public void PastaNovaIsolada(string id)
     {
         using var a=new AmbienteDistribuicao();
+        if(id=="D10")Directory.Delete(a.Destino);
         var c=ResolvedorDiretorios.Preparar(a.Destino);
+        if(id=="D18"){var outro=ResolvedorDiretorios.Preparar(Path.Combine(a.Pasta,"perfil2"));File.WriteAllText(Path.Combine(outro.Pasta,"backlog.json"),"[]");Assert.False(ResolvedorDiretorios.TemDados(c));Assert.True(ResolvedorDiretorios.TemDados(outro));}
         Assert.True(Directory.Exists(a.Destino));Assert.False(ResolvedorDiretorios.TemDados(c));
         Assert.Empty(Directory.GetFiles(a.Destino));Assert.NotEqual(c.Pasta,a.Origem);Assert.NotEmpty(id);
     }

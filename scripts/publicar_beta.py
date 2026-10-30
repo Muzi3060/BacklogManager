@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Publicação local: nenhum upload, release ou operação Git de escrita."""
-import argparse, hashlib, json, os, pathlib, re, subprocess, sys, tarfile, tempfile, zipfile
+import argparse, hashlib, json, os, pathlib, re, shutil, subprocess, sys, tarfile, tempfile, zipfile
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 def hash_arquivo(p):
@@ -82,6 +82,7 @@ def publicar(rid, saida, repositorio=None):
     if not (pasta/runtime).exists():raise ValueError('Runtime self-contained ausente.')
     if rid=='linux-x64':(pasta/'BacklogManager').chmod(0o755)
     (pasta/'LEIA-ME.txt').write_text('Minhas Realizações '+versao+'\nBeta em validação. Não contém dados pessoais.\nDados: Windows %LOCALAPPDATA%/MinhasRealizacoes/Dados; Linux $XDG_DATA_HOME/minhas-realizacoes/dados (padrão ~/.local/share/minhas-realizacoes/dados).\nExecute BacklogManager.exe (Windows) ou ./BacklogManager (Linux). Linux exige bibliotecas gráficas nativas.\nMigração: use --migrate-from /pasta/absoluta com destino novo; revise e confirme a prévia.\nTestes: --data-dir /pasta/absoluta/isolada.\nAtualização manual: feche o aplicativo, faça backup e substitua somente os binários. O instalador preserva os dados na desinstalação.\nAs credenciais IGDB da beta estão incorporadas; token expirado exige nova versão.\nSistemas-alvo: Windows 11 x64 e Ubuntu 24.04 LTS x64. Consulte o relatório de qualificação antes de distribuir.\n',encoding='utf-8')
+    shutil.copy2(ROOT/'packaging/THIRD-PARTY-NOTICES.txt',pasta/'THIRD-PARTY-NOTICES.txt')
     inventario=auditar(pasta,credenciais)
     manifesto={'versao':versao,'rid':rid,'sdk':subprocess.check_output(['dotnet','--version'],cwd=ROOT,text=True).strip(),
         'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
