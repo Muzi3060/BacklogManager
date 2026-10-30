@@ -30,3 +30,5 @@ A limpeza da versão atual **não remove caminhos, nomes ou e-mails do históric
 Os relatórios de auditoria não contêm valores completos de credenciais. As instruções privadas da beta, arquivos pessoais de ferramentas, bibliotecas reais e backups devem permanecer fora do versionamento. Regras de `.gitignore` ajudam no staging comum; não substituem a revisão de arquivos, referências e futuros pacotes antes de publicar.
 
 - [Resultado da preparação do lançamento e bloqueio de publicidade](LANCAMENTO_BETA_RESULTADO.md).
+
+- [Publicação da beta 0.1.0-beta.1](PUBLICACAO_BETA.md).

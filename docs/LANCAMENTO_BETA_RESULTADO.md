@@ -1,5 +1,8 @@
 # Resultado da retomada do lançamento 0.1.0-beta.1
 
+> Atualização: o proprietário classificou e autorizou expressamente somente as duas grafias de e-mail dos quatro commits antigos acessíveis. O bloqueio anterior está resolvido. O relato abaixo preserva a situação histórica; resultado atual em [PUBLICACAO_BETA.md](PUBLICACAO_BETA.md).
+
+
 **Publicação pública não concluída por bloqueio de segurança.** O destino `Muzi3060/BacklogManager` permanece privado. Não há tag nem pre-release criadas nesta execução.
 
 ## Identidade, MIT e preparação

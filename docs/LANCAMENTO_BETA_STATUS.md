@@ -1,5 +1,8 @@
 # Preparação do lançamento 0.1.0-beta.1
 
+> Atualização: o proprietário classificou e autorizou expressamente somente as duas grafias de e-mail dos quatro commits antigos acessíveis. O bloqueio anterior está resolvido. O relato abaixo preserva a situação histórica; resultado atual em [PUBLICACAO_BETA.md](PUBLICACAO_BETA.md).
+
+
 **Estado atual: identidade resolvida e main saneada enviada ao destino privado; publicidade suspensa por retenção de commit antigo no GitHub.** O relato inicial abaixo é histórico. Resultado da retomada em [LANCAMENTO_BETA_RESULTADO.md](LANCAMENTO_BETA_RESULTADO.md). Nenhuma tag ou release foi criada.
 
 ## Trabalho concluído

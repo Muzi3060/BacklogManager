@@ -2,7 +2,7 @@
 
 Uma biblioteca pessoal para organizar jogos, animes, séries, filmes, mangás e livros, registrar experiências e acompanhar o que você está consumindo.
 
-**Beta `0.1.0-beta.1` aprovada pelo proprietário; publicação em preparação.** Os pacotes foram auditados, mas ainda não foram publicados. Windows 11 x64 e Ubuntu 24.04 LTS x64 são os sistemas-alvo; os 37 cenários de qualificação nativa permanecem não executados, com essa limitação aceita para a beta. O teste manual relatado ocorreu no CachyOS com dados fictícios.
+**Beta `0.1.0-beta.1` — versão de pré-lançamento.** Confira os pacotes e checksums na página da release. Windows 11 x64 e Ubuntu 24.04 LTS x64 são os sistemas-alvo; os 37 cenários de qualificação nativa permanecem não executados, com essa limitação aceita para a beta. O teste manual relatado ocorreu no CachyOS com dados fictícios.
 
 ## O que funciona atualmente
 
@@ -17,7 +17,7 @@ Jogos novos exigem pesquisa e seleção de um resultado da IGDB. Os catálogos d
 
 ## Instalar a beta
 
-Os downloads serão disponibilizados em [GitHub Releases](https://github.com/Muzi3060/BacklogManager/releases). A publicação ainda está pendente; não há pre-release pública anunciada por este documento.
+Os pacotes da primeira beta estão na [pre-release 0.1.0-beta.1](https://github.com/Muzi3060/BacklogManager/releases/tag/v0.1.0-beta.1). Confira o SHA-256 do download com `SHA256SUMS.txt` antes de executar.
 
 ### Windows 11 x64
 
