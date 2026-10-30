@@ -15,7 +15,7 @@ public sealed class AtualizacoesInterfaceTests
         using var a=new BacklogManager.Tests.Fase7.AmbienteBackup();using var t=new BacklogManager.Tests.Fase7.TelaBackup(a);
         var h=new HttpSimulado();using var http=new HttpClient(h);
         var gatilho=new TaskCompletionSource<HttpResponseMessage>();
-        h.Responder=(_,ct)=>id is "T03" or "T04"?gatilho.Task.WaitAsync(ct):Task.FromResult(id switch
+        h.Responder=(_,ct)=>id is "T02" or "T03" or "T04"?gatilho.Task.WaitAsync(ct):Task.FromResult(id switch
         {"T05"=>AtualizacoesTests.Lista(),"T07"=>new(System.Net.HttpStatusCode.NotFound),"T08"=>AtualizacoesTests.Lista(AtualizacoesTests.Release(pacote:false)),_=>AtualizacoesTests.Lista(AtualizacoesTests.Release())});
         t.Janela.ConfigurarAtualizacoes(new(http,AtualizacoesTests.Repo));var abriu=false;
         t.Janela.AbrirPaginaAtualizacao=_=>{abriu=true;if(id=="U24")throw new InvalidOperationException();return Task.CompletedTask;};
@@ -23,12 +23,13 @@ public sealed class AtualizacoesInterfaceTests
         if(id=="T10"){t.Render();Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").Focus());t.Janela.KeyPress(Key.Space,RawInputModifiers.None,default,null);t.Janela.KeyRelease(Key.Space,RawInputModifiers.None,default,null);await t.Janela.ConsultaAtualizacaoPendente;Assert.Equal(1,h.Chamadas);return;}
         if(id=="T11"){t.Janela.Width=900;t.Janela.Height=660;t.Render();Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").IsVisible);return;}
         if(id=="T12")
-        {foreach(var tema in Enum.GetValues<BacklogManager.Aparencia.TemaVisual>())foreach(var modo in Enum.GetValues<BacklogManager.Aparencia.ModoVisual>())
-          {BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new(){Tema=tema,Modo=modo});t.Render();Assert.NotNull(t.Campo<TextBlock>("TxtEstadoAtualizacao").Foreground);Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").Focusable);}
+        {t.Campo<TextBox>("TxtReview").Text="rascunho de review fictício";foreach(var tema in Enum.GetValues<BacklogManager.Aparencia.TemaVisual>())foreach(var modo in Enum.GetValues<BacklogManager.Aparencia.ModoVisual>())
+          {BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new(){Tema=tema,Modo=modo});t.Render();Assert.NotNull(t.Campo<TextBlock>("TxtEstadoAtualizacao").Foreground);Assert.Equal("rascunho de review fictício",t.Campo<TextBox>("TxtReview").Text);Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").Focusable);}
           BacklogManager.Aparencia.AplicadorAparencia.Aplicar(new());return;}
         t.Clicar("BtnVerificarAtualizacoes");
-        if(id is "T03" or "T04")
-        {Assert.False(t.Campo<Button>("BtnVerificarAtualizacoes").IsEnabled);Assert.Contains("Consultando",t.Campo<TextBlock>("TxtEstadoAtualizacao").Text);t.Clicar("BtnVerificarAtualizacoes");Assert.Equal(1,h.Chamadas);gatilho.SetResult(AtualizacoesTests.Lista());}
+        if(id is "T02" or "T03" or "T04")
+        {Assert.False(t.Campo<Button>("BtnVerificarAtualizacoes").IsEnabled);Assert.Contains("Consultando",t.Campo<TextBlock>("TxtEstadoAtualizacao").Text);t.Clicar("BtnVerificarAtualizacoes");Assert.Equal(1,h.Chamadas);if(id=="T02"){t.Clicar("NavBacklog");Assert.True(t.Campo<Control>("PaginaBacklog").IsVisible);}
+         gatilho.SetResult(AtualizacoesTests.Lista());}
         await t.Janela.ConsultaAtualizacaoPendente;
         Assert.False(abriu);Assert.True(t.Campo<Button>("BtnVerificarAtualizacoes").IsEnabled);
         if(id=="T05")Assert.Contains("Nenhuma versão",t.Campo<TextBlock>("TxtEstadoAtualizacao").Text);

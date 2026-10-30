@@ -71,7 +71,7 @@ public sealed class MigracaoTests
         var s1=new ServicoMigracaoLocal(c,a.Seguranca);var s2=new ServicoMigracaoLocal(c,a.Seguranca);
         var p1=s1.Prever(a.Origem);var p2=s2.Prever(a.Origem);
         async Task<bool> Tentar(ServicoMigracaoLocal s,PreviaMigracao p)=>await Task.Run(()=>{try{s.Migrar(p,true,true);return true;}catch(IOException){return false;}});
-        var resultados=await Task.WhenAll(Tentar(s1,p1),Tentar(s2,p2));Assert.Single(resultados.Where(x=>x));
+        var resultados=await Task.WhenAll(Tentar(s1,p1),Tentar(s2,p2));Assert.Single(resultados,x=>x);
         Assert.Equal("[]",File.ReadAllText(c.Arquivos["Biblioteca"]));Assert.False(File.Exists(c.Diario));
     }
     [Theory]

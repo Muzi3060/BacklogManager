@@ -13,7 +13,8 @@ internal static class InicializacaoAplicativo
         {
             var caminhos=ResolvedorDiretorios.Preparar(ResolvedorDiretorios.Atual(desktop.Args ?? []));
             var backup=new ServicoBackupLocal(caminhos);
-            if(!backup.Recuperar()) throw new IOException(backup.Pendencia);
+            if(!backup.Recuperar())
+            { desktop.MainWindow=new MainWindow(PrepararPrincipal(caminhos));return; }
             var args=desktop.Args ?? [];
             var indice=Array.IndexOf(args,"--migrate-from");
             if(indice>=0 && (indice+1>=args.Length || !Path.IsPathFullyQualified(args[indice+1]))) throw new ArgumentException("--migrate-from exige uma pasta absoluta.");
@@ -29,12 +30,18 @@ internal static class InicializacaoAplicativo
         catch(Exception e) when(ServicoBackupLocal.Falha(e))
         { desktop.MainWindow=JanelaInicializacaoDados.Falha("Não foi possível abrir a pasta de dados. Nenhum perfil alternativo foi aberto.\n"+e.Message); }
     }
+    internal static DependenciasJanela PrepararPrincipal(CaminhosDadosLocais caminhos,Func<string,string?>? lerVariavel=null)
+    {
+        var backup=new ServicoBackupLocal(caminhos);
+        // Com pendência, a composição existente abre Configurações com leitores e gravadores bloqueados.
+        // Nunca inicializar JSON vazio sobre um conjunto parcialmente recuperado.
+        if(backup.Recuperar() && !ResolvedorDiretorios.TemDados(caminhos))
+        { var arquivo=new Data.FileManager(caminhos.Arquivos["Biblioteca"]);arquivo.Carregar();arquivo.Salvar([]); }
+        return ComposicaoAplicativo.Criar(caminhos.Arquivos["Biblioteca"],lerVariavel);
+    }
     private static void AbrirPrincipal(IClassicDesktopStyleApplicationLifetime desktop,CaminhosDadosLocais caminhos,Avalonia.Controls.Window? anterior)
     {
-        if(!new ServicoBackupLocal(caminhos).Recuperar()) throw new IOException("Há recuperação pendente. Reabra o aplicativo para tentar recuperá-la.");
-        if(!File.Exists(caminhos.Arquivos["Biblioteca"]))
-        { var arquivo=new Data.FileManager(caminhos.Arquivos["Biblioteca"]);var itens=arquivo.Carregar();arquivo.Salvar(itens); }
-        var janela=new MainWindow(ComposicaoAplicativo.Criar(caminhos.Arquivos["Biblioteca"]));
+        var janela=new MainWindow(PrepararPrincipal(caminhos));
         desktop.MainWindow=janela;
         if(anterior!=null){janela.Show();anterior.Close();}
     }
