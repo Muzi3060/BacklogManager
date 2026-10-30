@@ -12,7 +12,7 @@ A main foi saneada e usa a identidade pública confirmada. Foram transformados 6
 
 MIT, copyright 2026 Murilo Martins Ribeiro. Avisos de terceiros preservados. Os documentos privados de instruções/autorização, biblioteca, coleções pessoais, preferências, Qodana e skills não fazem parte da distribuição de fontes ou binários.
 
-Apenas os três artefatos candidato4 auditados serão anexados; seus bytes não foram alterados nesta preparação. As credenciais IGDB da beta permanecem incorporadas por decisão expressa. Nenhum Client Secret, backend ou autenticação individual foi introduzido. Os manifestos conservam a proveniência original dos binários e a evidência privada contém o mapa para a história saneada.
+Foram anexados somente os três artefatos candidato4 auditados e SHA256SUMS.txt; seus bytes não foram alterados nesta preparação. As credenciais IGDB da beta permanecem incorporadas por decisão expressa. Nenhum Client Secret, backend ou autenticação individual foi introduzido. Os manifestos conservam a proveniência original dos binários e a evidência privada contém o mapa para a história saneada.
 
 ## Links oficiais
 
@@ -23,7 +23,7 @@ Apenas os três artefatos candidato4 auditados serão anexados; seus bytes não 
 - Linux TAR.GZ: https://github.com/Muzi3060/BacklogManager/releases/download/v0.1.0-beta.1/MinhasRealizacoes-0.1.0-beta.1-linux-x64.tar.gz
 - Checksums: https://github.com/Muzi3060/BacklogManager/releases/download/v0.1.0-beta.1/SHA256SUMS.txt
 
-Os endereços são os destinos da publicação. A verificação de acessibilidade anônima será registrada após a criação e liberação efetivas; esta seção não substitui a evidência de publicação.
+Repositório e pre-release publicados e verificados sem autenticação: HTTP 200 nas páginas, na listagem de releases e no download integral dos quatro anexos. Cada download foi comparado por SHA-256 com o arquivo local auditado. A release está marcada como pre-release, não draft, na tag `v0.1.0-beta.1`.
 
 | Artefato | SHA-256 |
 |---|---|
@@ -40,3 +40,13 @@ Dos 206 cenários planejados, 169 atendidos e **37 nativos não executados**: 27
 O proprietário relatou validação manual CachyOS com dados fictícios: inicialização/navegação, persistência de jogos/temas, pesquisa/cadastro/edição/remoção pela IGDB, coleções, tratamento de releases indisponíveis e troca de binários com dados preservados. Não atribuir aprovação manual a offline, migração completa ou descoberta real de novas versões. Verificar a listagem pública da release não é executar esse fluxo completo pela interface.
 
 Outras limitações: catálogos de cinco mídias ainda simulados e identificados; token IGDB compartilhado pode expirar/atingir limites; capas remotas dependem de rede/cache; sem assinatura de código; atualização e instalação manuais; backup/restauração coordenados por diário sem atomicidade absoluta entre arquivos ou proteção contra toda falha física.
+
+## Evidência final de publicação
+
+- Commit da tag/release: `6a286085f5bb939df4832f1f1caa20e683c5cd0a`. Commits posteriores na main apenas registram documentação de entrega; a tag não foi movida.
+- Release ID: `429222851`; nome `0.1.0-beta.1`; pre-release confirmada.
+- Consulta anônima à API com o mesmo cabeçalho do aplicativo, `X-GitHub-Api-Version: 2026-03-10`, retornou HTTP 200 e incluiu esta beta na listagem. Não foi usado `/releases/latest`.
+- Três pacotes e SHA256SUMS.txt baixados integralmente sem Authorization/PAT; tamanhos e hashes coincidem com os artefatos auditados. Evidência estruturada em [PUBLICACAO_BETA_VERIFICACAO.json](PUBLICACAO_BETA_VERIFICACAO.json).
+- Revalidação anterior à publicidade nesta execução: build com 0 avisos/erros, 1707 testes C# aprovados (0 falhas/ignorados), 41 testes Python aprovados. SHA-256 do TRX: `505e6686323678bd2a52de270b0d72becdb8f8633c114a54c9fb29cff59d75bf`. Os 37 cenários nativos continuam não executados.
+- Testar a API e os downloads não foi registrado como descoberta de uma versão futura pela interface, migração manual completa, teste offline manual ou qualificação Windows/Ubuntu.
+- Não foram publicados outros branches, backups, arquivos pessoais ou documentos privados. As duas grafias históricas retidas receberam autorização específica; essa exceção não foi estendida a outros dados.

@@ -1,0 +1,47 @@
+{
+  "repo": "https://github.com/Muzi3060/BacklogManager",
+  "repo_http": 200,
+  "release": "https://github.com/Muzi3060/BacklogManager/releases/tag/v0.1.0-beta.1",
+  "release_http": 200,
+  "release_id": 429222851,
+  "tag": "v0.1.0-beta.1",
+  "commit": "6a286085f5bb939df4832f1f1caa20e683c5cd0a",
+  "prerelease": true,
+  "api_list_http": 200,
+  "api_version_header": "2026-03-10",
+  "autenticacao": false,
+  "assets": [
+    {
+      "name": "MinhasRealizacoes-0.1.0-beta.1-linux-x64.tar.gz",
+      "url": "https://github.com/Muzi3060/BacklogManager/releases/download/v0.1.0-beta.1/MinhasRealizacoes-0.1.0-beta.1-linux-x64.tar.gz",
+      "http": 200,
+      "bytes": 45507107,
+      "sha256": "55b2ed4c7683db65e5614d1fba709a9b04dd8934854c9a24a9c6abcb9a2441dc",
+      "anonimo": true
+    },
+    {
+      "name": "MinhasRealizacoes-0.1.0-beta.1-win-x64-setup.exe",
+      "url": "https://github.com/Muzi3060/BacklogManager/releases/download/v0.1.0-beta.1/MinhasRealizacoes-0.1.0-beta.1-win-x64-setup.exe",
+      "http": 200,
+      "bytes": 36113467,
+      "sha256": "73169f9ecd24da3af18c05841f435ce6bced3baf9d133b46a764127949f056c2",
+      "anonimo": true
+    },
+    {
+      "name": "MinhasRealizacoes-0.1.0-beta.1-win-x64.zip",
+      "url": "https://github.com/Muzi3060/BacklogManager/releases/download/v0.1.0-beta.1/MinhasRealizacoes-0.1.0-beta.1-win-x64.zip",
+      "http": 200,
+      "bytes": 49576629,
+      "sha256": "e517caddcab36a883351894b84504565801610dfe65fea5d57158d2972664805",
+      "anonimo": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "url": "https://github.com/Muzi3060/BacklogManager/releases/download/v0.1.0-beta.1/SHA256SUMS.txt",
+      "http": 200,
+      "bytes": 338,
+      "sha256": "9d1904263c5940488e144a2ced86e2302c0a23fe8b3288dffe1bd092238cdfdf",
+      "anonimo": true
+    }
+  ]
+}

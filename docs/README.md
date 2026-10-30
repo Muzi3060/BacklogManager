@@ -1,6 +1,6 @@
 # Documentação do Minhas Realizações
 
-O [README principal](../README.md) apresenta a versão de desenvolvimento atual. A primeira beta ainda está em preparação; a Etapa 2 está integrada por fast-forward. A implementação da Etapa 3 está na branch `feat/beta-distribuicao`, com candidatos locais e validações nativas pendentes; merge e publicação dependem de aprovação própria.
+O [README principal](../README.md) apresenta a versão de desenvolvimento atual. A beta `0.1.0-beta.1` está publicada como pre-release; código e licença MIT na main saneada. As 37 validações nativas pendentes continuam registradas como não executadas. A situação histórica das fases deve ser distinguida do [relatório final de publicação](PUBLICACAO_BETA.md).
 
 - [Simplificação da interface](BETA_ETAPA1.md) e [resultados automatizados](BETA_ETAPA1_TESTES.md).
 - [Aprovação manual geral da Etapa 1](APROVACAO_BETA_ETAPA1.md), sem inferir execuções individuais.
