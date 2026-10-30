@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="BacklogManager.JanelaInicializacaoDados"
+ Title="Minhas Realizações — Dados locais" Width="900" Height="660" MinWidth="900" MinHeight="660" Background="{DynamicResource AppBackground}" Foreground="{DynamicResource PanelForeground}">
+ <ScrollViewer><StackPanel Margin="24" Spacing="16">
+  <TextBlock Text="Seus dados locais" FontSize="24" FontWeight="SemiBold"/>
+  <TextBlock x:Name="TxtDestino" TextWrapping="Wrap"/>
+  <TextBlock Text="Foi identificada ou selecionada uma biblioteca anterior. A importação copia os arquivos e preserva os originais. Nenhum dado será importado sem sua confirmação." TextWrapping="Wrap"/>
+  <TextBox x:Name="TxtOrigem" PlaceholderText="Pasta que contém backlog.json" AutomationProperties.Name="Pasta de origem"/>
+  <WrapPanel><Button x:Name="BtnEscolher" Content="Escolher pasta" Click="Escolher_Click" Margin="0,0,12,12"/><Button x:Name="BtnPrever" Content="Validar e visualizar" Click="Prever_Click" Margin="0,0,0,12"/></WrapPanel>
+  <TextBlock x:Name="TxtEstado" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
+  <CheckBox x:Name="ChkPreferencias" IsChecked="True" Content="Importar também as preferências compatíveis"/>
+  <CheckBox x:Name="ChkConfirmar"><TextBlock Text="Confirmo a cópia dos dados para a pasta indicada, com backup externo verificado." TextWrapping="Wrap"/></CheckBox>
+  <WrapPanel><Button x:Name="BtnMigrar" Content="Importar dados" Click="Migrar_Click" IsEnabled="False" Margin="0,0,12,12"/><Button x:Name="BtnVazia" Content="Continuar com biblioteca nova" Click="Vazia_Click" Margin="0,0,0,12"/></WrapPanel>
+ </StackPanel></ScrollViewer>
+</Window>

@@ -33,7 +33,7 @@ public partial class MainWindow : Window
 
     public MainWindow() : this(ComposicaoAplicativo.Criar()) { }
 
-    private MainWindow(DependenciasJanela dependencias)
+    internal MainWindow(DependenciasJanela dependencias)
         : this(dependencias.Biblioteca, dependencias.Pesquisa, dependencias.RecursoPesquisa, dependencias.Preferencias, colecoes: dependencias.Colecoes, aparencia: dependencias.Aparencia, backup: dependencias.Backup) { }
 
     internal MainWindow(ServicoBiblioteca biblioteca, IPesquisaCatalogo? pesquisa, IDisposable? recursoPesquisa = null,

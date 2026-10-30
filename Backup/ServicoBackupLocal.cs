@@ -228,7 +228,7 @@ public sealed class ServicoBackupLocal
         }
         catch (Exception e) when (Falha(e)) { Pendencia = "Recuperação pendente: " + e.Message; return false; }
     }
-    private IDisposable Bloquear()
+    internal IDisposable Bloquear()
     {
         var locks = new List<FileStream>();
         try
