@@ -2,7 +2,7 @@
 
 Uma biblioteca pessoal para organizar jogos, animes, séries, filmes, mangás e livros, registrar experiências e acompanhar o que você está consumindo.
 
-**A primeira beta ainda está em desenvolvimento.** A interface simplificada está aprovada, mas não há pacotes de distribuição aprovados. A Etapa 3 implementa candidatos locais Windows/Linux, credenciais IGDB da beta e consulta manual de atualizações; a qualificação nativa dos sistemas-alvo continua pendente. Consulte o relatório antes de distribuir.
+**Beta `0.1.0-beta.1` aprovada pelo proprietário; publicação em preparação.** Os pacotes foram auditados, mas ainda não foram publicados. Windows 11 x64 e Ubuntu 24.04 LTS x64 são os sistemas-alvo; os 37 cenários de qualificação nativa permanecem não executados, com essa limitação aceita para a beta. O teste manual relatado ocorreu no CachyOS com dados fictícios.
 
 ## O que funciona atualmente
 
@@ -14,6 +14,24 @@ Uma biblioteca pessoal para organizar jogos, animes, séries, filmes, mangás e 
 - Backup local em JSON, prévia de importação e restauração com confirmação e recuperação.
 
 Jogos novos exigem pesquisa e seleção de um resultado da IGDB. Os catálogos das outras cinco mídias são **simulados** e identificados como demonstração. Visualização, edição de informações pessoais, filtros, ordenação e exclusão da biblioteca local funcionam sem IGDB; capas remotas podem depender da conexão e do cache da sessão.
+
+## Instalar a beta
+
+Os downloads serão disponibilizados em [GitHub Releases](https://github.com/Muzi3060/BacklogManager/releases). A publicação ainda está pendente; não há pre-release pública anunciada por este documento.
+
+### Windows 11 x64
+
+- **ZIP portátil:** extraia o pacote completo em uma pasta nova e execute `BacklogManager.exe`. Mantenha as bibliotecas ao lado do executável.
+- **Instalador EXE:** execute o instalador por usuário e utilize o atalho Minhas Realizações. A desinstalação dos binários preserva a pasta de dados.
+- O runtime .NET acompanha os pacotes. A beta não possui assinatura de código; confira a origem e o SHA-256 antes de executar.
+
+### Ubuntu 24.04 LTS x64
+
+Extraia o TAR.GZ em uma pasta nova e execute `./BacklogManager`. O arquivo mantém a permissão de execução. O runtime .NET acompanha o aplicativo; bibliotecas gráficas nativas do sistema continuam necessárias. A qualificação específica no Ubuntu está pendente; execução no CachyOS não comprova suporte validado em todas as distribuições.
+
+### Atualizar sem perder a biblioteca
+
+Feche o aplicativo e exporte um backup pelas Configurações. Troque apenas a pasta dos binários ou execute o novo instalador; os dados ficam em diretório persistente separado. Não apague a pasta de dados, os backups ou o diário de recuperação. A atualização é manual; o aplicativo apenas consulta versões e oferece abrir a página oficial.
 
 ## Executar a versão de desenvolvimento
 
@@ -95,4 +113,6 @@ O [guia da documentação](docs/README.md) distingue registros históricos do co
 
 A [Etapa 3](docs/BETA_ETAPA3.md) descreve a distribuição implementada, os limites e os testes pendentes. Atualizações são consultadas manualmente em Configurações e instaladas pelo usuário; nenhuma substituição automática é executada. O destino de releases configurado é `Muzi3060/BacklogManager`; sem acesso público, a consulta informa indisponibilidade. Nuvem, sincronização, Google Drive e APIs reais das outras mídias permanecem futuras.
 
-Uma licença ainda não foi escolhida. Nenhuma licença foi adicionada nesta etapa.
+## Licença
+
+Distribuído sob a [licença MIT](LICENSE). Copyright © 2026 Murilo Martins Ribeiro. Os avisos de terceiros permanecem em `packaging/THIRD-PARTY-NOTICES.txt`.

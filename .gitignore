@@ -83,3 +83,6 @@ biblioteca.preferencias.json.lock
 # Cache dos scripts locais de preparação
 __pycache__/
 *.pyc
+
+# Autorização operacional privada de lançamento
+/LANCAMENTO_BETA_AUTORIZACAO.md
