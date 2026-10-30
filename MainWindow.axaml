@@ -454,6 +454,13 @@
                 <ScrollViewer x:Name="PaginaConfiguracoes" IsVisible="False" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel Spacing="16" Margin="0,0,16,16" MaxWidth="{Binding #PaginaConfiguracoes.Viewport.Width}">
                         <TextBlock Text="Configurações" Classes="pageTitle" />
+                        <Border Classes="card" Padding="16"><StackPanel Spacing="10">
+                            <TextBlock Text="Sobre e atualizações" FontSize="18" FontWeight="SemiBold" />
+                            <TextBlock x:Name="TxtVersaoAplicativo" />
+                            <TextBlock x:Name="TxtEstadoAtualizacao" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+                            <WrapPanel><Button x:Name="BtnVerificarAtualizacoes" Content="Verificar atualizações" Click="VerificarAtualizacoes_Click" Margin="0,0,12,12" />
+                            <Button x:Name="BtnAbrirAtualizacao" Content="Abrir página oficial para download" Click="AbrirAtualizacao_Click" IsVisible="False" Margin="0,0,0,12" /></WrapPanel>
+                        </StackPanel></Border>
                         <Border x:Name="PreferenciasVisuais" Classes="card" Padding="16"><StackPanel Spacing="10">
                             <TextBlock Text="Aparência" FontSize="18" FontWeight="SemiBold" />
                             <WrapPanel>

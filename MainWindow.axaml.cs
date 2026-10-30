@@ -75,6 +75,7 @@ public partial class MainWindow : Window
         AtualizarColecao();
         AtualizarDisponibilidadeCadastro();
         InicializarConfiguracoes();
+        InicializarAtualizacoes();
         BtnAtualizar.IsEnabled = PersistenciaDisponivel;
         if (!PersistenciaDisponivel)
         {
@@ -123,6 +124,8 @@ public partial class MainWindow : Window
     protected override void OnClosed(EventArgs e)
     {
         _fechada = true;
+        _vidaAtualizacoes.Cancel();
+        _httpAtualizacoes?.Dispose();
         CancelarBusca();
         _recursoPesquisa?.Dispose();
         Capas.Dispose();

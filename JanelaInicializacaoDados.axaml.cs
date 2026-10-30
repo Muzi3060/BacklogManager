@@ -48,7 +48,7 @@ public partial class JanelaInicializacaoDados:Window
         }
         catch(Exception erro) when(ServicoBackupLocal.Falha(erro)){TxtEstado.Text="Importação indisponível: "+erro.Message;}
     }
-    private void Migrar_Click(object? sender,RoutedEventArgs e)=>OperacaoPendente=Migrar();
+    private void Migrar_Click(object? sender,RoutedEventArgs e){if(!_ocupada)OperacaoPendente=Migrar();}
     private async Task Migrar()
     {
         if(_ocupada || _previa==null)return;
