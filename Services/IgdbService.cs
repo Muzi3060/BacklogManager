@@ -17,9 +17,10 @@ public sealed class IgdbService
     private readonly HttpClient _httpClient;
     private readonly string _clientId;
     private readonly string _accessToken;
+    private readonly bool _credenciaisBeta;
 
     // Quem fornece o HttpClient continua responsável por seu descarte.
-    public IgdbService(HttpClient httpClient, string clientId, string accessToken)
+    public IgdbService(HttpClient httpClient, string clientId, string accessToken, bool credenciaisBeta = false)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
         if (!ConfiguracaoIgdb.CredencialValida(clientId) || !ConfiguracaoIgdb.CredencialValida(accessToken))
@@ -27,6 +28,7 @@ public sealed class IgdbService
         _httpClient = httpClient;
         _clientId = clientId;
         _accessToken = accessToken;
+        _credenciaisBeta = credenciaisBeta;
     }
 
     public async Task<List<IgdbGame>> BuscarJogosAsync(string gameName, CancellationToken cancellationToken = default)
@@ -51,6 +53,7 @@ public sealed class IgdbService
                 throw new PesquisaIgdbException(resposta.StatusCode switch
                 {
                     HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden =>
+                        _credenciaisBeta ? "A IGDB recusou a autenticação. O token da beta pode ter expirado. Verifique se há uma nova versão em Configurações. Sua biblioteca local continua disponível." :
                         "A IGDB recusou a autenticação. Confira o Client ID e o token na configuração local.",
                     HttpStatusCode.TooManyRequests =>
                         "O limite de buscas da IGDB foi atingido. Aguarde um pouco antes de tentar novamente.",

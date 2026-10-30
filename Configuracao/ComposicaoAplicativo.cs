@@ -25,7 +25,8 @@ internal static class ComposicaoAplicativo
         var aparencia = new BacklogManager.Aparencia.ServicoAparencia(new BacklogManager.Aparencia.ArmazenamentoAparenciaJson(caminhos.Arquivos["Aparencia"]));
         var colecoes = new ServicoColecoes(arquivoColecoes, biblioteca);
         backup.ConferirEstadoCarregado = () => { arquivoBiblioteca.ConferirEstadoAtual(); arquivoColecoes.ConferirEstadoAtual(); };
-        if (!ConfiguracaoIgdb.TentarLer(out var clientId, out var token, lerVariavel))
+        var credenciais = ProvedorCredenciaisIgdb.Obter(lerVariavel);
+        if (credenciais == null)
             return new DependenciasJanela(biblioteca, null, null, preferencias, colecoes, aparencia, backup);
 
         // O cliente produzido pela fábrica pertence a esta composição e será fechado pela janela.
@@ -34,7 +35,7 @@ internal static class ComposicaoAplicativo
             PooledConnectionLifetime = TimeSpan.FromMinutes(5)
         });
         cliente.Timeout = TimeSpan.FromSeconds(15);
-        var pesquisa = new PesquisaJogosIgdb(new IgdbService(cliente, clientId, token));
+        var pesquisa = new PesquisaJogosIgdb(new IgdbService(cliente, credenciais.ClientId, credenciais.AccessToken, credenciais.DaBeta));
         return new DependenciasJanela(biblioteca, pesquisa, cliente, preferencias, colecoes, aparencia, backup);
     }
 }
